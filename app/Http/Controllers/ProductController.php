@@ -55,4 +55,8 @@ class ProductController extends Controller
 
         return view('product.detail', compact('colors', 'stars', 'starReviewPoint'));
     }
+
+    public function productContent(Request $request){
+        return view('product.index');
+    }
 }

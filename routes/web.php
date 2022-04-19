@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,3 +25,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('chi-tiet-san-pham/{id}', [ProductController::class, 'detailProduct']);
 Route::get('/', [HomeController::class, 'index']);
 Route::get('danh-muc/{slug}', [CategoryController::class, 'index']);
+Route::get('san-pham/{slug}', [ProductController::class, 'productContent']);
+Route::get('lien-he', [ContactController::class, 'index']);

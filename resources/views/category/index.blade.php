@@ -76,7 +76,7 @@
                                             </button>
                                         </h2>
                                         <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                                            <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+
                                         </div>
                                     </div>
                                     <div class="accordion-item">
@@ -86,7 +86,19 @@
                                             </button>
                                         </h2>
                                         <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-                                            <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+                                            <div class="accordion-body">
+                                                <div class="checkbox-item">
+                                                    <a href="./filter?price[]=1">
+                                                        <input type="checkbox" name="price[]" value="1" onChange='submit();'/> 1.000.000đ - 2.000.000đ
+                                                    </a>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <input type="checkbox" name="price[]" value="2" onChange='submit();'/> 1.000.000đ - 2.000.000đ
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <input type="checkbox" name="price[]" value="3" onChange='submit();'/> 1.000.000đ - 2.000.000đ
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="accordion-item">
@@ -96,7 +108,19 @@
                                             </button>
                                         </h2>
                                         <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
-                                            <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+                                            <div class="accordion-body">
+                                                <div class="checkbox-item">
+                                                    <a href="./filter?price[]=1">
+                                                        <input type="checkbox" name="price[]" value="1" onChange='submit();'/> 1.000.000đ - 2.000.000đ
+                                                    </a>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <input type="checkbox" name="price[]" value="2" onChange='submit();'/> 1.000.000đ - 2.000.000đ
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <input type="checkbox" name="price[]" value="3" onChange='submit();'/> 1.000.000đ - 2.000.000đ
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
