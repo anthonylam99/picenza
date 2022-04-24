@@ -47,7 +47,7 @@
             <div class="menu">
                 <ul>
                     <li>
-                        <a href="">BÌNH NÓNG</a>
+                        <a href="{{route('product.category', ['slug' => 'binh-nong'])}}">BÌNH NÓNG</a>
                     </li>
                     <li>
                         <a href="">CHẬU RỬA</a>

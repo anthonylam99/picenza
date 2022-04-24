@@ -16,7 +16,7 @@
                 <div class="content row text-center">
                     <div class="product-category-item text-center col-2">
                         <div class="div-center">
-                            <a href="">
+                            <a href="{{route('product.category', ['slug' => 'binh-nong'])}}">
                                 <div class="product-category-item-content">
                                     <img src="{{asset('/images/category/1.png')}}" alt="">
                                 </div>
