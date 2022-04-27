@@ -1,4 +1,4 @@
-#btn-add {
+#btn-add, #btn-add-banner, .btn-add-custom {
     padding: 20px;
     border: 2px dashed #000000;
     background-color: #FFFFFF;

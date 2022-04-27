@@ -3,14 +3,14 @@
 @section('pageTitle', '')
 
 @section('breadcrumbContent')
-    <li class="breadcrumb-item"><a href="#">Sản phẩm</a></li>
-    <li class="breadcrumb-item active">Danh sách khoảng giá</li>
+    <li class="breadcrumb-item"><a href="#">Bài viết</a></li>
+    <li class="breadcrumb-item active">Danh sách</li>
 @endsection
 
 @section('content')
     <div class="col-3">
         <button style="margin-bottom: 10px" type="button" class="btn btn-success">
-            <a style="color: #FFFFFF;" href="{{route('admin.page.add')}}">
+            <a style="color: #FFFFFF;" href="{{route('admin.post.add')}}">
                 Thêm mới
             </a>
         </button>
@@ -39,24 +39,24 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($page as $value)
+                    @foreach($post as $value)
                         <tr>
                             <td>{{$value->id}}</td>
-                            <td><a href="{{ route('admin.page.edit', ['id' => $value->id]) }}">
-                                    {{$value->name}}
+                            <td><a href="{{ route('admin.post.edit', ['id' => $value->id]) }}">
+                                    {{$value->title}}
                                 </a></td>
                             <td>{{$value->created_at}}</td>
                             <td>{{$value->updated_at}}</td>
                             <td>
                                 <button class="btn btn-info">
                                     <a target="_blank" style="color: #FFFFFF"
-                                       href="{{ route('page.show.custom', ['slug' => $value->slug]) }}">
+                                       href="{{ route('page.show.post', ['slug' => $value->slug]) }}">
                                         Xem Trang
                                     </a>
                                 </button>
                                 <button class="btn btn-danger">
                                     <a style="color: #FFFFFF"
-                                       href="{{ route('admin.page.edit', ['id' => $value->id]) }}">
+                                       href="{{ route('admin.post.del', ['id' => $value->id]) }}">
                                         Xoá
                                     </a>
                                 </button>

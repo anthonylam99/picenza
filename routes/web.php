@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\PriceController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -81,14 +82,24 @@ Route::group(['prefix' => 'quan-tri'], function () {
         Route::post('them-moi', [PageController::class, 'addPage'])->name('admin.page.add.post');
         Route::get('sua/{id}', [PageController::class, 'editPage'])->name('admin.page.edit');
     });
+
+    Route::group(['prefix' => 'bai-viet'], function() {
+        Route::get('/', [PostController::class, 'listPost'])->name('admin.post.list');
+        Route::get('them-moi', [PostController::class, 'addPost'])->name('admin.post.add');
+        Route::post('them-moi', [PostController::class, 'addPost'])->name('admin.post.add.post');
+        Route::get('sua/{id}', [PostController::class, 'editPost'])->name('admin.post.edit');
+        Route::get('xoa/{id}', [PostController::class, 'delPost'])->name('admin.post.del');
+    });
 });
 Route::get('menu', [AdminController::class, 'menu'])->name('admin.menu.add');
 Route::post('menu', [AdminController::class, 'menu']);
 Route::get('danh-sach-menu', [AdminController::class, 'menuList'])->name('admin.menu.list');
 
 
+
 //Trang custom
 Route::get('/trang/{slug}', [PageController::class, 'showPage'])->name('page.show.custom');
+Route::get('/bai-viet/{slug}', [PostController::class, 'showPost'])->name('page.show.post');
 
 Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderController@requestAction')
     ->name('ckfinder_connector');

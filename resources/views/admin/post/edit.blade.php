@@ -4,6 +4,8 @@
 
 @section('admin.css')
     <link rel="stylesheet" href="{{asset('css/admin.css')}}">
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
 @endsection
 
 @section('breadcrumbContent')
@@ -18,18 +20,30 @@
 
         <div class="row">
             <div class="col-12">
-                <form action="{{route('admin.page.add.post')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('admin.post.add.post')}}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="post_id" value="{{$post->id}}">
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="title">Tên Trang</label>
-                            <input type="text" name="name" id="title" class="form-control" value="" placeholder="Nhập tên trang...">
+                            <label for="title">Tiêu đề</label>
+                            <input type="text" name="title" id="title" class="form-control" value="{{$post->title}}"
+                                   placeholder="Nhập tiêu đề bài viết...">
+                        </div>
+                        <div class="form-group">
+                            <label for="title">Tag</label>
+                            <select name="tag[]" class="form-control js-example-tags" multiple="multiple">
+
+                                <option selected="{{(in_array('orange', $tag) ? 'selected' : '')}}">orange</option>
+                                <option selected="{{(in_array('white', $tag) ? 'selected' : '')}}">white</option>
+                                <option selected="{{(in_array('purple', $tag) ? 'selected' : '')}}">purple</option>
+
+                            </select>
                         </div>
                     </div>
                     <div class="card card-info">
                         <div class="card-header">
                             <h3 class="card-title">
-                                NỘI DUNG TRANG
+                                NỘI DUNG
                             </h3>
 
                             <div class="card-tools">
@@ -39,7 +53,7 @@
                             </div>
                         </div>
                         <div class="card-body p-0">
-                            <textarea name="content" id="text" cols="30" rows="10"></textarea>
+                            <textarea name="content" id="text" cols="30" rows="10">{{$post->content}}</textarea>
                         </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-success">Thêm mới</button>
@@ -55,14 +69,19 @@
 @section('admin.js')
     <script src="{{asset('js/admin.js')}}"></script>
     <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
-        CKEDITOR.replace( 'text', {
+        CKEDITOR.replace('text', {
             filebrowserBrowseUrl: '{{ asset(route('ckfinder_browser')) }}',
             filebrowserImageBrowseUrl: '{{ asset(route('ckfinder_browser')) }}?type=Images',
             filebrowserFlashBrowseUrl: '{{ asset(route('ckfinder_browser')) }}?type=Flash',
             filebrowserUploadUrl: '{{ asset(route('ckfinder_connector')) }}?command=QuickUpload&type=Files',
             filebrowserImageUploadUrl: '{{ asset(route('ckfinder_connector')) }}?command=QuickUpload&type=Images',
             filebrowserFlashUploadUrl: '{{ asset(route('ckfinder_connector')) }}?command=QuickUpload&type=Flash'
+        });
+        $(".js-example-tags").select2({
+            tags: true
         });
     </script>
     @include('ckfinder::setup')

@@ -1,7 +1,9 @@
 $(function () {
     var i = 0;
-    var list = $(".img-box").map(function(){return $(this).attr("data-photo");}).get();
-    if(list.length > 0){
+    var list = $(".img-box").map(function () {
+        return $(this).attr("data-photo");
+    }).get();
+    if (list.length > 0) {
         i = list.splice(-1)[0]
     }
 
@@ -24,6 +26,63 @@ $(function () {
     })
 })
 
+function addImageBox(tag) {
+    var i = 0;
+    var list = $(".img-box" + tag).map(function () {
+        return $(this).attr("data-photo");
+    }).get();
+    if (list.length > 0) {
+        i = list.splice(-1)[0]
+    }
+
+    i++;
+
+
+    if (tag === 'discovery') {
+        $(".body-card-image" + tag).append("" +
+            "<div class='col-3 img-box" + tag + "' id='label-image" + tag + i + "' data-photo='" + i + "'>" +
+            "<div style='height: 100px; border: 2px dashed #cccccc; margin-bottom: 10px;' id='image-preview" + tag + i + "' class='show-img'>" +
+            "</div>" +
+
+            "<label for='image-input" + tag + i + "' class='image-upload'>" +
+            "<i class='fas fa-upload'></i>Chọn ảnh" +
+            "</label>" +
+            "<input style='margin-bottom: 3px' class='form-control' type='text' name='title" + tag + i + "' value='' placeholder='Nhập tiêu đề..' />" +
+            "<input style='margin-bottom: 3px' class='form-control' type='text' name='url" + tag + i + "' value='' placeholder='Nhập đường dẫn bài viết..' />" +
+            "<input style='margin-bottom: 3px' class='form-control' type='text' name='content" + tag + i + "' value='' placeholder='Nhập nội dung mô tả..' />" +
+            "<input style='display: none' onchange='previewImageCustom(" + i + ", " + ' "' + tag + '" ' + ")'  id='image-input" + tag + i + "' type='file' name='image" + tag + i + "' data-photo='" + i + "'> " +
+            "<button type='button' class='btn-danger btn-deleteimg' onclick='removeImage(" + i + ", " + ' "' + tag + '" ' + ")'>Xóa ảnh</button>" +
+            "</div>");
+    } else {
+        $(".body-card-image" + tag).append("" +
+            "<div class='col-3 img-box" + tag + "' id='label-image" + tag + i + "' data-photo='" + i + "'>" +
+            "<div style='height: 100px; border: 2px dashed #cccccc; margin-bottom: 10px;' id='image-preview" + tag + i + "' class='show-img'>" +
+            "</div>" +
+
+            "<label for='image-input" + tag + i + "' class='image-upload'>" +
+            "<i class='fas fa-upload'></i>Chọn ảnh" +
+            "</label>" +
+            "<input style='display: none' onchange='previewImageCustom(" + i + ", " + ' "' + tag + '" ' + ")'  id='image-input" + tag + i + "' type='file' name='image" + tag + i + "' data-photo='" + i + "'> " +
+            "<button type='button' class='btn-danger btn-deleteimg' onclick='removeImage(" + i + ", " + ' "' + tag + '" ' + ")'>Xóa ảnh</button>" +
+            "</div>");
+    }
+}
+
+function previewImageCustom(index, tag) {
+    var imageInput = document.getElementById('image-input' + tag + index)
+    var quantos = imageInput.files.length;
+    for (i = 0; i < quantos; i++) {
+        var urls = URL.createObjectURL(event.target.files[i]);
+        document.getElementById("image-preview" + tag + index).innerHTML = '<img src="' + urls + '">';
+    }
+}
+function removeImageCustom(index, tag, value) {
+    var imageInput = document.getElementById('label-image'+tag + index)
+    imageInput.remove()
+
+    $('#card-image'+tag).append("<input type='hidden' name='del-image"+tag + index + "' value='" + value + "' />");
+}
+
 
 function previewImage(index) {
     var imageInput = document.getElementById('image-input' + index)
@@ -34,11 +93,11 @@ function previewImage(index) {
     }
 }
 
-function removeImage(index, imagePath) {
+function removeImage(index, value) {
     var imageInput = document.getElementById('label-image' + index)
     imageInput.remove()
 
-    $('#card-image').append("<input type='hidden' name='del-image" + index + "' value='" + imagePath + "' />");
+    $('#card-image').append("<input type='hidden' name='del-image" + index + "' value='" + value + "' />");
 
 }
 
@@ -64,7 +123,7 @@ $('#salePrice').on('input', function () {
     if (salePrice > 0) {
         console.log(salePrice)
         console.log(parseInt(price))
-        if(salePrice > parseInt(price)) {
+        if (salePrice > parseInt(price)) {
             alert('Giá giảm giá lớn hơn giá gốc. Vui lòng kiểm tra lại')
         }
         const format = parseInt(salePrice).toLocaleString('en-US')
