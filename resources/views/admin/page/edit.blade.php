@@ -8,7 +8,7 @@
 
 @section('breadcrumbContent')
     <li class="breadcrumb-item"><a href="#">Quản lý trang</a></li>
-    <li class="breadcrumb-item active">Thêm mới</li>
+    <li class="breadcrumb-item active">Sửa</li>
 @endsection
 
 
@@ -19,17 +19,19 @@
         <div class="row">
             <form class="col-12" action="{{route('admin.page.add.post')}}" method="POST" enctype="multipart/form-data">
                 @csrf
+
                 <div class="col-12">
                     <div class="card-body" style="padding: 1.25rem 3px;">
                         <div class="form-group">
                             <label for="title">Tên Trang</label>
-                            <input type="text" name="pageName" id="pageName" class="form-control" placeholder="Nhập tên trang...." value="">
+
+                            <input type="text" name="pageName" id="pageName" class="form-control" placeholder="Nhập tên trang...." value="{{$page->name}}">
                         </div>
                     </div>
                     <div class="card card-info">
                         <div class="card-header">
                             <h3 class="card-title">
-
+                                <input type="hidden" name="page_id" value="{{$page->id}}" />
                             </h3>
 
                             <div class="card-tools">
@@ -39,7 +41,7 @@
                             </div>
                         </div>
                         <div class="card-body p-0">
-                            <textarea name="content" id="content" cols="30" rows="10"></textarea>
+                            <textarea name="content" id="content" cols="30" rows="10" >{{$page->content}}</textarea>
                         </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-success">Thêm mới</button>

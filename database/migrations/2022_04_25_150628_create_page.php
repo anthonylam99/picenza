@@ -17,6 +17,10 @@ class CreatePage extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
+            $table->longText('content');
+            $table->longText('url');
+            $table->longText('seo_url')->nullable();
+
             $table->softDeletes();
             $table->timestamps();
         });

@@ -1,4 +1,3 @@
-@include('components.header')
-@yield('content')
-@include('components.footer')
+@extends('main')
 
+@section('title', 'Trang chủ')
