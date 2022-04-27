@@ -83,3 +83,9 @@ Route::group(['prefix' => 'quan-tri'], function () {
 Route::get('menu', [AdminController::class, 'menu'])->name('admin.menu.add');
 Route::post('menu', [AdminController::class, 'menu']);
 Route::get('danh-sach-menu', [AdminController::class, 'menuList'])->name('admin.menu.list');
+
+Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderController@requestAction')
+    ->name('ckfinder_connector');
+
+Route::any('/ckfinder/browser', '\CKSource\CKFinderBridge\Controller\CKFinderController@browserAction')
+    ->name('ckfinder_browser');
