@@ -7,6 +7,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\PriceController;
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -73,4 +74,12 @@ Route::group(['prefix' => 'quan-tri'], function () {
         Route::get('sua/{id}', [PriceController::class, 'editPrice'])->name('admin.price.edit');
         Route::get('xoa/{id}', [PriceController::class, 'delPrice'])->name('admin.price.del');
     });
+
+    Route::group(['prefix' => 'quan-ly-trang'], function() {
+        Route::get('danh-sach', [PageController::class, 'list'])->name('admin.page.list');
+        Route::get('them-moi', [PageController::class, 'add'])->name('admin.page.add');
+    });
 });
+Route::get('menu', [AdminController::class, 'menu'])->name('admin.menu.add');
+Route::post('menu', [AdminController::class, 'menu']);
+Route::get('danh-sach-menu', [AdminController::class, 'menuList'])->name('admin.menu.list');

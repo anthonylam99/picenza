@@ -13,8 +13,12 @@ use App\Models\ProductReliability;
 use App\Models\ProductShape;
 use App\Models\ProductTechnology;
 use App\Models\ProductType;
+use Harimayco\Menu\Models\MenuItems;
+use Harimayco\Menu\Models\Menus;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
 class AdminController extends Controller
@@ -235,5 +239,47 @@ class AdminController extends Controller
 
 
         return back()->with(['success_flash' => 'Xoá thành công']);
+    }
+
+    public function menu(Request $request){
+        if($request->method() == 'POST'){
+            $idmenu = $request->get('idmenu');
+            $labelProduct = $request->get('label_product');
+            foreach ($labelProduct as $value){
+                $data = ProductLine::find($value);
+                if(!empty($data)){
+                    $arr = [
+                        'labelmenu' => $data->name,
+                        'linkmenu' => $data->url,
+                        'idmenu' => $idmenu
+                    ];
+
+                    $this->addMenu($arr['idmenu'], $arr['labelmenu'], $arr['linkmenu']);
+                }
+            }
+        }
+        return view('admin.menu');
+    }
+
+    public function addMenu($idmenu, $label, $link)
+    {
+
+        $menuitem = new MenuItems();
+        $menuitem->label = $label;
+        $menuitem->link = $link;
+        if (config('menu.use_roles')) {
+            $menuitem->role_id = request()->input("rolemenu") ? request()->input("rolemenu")  : 0 ;
+        }
+        $menuitem->menu = $idmenu;
+        $menuitem->sort = MenuItems::getNextSortRoot($idmenu);
+        $menuitem->save();
+
+    }
+
+    public function menuList(Request $request){
+
+        $menu = DB::table('admin_menus')->get();
+
+        return view('admin.menu.list', compact('menu'));
     }
 }

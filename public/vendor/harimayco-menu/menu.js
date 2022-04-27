@@ -38,6 +38,13 @@ function getmenus() {
   actualizarmenu();
 }
 
+function addmultidatamenu(){
+    var labelProduct = $(".label_product").map(function() {
+        return this.value;
+    }).get();
+    console.log(labelProduct)
+}
+
 function addcustommenu() {
   $('#spincustomu').show();
 

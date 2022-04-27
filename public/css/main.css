@@ -1,3 +1,14 @@
+:root {
+    box-sizing: border-box;
+
+    --primary: #FFFFFF;
+    --hover-color: #000;
+    --dark: #1c2022;
+    --light: #000;
+
+    --header-bg: var(--primary);
+}
+
 html,
 body {
     margin: 0;
@@ -43,9 +54,218 @@ img {
     color: #ED2027;
 }
 
+a.nav-link {
+    font-weight: 700;
+    font-size: 15px;
+    font-family: 'Google Sans';
+    color: #232323;
+    text-transform: uppercase;
+}
+
+a.nav-link:hover {
+    color: #000000;
+    text-decoration: underline;
+}
+
+.nav-link:hover, .nav-link:focus {
+    color: #000000;
+}
+
+.dropdown-item:hover {
+    border-left: 3px solid red;
+    transition: all 0.3s ease;
+    padding-left: 15px;
+}
+
+.navbar-nav .dropdown-menu {
+    min-width: 200px;
+}
+.dropdown-menu li{
+    padding-left: 10px;
+}
+
+.header-2 .dropdown-toggle::after{
+    content: none;
+}
+
 .middle {
     display: flex;
     align-items: center;
+}
+
+header {
+    background: var(--header-bg);
+    padding-left: 1.5em;
+    position: sticky;
+    top: 0;
+}
+
+.branding-logo {
+    color: var(--light);
+    font-size: calc(0.8rem + 1vw);
+    text-decoration: none;
+}
+
+/* Arrows */
+
+.arrow {
+    width: 0.5em;
+    height: 0.5em;
+    display: inline-block;
+    vertical-align: middle;
+    border-left: 0.15em solid currentColor;
+    border-bottom: 0.15em solid currentColor;
+    transform: rotate(-45deg);
+    margin-top: -0.25em;
+    transition: transform 100ms ease-in-out;
+}
+
+/* Reveal  */
+.menu > li:hover > a + .submenu,
+.submenu > li:hover > a + .submenu {
+    opacity: 1;
+    transform: scaleY(1);
+}
+
+/* ANIMATE aRROWS */
+.menu > li:hover > a > .arrow,
+.submenu > li:hover > a > .arrow {
+    transform: rotate(225deg);
+}
+
+@media only screen and (max-width: 78.75em) {
+    .submenu .submenu .submenu {
+        left: -100%;
+        top: 0.5em;
+    }
+
+    .submenu {
+        min-width: 16em;
+    }
+}
+
+@media only screen and (max-width: 58.75em) {
+    .menu li a {
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (max-width: 50em) {
+    header {
+        /*     position: relative; */
+        padding: 1.5em 2em;
+    }
+
+    .menu {
+        flex-flow: column;
+        position: absolute;
+        background: #fff;
+        top: 4.55em;
+        left: 0;
+        right: 0;
+        height: 100vh;
+
+        opacity: 0;
+        transform: scaleY(0);
+        transform-origin: top center;
+        transition: 200ms transform cubic-bezier(0.36, 0.4, 0.42, 1.48) 100ms,
+        100ms opacity ease-in-out;
+
+        overflow-y: scroll;
+
+    }
+
+    .menu > li > a {
+        font-size: 1rem;
+        color: var(--dark);
+    }
+
+    .submenu > li > a {
+        font-size: 1rem;
+    }
+
+    .submenu {
+        top: 0;
+        padding-left: 1.5em;
+        border-left: 0.12em dotted hsla(342, 99%, 45%, 0.95);
+    }
+
+    .submenu .submenu {
+        left: 0;
+        top: 0;
+    }
+
+    .submenu .submenu .submenu {
+        left: 0;
+        top: 0;
+    }
+
+    .menu > li:hover > a + .submenu,
+    .submenu > li:hover > a + .submenu {
+        position: relative;
+    }
+
+    .hamburger {
+        width: 2em;
+        height: 0.25em;
+        display: block;
+        background: var(--light);
+        position: relative;
+        cursor: pointer;
+        transition: 0.2s transform ease-in-out;
+    }
+
+    .hamburger::after,
+    .hamburger::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        background: inherit;
+        width: inherit;
+        height: inherit;
+
+        transition: 0.2s transform ease-in-out;
+    }
+
+    .hamburger::after {
+        top: 0.65em;
+    }
+
+    .hamburger::before {
+        bottom: 0.65em;
+    }
+
+    .close::after,
+    .close::before {
+        top: 0;
+        transition: 0.2s transform ease-in-out;
+    }
+
+    .close::before {
+        display: none;
+    }
+
+    .close {
+        transform: rotate(45deg);
+        transition: 0.2s transform ease-in-out;
+    }
+
+    .close::after {
+        transform: rotate(-90deg);
+    }
+
+    /* reveal menu */
+    input[type="checkbox"]:checked + .menu {
+        position: absolute;
+        opacity: 1;
+        transform: scaleY(1);
+    }
+}
+
+
+main {
+    /* just to make scrollable vertically to see sticky navbar    */
+    height: 200vh;
 }
 
 .accordion-button::after {
@@ -1798,3 +2018,39 @@ footer .copyright h6 {
     font-weight: 400;
 }
 
+@media all and (min-width: 992px) {
+    .dropdown-menu li {
+        position: relative;
+    }
+
+    .nav-item .submenu {
+        display: none;
+        position: absolute;
+        left: 100%;
+        top: -7px;
+    }
+
+    .nav-item .submenu-left {
+        right: 100%;
+        left: auto;
+    }
+
+    .dropdown-menu > li:hover {
+        background-color: #f1f1f1
+    }
+
+    .dropdown-menu > li:hover > .submenu {
+        display: block;
+    }
+}
+
+/* ============ desktop view .end// ============ */
+
+/* ============ small devices ============ */
+@media (max-width: 991px) {
+    .dropdown-menu .dropdown-menu {
+        margin-left: 0.7rem;
+        margin-right: 0.7rem;
+        margin-bottom: .5rem;
+    }
+}

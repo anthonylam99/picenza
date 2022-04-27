@@ -32,7 +32,7 @@ $currentUrl = url()->current();
 
 									<div class="clear"></div>
 
-									<form id="nav-menu-meta" action="" class="nav-menu-meta" method="post" enctype="multipart/form-data">
+{{--									<form id="nav-menu-meta" action="" class="nav-menu-meta" method="post" enctype="multipart/form-data">--}}
 										<div id="side-sortables" class="accordion-container">
 											<ul class="outer-border">
 												<li class="control-section accordion-section  open add-page" id="add-page">
@@ -77,8 +77,50 @@ $currentUrl = url()->current();
 												</li>
 
 											</ul>
+                                            <ul class="outer-border">
+                                                <li class="control-section accordion-section  open add-page" id="add-page">
+                                                    <h3 class="accordion-section-title hndle" tabindex="0"> DANH MỤC SẢN PHẨM <span class="screen-reader-text">Press return or enter to expand</span></h3>
+                                                    <div class="accordion-section-content ">
+                                                        <div class="inside">
+                                                            <form action="#" method="POST" id="addCustomMenu">
+                                                                <input type="hidden" name="idmenu" value="@if(isset($indmenu)){{$indmenu->id}}@endif" />
+                                                                @csrf
+                                                                <div class="customlinkdiv" id="customlinkdiv">
+                                                                    <?php
+                                                                    $data = \App\Models\ProductLine::all();
+                                                                    foreach($data as $value){
+                                                                    ?>
+                                                                    <div class="productLine">
+                                                                        <input id="{{$value->name}}"  value="{{$value->id}}" type="checkbox" name="label_product[]">
+                                                                        <label for="{{$value->name}}">{{$value->name}}</label>
+                                                                    </div>
+                                                                    <?php
+                                                                    }
+                                                                    ?>
+
+                                                                    @if(!empty($roles))
+                                                                        <p id="menu-item-role_id-wrap">
+                                                                            <label class="howto" for="custom-menu-item-name"> <span>Role</span>&nbsp;
+                                                                                <select id="custom-menu-item-role" name="role">
+                                                                                    <option value="0">Select Role</option>
+                                                                                    @foreach($roles as $role)
+                                                                                        <option value="{{ $role->$role_pk }}">{{ ucfirst($role->$role_title_field) }}</option>
+                                                                                    @endforeach
+                                                                                </select>
+                                                                            </label>
+                                                                        </p>
+                                                                    @endif
+
+                                                                </div>
+                                                            </form>
+                                                            <button class="float-right" type="submit" form="addCustomMenu" value="Submit">Submit</button>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+                                            </ul>
 										</div>
-									</form>
+{{--									</form>--}}
 
 								</div>
 								@endif
@@ -211,7 +253,7 @@ $currentUrl = url()->current();
 															<a onclick="createnewmenu()" name="save_menu" id="save_menu_header" class="button button-primary menu-save">Create menu</a>
 														</div>
 														@elseif(request()->has("menu"))
-														<span class="delete-action"> <a class="submitdelete deletion menu-delete" onclick="deletemenu()" href="javascript:void(9)">Delete menu</a> </span>
+{{--														<span class="delete-action"> <a class="submitdelete deletion menu-delete" onclick="deletemenu()" href="javascript:void(9)">Delete menu</a> </span>--}}
 														<div class="publishing-action">
 
 															<a onclick="getmenus()" name="save_menu" id="save_menu_header" class="button button-primary menu-save">Save menu</a>

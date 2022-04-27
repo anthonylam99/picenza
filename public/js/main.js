@@ -44,8 +44,31 @@ function showSlides(n) {
     for (i = 0; i < listDots.length; i++) {
         listDots[i].className = listDots[i].className.replace(" slideractive", "");
     }
-    slides[slideIndex-1].style.display = "block";
-    dots[slideIndex-1].className += " active";
+    // slides[slideIndex-1].style.display = "block";
+    // dots[slideIndex-1].className += " active";
     // captionText.innerHTML = dots[slideIndex-1].alt;
-    listDots[slideIndex-1].className += ' slideractive';
+    // listDots[slideIndex-1].className += ' slideractive';
+
+    if(slides.length > 0){
+        slides[slideIndex-1].style.display = "block";
+    }
+    if(dots.length > 0){
+        dots[slideIndex-1].className += " active";
+    }
+    // captionText.innerHTML = dots[slideIndex-1].alt;
+    if(listDots.length > 0){
+        listDots[slideIndex-1].className += ' slideractive';
+    }
 }
+$('.dropdown-menu a.dropdown-item').on('click', function(e) {
+    if (!$(this).next().hasClass('show')) {
+        $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+    }
+    var $subMenu = $(this).next(".dropdown-menu");
+
+    $subMenu.toggleClass('show');
+    $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
+        $('.dropdown-submenu .show').removeClass("show");
+    });
+    return false;
+});
