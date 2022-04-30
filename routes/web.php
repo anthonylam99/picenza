@@ -8,6 +8,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\PriceController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\ProductTypeController;
+use App\Http\Controllers\ProductLineController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,7 +34,7 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('danh-muc/{slug}', [CategoryController::class, 'index'])->name('product.category');
 Route::get('san-pham/{slug}', [ProductController::class, 'productContent']);
 Route::get('lien-he', [ContactController::class, 'index']);
-
+Route::get('danh-muc-hinh-anh', [AdminController::class, 'galery'])->name('admin.galery');
 
 Route::get('/quan-tri', [AdminController::class, 'index']);
 
@@ -40,6 +42,7 @@ Route::group(['prefix' => 'quan-tri'], function () {
     Route::get('/', [AdminController::class, 'index']);
     Route::get('product_line_list/{id}', [AdminController::class, 'getProductLine']);
     Route::get('product_type_list/{id}/{id2}', [AdminController::class, 'getProductType']);
+    Route::get('product_feature_list/{id}', [AdminController::class, 'getProductFeature']);
 
     Route::group(['prefix' => 'san-pham'], function () {
         Route::get('danh-sach', [AdminController::class, 'productList'])->name('admin.product.list');
@@ -52,6 +55,14 @@ Route::group(['prefix' => 'quan-tri'], function () {
         Route::get('xoa/{id}', [AdminController::class, 'delProduct'])->name('admin.product.del');
 
         Route::get('sua/{id}', [AdminController::class, 'editProduct'])->name('admin.product.edit');
+
+        Route::group(['prefix' => 'tinh-nang'], function (){
+            Route::get('/', [\App\Http\Controllers\ProductFeatureController::class, 'listProductFeature'])->name('admin.product.feature.list');
+            Route::get('them-moi', [\App\Http\Controllers\ProductFeatureController::class, 'addProductFeature'])->name('admin.product.feature.add');
+            Route::post('them-moi', [\App\Http\Controllers\ProductFeatureController::class, 'addPostProductFeature'])->name('admin.product.feature.add.post');
+            Route::get('sua/{id}', [\App\Http\Controllers\ProductFeatureController::class, 'editProductFeature'])->name('admin.product.feature.edit');
+            Route::get('xoa/{id}', [\App\Http\Controllers\ProductFeatureController::class, 'delProductFeature'])->name('admin.product.feature.del');
+        });
     });
 
 
@@ -66,6 +77,22 @@ Route::group(['prefix' => 'quan-tri'], function () {
         Route::post('them-moi', [CompanyController::class, 'addCompanyPost'])->name('admin.company.add.post');
         Route::get('sua/{id}', [CompanyController::class, 'editCompany'])->name('admin.company.edit');
         Route::get('xoa/{id}', [CompanyController::class, 'delCompany'])->name('admin.company.del');
+    });
+
+    Route::group(['prefix' => 'dong-san-pham'], function(){
+        Route::get('/', [ProductLineController::class, 'listLine'])->name('admin.line.list');
+        Route::get('them-moi', [ProductLineController::class, 'addLine'])->name('admin.line.add');
+        Route::post('them-moi', [ProductLineController::class, 'addLinePost'])->name('admin.line.add.post');
+        Route::get('sua/{id}', [ProductLineController::class, 'editLine'])->name('admin.line.edit');
+        Route::get('xoa/{id}', [ProductLineController::class, 'delLine'])->name('admin.line.del');
+    });
+
+    Route::group(['prefix' => 'loai-san-pham'], function(){
+        Route::get('/', [ProductTypeController::class, 'listType'])->name('admin.type.list');
+        Route::get('them-moi', [ProductTypeController::class, 'addType'])->name('admin.type.add');
+        Route::post('them-moi', [ProductTypeController::class, 'addTypePost'])->name('admin.type.add.post');
+        Route::get('sua/{id}', [ProductTypeController::class, 'editType'])->name('admin.type.edit');
+        Route::get('xoa/{id}', [ProductTypeController::class, 'delType'])->name('admin.type.del');
     });
 
     Route::group(['prefix' => 'khoang-gia'], function() {
@@ -89,7 +116,23 @@ Route::group(['prefix' => 'quan-tri'], function () {
         Route::post('them-moi', [PostController::class, 'addPost'])->name('admin.post.add.post');
         Route::get('sua/{id}', [PostController::class, 'editPost'])->name('admin.post.edit');
         Route::get('xoa/{id}', [PostController::class, 'delPost'])->name('admin.post.del');
+        Route::group(['prefix' => 'tag'], function (){
+            Route::get('/', [\App\Http\Controllers\TagController::class, 'listTag'])->name('admin.tag.list');
+            Route::get('them-moi', [\App\Http\Controllers\TagController::class, 'addTag'])->name('admin.tag.add');
+            Route::post('them-moi', [\App\Http\Controllers\TagController::class, 'addTagPost'])->name('admin.tag.add.post');
+            Route::get('sua/{id}', [\App\Http\Controllers\TagController::class, 'editTag'])->name('admin.tag.edit');
+            Route::get('xoa/{id}', [\App\Http\Controllers\TagController::class, 'delTag'])->name('admin.tag.del');
+        });
+        Route::group(['prefix' => 'chuyen-muc'], function (){
+            Route::get('/', [\App\Http\Controllers\PostCategoryController::class, 'listPostCategory'])->name('admin.post.category.list');
+            Route::get('them-moi', [\App\Http\Controllers\PostCategoryController::class, 'addPostCategory'])->name('admin.post.category.add');
+            Route::post('them-moi', [\App\Http\Controllers\PostCategoryController::class, 'addPostCategoryPost'])->name('admin.post.category.add.post');
+            Route::get('sua/{id}', [\App\Http\Controllers\PostCategoryController::class, 'editPostCategory'])->name('admin.post.category.edit');
+            Route::get('xoa/{id}', [\App\Http\Controllers\PostCategoryController::class, 'delPostCategory'])->name('admin.post.category.del');
+        });
     });
+
+
 });
 Route::get('menu', [AdminController::class, 'menu'])->name('admin.menu.add');
 Route::post('menu', [AdminController::class, 'menu']);

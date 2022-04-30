@@ -3,8 +3,8 @@
 @section('pageTitle', '')
 
 @section('breadcrumbContent')
-    <li class="breadcrumb-item"><a href="#">Sản phẩm</a></li>
-    <li class="breadcrumb-item active">Danh sách sản phẩm</li>
+    <li class="breadcrumb-item"><a href="#">Hãng sản xuất</a></li>
+    <li class="breadcrumb-item active">Danh sách hãng sản xuấtt</li>
 @endsection
 
 @section('content')
@@ -18,7 +18,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h2 class="card-title" style="font-size: 26px; font-weight: 700">DANH SÁCH HÃNG SẢN XUẤT</h2>
+                <h2 class="card-title" style="font-size: 19px; font-weight: 700">DANH SÁCH HÃNG SẢN XUẤT</h2>
 
                 <div class="form-search float-right">
                     <form style="margin-bottom: 0" class="form-group" action="{{route('admin.product.add')}}">
@@ -28,22 +28,18 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body p-0">
-                <table class="table">
+                <table class="table table-bordered table-striped table-bordered bulk_action">
                     <thead>
                     <tr>
                         <th>ID</th>
                         <th>TÊN HÃNG SẢN XUẤT</th>
-                        <th>DÒNG SẢN PHẨM</th>
-                        <th>LOẠI SẢN PHẨM</th>
                         <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach($productType as $value)
+                        @foreach($company as $value)
                             <tr>
                                 <td>{{$value->id}}</td>
-                                <td>{{$value->company->name}}</td>
-                                <td>{{$value->productLine->name}}</td>
                                 <td>{{$value->name}}</td>
                                 <td>
                                     <button class="btn btn-info">

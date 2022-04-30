@@ -11,6 +11,7 @@
     <div class="col-3">
         <button style="margin-bottom: 10px" type="button" class="btn btn-success">
             <a style="color: #FFFFFF;" href="{{route('admin.product.add')}}">
+                <i class="fa fa-plus" aria-hidden="true"></i>
                 Thêm mới
             </a>
         </button>
@@ -18,7 +19,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h2 class="card-title" style="font-size: 26px; font-weight: 700">DANH SÁCH SẢN PHẨM</h2>
+                <h2 class="card-title" style="font-size: 20px; font-weight: 500">DANH SÁCH SẢN PHẨM</h2>
 
                 <div class="form-search float-right">
                     <form style="margin-bottom: 0" class="form-group" action="{{route('admin.product.list')}}">
@@ -28,13 +29,14 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body p-0">
-                <table class="table">
+                <table class="table table-bordered table-striped table-bordered bulk_action">
                     <thead>
                     <tr>
                         <th style="width: 10px">ID</th>
+                        <th>Ảnh đại diện</th>
                         <th>Tên sản phẩm</th>
                         <th>Giá</th>
-                        <th>Loại sản phẩm</th>
+                        <th>Danh mục</th>
                         <th>Hãng sản xuất</th>
                         <th></th>
                     </tr>
@@ -43,19 +45,22 @@
                     @foreach($product as $value)
                         <tr>
                             <td>{{$value->id}}</td>
+                            <td>
+{{--                                <img src="{{$v}}" alt="">--}}
+                            </td>
                             <td>{{$value->name}}</td>
                             <td>{{number_format($value->price)}}</td>
-                            <td>{{$value->productType['name']}}</td>
-                            <td>{{$value->companyName['name']}}
+                            <td>{{isset($value->productLine['name']) ? $value->productLine['name'] : ''}}</td>
+                            <td>{{isset($value->companyName['name']) ? $value->companyName['name'] : ''}}
                             <td>
                                 <button class="btn btn-info">
                                     <a style="color: #FFFFFF" href="{{ route('admin.product.edit', ['id' => $value->id]) }}">
-                                        Chi tiết
+                                        <i class="far fa-edit"></i>
                                     </a>
                                 </button>
                                 <button class="btn btn-danger">
                                     <a style="color: #FFFFFF" href="{{ route('admin.product.del', ['id' => $value->id]) }}">
-                                        Xoá
+                                        <i class="fas fa-trash"></i>
                                     </a>
                                 </button>
                             </td>

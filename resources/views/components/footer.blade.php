@@ -2,7 +2,7 @@
     <div class="footer-div">
         <div class="main-footer container">
             <div class="main-footer-content row">
-                <div class="footer-item col-3">
+                <div class="footer-item col-12 col-sm-6 col-lg-3 col-xl-3">
                     <ul>
                         <li>
                             <b>Thông tin</b>
@@ -24,7 +24,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="footer-item col-3">
+                <div class="footer-item col-12 col-sm-6 col-lg-3 col-xl-3">
                     <ul>
                         <li>
                             <b>THƯƠNG HIỆU PICENZA</b>
@@ -46,7 +46,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="footer-item col-3">
+                <div class="footer-item col-12 col-sm-6 col-lg-3 col-xl-3">
                     <ul>
                         <li>
                             <b>TRỢ GIÚP</b>
@@ -68,7 +68,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="footer-item col-3">
+                <div class="footer-item col-12 col-sm-6 col-lg-3 col-xl-3">
                     <ul>
                         <li>
                             <b>KẾT NỐI</b>
@@ -99,4 +99,5 @@
 </footer>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{{asset('js/main.js')}}"></script>
+@yield('scripts')
 </html>

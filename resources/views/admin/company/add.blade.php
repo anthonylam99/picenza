@@ -22,14 +22,6 @@
                             <label for="productName">Tên hãng sản xuất</label>
                             <input type="text" name="company" class="form-control" id="productName" placeholder="Nhập tên hãng sản xuất...">
                         </div>
-                        <div class="form-group">
-                            <label for="productName">Dòng sản phẩm</label>
-                            <input type="text" name="product_line" class="form-control" id="productName" placeholder="Nhập tên dòng sản phẩm...">
-                        </div>
-                        <div class="form-group">
-                            <label for="productName">Loại sản phẩm</label>
-                            <input type="text" name="product_type" class="form-control" id="productName" placeholder="Nhập tên loại sản phẩm...">
-                        </div>
                     </div>
                 </div>
                 <div class="col-12">

@@ -72,3 +72,122 @@ $('.dropdown-menu a.dropdown-item').on('click', function(e) {
     });
     return false;
 });
+$(document).ready(function(){
+    $('.owl-carousel.brands').owlCarousel({
+        loop:true,
+        margin:10,
+        responsiveClass:true,
+        responsive:{
+            0:{
+                items:2,
+                nav:false,
+                dots: true
+            },
+            600:{
+                items:3,
+                nav:false,
+                dots: true
+            },
+            1000:{
+                items:5,
+                nav:false,
+                loop:false,
+                dots: true
+            }
+        }
+    })
+
+    $('.owl-carousel.options3').owlCarousel({
+        loop:true,
+        margin:10,
+        responsiveClass:true,
+        responsive:{
+            0:{
+                items:1,
+                nav:false,
+                dots: true
+            },
+            600:{
+                items:2,
+                nav:false,
+                dots: true
+            },
+            1000:{
+                items:3,
+                nav:false,
+                loop:false,
+                dots: true
+            }
+        }
+    })
+
+    $('.owl-carousel.category').owlCarousel({
+        loop:true,
+        margin:10,
+        responsiveClass:true,
+        responsive:{
+            0:{
+                items:2,
+                nav:false,
+                dots: true
+            },
+            600:{
+                items:4,
+                nav:false,
+                dots: true
+            },
+            1000:{
+                items:6,
+                nav:false,
+                loop:false,
+                dots: true
+            }
+        }
+    })
+    $('.owl-carousel.product-relate').owlCarousel({
+        loop:true,
+        margin:10,
+        responsiveClass:true,
+        responsive:{
+            0:{
+                items:2,
+                nav:false,
+                dots: true
+            },
+            600:{
+                items:4,
+                nav:false,
+                dots: true
+            },
+            1000:{
+                items:6,
+                nav:false,
+                loop:false,
+                dots: true
+            }
+        }
+    })
+    $('.owl-carousel.product-recent').owlCarousel({
+        loop:true,
+        margin:10,
+        responsiveClass:true,
+        responsive:{
+            0:{
+                items:2,
+                nav:false,
+                dots: true
+            },
+            600:{
+                items:4,
+                nav:false,
+                dots: true
+            },
+            1000:{
+                items:6,
+                nav:false,
+                loop:false,
+                dots: true
+            }
+        }
+    })
+});

@@ -12,15 +12,17 @@ $(function () {
         $(".body-card-image").append("" +
             "<div class='col-3 img-box' id='label-image" + i + "' data-photo='" + i + "'>" +
             "<div style='height: 100px; border: 2px dashed #cccccc; margin-bottom: 10px;' id='image-preview" + i + "' class='show-img'>" +
+            "<img id='image-preview-src" + i + "' >" +
             "</div>" +
             "<label for='color-choose" + i + "'>Màu sắc:</label>" +
             "                        <input onchange='setColor(" + i + ")' type='color' id='color-picker" + i + "'>" +
             "                        <input type='hidden' id='color-choose" + i + "' name='hex" + i + "' value='#000000'>" +
+            "<input class='form-control' type='text' name='price" + i + "' value='' placeholder='Nhập giá cả....' required/>" +
             "<input class='form-control' type='text' name='color" + i + "' value='' placeholder='Nhập tên màu....' required/>" +
             "<label for='image-input" + i + "' class='image-upload'>" +
             "<i class='fas fa-upload'></i>Chọn ảnh" +
             "</label>" +
-            "<input style='display: none' onchange='previewImage(" + i + ")'  id='image-input" + i + "' type='file' name='image" + i + "' data-photo='" + i + "'> " +
+            "<input style='display: none' onclick='selectImageGalery(" + i + ")'  id='image-input" + i + "' type='text' name='image" + i + "' data-photo='" + i + "' value=''> " +
             "<button type='button' class='btn-danger btn-deleteimg' onclick='removeImage(" + i + ")'>Xóa ảnh</button>" +
             "</div>");
     })
@@ -76,11 +78,12 @@ function previewImageCustom(index, tag) {
         document.getElementById("image-preview" + tag + index).innerHTML = '<img src="' + urls + '">';
     }
 }
+
 function removeImageCustom(index, tag, value) {
-    var imageInput = document.getElementById('label-image'+tag + index)
+    var imageInput = document.getElementById('label-image' + tag + index)
     imageInput.remove()
 
-    $('#card-image'+tag).append("<input type='hidden' name='del-image"+tag + index + "' value='" + value + "' />");
+    $('#card-image' + tag).append("<input type='hidden' name='del-image" + tag + index + "' value='" + value + "' />");
 }
 
 
@@ -167,11 +170,18 @@ $(function () {
                 result.forEach(function (item) {
                     html += "<option value='" + item.id + "'> " + item.name + " "
                 })
+
+
+                if (result.length === 0) {
+                    html = "<option value=''> -- Vui lòng chọn --- "
+                }
                 productLineList.html(html)
                 getProductType()
+                getProductFeature()
                 console.log(result)
             },
             error: function (err) {
+
                 console.log(err)
             }
         })
@@ -202,6 +212,36 @@ function getProductType() {
     })
 }
 
+function getProductFeature() {
+    var productTypeId = $('#productTypeList').val()
+
+    $.ajax({
+        type: 'GET',
+        url: '/quan-tri/product_feature_list/' + productTypeId,
+        success: function (result) {
+            var productFeature = $("#productFeature")
+
+            var html = '';
+            result.forEach(function (item) {
+                html += '<div class="custom-control custom-checkbox col-4">\n' +
+                    '                                    <input name="feature[]" class="custom-control-input" type="checkbox" id="customCheckbox' + item.id + '" value="' + item.id + '">\n' +
+                    '                                    <label for="customCheckbox' + item.id + '" class="custom-control-label">' + item.name + '</label>\n' +
+                    '                                </div>'
+            })
+            productFeature.html(html)
+            if (result.length === 0) {
+                productFeature.html("<input type='hidden' name='feature[]' value=''>")
+                alert('Chưa có tính năng')
+            }
+
+            console.log(result)
+        },
+        error: function (err) {
+            console.log(err)
+        }
+    })
+}
+
 
 $(function () {
     $("#productLineList").change(function () {
@@ -218,7 +258,10 @@ $(function () {
                 result.forEach(function (item) {
                     html += "<option value='" + item.id + "'> " + item.name + " "
                 })
-                productTypeList.html(html)
+                productLineList.html(html)
+                if (result.length === 0) {
+                    productTypeList.html("<option value=''> -- Vui lòng chọn --- ")
+                }
 
                 console.log(result)
             },
@@ -227,4 +270,110 @@ $(function () {
             }
         })
     })
+})
+
+$(function () {
+    $("#productTypeList").change(function () {
+        var productTypeId = $(this).val()
+
+        $.ajax({
+            type: 'GET',
+            url: '/quan-tri/product_feature_list/' + productTypeId,
+            success: function (result) {
+                var productFeature = $("#productFeature")
+
+                var html = '';
+                result.forEach(function (item) {
+                    html += '<div class="custom-control custom-checkbox col-4">\n' +
+                        '                                    <input name="feature[]" class="custom-control-input" type="checkbox" id="customCheckbox' + item.id + '" value="' + item.id + '">\n' +
+                        '                                    <label for="customCheckbox' + item.id + '" class="custom-control-label">' + item.name + '</label>\n' +
+                        '                                </div>'
+                })
+                productLineList.html(html)
+                if (result.length === 0) {
+                    productTypeList.html("<option value=''> -- Vui lòng chọn --- ")
+                }
+
+                console.log(result)
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+    })
+})
+
+
+//Choose Image Galery
+var button1 = document.getElementById('ckfinder-popup-1');
+button1.onclick = function () {
+    selectFileWithCKFinder('img-avatar');
+};
+
+function selectFileWithCKFinder(elementId) {
+    CKFinder.popup({
+        chooseFiles: true,
+        width: 1200,
+        height: 600,
+        onInit: function (finder) {
+            finder.on('files:choose', function (evt) {
+                var file = evt.data.files.first();
+                var output = document.getElementById(elementId);
+                // output.value = file.getUrl();
+                $('#img-avatar').attr('src', file.getUrl());
+                $('#img_avatar_path').val(file.getUrl());
+            });
+
+            finder.on('file:choose:resizedImage', function (evt) {
+                var output = document.getElementById(elementId);
+                output.value = evt.data.resizedUrl;
+            });
+        }
+    });
+}
+
+function selectImageGalery(id) {
+    CKFinder.popup({
+        chooseFiles: true,
+        width: 1200,
+        height: 600,
+        onInit: function (finder) {
+            finder.on('files:choose', function (evt) {
+                var file = evt.data.files.first();
+                // output.value = file.getUrl();
+                $('#image-preview-src' + id).attr('src', file.getUrl());
+                $('#image-input' + id).val(file.getUrl());
+                console.log($('#image-input' + id).val())
+            });
+
+            finder.on('file:choose:resizedImage', function (evt) {
+                var output = document.getElementById(elementId);
+                output.value = evt.data.resizedUrl;
+            });
+        }
+    });
+}
+
+
+//POST SEO
+$('#news_title').on('input', function (){
+    var seo_title = $(this).val()
+
+    $('.preview_snippet_title').html(seo_title)
+})
+$('#news_description').on('input', function(){
+    var seo_description = $(this).val()
+
+    $('.preview_snippet_des').html(seo_description)
+})
+
+$(function(){
+    $('#seo-url').on('input', function (){
+        var repalce = $(this).val();
+        var url = $('#url_seo').val();
+
+        var seo_url = $('.preview_snippet_link').html(url+repalce)
+
+    })
+
 })

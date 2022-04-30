@@ -24,7 +24,11 @@ class Product extends Model
         'shape_type',
         'technology_type',
         'reliability_type',
-        'description'
+        'description',
+        'feature',
+        'avatar_path',
+        'show_home',
+        'status'
     ];
 
 

@@ -15,4 +15,9 @@ class ProductLine extends Model
         'name',
         'company_id'
     ];
+
+    public function company(){
+        return $this->hasOne(ProductCompany::class, 'id', 'company_id');
+    }
+
 }

@@ -8,9 +8,12 @@
     <title>@yield('title')</title>
     <link href="{{ asset('css/boostrap.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="@yield('font-awsomes')">
+    <link rel="stylesheet" href="@yield('font-awsomes')"><link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
+
     <script src="{{ asset('js/boostrap.js') }}"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
     <style type="text/css">
 
         /* ============ desktop view ============ */

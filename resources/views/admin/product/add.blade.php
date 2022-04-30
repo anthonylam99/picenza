@@ -20,11 +20,11 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="productName">Tên sản phẩm</label>
-                            <input type="text" name="product_name" class="form-control" id="productName" placeholder="Nhập tên sản phẩm...">
+                            <input type="text" name="product_name" class="form-control" id="productName" placeholder="Nhập tên sản phẩm..." required>
                         </div>
                         <div class="form-group">
                             <label for="productPrice">Giá</label>
-                            <input type="text" name="price" class="form-control" id="productPrice" placeholder="Nhập giá sản phẩm....">
+                            <input type="text" name="price" class="form-control" id="productPrice" placeholder="Nhập giá sản phẩm...." required>
                         </div>
                         <div class="form-group">
                             <label for="salePrice">Giá giảm giá</label>
@@ -36,7 +36,7 @@
                         </div>
                         <div class="form-group">
                             <label for="company">Hãng sản xuất</label>
-                            <select name="company" id="companyList" class="form-control">
+                            <select name="company" id="companyList" class="form-control" required>
                                 <option>----- Vui lòng chọn ----</option>
                                 @foreach($company as $value)
                                     <option value="{{$value->id}}">{{$value->name}}</option>
@@ -44,8 +44,8 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="company">Dòng sản phẩm</label>
-                            <select name="product_line" id="productLineList" class="form-control">
+                            <label for="company">Danh mục</label>
+                            <select name="product_line" id="productLineList" class="form-control" required>
                                 @foreach($productLine as $value)
                                     <option value="{{$value->id}}">{{$value->name}}</option>
                                 @endforeach
@@ -53,7 +53,7 @@
                         </div>
                         <div class="form-group">
                             <label for="company">Loại sản phẩm</label>
-                            <select name="product_type" id="productTypeList" class="form-control">
+                            <select name="product_type" id="productTypeList" class="form-control" required>
                                 @foreach($productType as $value)
                                     <option value="{{$value->id}}">{{$value->name}}</option>
                                 @endforeach
@@ -126,6 +126,21 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-4">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="ckfinder-popup-1">Ảnh đại diện</label>
+                            <button type="button" id="ckfinder-popup-1" class="btn btn-sm btn-success">
+                                Chọn ảnh
+                            </button>
+                            <div id="show-img-avatar">
+                                <img id="img-avatar" src="" alt="">
+                                <input type="hidden" id="img_avatar_path" name="img_avatar_path" value="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="col-12">
                     <div class="card-body">
                         <div class="form-group">
@@ -152,4 +167,5 @@
 
 @section('admin.js')
     <script src="{{asset('js/admin.js')}}"></script>
+    @include('ckfinder::setup')
 @endsection

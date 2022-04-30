@@ -13,9 +13,9 @@ class CompanyController extends Controller
     public function listCompany(Request $request)
     {
 
-        $productType = ProductType::with(['company', 'productLine'])->paginate(10);
+        $company = ProductCompany::all();
 
-        return view('admin.company.list', compact('productType'));
+        return view('admin.company.list', compact('company'));
     }
 
     public function addCompany(Request $request)
@@ -26,21 +26,19 @@ class CompanyController extends Controller
     public function addCompanyPost(Request $request)
     {
         $companyName = $request->get('company');
-        $product_line = $request->get('product_line');
-        $product_type = $request->get('product_type');
 
         if($request->has('id')){
             $id = $request->get('id');
-            $productType = ProductType::findOrFail($id);
+            $company = ProductCompany::findOrFail($id);
 
-            ProductCompany::where('id', $productType->company_id)->update([
+            ProductCompany::where('id', $company->id)->update([
                 'name' => $companyName
             ]);
-            ProductLine::where('id', $productType->product_line_id)->update([
-                'name' => $product_line,
-                'company_id' => $productType->company_id
-            ]);
-            ProductType::where('id', $id)->update(['name' =>  $product_type]);
+//            ProductLine::where('id', $productType->product_line_id)->update([
+//                'name' => $product_line,
+//                'company_id' => $productType->company_id
+//            ]);
+//            ProductType::where('id', $id)->update(['name' =>  $product_type]);
 
         }else{
             $company = ProductCompany::updateOrCreate(
@@ -48,40 +46,38 @@ class CompanyController extends Controller
                 ['name' => $companyName]
             );
 
-            $productLine = ProductLine::updateOrCreate(
-                [
-                    'name' => $product_line,
-                    'company_id' => $company->id
-                ],
-                [
-                    'name' => $product_line,
-                    'company_id' => $company->id
-                ]
-            );
-
-            $productType = ProductType::updateOrCreate(
-                [
-                    'name' => $product_type,
-                    'product_line_id' => $productLine->id,
-                    'company_id' => $company->id
-                ],
-                [
-                    'name' => $product_type,
-                    'product_line_id' => $productLine->id,
-                    'company_id' => $company->id
-                ]
-            );
+//
+//            $productLine = ProductLine::updateOrCreate(
+//                [
+//                    'name' => $product_line,
+//                    'company_id' => $company->id
+//                ],
+//                [
+//                    'name' => $product_line,
+//                    'company_id' => $company->id
+//                ]
+//            );
+//
+//            $productType = ProductType::updateOrCreate(
+//                [
+//                    'name' => $product_type,
+//                    'product_line_id' => $productLine->id,
+//                    'company_id' => $company->id
+//                ],
+//                [
+//                    'name' => $product_type,
+//                    'product_line_id' => $productLine->id,
+//                    'company_id' => $company->id
+//                ]
+//            );
         }
 
-        return redirect()->route('admin.company.edit', ['id' => $productType->id]);
+        return redirect()->route('admin.company.edit', ['id' => $company->id]);
     }
 
     public function editCompany(Request $request, $id = null)
     {
-        $data = ProductType::with([
-            'company',
-            'productLine'
-        ])->findOrFail($id);
+        $data = ProductCompany::findOrFail($id);
         $data = collect($data)->toArray();
 
         return view('admin.company.edit', compact('data'));

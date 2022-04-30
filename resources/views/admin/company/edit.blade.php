@@ -21,15 +21,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="productName">Tên hãng sản xuất</label>
-                        <input type="text" name="company" class="form-control" id="productName" value="{{ $data['company']['name'] }}" placeholder="Nhập tên hãng sản xuất...">
-                    </div>
-                    <div class="form-group">
-                        <label for="productName">Dòng sản phẩm</label>
-                        <input type="text" name="product_line" class="form-control" id="productName" value="{{ $data['product_line']['name'] }}" placeholder="Nhập tên dòng sản phẩm...">
-                    </div>
-                    <div class="form-group">
-                        <label for="productName">Loại sản phẩm</label>
-                        <input type="text" name="product_type" class="form-control" id="productName" value="{{ $data['name'] }}" placeholder="Nhập tên loại sản phẩm...">
+                        <input type="text" name="company" class="form-control" id="productName" value="{{ $data['name'] }}" placeholder="Nhập tên hãng sản xuất...">
                     </div>
                 </div>
             </div>
@@ -37,7 +29,7 @@
                 <div class="card-footer">
                     <button type="submit" class="btn btn-warning">Cập nhật</button>
                     <button type="button" class="btn btn-default float-right">
-                        <a style="color: #000000" href="{{route('admin.product.list')}}">Hủy</a>
+                        <a style="color: #000000" href="{{route('admin.company.list')}}">Hủy</a>
                     </button>
                 </div>
             </div>

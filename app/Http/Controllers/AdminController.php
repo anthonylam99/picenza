@@ -6,6 +6,7 @@ use App\Http\Controllers\Entity\Options;
 use App\Models\Product;
 use App\Models\ProductColor;
 use App\Models\ProductCompany;
+use App\Models\ProductFeature;
 use App\Models\ProductImage;
 use App\Models\ProductLine;
 use App\Models\ProductPrice;
@@ -28,16 +29,37 @@ class AdminController extends Controller
         return view('admin.index');
     }
 
-    public function getProductLine(Request $request, $id = null){
+    public function galery(Request $request)
+    {
+        return view('admin.galery');
+    }
+
+    public function getProductLine(Request $request, $id = null)
+    {
         $data = ProductLine::where('company_id', $id)->get();
         return response()->json($data);
     }
-    public function getProductType(Request $request, $id = null, $id2 = null){
+
+    public function getProductType(Request $request, $id = null, $id2 = null)
+    {
         $data = ProductType::where([
             'company_id' => $id,
             'product_line_id' => $id2
         ])->get();
         return response()->json($data);
+    }
+
+    public function getProductFeature(Request $request, $id = null)
+    {
+
+        $feature = ProductFeature::with('productType')
+            ->whereHas('productType', function ($q) use ($id) {
+                return $q->where('id', $id);
+            })
+            ->whereHas('productType.productLine')
+            ->whereHas('productType.company')
+            ->get();
+        return response()->json($feature);
     }
 
 
@@ -59,8 +81,9 @@ class AdminController extends Controller
                 ->orWhere('name', 'like', '%' . $query . '%')
                 ->orWhere('price', $query)
                 ->paginate(10);
-        } else if (!empty($request->get('s')) || !$request->has('s')){
+        } else if (!empty($request->get('s')) || !$request->has('s')) {
             $product = Product::with(['productType', 'companyName'])->paginate(10);
+//            return response()->json($product);
         }
 
         return view('admin.product.list', compact('product'));
@@ -73,7 +96,8 @@ class AdminController extends Controller
         return view('admin.product.type', compact(['productType']));
     }
 
-    public function addProductType(Request $request){
+    public function addProductType(Request $request)
+    {
 
     }
 
@@ -98,6 +122,10 @@ class AdminController extends Controller
 
     public function addProductPost(Request $request)
     {
+//        dd($request->all());
+//        if(empty($request->feature)){
+//            return redirect()->back()->with('error', 'Sản phẩm chưa có tính năng');
+//        }
         $data = collect($request)->toArray();
 
         $productTechnology = ProductTechnology::all();
@@ -115,6 +143,21 @@ class AdminController extends Controller
             }
         }
 
+        $feature = '';
+
+        $i = 0;
+        $featureData = $request->get('feature');
+        if (!empty($featureData)) {
+            foreach ($featureData as $value) {
+                $i++;
+                if ($i < count($featureData)) {
+                    $feature .= $value . ',';
+                } else {
+                    $feature .= $value;
+                }
+            }
+        }
+
         $dataInsert = [
             'name' => $request->get('product_name'),
             'slug' => $slug,
@@ -128,8 +171,11 @@ class AdminController extends Controller
             'shape_type' => $request->get('shape_type'),
             'technology_type' => $request->get('technology_type'),
             'reliability_type' => $request->get('reliability_type'),
-            'description' => $request->get('description', '')
+            'description' => $request->get('description', ''),
+            'feature' => $feature,
+            'avatar_path' => $request->get('img_avatar_path')
         ];
+
 
         if (!isset($data['id'])) {
             $product = Product::updateOrCreate(
@@ -139,35 +185,33 @@ class AdminController extends Controller
         } else {
             $update = Product::where('id', $data['id'])->update($dataInsert);
             $product = Product::find($data['id']);
+
+
         }
 
         $arrImageColor = [];
         $productId = $product->id;
         foreach ($data as $key => $value) {
             if (strpos($key, 'image') !== false) {
+
                 $index = explode('image', $key);
                 $index = $index[1];
-                if ($request->hasFile($key)) {
-                    $arr = [];
-                    $image = $request->file($key);
-                    $fileName = Str::random(40);
-                    $imagePath = $image->move('images-product', $fileName . '.' . $image->getClientOriginalExtension());
-                    $arr['image_path'] = $imagePath;
-                    $arr['product_id'] = $product->id;
+                $arr = [];
+                $arr['image_path'] = $request->get('image' . $index);
+                $arr['product_id'] = $product->id;
 
-                    $arrColor = [];
-                    $color = $request->get('color' . $index);
-                    $hex = $request->get('hex' . $index);
-                    $insert = ProductColor::updateOrCreate(
-                        ['color' => $color],
-                        [
-                            'color' => $color,
-                            'hex' => $hex
-                        ]
-                    );
-                    $arr['color'] = $insert->id;
-                    array_push($arrImageColor, $arr);
-                }
+                $arrColor = [];
+                $color = $request->get('color' . $index);
+                $hex = $request->get('hex' . $index);
+                $insert = ProductColor::updateOrCreate(
+                    ['color' => $color],
+                    [
+                        'color' => $color,
+                        'hex' => $hex
+                    ]
+                );
+                $arr['color'] = $insert->id;
+                array_push($arrImageColor, $arr);
             }
 
             if (strpos($key, 'del-image') !== false) {
@@ -196,7 +240,7 @@ class AdminController extends Controller
             }
         }
 
-        return redirect()->route('admin.product.edit', ['id' => $productId]);
+        return redirect()->route('admin.product.edit', ['id' => $productId])->with('success', 'Cập nhật thành công');
     }
 
 
@@ -212,7 +256,7 @@ class AdminController extends Controller
             'reliabilityType',
             'productImage.color',
         ])->findOrFail($id);
-
+        $featureList = explode(',', $product->feature);
 
         $productType = ProductType::all();
         $company = ProductCompany::all();
@@ -220,6 +264,10 @@ class AdminController extends Controller
         $productTechnology = ProductTechnology::all();
         $productLine = ProductLine::all();
         $productReliability = ProductReliability::all();
+        $feature = ProductFeature::select('product_feature.name')->join('product_type', 'product_type', '=', 'product_type.id')
+            ->join('product_line', 'product_line_id', '=', 'product_line.id')
+            ->join('product_company', 'product_type.company_id', '=', 'product_company.id')
+            ->get();
         $product = collect($product)->toArray();
 
         return view('admin.product.edit', compact(
@@ -229,11 +277,14 @@ class AdminController extends Controller
             'productShape',
             'productTechnology',
             'productLine',
-            'productReliability'
+            'productReliability',
+            'feature',
+            'featureList'
         ));
     }
 
-    public function delProduct(Request  $request, $id = null){
+    public function delProduct(Request $request, $id = null)
+    {
         $product = Product::findOrFail($id);
         $product->delete();
 
@@ -241,13 +292,14 @@ class AdminController extends Controller
         return back()->with(['success_flash' => 'Xoá thành công']);
     }
 
-    public function menu(Request $request){
-        if($request->method() == 'POST'){
+    public function menu(Request $request)
+    {
+        if ($request->method() == 'POST') {
             $idmenu = $request->get('idmenu');
             $labelProduct = $request->get('label_product');
-            foreach ($labelProduct as $value){
+            foreach ($labelProduct as $value) {
                 $data = ProductLine::find($value);
-                if(!empty($data)){
+                if (!empty($data)) {
                     $arr = [
                         'labelmenu' => $data->name,
                         'linkmenu' => $data->url,
@@ -268,7 +320,7 @@ class AdminController extends Controller
         $menuitem->label = $label;
         $menuitem->link = $link;
         if (config('menu.use_roles')) {
-            $menuitem->role_id = request()->input("rolemenu") ? request()->input("rolemenu")  : 0 ;
+            $menuitem->role_id = request()->input("rolemenu") ? request()->input("rolemenu") : 0;
         }
         $menuitem->menu = $idmenu;
         $menuitem->sort = MenuItems::getNextSortRoot($idmenu);
@@ -276,7 +328,8 @@ class AdminController extends Controller
 
     }
 
-    public function menuList(Request $request){
+    public function menuList(Request $request)
+    {
 
         $menu = DB::table('admin_menus')->get();
 

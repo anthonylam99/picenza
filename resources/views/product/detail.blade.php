@@ -2,6 +2,10 @@
 
 @section('title', 'Chi tiết sản phẩm')
 @section('font-awsomes' ,'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+@section('scripts')
+    <script src="{{asset('js/owl.carousel.js')}}"></script>
+@endsection
+
 
 @section('breadcrumb')
     <div class="breadcrumb-s">
@@ -29,13 +33,13 @@
 
 @section('content')
     <div class="main-content-product container">
-        <div class="content-1">
-            <div class="product-image col-md-7">
+        <div class="content-1 row">
+            <div class="product-image col-12 col-md-7">
                 <div class="image">
                     <img src="{{ asset('images/product/product_demo.png') }}" alt="tag">
                 </div>
             </div>
-            <div class="product-options col-md-5">
+            <div class="product-options col-12 col-md-5">
                 <div class="product-option-1">
                     <div class="product-name">
                         <h5>Chậu rửa Picenza 15344A</h5>
@@ -273,82 +277,85 @@
                 </div>
             </div>
             <div class="content w-100">
-                <div class="product-relate-item-main col-3">
-                    <div class="product-relate-item">
-                        <div class="image">
-                            <a href="">
-                                <img src="{{ asset('images/product/product_demo_2.png') }}" alt="tag">
-                            </a>
-                        </div>
-                        <div class="name">
-                            <h6>
-                                <a href="">Bình lọc tổng hikarix SH-1500</a>
-                            </h6>
-                        </div>
-                        <div class="price">
-                            <div class="content-price">
-                                <h6 class="sale-price">1.000.000đ</h6>
-                                <h6 class="unsale-price">1.200.000đ</h6>
+                <div class="owl-carousel product-relate owl-theme">
+
+                    <div class="product-relate-item-main">
+                        <div class="product-relate-item">
+                            <div class="image">
+                                <a href="">
+                                    <img src="{{ asset('images/product/product_demo_2.png') }}" alt="tag">
+                                </a>
+                            </div>
+                            <div class="name">
+                                <h6>
+                                    <a href="">Bình lọc tổng hikarix SH-1500</a>
+                                </h6>
+                            </div>
+                            <div class="price">
+                                <div class="content-price">
+                                    <h6 class="sale-price">1.000.000đ</h6>
+                                    <h6 class="unsale-price">1.200.000đ</h6>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="product-relate-item-main col-3">
-                    <div class="product-relate-item">
-                        <div class="image">
-                            <a href="">
-                                <img src="{{ asset('images/product/product_demo_2.png') }}" alt="tag">
-                            </a>
-                        </div>
-                        <div class="name">
-                            <h6>
-                                <a href="">Bình lọc tổng hikarix SH-1500</a>
-                            </h6>
-                        </div>
-                        <div class="price">
-                            <div class="content-price">
-                                <h6 class="sale-price">1.000.000đ</h6>
-                                <h6 class="unsale-price">1.200.000đ</h6>
+                    <div class="product-relate-item-main">
+                        <div class="product-relate-item">
+                            <div class="image">
+                                <a href="">
+                                    <img src="{{ asset('images/product/product_demo_2.png') }}" alt="tag">
+                                </a>
+                            </div>
+                            <div class="name">
+                                <h6>
+                                    <a href="">Bình lọc tổng hikarix SH-1500</a>
+                                </h6>
+                            </div>
+                            <div class="price">
+                                <div class="content-price">
+                                    <h6 class="sale-price">1.000.000đ</h6>
+                                    <h6 class="unsale-price">1.200.000đ</h6>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="product-relate-item-main col-3">
-                    <div class="product-relate-item">
-                        <div class="image">
-                            <a href="">
-                                <img src="{{ asset('images/product/product_demo_2.png') }}" alt="tag">
-                            </a>
-                        </div>
-                        <div class="name">
-                            <h6>
-                                <a href="">Bình lọc tổng hikarix SH-1500</a>
-                            </h6>
-                        </div>
-                        <div class="price">
-                            <div class="content-price">
-                                <h6 class="sale-price">1.000.000đ</h6>
-                                <h6 class="unsale-price">1.200.000đ</h6>
+                    <div class="product-relate-item-main">
+                        <div class="product-relate-item">
+                            <div class="image">
+                                <a href="">
+                                    <img src="{{ asset('images/product/product_demo_2.png') }}" alt="tag">
+                                </a>
+                            </div>
+                            <div class="name">
+                                <h6>
+                                    <a href="">Bình lọc tổng hikarix SH-1500</a>
+                                </h6>
+                            </div>
+                            <div class="price">
+                                <div class="content-price">
+                                    <h6 class="sale-price">1.000.000đ</h6>
+                                    <h6 class="unsale-price">1.200.000đ</h6>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="product-relate-item-main col-3">
-                    <div class="product-relate-item">
-                        <div class="image">
-                            <a href="">
-                                <img src="{{ asset('images/product/product_demo_2.png') }}" alt="tag">
-                            </a>
-                        </div>
-                        <div class="name">
-                            <h6>
-                                <a href="">Bình lọc tổng hikarix SH-1500</a>
-                            </h6>
-                        </div>
-                        <div class="price">
-                            <div class="content-price">
-                                <h6 class="sale-price">1.000.000đ</h6>
-                                <h6 class="unsale-price">1.200.000đ</h6>
+                    <div class="product-relate-item-main">
+                        <div class="product-relate-item">
+                            <div class="image">
+                                <a href="">
+                                    <img src="{{ asset('images/product/product_demo_2.png') }}" alt="tag">
+                                </a>
+                            </div>
+                            <div class="name">
+                                <h6>
+                                    <a href="">Bình lọc tổng hikarix SH-1500</a>
+                                </h6>
+                            </div>
+                            <div class="price">
+                                <div class="content-price">
+                                    <h6 class="sale-price">1.000.000đ</h6>
+                                    <h6 class="unsale-price">1.200.000đ</h6>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -667,7 +674,7 @@
             </div>
             <div class="review-detail-content">
                 <div class="review-item row">
-                    <div class="customer-info col-3">
+                    <div class="customer-info col-sm-3 col-12">
                         <div class="name">Nguyễn Vân Anh</div>
                         <div class="address">Đông Anh, Hà Nội</div>
                         <div class="comment">Bình luận: 1</div>
@@ -675,7 +682,7 @@
                         <div class="gender">Giới tính: Nữ</div>
                         <div class="age">Tuổi: 35-44</div>
                     </div>
-                    <div class="review-content col-6">
+                    <div class="review-content col-sm-6 col-12">
                         <div class="rating-star">
                             <i class="fa fa-star" style="color: #ED2027; "></i>
                             <i class="fa fa-star" style="color: #ED2027; "></i>
@@ -751,7 +758,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="review-quality col-3">
+                    <div class="review-quality col-sm-3 col-12">
                         <div class="review-quality-content">
                             <div class="quality">
                                 <h6>Chất lượng</h6>
@@ -781,7 +788,7 @@
                     </div>
                 </div>
                 <div class="review-item row">
-                    <div class="customer-info col-3">
+                    <div class="customer-info col-sm-3 col-12">
                         <div class="name">Nguyễn Vân Anh</div>
                         <div class="address">Đông Anh, Hà Nội</div>
                         <div class="comment">Bình luận: 1</div>
@@ -789,7 +796,7 @@
                         <div class="gender">Giới tính: Nữ</div>
                         <div class="age">Tuổi: 35-44</div>
                     </div>
-                    <div class="review-content col-6">
+                    <div class="review-content col-sm-6 col-12">
                         <div class="rating-star">
                             <i class="fa fa-star" style="color: #ED2027; "></i>
                             <i class="fa fa-star" style="color: #ED2027; "></i>
@@ -865,7 +872,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="review-quality col-3">
+                    <div class="review-quality col-sm-3 col-12">
                         <div class="review-quality-content">
                             <div class="quality">
                                 <h6>Chất lượng</h6>
@@ -908,82 +915,84 @@
                 </div>
             </div>
             <div class="content w-100">
-                <div class="product-relate-item-main col-3">
-                    <div class="product-relate-item">
-                        <div class="image">
-                            <a href="">
-                                <img src="{{ asset('images/product/product_demo_2.png') }}" alt="tag">
-                            </a>
-                        </div>
-                        <div class="name">
-                            <h6>
-                                <a href="">Bình lọc tổng hikarix SH-1500</a>
-                            </h6>
-                        </div>
-                        <div class="price">
-                            <div class="content-price">
-                                <h6 class="sale-price">1.000.000đ</h6>
-                                <h6 class="unsale-price">1.200.000đ</h6>
+                <div class="owl-carousel product-recent owl-theme">
+                    <div class="product-relate-item-main">
+                        <div class="product-relate-item">
+                            <div class="image">
+                                <a href="">
+                                    <img src="{{ asset('images/product/product_demo_2.png') }}" alt="tag">
+                                </a>
+                            </div>
+                            <div class="name">
+                                <h6>
+                                    <a href="">Bình lọc tổng hikarix SH-1500</a>
+                                </h6>
+                            </div>
+                            <div class="price">
+                                <div class="content-price">
+                                    <h6 class="sale-price">1.000.000đ</h6>
+                                    <h6 class="unsale-price">1.200.000đ</h6>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="product-relate-item-main col-3">
-                    <div class="product-relate-item">
-                        <div class="image">
-                            <a href="">
-                                <img src="{{ asset('images/product/product_demo_2.png') }}" alt="tag">
-                            </a>
-                        </div>
-                        <div class="name">
-                            <h6>
-                                <a href="">Bình lọc tổng hikarix SH-1500</a>
-                            </h6>
-                        </div>
-                        <div class="price">
-                            <div class="content-price">
-                                <h6 class="sale-price">1.000.000đ</h6>
-                                <h6 class="unsale-price">1.200.000đ</h6>
+                    <div class="product-relate-item-main">
+                        <div class="product-relate-item">
+                            <div class="image">
+                                <a href="">
+                                    <img src="{{ asset('images/product/product_demo_2.png') }}" alt="tag">
+                                </a>
+                            </div>
+                            <div class="name">
+                                <h6>
+                                    <a href="">Bình lọc tổng hikarix SH-1500</a>
+                                </h6>
+                            </div>
+                            <div class="price">
+                                <div class="content-price">
+                                    <h6 class="sale-price">1.000.000đ</h6>
+                                    <h6 class="unsale-price">1.200.000đ</h6>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="product-relate-item-main col-3">
-                    <div class="product-relate-item">
-                        <div class="image">
-                            <a href="">
-                                <img src="{{ asset('images/product/product_demo_2.png') }}" alt="tag">
-                            </a>
-                        </div>
-                        <div class="name">
-                            <h6>
-                                <a href="">Bình lọc tổng hikarix SH-1500</a>
-                            </h6>
-                        </div>
-                        <div class="price">
-                            <div class="content-price">
-                                <h6 class="sale-price">1.000.000đ</h6>
-                                <h6 class="unsale-price">1.200.000đ</h6>
+                    <div class="product-relate-item-main">
+                        <div class="product-relate-item">
+                            <div class="image">
+                                <a href="">
+                                    <img src="{{ asset('images/product/product_demo_2.png') }}" alt="tag">
+                                </a>
+                            </div>
+                            <div class="name">
+                                <h6>
+                                    <a href="">Bình lọc tổng hikarix SH-1500</a>
+                                </h6>
+                            </div>
+                            <div class="price">
+                                <div class="content-price">
+                                    <h6 class="sale-price">1.000.000đ</h6>
+                                    <h6 class="unsale-price">1.200.000đ</h6>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="product-relate-item-main col-3">
-                    <div class="product-relate-item">
-                        <div class="image">
-                            <a href="">
-                                <img src="{{ asset('images/product/product_demo_2.png') }}" alt="tag">
-                            </a>
-                        </div>
-                        <div class="name">
-                            <h6>
-                                <a href="">Bình lọc tổng hikarix SH-1500</a>
-                            </h6>
-                        </div>
-                        <div class="price">
-                            <div class="content-price">
-                                <h6 class="sale-price">1.000.000đ</h6>
-                                <h6 class="unsale-price">1.200.000đ</h6>
+                    <div class="product-relate-item-main">
+                        <div class="product-relate-item">
+                            <div class="image">
+                                <a href="">
+                                    <img src="{{ asset('images/product/product_demo_2.png') }}" alt="tag">
+                                </a>
+                            </div>
+                            <div class="name">
+                                <h6>
+                                    <a href="">Bình lọc tổng hikarix SH-1500</a>
+                                </h6>
+                            </div>
+                            <div class="price">
+                                <div class="content-price">
+                                    <h6 class="sale-price">1.000.000đ</h6>
+                                    <h6 class="unsale-price">1.200.000đ</h6>
+                                </div>
                             </div>
                         </div>
                     </div>

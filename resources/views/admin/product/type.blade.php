@@ -18,7 +18,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h2 class="card-title" style="font-size: 26px; font-weight: 700">DANH SÁCH SẢN PHẨM</h2>
+                <h2 class="card-title" style="font-size: 19px; font-weight: 700">DANH SÁCH SẢN PHẨM</h2>
 
                 <div class="form-search float-right">
                     <form style="margin-bottom: 0" class="form-group" action="{{route('admin.product.type')}}">
@@ -28,7 +28,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body p-0">
-                <table class="table">
+                <table class="table table-bordered table-striped table-bordered bulk_action">
                     <thead>
                     <tr>
                         <th>ID</th>
