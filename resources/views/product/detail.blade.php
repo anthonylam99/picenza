@@ -12,7 +12,7 @@
         <div class="breadcrumb-s-content container middle">
             <div class="breadcrumb-content middle">
                 <img width="10" height="10" src="{{ asset('images/arrow-right.png') }}" alt="tag">
-                <a href="">Chậu rửa Picenza 15344A</a>
+                <a href="">{{ $detailProduct->name }}</a>
             </div>
             <div class="breadcrumb-path">
                 <ul class="middle">
@@ -35,14 +35,14 @@
     <div class="main-content-product container">
         <div class="content-1 row">
             <div class="product-image col-12 col-md-7">
-                <div class="image">
-                    <img src="{{ asset('images/product/product_demo.png') }}" alt="tag">
+                <div class="image" id="img-product-color">
+                    <img src="{{ !empty($detailProduct->productImage) ? asset($detailProduct->productImage[0]->image_path) : 'images/product/product_demo_2.png' }}" alt="tag">
                 </div>
             </div>
             <div class="product-options col-12 col-md-5">
                 <div class="product-option-1">
                     <div class="product-name">
-                        <h5>Chậu rửa Picenza 15344A</h5>
+                        <h5>{{ $detailProduct->name }}</h5>
                     </div>
                     <div class="product-description">
                         <p>Mô tả</p>
@@ -139,13 +139,11 @@
                     <div class="product-price">
                         <div class="price">
                             <h5>Giá niêm yết:
-                                <text>1.000.000 VNĐ</text>
+                                <text>@money($detailProduct->price)</text>
                             </h5>
                         </div>
                         <div class="price-description">
-                            <p>Sử dụng mã <b>SPRING</b> khi thanh toán để nhận giảm giá 25% cho toàn bộ đơn đặt hàng của
-                                bạn
-                                mã phiếu giảm giá chỉ có giá trị đối với các mặt hàng có giá đầy đủ.</p>
+                            {!! $detailProduct->description !!}
                         </div>
                     </div>
                     <div class="product-color">
@@ -155,10 +153,10 @@
                             </h6>
                         </div>
                         <div class="color-options-select">
-                            @foreach($colors as $color)
+                            @foreach($detailProduct->productImage as $imageColor)
                                 <input class="color-options"
-                                       onClick="changeColor({{$color['id']}}, '{{$color['color']}}')" type="button"
-                                       style="background-color: {{$color['hex']}}"></input>
+                                       onClick="changeColor({{ $imageColor->color }}, '{{ get_color_from_id($imageColor->color) }}', '{{ $detailProduct->id }}')" type="button"
+                                       style="background-color: {{ get_color_from_id($imageColor->color) }}"></input>
                             @endforeach
                             <input type="hidden" id="color-selected" value="1" name="color"/>
                         </div>
@@ -270,6 +268,7 @@
                 </div>
             </div>
         </div>
+        @if (!empty($aryRelatedProd))
         <div class="product-relate-to">
             <div class="title-main">
                 <div class="title">
@@ -279,89 +278,34 @@
             <div class="content w-100">
                 <div class="owl-carousel product-relate owl-theme">
 
+                    @foreach ($aryRelatedProd as $relatedProd)
                     <div class="product-relate-item-main">
                         <div class="product-relate-item">
                             <div class="image">
                                 <a href="">
-                                    <img src="{{ asset('images/product/product_demo_2.png') }}" alt="tag">
+                                    <img src="{{ !empty($detailProduct->productImage) ? asset($detailProduct->productImage[0]->image_path) : 'images/product/product_demo_2.png' }}" alt="tag">
                                 </a>
                             </div>
                             <div class="name">
                                 <h6>
-                                    <a href="">Bình lọc tổng hikarix SH-1500</a>
+                                    <a href="{{ route('product.detail', $relatedProd->id) }}">{{ $relatedProd->name }}</a>
                                 </h6>
                             </div>
                             <div class="price">
                                 <div class="content-price">
-                                    <h6 class="sale-price">1.000.000đ</h6>
-                                    <h6 class="unsale-price">1.200.000đ</h6>
+                                    <h6 class="sale-price">@money($relatedProd->sale_price)</h6>
+                                    <h6 class="unsale-price">@money($relatedProd->price)</h6>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="product-relate-item-main">
-                        <div class="product-relate-item">
-                            <div class="image">
-                                <a href="">
-                                    <img src="{{ asset('images/product/product_demo_2.png') }}" alt="tag">
-                                </a>
-                            </div>
-                            <div class="name">
-                                <h6>
-                                    <a href="">Bình lọc tổng hikarix SH-1500</a>
-                                </h6>
-                            </div>
-                            <div class="price">
-                                <div class="content-price">
-                                    <h6 class="sale-price">1.000.000đ</h6>
-                                    <h6 class="unsale-price">1.200.000đ</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-relate-item-main">
-                        <div class="product-relate-item">
-                            <div class="image">
-                                <a href="">
-                                    <img src="{{ asset('images/product/product_demo_2.png') }}" alt="tag">
-                                </a>
-                            </div>
-                            <div class="name">
-                                <h6>
-                                    <a href="">Bình lọc tổng hikarix SH-1500</a>
-                                </h6>
-                            </div>
-                            <div class="price">
-                                <div class="content-price">
-                                    <h6 class="sale-price">1.000.000đ</h6>
-                                    <h6 class="unsale-price">1.200.000đ</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-relate-item-main">
-                        <div class="product-relate-item">
-                            <div class="image">
-                                <a href="">
-                                    <img src="{{ asset('images/product/product_demo_2.png') }}" alt="tag">
-                                </a>
-                            </div>
-                            <div class="name">
-                                <h6>
-                                    <a href="">Bình lọc tổng hikarix SH-1500</a>
-                                </h6>
-                            </div>
-                            <div class="price">
-                                <div class="content-price">
-                                    <h6 class="sale-price">1.000.000đ</h6>
-                                    <h6 class="unsale-price">1.200.000đ</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
+
                 </div>
             </div>
         </div>
+        @endif
+
         <div class="review">
             <div class="review-content-1">
                 <div class="review-1">
@@ -564,7 +508,7 @@
                 </div>
             </div>
             <div class="write-cmt col-md-3 col-12">
-                <button class="write">
+                <button class="write btn-review" type="button" data-bs-toggle="modal" data-bs-target="#reviewmodal">
                     Viết nhận xét
                 </button>
                 <div class="rank">
@@ -656,10 +600,11 @@
                 </div>
             </div>
         </div>
+        @if (!empty($detailProduct->comment))
         <div class="review-detail">
             <div class="review-detail-title">
                 <div class="number-review">
-                    <h6>1-3 trong 49 đánh giá</h6>
+                    <h6>@if(count($detailProduct->comment) > 3) 1-3 trong @endif {{ count($detailProduct->comment) }} đánh giá</h6>
                 </div>
                 <div class=orders>
                     <div class="order-by-title">
@@ -673,49 +618,32 @@
                 </div>
             </div>
             <div class="review-detail-content">
+                @foreach ($detailProduct->comment as $comment)
                 <div class="review-item row">
                     <div class="customer-info col-sm-3 col-12">
-                        <div class="name">Nguyễn Vân Anh</div>
-                        <div class="address">Đông Anh, Hà Nội</div>
+                        <div class="name">{{ $comment->user->name }}</div>
+                        <div class="address">{{ $comment->user->address ?? '' }}</div>
                         <div class="comment">Bình luận: 1</div>
                         <div class="has-review">Đã đánh giá: 61</div>
-                        <div class="gender">Giới tính: Nữ</div>
+                        <div class="gender">Giới tính: {{ $comment->user->gender }}</div>
                         <div class="age">Tuổi: 35-44</div>
                     </div>
                     <div class="review-content col-sm-6 col-12">
                         <div class="rating-star">
-                            <i class="fa fa-star" style="color: #ED2027; "></i>
-                            <i class="fa fa-star" style="color: #ED2027; "></i>
-                            <i class="fa fa-star" style="color: #ED2027; "></i>
-                            <i class="fa fa-star" style="color: #ED2027; "></i>
-                            <i class="fa fa-star" style="color: #DBDBDB;"></i>
+                            @for ($i = 1; $i < 6; $i++)
+                                <i class="fa fa-star" style="color: {{ $comment->rating < $i ? '#DBDBDB' : '#ED2027' }}; "></i>
+                            @endfor
                             <i class="fa fa-circle" style="font-size: 4px; padding: 0 10px; color: #444444;"></i>
                             <div class="dot">
                                 <h6 class="timer">15 phút trước</h6>
                             </div>
                         </div>
                         <div class="review-title">
-                            <h6>Bồn cấu toilet sang trọng , đẹp !</h6>
+                            <h6>{{ $comment->title }}</h6>
                         </div>
                         <div class="review-main-content">
                             <div class="content-1">
-                                <p>
-                                    There are several things I love about this toilet!!!
-                                    First, the base is smooth. Not a lot of dips,
-                                    and places for dirt and dust to collect.
-                                    No one likes cleaning the toilet. We all do it,
-                                    but no one likes it. This helps so much!!
-                                    The force flush help avoid that yucky ring near the top of
-                                    the bowl, that always sneaks up on me in the average toilet. A
-                                    lso, you can use any brand of toilet tab. There is not a specif
-                                    ic one that works. Which I love! This toilet sits a bit taller than
-                                    our other toilets. Which I will not complain about at all. It is one of th
-                                    ose features you don't realize is a plus, until you have it. I am in my 40's,
-                                    and that little raise makes a difference. But it is still low enough for my young
-                                    chil
-                                    dren to use comfortably. While this is not 100% self cleaning toilet, you still need
-                                    do some cleaning, it is incredibly helpful. I could not be happier.
-                                </p>
+                                {{ $comment->body }}
                             </div>
                             <div class="content-2">
                                 <div class="review-useful">
@@ -724,18 +652,13 @@
                                     </h6>
                                 </div>
                                 <div class="review-image row">
-                                    <div class="col-3">
-                                        <img src="{{asset('/images/product/Rectangle 1480.png')}}" alt="">
-                                    </div>
-                                    <div class="col-3">
-                                        <img src="{{asset('/images/product/Rectangle 1481.png')}}" alt="">
-                                    </div>
-                                    <div class="col-3">
-                                        <img src="{{asset('/images/product/Rectangle 1482.png')}}" alt="">
-                                    </div>
-                                    <div class="col-3">
-                                        <img src="{{asset('/images/product/Rectangle 1483.png')}}" alt="">
-                                    </div>
+                                    @forelse ($comment->file as $image)
+                                        <div class="col-3">
+                                            <img src="{{ $image }}" >
+                                        </div>
+                                    @empty
+
+                                    @endforelse
                                 </div>
                                 <div class="make-review-useful">
                                     <h6>Hữu ích ?</h6>
@@ -743,13 +666,13 @@
                                         Có
                                         <i class="fa fa-circle"
                                            style="font-size: 4px; padding: 0 4px; color: #444444;"></i>
-                                        <text>32</text>
+                                        <text>{{ $comment->count_like }}</text>
                                     </button>
                                     <button class="unuseful">
                                         Không
                                         <i class="fa fa-circle"
                                            style="font-size: 4px; padding: 0 4px; color: #444444;"></i>
-                                        <text>32</text>
+                                        <text>{{ $comment->count_dislike }}</text>
                                     </button>
                                     <button class="report">
                                         Báo cáo
@@ -787,127 +710,18 @@
                         </div>
                     </div>
                 </div>
-                <div class="review-item row">
-                    <div class="customer-info col-sm-3 col-12">
-                        <div class="name">Nguyễn Vân Anh</div>
-                        <div class="address">Đông Anh, Hà Nội</div>
-                        <div class="comment">Bình luận: 1</div>
-                        <div class="has-review">Đã đánh giá: 61</div>
-                        <div class="gender">Giới tính: Nữ</div>
-                        <div class="age">Tuổi: 35-44</div>
-                    </div>
-                    <div class="review-content col-sm-6 col-12">
-                        <div class="rating-star">
-                            <i class="fa fa-star" style="color: #ED2027; "></i>
-                            <i class="fa fa-star" style="color: #ED2027; "></i>
-                            <i class="fa fa-star" style="color: #ED2027; "></i>
-                            <i class="fa fa-star" style="color: #ED2027; "></i>
-                            <i class="fa fa-star" style="color: #DBDBDB;"></i>
-                            <i class="fa fa-circle" style="font-size: 4px; padding: 0 10px; color: #444444;"></i>
-                            <div class="dot">
-                                <h6 class="timer">15 phút trước</h6>
-                            </div>
-                        </div>
-                        <div class="review-title">
-                            <h6>Bồn cấu toilet sang trọng , đẹp !</h6>
-                        </div>
-                        <div class="review-main-content">
-                            <div class="content-1">
-                                <p>
-                                    There are several things I love about this toilet!!!
-                                    First, the base is smooth. Not a lot of dips,
-                                    and places for dirt and dust to collect.
-                                    No one likes cleaning the toilet. We all do it,
-                                    but no one likes it. This helps so much!!
-                                    The force flush help avoid that yucky ring near the top of
-                                    the bowl, that always sneaks up on me in the average toilet. A
-                                    lso, you can use any brand of toilet tab. There is not a specif
-                                    ic one that works. Which I love! This toilet sits a bit taller than
-                                    our other toilets. Which I will not complain about at all. It is one of th
-                                    ose features you don't realize is a plus, until you have it. I am in my 40's,
-                                    and that little raise makes a difference. But it is still low enough for my young
-                                    chil
-                                    dren to use comfortably. While this is not 100% self cleaning toilet, you still need
-                                    do some cleaning, it is incredibly helpful. I could not be happier.
-                                </p>
-                            </div>
-                            <div class="content-2">
-                                <div class="review-useful">
-                                    <h6>Đánh giá sản phẩm này
-                                        <text>✔ Hữu ích</text>
-                                    </h6>
-                                </div>
-                                <div class="review-image row">
-                                    <div class="col-3">
-                                        <img src="{{asset('/images/product/Rectangle 1480.png')}}" alt="">
-                                    </div>
-                                    <div class="col-3">
-                                        <img src="{{asset('/images/product/Rectangle 1481.png')}}" alt="">
-                                    </div>
-                                    <div class="col-3">
-                                        <img src="{{asset('/images/product/Rectangle 1482.png')}}" alt="">
-                                    </div>
-                                    <div class="col-3">
-                                        <img src="{{asset('/images/product/Rectangle 1483.png')}}" alt="">
-                                    </div>
-                                </div>
-                                <div class="make-review-useful">
-                                    <h6>Hữu ích ?</h6>
-                                    <button class="useful">
-                                        Có
-                                        <i class="fa fa-circle"
-                                           style="font-size: 4px; padding: 0 4px; color: #444444;"></i>
-                                        <text>32</text>
-                                    </button>
-                                    <button class="unuseful">
-                                        Không
-                                        <i class="fa fa-circle"
-                                           style="font-size: 4px; padding: 0 4px; color: #444444;"></i>
-                                        <text>32</text>
-                                    </button>
-                                    <button class="report">
-                                        Báo cáo
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="review-quality col-sm-3 col-12">
-                        <div class="review-quality-content">
-                            <div class="quality">
-                                <h6>Chất lượng</h6>
-                                <div class="point-group">
-                                    <div class="point-item">
-                                        <i class="point point-active"></i>
-                                        <i class="point point-active"></i>
-                                        <i class="point point-active"></i>
-                                        <i class="point point-active"></i>
-                                        <i class="point point-unactive"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="value">
-                                <h6>Giá trị</h6>
-                                <div class="point-group">
-                                    <div class="point-item">
-                                        <div class="point point-active"></div>
-                                        <div class="point point-active"></div>
-                                        <div class="point point-active"></div>
-                                        <div class="point point-active"></div>
-                                        <div class="point point-unactive"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
+            @if(count($detailProduct->comment) > 3)
             <div class="btn-load-more text-center">
                 <button class="load-more">
                     Xem thêm <i class="fa fa-long-arrow-right"></i>
                 </button>
             </div>
+            @endif
         </div>
+        @endif
+
         <div class="product-recent">
             <div class="title-main">
                 <div class="title">
@@ -999,6 +813,7 @@
                 </div>
             </div>
         </div>
+        @include('partials.modals.review-modal', ['product_id' => $detailProduct->id])
     </div>
 @endsection
 

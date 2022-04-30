@@ -1,5 +1,5 @@
 $('.color-options:nth-child(1)').addClass('active')
-function changeColor(id, color) {
+function changeColor(id, color, productId) {
     console.log(id)
     $('#color-selected').val(id)
     $('.color-option .color').html('<text class="color">' + color + '</text>')
@@ -7,6 +7,20 @@ function changeColor(id, color) {
     $('.color-options').removeClass('active')
     $('.color-options:nth-child(' + id + ')').addClass("active")
 
+    $.ajax({
+        url: '/get-image-from-color-and-product-id',
+        type: 'GET',
+        data: {
+            color_id: id,
+            product_id: productId,
+        },
+        //Ajax events
+        success: function (response) {
+            var img = `<img src="${response.url}" >`;
+            console.log(img);
+           $('#img-product-color').html(img);
+        }
+    })
 }
 
 function addParamCategory(){

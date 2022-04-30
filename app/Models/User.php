@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Models\Comment;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -17,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'gender', 'address'
     ];
 
     /**
@@ -37,4 +38,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the reviews for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comment()
+    {
+        return $this->hasMany(Comment::class)->where(function (Builder $query) {
+            $query->whereNull('publish_at')->orWhere('publish_at', '<=', now());
+        });
+    }
 }

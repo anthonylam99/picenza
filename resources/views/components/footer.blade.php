@@ -97,7 +97,9 @@
         <h6 style="margin: 0; color: #999999; ">© 2022 Công ty Pacenza</h6>
     </div>
 </footer>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script src="{{asset('js/main.js')}}"></script>
 @yield('scripts')
+@stack('scripts')
 </html>

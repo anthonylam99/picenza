@@ -2,38 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function detailProduct(Request $request){
-        $colors = [
-            [
-                "id" => 1,
-                "color" => 'Trắng',
-                "hex" => '#E5E5E5'
-            ],
-            [
-                "id" => 2,
-                "color" => 'Vàng',
-                "hex" => '#E7E5D8'
-            ],
-            [
-                "id" => 3,
-                "color" => 'Xanh',
-                "hex" => '#E1E2DA'
-            ],
-            [
-                "id" => 4,
-                "color" => 'Xanh dương',
-                "hex" => '#C2C5C2'
-            ],
-            [
-                "id" => 5,
-                "color" => 'Đen',
-                "hex" => '#5C5C59'
-            ]
-        ];
+    public function detailProduct(Request $request, $id){
 
         $starReviewPoint = 3.5;
         $stars = [
@@ -53,10 +28,28 @@ class ProductController extends Controller
             $stars['halfStar'] = 5 - $stars['fullStar'] - $stars['noneStar'];
         }
 
-        return view('product.detail', compact('colors', 'stars', 'starReviewPoint'));
+        $detailProduct = Product::with(['productImage.color', 'comment'])->find($id);
+
+        $aryRelatedProd = get_related_product($id);
+
+        return view('product.detail', compact('stars', 'starReviewPoint', 'detailProduct', 'aryRelatedProd'));
     }
 
     public function productContent(Request $request){
         return view('product.index');
+    }
+
+    /**
+     * Ajax get image from color and product Id
+     *
+     * @param [type] $color_id
+     * @param [type] $product_id
+     * @return json
+     */
+    public function getImageByColorAndProductId(Request $request)
+    {
+        $imageUrl = ProductImage::where('color', $request->color_id)->where('product_id', $request->product_id)->first();
+
+        return response()->json(['url' => $request->getSchemeAndHttpHost() . '/' .$imageUrl->image_path]);
     }
 }

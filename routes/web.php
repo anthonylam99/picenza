@@ -11,6 +11,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductTypeController;
 use App\Http\Controllers\ProductLineController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +36,10 @@ Route::get('danh-muc/{slug}', [CategoryController::class, 'index'])->name('produ
 Route::get('san-pham/{slug}', [ProductController::class, 'productContent']);
 Route::get('lien-he', [ContactController::class, 'index']);
 Route::get('danh-muc-hinh-anh', [AdminController::class, 'galery'])->name('admin.galery');
+Route::post('/postRatingImage', [CommentController::class, 'postRatingImage'])->name('postRatingImage');
+Route::post('/submitRatingComment', [CommentController::class, 'submitRatingComment'])->name('submitRatingComment');
+Route::get('/get-image-from-color-and-product-id', [ProductController::class, 'getImageByColorAndProductId'])->name('getImageByColorAndProductId');
+Route::get('/update-like-dislike-comment', [ProductController::class, 'getImageByColorAndProductId'])->name('getImageByColorAndProductId');
 
 Route::get('/quan-tri', [AdminController::class, 'index']);
 
