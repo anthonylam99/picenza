@@ -27,7 +27,7 @@ class CommentStoreRequest extends FormRequest
             'body'          => 'required|min:20',
             'full_name'     => 'required',
             'phone_number'  => 'required',
-            'email'         => 'required|email',
+            'email'         => 'required|email|unique:users,email',
             'address'       => 'nullable',
             'gender'        => 'numeric',
             'file'          => 'nullable',
@@ -47,6 +47,9 @@ class CommentStoreRequest extends FormRequest
             'email.required'        => 'Vui lòng nhập Email.',
             'body.required'         => 'Vui lòng nhập nội dung đánh giá về sản phẩm.',
             'body.min'              => 'Nội dung đánh giá quá ít. Vui lòng nhập thêm nội dung đánh giá về sản phẩm.',
+            'title.required'        => 'Tiêu đề không được bỏ trống',
+            'email.email'           => 'Định dạng email không hợp lệ',
+            'email.unique'          => 'Email đã được sử dụng',
         ];
     }
 }

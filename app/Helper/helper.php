@@ -4,6 +4,7 @@ use App\Models\Comments;
 use App\Models\Product;
 use App\Models\ProductColor;
 use App\Models\User;
+use Carbon\Carbon;
 
 if (!function_exists('get_related_product')) {
     /**
@@ -35,6 +36,7 @@ if (!function_exists('action_create_user')) {
             'password'  => bcrypt('12345678'),
             'gender'    => $dataUser['gender'] ?? 0,
             'address'   => $dataUser['address'] ?? '',
+            'address'   => $dataUser['phone'] ?? '',
         ]);
     }
 }
@@ -64,5 +66,23 @@ if (!function_exists('calculateAverageReview')) {
         $averageStar = Comments::where('product_id', $product_id)->avg($coloum);
 
         return !empty($averageStar) ? ceil($averageStar) : 0;
+    }
+}
+
+if (!function_exists('conver_date_to_time_ago')) {
+    /**
+     * Create user from simple data and return user id
+     *
+     * @param array $dataUser
+     * @return void
+     */
+    function conver_date_to_time_ago($dateTime)
+    {
+        Carbon::setLocale('vi');
+        $now = Carbon::now();
+
+        $dateDiff = Carbon::parse($dateTime);
+
+        return $dateDiff->diffForHumans($now);
     }
 }

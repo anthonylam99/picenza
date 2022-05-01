@@ -32,7 +32,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('chi-tiet-san-pham/{id}', [ProductController::class, 'detailProduct'])->name('product.detail');
 Route::get('gio-hang', [ProductController::class, 'cart'])->name('product.cart');
-Route::get('/', [HomeController::class, 'index']);
+Route::post('add-to-cart', [ProductController::class, 'addToCart'])->name('addToCart');
+Route::get('remove-item-to-cart', [ProductController::class, 'removeItemCart'])->name('removeItemCart');
+Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('danh-muc/{slug}', [CategoryController::class, 'index'])->name('product.category');
 Route::get('san-pham/{slug}', [ProductController::class, 'productContent']);
 Route::get('lien-he', [ContactController::class, 'index']);
@@ -40,8 +42,12 @@ Route::get('danh-muc-hinh-anh', [AdminController::class, 'galery'])->name('admin
 Route::post('/postRatingImage', [CommentController::class, 'postRatingImage'])->name('postRatingImage');
 Route::post('/submitRatingComment', [CommentController::class, 'submitRatingComment'])->name('submitRatingComment');
 Route::get('/get-image-from-color-and-product-id', [ProductController::class, 'getImageByColorAndProductId'])->name('getImageByColorAndProductId');
-Route::get('/update-like-dislike-comment', [CommentController::class, 'updateLikeAndDisLikeCommment'])->name('updateLikeAndDisLikeCommment');
+Route::post('/update-like-dislike-comment', [CommentController::class, 'updateLikeAndDisLikeCommment'])->name('updateLikeAndDisLikeCommment');
 Route::get('/find-comment', [CommentController::class, 'findComment'])->name('findComment');
+Route::get('locations/district', [ProductController::class, 'district'])->name('locations.district');
+Route::get('locations/ward', [ProductController::class, 'ward'])->name('locations.ward');
+Route::post('save-order', [ProductController::class, 'saveOrder'])->name('saveOrder');
+Route::post('update-quantity-cart', [ProductController::class, 'updateQtyCart'])->name('updateQtyCart');
 
 Route::get('/quan-tri', [AdminController::class, 'index']);
 

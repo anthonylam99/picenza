@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="@yield('font-awsomes')"><link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    @yield('style')
 
 
 
@@ -265,7 +266,7 @@
                                         </button>
                                     </div>
                                     <button class="cart">
-                                        <a href="" class="text-center">
+                                        <a href="{{ route('product.cart') }}" class="text-center">
                                             <img src="{{ asset('images/cart.png') }}" alt="tag">
                                         </a>
                                     </button>

@@ -13,7 +13,8 @@ class ProductImage extends Model
     protected $fillable = [
         'product_id',
         'image_path',
-        'color'
+        'color',
+        'price'
     ];
 
     public function color(){

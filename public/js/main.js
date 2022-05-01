@@ -1,6 +1,6 @@
 $('.color-options:nth-child(1)').addClass('active')
 function changeColor(id, color, productId) {
-    console.log(id)
+    console.log(id);
     $('#color-selected').val(id)
     $('.color-option .color').html('<text class="color">' + color + '</text>')
 
@@ -17,8 +17,11 @@ function changeColor(id, color, productId) {
         //Ajax events
         success: function (response) {
             var img = `<img src="${response.url}" >`;
-            console.log(img);
+
+            var price = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(response.price)
            $('#img-product-color').html(img);
+           $('#bind-price').html(price);
+           $('#hidden-price').val(response.price);
         }
     })
 }
