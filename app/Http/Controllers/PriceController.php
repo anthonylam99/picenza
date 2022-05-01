@@ -22,17 +22,17 @@ class PriceController extends Controller
             $id = $request->get('id');
             $price = ProductPrice::where('id', $id)->update([
                 'name' => $request->name,
-                'min_price' => $request->min_price,
-                'max_price' => $request->max_price
+                'min_price' => str_replace(',', '', $request->min_price),
+                'max_price' => str_replace(',', '', $request->max_price),
             ]);
 
             return redirect()->route('admin.price.edit', ['id' => $id]);
         }else{
             $price = ProductPrice::create(
                 [
-                    'name' => $request->name,
-                    'min_price' => $request->min_price,
-                    'max_price' => $request->max_price
+                    'name' => $request->get('name'),
+                    'min_price' => str_replace(',', '', $request->min_price),
+                    'max_price' => str_replace(',', '', $request->max_price),
                 ]
             );
 

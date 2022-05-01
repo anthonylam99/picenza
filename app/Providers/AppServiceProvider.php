@@ -24,8 +24,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        \Blade::directive('money', function ($money) {
-            return "<?php echo number_format($money ,0,',','.'). 'đ'; ?>";
-        });
+        \Blade::directive('money', function ($amount) {
+
+            $price ="
+            <?php
+             if($amount==0){
+                 echo 'Liên hệ';
+             }else {
+              echo number_format($amount,0,',','.').'₫';
+             }
+            ?>
+            ";
+             return $price;
+         });
     }
 }

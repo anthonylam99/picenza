@@ -19,66 +19,18 @@
                 </div>
                 <div class="content  text-center">
                     <div class="owl-carousel category owl-theme">
-                        <div class="product-category-item text-center">
-                            <div class="div-center">
-                                <a href="{{route('product.category', ['slug' => 'binh-nong'])}}">
-                                    <div class="product-category-item-content">
-                                        <img src="{{asset('/images/category/1.png')}}" alt="">
-                                    </div>
-                                    <h5>Bình nóng</h5>
-                                </a>
+                        @foreach($category as $value)
+                            <div class="product-category-item text-center">
+                                <div class="div-center">
+                                    <a href="/san-pham/{{$value->seo_url}}">
+                                        <div class="product-category-item-content">
+                                            <img src="{{$value->avatar}}" alt="">
+                                        </div>
+                                        <h5>{{$value->name}}</h5>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="product-category-item text-center">
-                            <div class="div-center">
-                                <a href="">
-                                    <div class="product-category-item-content">
-                                        <img src="{{asset('/images/category/2.png')}}" alt="">
-                                    </div>
-                                    <h5>Năng lượng mặt trời</h5>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product-category-item text-center">
-                            <div class="div-center">
-                                <a href="">
-                                    <div class="product-category-item-content">
-                                        <img src="{{asset('/images/category/3.png')}}" alt="">
-                                    </div>
-                                    <h5>Vòi xịt</h5>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product-category-item text-center">
-                            <div class="div-center">
-                                <a href="">
-                                    <div class="product-category-item-content">
-                                        <img src="{{asset('/images/category/4.png')}}" alt="">
-                                    </div>
-                                    <h5>Sen tắm</h5>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product-category-item text-center">
-                            <div class="div-center">
-                                <a href="">
-                                    <div class="product-category-item-content">
-                                        <img src="{{asset('/images/category/5.png')}}" alt="">
-                                    </div>
-                                    <h5>Chậu rửa</h5>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product-category-item text-center">
-                            <div class="div-center">
-                                <a href="">
-                                    <div class="product-category-item-content">
-                                        <img src="{{asset('/images/category/6.png')}}" alt="">
-                                    </div>
-                                    <h5>Sản phẩm khác</h5>
-                                </a>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

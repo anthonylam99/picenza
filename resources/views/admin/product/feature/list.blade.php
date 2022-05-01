@@ -4,7 +4,7 @@
 
 @section('breadcrumbContent')
     <li class="breadcrumb-item"><a href="#">Tính năng</a></li>
-    <li class="breadcrumb-item active">Danh sách tính năng</li>
+    <li class="breadcrumb-item active">Danh sách thuộc tính</li>
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h2 class="card-title" style="font-size: 19px; font-weight: 700">Danh sách tính năng</h2>
+                <h2 class="card-title" style="font-size: 19px; font-weight: 700">Danh sách thuộc tính</h2>
 
                 <div class="form-search float-right">
                     <form style="margin-bottom: 0" class="form-group" action="{{route('admin.type.add.post')}}">
@@ -43,8 +43,8 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>TÍNH NĂNG</th>
-                        <th>LOẠI SẢN PHẨM</th>
+                        <th>Thuộc tính</th>
+                        <th>Thông tin</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -53,15 +53,18 @@
                             <tr>
                                 <td>{{$value->id}}</td>
                                 <td>{{$value->name}}</td>
-                                <td>{{$value->productType->name}}</td>
+                                <td>
+                                    <strong>Thêm lúc:</strong>{{$value->created_at}} <br>
+                                    <strong>Cập nhật:</strong>{{$value->updated_at}}
+                                </td>
                                 <td>
                                     <button class="btn btn-info">
-                                        <a style="color: #FFFFFF" href="{{ route('admin.type.edit', ['id' => $value->id]) }}">
+                                        <a style="color: #FFFFFF" href="{{ route('admin.product.feature.edit', ['id' => $value->id]) }}">
                                             Chi tiết
                                         </a>
                                     </button>
                                     <button class="btn btn-danger">
-                                        <a style="color: #FFFFFF" href="{{ route('admin.type.del', ['id' => $value->id]) }}">
+                                        <a style="color: #FFFFFF" href="{{ route('admin.product.feature.del', ['id' => $value->id]) }}">
                                             Xoá
                                         </a>
                                     </button>

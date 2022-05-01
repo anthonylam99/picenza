@@ -20,4 +20,8 @@ class ProductLine extends Model
         return $this->hasOne(ProductCompany::class, 'id', 'company_id');
     }
 
+    public function feature(){
+        return $this->hasMany(ProductFeature::class, 'product_line', 'id');
+    }
+
 }

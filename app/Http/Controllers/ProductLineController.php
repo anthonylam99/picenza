@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Entity\Options;
 use App\Models\ProductCompany;
 use App\Models\ProductLine;
 use App\Models\ProductType;
@@ -9,6 +10,22 @@ use Illuminate\Http\Request;
 
 class ProductLineController extends Controller
 {
+    public function updateStatus(Request $request){
+        $update = ProductLine::where('id', $request->get('id'))->update([
+            'status' => $request->status
+        ]);
+        if($update){
+            return response()->json(['message' => 'Success']);
+        }
+    }
+    public function updateStatusHome(Request $request){
+        $update = ProductLine::where('id', $request->get('id'))->update([
+            'show_home' => $request->show_home
+        ]);
+        if($update){
+            return response()->json(['message' => 'Success']);
+        }
+    }
     public function listLine(Request $request)
     {
         $line = ProductLine::with(['company'])->get();
@@ -23,21 +40,40 @@ class ProductLineController extends Controller
 
     public function addLinePost(Request $request)
     {
-        $companyId = $request->get('company_id');
+        $options = new Options;
         $lineName = $request->get('lineName');
 
+        $avatar = $request->get('img_avatar_path');
+        $status = $request->get('status') === 'on' ? 1 : 0;
+        $description = $request->get('description');
+
+
         if(!$request->has('id')){
+            $slug = $options->create_slug($lineName);
+            $seo_url = $slug;
             $insert = ProductLine::create([
                 'name' => $lineName,
-                'company_id' => $companyId
+                'avatar' => $avatar,
+                'status' => $status,
+                'slug' => $slug,
+                'seo_url' => $seo_url,
+                'url' => collect($request->server)['HTTP_ORIGIN'].'/'.$slug,
+                'description' => $description
             ]);
             if($insert){
                 return redirect()->route('admin.line.edit', ['id' => $insert->id]);
             }
         }else{
+            $slug = $options->create_slug($lineName);
+            $seo_url = $request->get('seo-url');
             $update = ProductLine::where('id', $request->get('id'))->update([
                 'name' => $lineName,
-                'company_id' => $companyId
+                'avatar' => $avatar,
+                'status' => $status,
+                'slug' => $slug,
+                'seo_url' => $seo_url,
+                'url' => collect($request->server)['HTTP_ORIGIN'].'/'.$slug,
+                'description' => $description
             ]);
             if($update){
                 return redirect()->route('admin.line.edit', ['id' => $request->get('id')]);

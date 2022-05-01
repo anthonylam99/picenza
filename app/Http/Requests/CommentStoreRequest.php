@@ -33,7 +33,9 @@ class CommentStoreRequest extends FormRequest
             'file'          => 'nullable',
             'product_id'    => 'required',
             'rating'        => 'required',
-            'title'        => 'required',
+            'count_worth'   => 'required',
+            'count_quality' => 'required',
+            'title'         => 'required',
         ];
     }
 

@@ -20,20 +20,29 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="productName">Tên sản phẩm</label>
-                            <input type="text" name="product_name" class="form-control" id="productName" placeholder="Nhập tên sản phẩm..." required>
+                            <input type="text" name="product_name" class="form-control" id="productName"
+                                   placeholder="Nhập tên sản phẩm..." required>
                         </div>
                         <div class="form-group">
                             <label for="productPrice">Giá</label>
-                            <input type="text" name="price" class="form-control" id="productPrice" placeholder="Nhập giá sản phẩm...." required>
+                            <input type="text" name="price" class="form-control" id="productPrice"
+                                   placeholder="Nhập giá sản phẩm...." required>
                         </div>
                         <div class="form-group">
                             <label for="salePrice">Giá giảm giá</label>
-                            <input type="text" name="sale_price" class="form-control" id="salePrice" placeholder="Nhập giá giảm giá....">
+                            <input type="text" name="sale_price" class="form-control" id="salePrice"
+                                   placeholder="Nhập giá giảm giá....">
                         </div>
                         <div class="form-group">
                             <label for="pricePercent">Giảm giá (%)</label>
-                            <input type="number" max="100" min="0" name="sale_percent" class="form-control" id="pricePercent" placeholder="Nhập phần trăm giảm giá....">
+                            <input type="number" max="100" min="0" name="sale_percent" class="form-control"
+                                   id="pricePercent" placeholder="Nhập phần trăm giảm giá....">
                         </div>
+
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card-body">
                         <div class="form-group">
                             <label for="company">Hãng sản xuất</label>
                             <select name="company" id="companyList" class="form-control" required>
@@ -46,76 +55,26 @@
                         <div class="form-group">
                             <label for="company">Danh mục</label>
                             <select name="product_line" id="productLineList" class="form-control" required>
+
+                                <option value="">-- Vui lòng chọn --</option>
                                 @foreach($productLine as $value)
                                     <option value="{{$value->id}}">{{$value->name}}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="company">Loại sản phẩm</label>
-                            <select name="product_type" id="productTypeList" class="form-control" required>
-                                @foreach($productType as $value)
-                                    <option value="{{$value->id}}">{{$value->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="shape">Hình dáng</label>
-                            <select name="shape_type" class="form-control">
-                                @foreach($productShape as $value)
-                                    <option value="{{$value->id}}">{{$value->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="technology">Công nghệ xả</label>
-                            <select name="technology_type" class="form-control">
-                                @foreach($productTechnology as $value)
-                                    <option value="{{$value->id}}">{{$value->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="company">Độ bền</label>
-                            <select name="reliability_type" class="form-control">
-                                @foreach($productReliability as $value)
-                                    <option value="{{$value->id}}">{{$value->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+{{--                        <div class="form-group">--}}
+{{--                            <label for="company">Loại sản phẩm</label>--}}
+{{--                            <select name="product_type" id="productTypeList" class="form-control" required>--}}
+{{--                                @foreach($productType as $value)--}}
+{{--                                    <option value="{{$value->id}}">{{$value->name}}</option>--}}
+{{--                                @endforeach--}}
+{{--                            </select>--}}
+{{--                        </div>--}}
                         <div class="form-group">
                             <label for="company">Tính năng</label>
                             <div class="form-group">
-                                <div class="custom-control custom-checkbox">
-                                    <input name="feature[]" class="custom-control-input" type="checkbox"
-                                           id="customCheckbox1" value="option1">
-                                    <label for="customCheckbox1" class="custom-control-label">Custom Checkbox</label>
-                                </div>
-                                <div class="custom-control custom-checkbox">
-                                    <input name="feature[]" class="custom-control-input" type="checkbox"
-                                           id="customCheckbox2" value="option1">
-                                    <label for="customCheckbox2" class="custom-control-label">Custom Checkbox</label>
-                                </div>
-                                <div class="custom-control custom-checkbox">
-                                    <input name="feature[]" class="custom-control-input" type="checkbox"
-                                           id="customCheckbox3" value="option1">
-                                    <label for="customCheckbox3" class="custom-control-label">Custom Checkbox</label>
-                                </div>
-                                <div class="custom-control custom-checkbox">
-                                    <input name="feature[]" class="custom-control-input" type="checkbox"
-                                           id="customCheckbox4" value="option1">
-                                    <label for="customCheckbox4" class="custom-control-label">Custom Checkbox</label>
-                                </div>
-                                <div class="custom-control custom-checkbox">
-                                    <input name="feature[]" class="custom-control-input" type="checkbox"
-                                           id="customCheckbox5" value="option1">
-                                    <label for="customCheckbox5" class="custom-control-label">Custom Checkbox</label>
+                                <div class="accordion row" id="accordionExample">
+
                                 </div>
                             </div>
                         </div>
@@ -165,7 +124,4 @@
 @endsection
 
 
-@section('admin.js')
-    <script src="{{asset('js/admin.js')}}"></script>
-    @include('ckfinder::setup')
-@endsection
+

@@ -18,7 +18,7 @@ class PostController extends Controller
             $q->where('category', 'LIKE', '%'.$post->category.'%');
             $q->orWhere('tag', 'like', '%'.$post->tag.'%');
             return $q;
-        })->get();
+        })->inRandomOrder()->limit(5)->get();
         return view('admin.post.show', compact('post', 'relatePost'));
     }
     public function listPost(Request $request)

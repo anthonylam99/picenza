@@ -67,4 +67,9 @@ label.image-upload {
     font-size: 14px;
     margin: 0;
 }
+.table-subcategory{
+    max-height: 380px;
+    overflow-y: scroll;
+}
+
 
