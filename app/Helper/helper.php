@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Comments;
 use App\Models\Product;
 use App\Models\ProductColor;
 use App\Models\User;
@@ -47,6 +48,21 @@ if (!function_exists('get_color_from_id')) {
      */
     function get_color_from_id($id_color)
     {
-        return ProductColor::findOrFail($id_color)->hex;
+        return ProductColor::findOrFail($id_color);
+    }
+}
+
+if (!function_exists('calculateAverageReview')) {
+    /**
+     * Create user from simple data and return user id
+     *
+     * @param array $dataUser
+     * @return void
+     */
+    function calculateAverageReview($product_id, $coloum = 'rating')
+    {
+        $averageStar = Comments::where('product_id', $product_id)->avg($coloum);
+
+        return !empty($averageStar) ? ceil($averageStar) : 0;
     }
 }

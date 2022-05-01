@@ -10,6 +10,51 @@
                 <form id="form_testimonial">
                 <div class="mt-3">
                     <div class="row">
+                        <div class="col-lg-4 pb-lg-1 mb-1 mb-lg-0 mb-md-0">
+                            <span class="mr-2">Chọn đánh giá của bạn</span>
+                            <div class="d-flex flex-row mt-3 mt-md-0 mt-lg-0">
+                                <span class="rate-star-product">
+                                    <i class="fa fa-star fa-2x" data-id="1"></i>
+                                    <i class="fa fa-star fa-2x" data-id="2"></i>
+                                    <i class="fa fa-star fa-2x" data-id="3"></i>
+                                    <i class="fa fa-star fa-2x" data-id="4"></i>
+                                    <i class="fa fa-star fa-2x" data-id="5"></i>
+                                </span>
+                                <span class="rate-star-title" style="display: none">
+
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 pb-lg-1 mb-1 mb-lg-0 mb-md-0">
+                            <span class="mr-2">Đánh giá chất lượng</span>
+                            <div class="d-flex flex-row mt-3 mt-md-0 mt-lg-0">
+                                <span class="rate-quality-product">
+                                    <i class="fa fa-window-minimize fa-2x" data-id="1"></i>
+                                    <i class="fa fa-window-minimize fa-2x" data-id="2"></i>
+                                    <i class="fa fa-window-minimize fa-2x" data-id="3"></i>
+                                    <i class="fa fa-window-minimize fa-2x" data-id="4"></i>
+                                    <i class="fa fa-window-minimize fa-2x" data-id="5"></i>
+                                </span>
+                                <span class="rate-value-title" style="display: none">
+
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 pb-lg-1 mb-1 mb-lg-0 mb-md-0">
+                            <span class="mr-2">Đánh giá giá trị sản phẩm</span>
+                            <div class="d-flex flex-row mt-3 mt-md-0 mt-lg-0">
+                                <span class="rate-worth-product">
+                                    <i class="fa fa-window-minimize fa-2x" data-id="1"></i>
+                                    <i class="fa fa-window-minimize fa-2x" data-id="2"></i>
+                                    <i class="fa fa-window-minimize fa-2x" data-id="3"></i>
+                                    <i class="fa fa-window-minimize fa-2x" data-id="4"></i>
+                                    <i class="fa fa-window-minimize fa-2x" data-id="5"></i>
+                                </span>
+                                <span class="rate-worth-title" style="display: none">
+
+                                </span>
+                            </div>
+                        </div>
                         <div class="col-lg-12 pb-lg-1 mb-1 mb-lg-0 mb-md-0">
                             <input type="text" class="form-control" name="title" placeholder="Tiêu đề">
                             <small id="title_div_alert" class="text-danger"></small>
@@ -72,6 +117,8 @@
                             </div>
                             <input type="hidden" name="product_id" value="{{ $product_id }}" class="product_id">
                             <input type="hidden" name="rating" value="1" class="rating">
+                            <input type="hidden" name="count_worth" value="1">
+                            <input type="hidden" name="count_quality" value="1">
 
                         </div>
                     </div>
@@ -166,6 +213,84 @@
         }
     </script>
     <script>
+        let starId
+        let qualityID
+        let worthId
+        
+        // Star
+        $('.rate-star-product i').bind('mouseover', function (e) {
+            e.preventDefault()
+            $(this).nextAll().removeClass('hover').removeClass('selected')
+            $(this).prevAll().addClass('hover').removeClass('selected')
+            $(this).addClass('hover')
+        }).bind('mouseleave', function (e) {
+            checkRateSelectedWhenLeave()
+        })
+
+        function checkRateSelectedWhenLeave() {
+            $('.rate-star-product i').removeClass('selected').removeClass('hover')
+            var elementRate = $('.rate-star-product i[data-id="' + starId + '"]')
+            elementRate.addClass('selected')
+            elementRate.prevAll().addClass('selected')
+        }
+
+        $(document).on('click', '.rate-star-product i', function (e) {
+            starId = $(this).attr('data-id')
+            $('.rate-star-product i').removeClass('selected')
+            $(this).addClass('selected')
+            $(this).prevAll().addClass('selected')
+            $('#form_testimonial input[name="rating"]').val(starId)
+        })
+
+        // quality
+        $('.rate-quality-product i').bind('mouseover', function (e) {
+            e.preventDefault()
+            $(this).nextAll().removeClass('hover').removeClass('selected')
+            $(this).prevAll().addClass('hover').removeClass('selected')
+            $(this).addClass('hover')
+        }).bind('mouseleave', function (e) {
+            checkRateSelectedWhenLeaveQuality()
+        })
+
+        function checkRateSelectedWhenLeaveQuality() {
+            $('.rate-quality-product i').removeClass('selected').removeClass('hover')
+            var elementRate = $('.rate-quality-product i[data-id="' + qualityID + '"]')
+            elementRate.addClass('selected')
+            elementRate.prevAll().addClass('selected')
+        }
+
+        $(document).on('click', '.rate-quality-product i', function (e) {
+            qualityID = $(this).attr('data-id')
+            $('.rate-quality-product i').removeClass('selected')
+            $(this).addClass('selected')
+            $(this).prevAll().addClass('selected')
+            $('#form_testimonial input[name="count_quality"]').val(qualityID)
+        })
+
+        // Worth
+        $('.rate-worth-product i').bind('mouseover', function (e) {
+            e.preventDefault()
+            $(this).nextAll().removeClass('hover').removeClass('selected')
+            $(this).prevAll().addClass('hover').removeClass('selected')
+            $(this).addClass('hover')
+        }).bind('mouseleave', function (e) {
+            checkRateSelectedWhenLeaveWorth()
+        })
+
+        function checkRateSelectedWhenLeaveWorth() {
+            $('.rate-worth-product i').removeClass('selected').removeClass('hover')
+            var elementRate = $('.rate-worth-product i[data-id="' + worthId + '"]')
+            elementRate.addClass('selected')
+            elementRate.prevAll().addClass('selected')
+        }
+
+        $(document).on('click', '.rate-worth-product i', function (e) {
+            worthId = $(this).attr('data-id')
+            $('.rate-worth-product i').removeClass('selected')
+            $(this).addClass('selected')
+            $(this).prevAll().addClass('selected')
+            $('#form_testimonial input[name="count_worth"]').val(worthId)
+        })
         $('#imgInp').change(function () {
             readURL(this)
         })

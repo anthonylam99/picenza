@@ -64,7 +64,8 @@ img {
 }
 
 .fa-star,
-.fa-star-half {
+.fa-star-half,
+.fa-window-minimize {
     color: #DBDBDB;
 }
 
@@ -2420,4 +2421,24 @@ footer .copyright h6 {
     }
 }
 
+.rate-star-product i.selected, .rate-star-product-list i.selected, .rate-star-product i.hover, .rate-star-product-list i.hover,
+.rate-quality-product i.selected, .rate-quality-product-list i.selected, .rate-quality-product i.hover, .rate-quality-product-list i.hover,
+.rate-worth-product i.selected, .rate-worth-product-list i.selected, .rate-worth-product i.hover, .rate-worth-product-list i.hover  {
+    color: #ED2027;
+}
+#form_testimonial .point-group .point-item {
+    display: flex;
+    width: 120px;
+    height: 7px;
+}
 
+#form_testimonial .point-item .point-active{
+    background: #ED2027;
+    border-radius: 2px 0px 0px 2px;
+}
+
+#form_testimonial .point-item .point-unactive
+{
+    background: #C4C4C4;
+    border-radius: 2px;
+}
