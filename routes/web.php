@@ -75,6 +75,10 @@ Route::group(['prefix' => 'quan-tri'], function () {
             Route::post('them-moi', [\App\Http\Controllers\ProductFeatureController::class, 'addPostProductFeature'])->name('admin.product.feature.add.post');
             Route::get('sua/{id}', [\App\Http\Controllers\ProductFeatureController::class, 'editProductFeature'])->name('admin.product.feature.edit');
             Route::get('xoa/{id}', [\App\Http\Controllers\ProductFeatureController::class, 'delProductFeature'])->name('admin.product.feature.del');
+            Route::post('add-sub-category', [\App\Http\Controllers\ProductFeatureController::class, 'addSubCategory']);
+            Route::get('danh-muc-con/sua/{id}', [\App\Http\Controllers\ProductFeatureController::class, 'editSubCategory'])->name('admin.sub.category.edit');
+            Route::post('danh-muc-con/sua/{id}', [\App\Http\Controllers\ProductFeatureController::class, 'editSubCategory'])->name('admin.sub.category.edit.post');
+            Route::get('danh-muc-con/yeu-thich', [\App\Http\Controllers\ProductFeatureController::class, 'makeFavourite']);
         });
     });
 
@@ -98,6 +102,8 @@ Route::group(['prefix' => 'quan-tri'], function () {
         Route::post('them-moi', [ProductLineController::class, 'addLinePost'])->name('admin.line.add.post');
         Route::get('sua/{id}', [ProductLineController::class, 'editLine'])->name('admin.line.edit');
         Route::get('xoa/{id}', [ProductLineController::class, 'delLine'])->name('admin.line.del');
+        Route::get('update-status', [ProductLineController::class, 'updateStatus']);
+        Route::get('showhome', [ProductLineController::class, 'updateStatusHome']);
     });
 
     Route::group(['prefix' => 'loai-san-pham'], function(){

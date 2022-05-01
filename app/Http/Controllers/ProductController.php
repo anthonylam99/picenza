@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Comments;
 use App\Models\Orders;
 use App\Models\Product;
+use App\Models\ProductFeature;
 use App\Models\ProductImage;
+use App\Models\ProductLine;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Cart;
 
@@ -92,8 +95,17 @@ class ProductController extends Controller
         ));
     }
 
-    public function productContent(Request $request){
-        return view('product.index');
+    public function productContent(Request $request, $slug = null){
+        $category = ProductLine::where('seo_url', $slug)->firstOrFail();
+        $feature = ProductFeature::where('product_line', $category->id)->get('id');
+
+        $ids = [];
+        foreach($feature as $value){
+            array_push($ids, $value->id);
+        }
+        $favourite = SubCategory::where('favourite', 1)->whereIn('id_category_parent', $ids)->where('status' , 1)->get();
+
+        return view('product.index', compact('category', 'favourite'));
     }
 
     /**

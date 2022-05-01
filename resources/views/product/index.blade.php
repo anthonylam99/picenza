@@ -8,11 +8,11 @@
             <div class="banner">
                 <img src="{{asset('images/banner/banner_2.png')}}" alt="">
                 <div class="title">
-                    <h4>CHẬU RỬA</h4>
-                    <p>Một loạt các sản phẩm chậu rửa mạnh mẽ sạch sẽ và hiệu quả</p>
+                    <h4>{{$category->name}}</h4>
+                    <p>{{$category->description}}</p>
                     <div class="button-product">
                         <button>
-                            <a href="">MUA TẤT CẢ SẢN PHẨM</a>
+                            <a href="/danh-muc/{{$category->seo_url}}">MUA TẤT CẢ SẢN PHẨM</a>
                         </button>
                     </div>
                 </div>
@@ -26,72 +26,21 @@
                     </div>
                     <div class="feature">
                         <div class="feature-item row">
-                            <div class="feature-item-main col-6 col-sm-6 col-md-4 col-lg-4">
-                                <div class="image">
-                                    <img src="{{asset('images/feature/1.png')}}" alt="">
+                            @foreach($favourite as $item)
+                                <div class="feature-item-main col-6 col-sm-6 col-md-4 col-lg-4">
+                                    <a href="{{$item->url}}">
+                                        <div class="image">
+                                            <img src="{{$item->avatar}}" alt="">
+                                        </div>
+                                        <div class="title">
+                                            <h5 class="text-uppercase">{{$item->name}}</h5>
+                                        </div>
+                                        <div class="sub-title">
+                                            <p>{{$item->description}}</p>
+                                        </div>
+                                    </a>
                                 </div>
-                                <div class="title">
-                                    <h5 class="text-uppercase">Tự động vệ sinh liên tục</h5>
-                                </div>
-                                <div class="sub-title">
-                                    <p>Chậu rửa tự động vệ sinh liên tục khi bẩn</p>
-                                </div>
-                            </div>
-                            <div class="feature-item-main col-6 col-sm-6 col-md-4 col-lg-4">
-                                <div class="image">
-                                    <img src="{{asset('images/feature/2.png')}}" alt="">
-                                </div>
-                                <div class="title">
-                                    <h5 class="text-uppercase">Tự động vệ sinh liên tục</h5>
-                                </div>
-                                <div class="sub-title">
-                                    <p>Chậu rửa tự động vệ sinh liên tục khi bẩn</p>
-                                </div>
-                            </div>
-                            <div class="feature-item-main col-6 col-sm-6 col-md-4 col-lg-4">
-                                <div class="image">
-                                    <img src="{{asset('images/feature/3.png')}}" alt="">
-                                </div>
-                                <div class="title">
-                                    <h5 class="text-uppercase">Tự động vệ sinh liên tục</h5>
-                                </div>
-                                <div class="sub-title">
-                                    <p>Chậu rửa tự động vệ sinh liên tục khi bẩn</p>
-                                </div>
-                            </div>
-                            <div class="feature-item-main col-6 col-sm-6 col-md-4 col-lg-4">
-                                <div class="image">
-                                    <img src="{{asset('images/feature/4.png')}}" alt="">
-                                </div>
-                                <div class="title">
-                                    <h5 class="text-uppercase">Tự động vệ sinh liên tục</h5>
-                                </div>
-                                <div class="sub-title">
-                                    <p>Chậu rửa tự động vệ sinh liên tục khi bẩn</p>
-                                </div>
-                            </div>
-                            <div class="feature-item-main col-6 col-sm-6 col-md-4 col-lg-4">
-                                <div class="image">
-                                    <img src="{{asset('images/feature/5.png')}}" alt="">
-                                </div>
-                                <div class="title">
-                                    <h5 class="text-uppercase">Tự động vệ sinh liên tục</h5>
-                                </div>
-                                <div class="sub-title">
-                                    <p>Chậu rửa tự động vệ sinh liên tục khi bẩn</p>
-                                </div>
-                            </div>
-                            <div class="feature-item-main col-6 col-sm-6 col-md-4 col-lg-4">
-                                <div class="image">
-                                    <img src="{{asset('images/feature/6.png')}}" alt="">
-                                </div>
-                                <div class="title">
-                                    <h5 class="text-uppercase">Tự động vệ sinh liên tục</h5>
-                                </div>
-                                <div class="sub-title">
-                                    <p>Chậu rửa tự động vệ sinh liên tục khi bẩn</p>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

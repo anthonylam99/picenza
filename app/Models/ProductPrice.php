@@ -11,5 +11,5 @@ class ProductPrice extends Model
 
     protected $table = 'product_price';
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'min_price', 'max_price'];
 }

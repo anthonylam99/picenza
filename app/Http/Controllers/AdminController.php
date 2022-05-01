@@ -51,14 +51,7 @@ class AdminController extends Controller
 
     public function getProductFeature(Request $request, $id = null)
     {
-
-        $feature = ProductFeature::with('productType')
-            ->whereHas('productType', function ($q) use ($id) {
-                return $q->where('id', $id);
-            })
-            ->whereHas('productType.productLine')
-            ->whereHas('productType.company')
-            ->get();
+        $feature = ProductLine::with(['feature', 'feature.sub'])->where('id', $id)->first();
         return response()->json($feature);
     }
 
@@ -109,6 +102,7 @@ class AdminController extends Controller
         $productTechnology = ProductTechnology::all();
         $productLine = ProductLine::all();
         $productReliability = ProductReliability::all();
+        $feature = ProductFeature::whereHas('sub')->get();
 
         return view('admin.product.add', compact(
             'productType',
@@ -116,13 +110,13 @@ class AdminController extends Controller
             'productShape',
             'productTechnology',
             'productLine',
-            'productReliability'
+            'productReliability',
+            'feature'
         ));
     }
 
     public function addProductPost(Request $request)
     {
-//        dd($request->all());
 //        if(empty($request->feature)){
 //            return redirect()->back()->with('error', 'Sản phẩm chưa có tính năng');
 //        }
@@ -135,13 +129,16 @@ class AdminController extends Controller
         $price = str_replace(",", '', $request->get('price'));
 
         $priceData = ProductPrice::all();
-        $priceType = '';
+        $priceType = [];
 
         foreach ($priceData as $value) {
-            if ($price >= $value['min_price'] && $price <= $value['max_price']) {
-                $priceType = $value['id'];
+            if ($price >= $value['min_price'] && $price <= $value['max_price'] ) {
+                array_push($priceType, $value['id']);
             }
         }
+
+        $priceType = end($priceType);
+
 
         $feature = '';
 
@@ -178,14 +175,10 @@ class AdminController extends Controller
 
 
         if (!isset($data['id'])) {
-            $product = Product::updateOrCreate(
-                ['name' => $request->get('product_name')],
-                $dataInsert
-            );
+            $product = Product::create($dataInsert);
         } else {
             $update = Product::where('id', $data['id'])->update($dataInsert);
             $product = Product::find($data['id']);
-
 
         }
 
@@ -222,23 +215,25 @@ class AdminController extends Controller
                 ProductImage::where($arr)->delete();
             }
 
-        }
-
-        if (!empty($arrImageColor)) {
-            foreach ($arrImageColor as $value) {
-                ProductImage::updateOrCreate(
-                    [
-                        'product_id' => $value['product_id'],
-                        'color' => $value['color']
-                    ],
-                    [
-                        'product_id' => $value['product_id'],
-                        'color' => $value['color'],
-                        'image_path' => $value['image_path']
-                    ]
-                );
+            if(!empty($arr['image_path'])){
+                if (!empty($arrImageColor)) {
+                    foreach ($arrImageColor as $value) {
+                        ProductImage::updateOrCreate(
+                            [
+                                'product_id' => $value['product_id'],
+                                'color' => $value['color']
+                            ],
+                            [
+                                'product_id' => $value['product_id'],
+                                'color' => $value['color'],
+                                'image_path' => $value['image_path']
+                            ]
+                        );
+                    }
+                }
             }
         }
+
 
         return redirect()->route('admin.product.edit', ['id' => $productId])->with('success', 'Cập nhật thành công');
     }
@@ -256,6 +251,7 @@ class AdminController extends Controller
             'reliabilityType',
             'productImage.color',
         ])->findOrFail($id);
+
         $featureList = explode(',', $product->feature);
 
         $productType = ProductType::all();
@@ -264,10 +260,9 @@ class AdminController extends Controller
         $productTechnology = ProductTechnology::all();
         $productLine = ProductLine::all();
         $productReliability = ProductReliability::all();
-        $feature = ProductFeature::select('product_feature.name')->join('product_type', 'product_type', '=', 'product_type.id')
-            ->join('product_line', 'product_line_id', '=', 'product_line.id')
-            ->join('product_company', 'product_type.company_id', '=', 'product_company.id')
-            ->get();
+        $featureData = ProductLine::with(['feature', 'feature.sub'])->where('id', $product->product_line)->first();
+        $feature = $featureData->feature;
+
         $product = collect($product)->toArray();
 
         return view('admin.product.edit', compact(

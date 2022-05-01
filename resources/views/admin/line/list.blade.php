@@ -42,25 +42,45 @@
                 <table class="table table-bordered table-striped table-bordered bulk_action">
                     <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Tên hãng sản xuất</th>
+                        <th>ID</th>
                         <th>Danh mục sản phẩm</th>
-                        <th></th>
+                        <th>Hiển thị trang chủ</th>
+                        <th>Trạng thái</th>
+                        <th>Thông tin</th>
+                        <th class="text-center">Sửa</th>
+                        <th class="text-center">Xóa</th>
                     </tr>
                     </thead>
                     <tbody>
                         @foreach($line as $value)
                             <tr>
                                 <td>{{$value->id}}</td>
-                                <td>{{$value->company->name}}</td>
                                 <td>{{$value->name}}</td>
+                                <th>
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="show-home{{$value->id}}" name="show-home" onclick="changeShowHome({{$value->id}})">
+                                        <label name="show-home{{$value->id}}" class="custom-control-label show-home{{$value->id}}" for="show-home{{$value->id}}">{{ $value->show_home ? 'Bật' : 'Tắt' }}</label>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="status{{$value->id}}" name="status" onclick="changeStatus({{$value->id}})">
+                                        <label name="status{{$value->id}}" class="custom-control-label status{{$value->id}}" for="status{{$value->id}}">{{ $value->status ? 'Bật' : 'Tắt' }}</label>
+                                    </div>
+                                </th>
                                 <td>
-                                    <button class="btn btn-info">
+                                    <strong>Thêm lúc:</strong>{{$value->created_at}} <br>
+                                    <strong>Cập nhật:</strong>{{$value->updated_at}}
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-info ">
                                         <a style="color: #FFFFFF" href="{{ route('admin.line.edit', ['id' => $value->id]) }}">
                                             <i class="far fa-edit"></i>
 
                                         </a>
                                     </button>
+                                </td>
+                                <td class="text-center">
                                     <button class="btn btn-danger">
                                         <a style="color: #FFFFFF" href="{{ route('admin.line.del', ['id' => $value->id]) }}">
                                             <i class="fas fa-trash"></i>

@@ -46,6 +46,4 @@
 @endsection
 
 
-@section('admin.js')
-    <script src="{{asset('js/admin.js')}}"></script>
-@endsection
+

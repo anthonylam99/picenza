@@ -111,6 +111,21 @@ function setColor(index) {
     colorInput.setAttribute('value', color)
 }
 
+$('#minPrice').on('input', function () {
+    const price = $(this).val().replace(/[,]+/g, "");
+    const format = parseInt(price).toLocaleString('en-US')
+
+    $(this).val(format)
+})
+
+$('#maxPrice').on('input', function () {
+    const price = $(this).val().replace(/[,]+/g, "");
+    const format = parseInt(price).toLocaleString('en-US')
+
+    $(this).val(format)
+})
+
+
 $('#productPrice').on('input', function () {
     const price = $(this).val().replace(/[,]+/g, "");
     const format = parseInt(price).toLocaleString('en-US')
@@ -156,37 +171,6 @@ $('#pricePercent').on('input', function () {
 
 })
 
-
-$(function () {
-    $("#companyList").change(function () {
-        var id = $(this).val()
-        $.ajax({
-            type: 'GET',
-            url: '/quan-tri/product_line_list/' + id,
-            success: function (result) {
-                var productLineList = $("#productLineList")
-
-                var html = '';
-                result.forEach(function (item) {
-                    html += "<option value='" + item.id + "'> " + item.name + " "
-                })
-
-
-                if (result.length === 0) {
-                    html = "<option value=''> -- Vui lòng chọn --- "
-                }
-                productLineList.html(html)
-                getProductType()
-                getProductFeature()
-                console.log(result)
-            },
-            error: function (err) {
-
-                console.log(err)
-            }
-        })
-    })
-})
 
 function getProductType() {
     var productLineList = $("#productLineList").val()
@@ -242,59 +226,49 @@ function getProductFeature() {
     })
 }
 
-
+//GET FEATURE PRODUCT
 $(function () {
-    $("#productLineList").change(function () {
-        var companyId = $('#companyList').val()
-        var productTypeId = $(this).val()
+    $('#productLineList').change(function () {
+        var categoryId = $(this).val()
+        var html = ''
 
         $.ajax({
             type: 'GET',
-            url: '/quan-tri/product_type_list/' + companyId + '/' + productTypeId,
-            success: function (result) {
-                var productTypeList = $("#productTypeList")
+            url: '/quan-tri/product_feature_list/' + categoryId,
+            success: function (res) {
 
-                var html = '';
-                result.forEach(function (item) {
-                    html += "<option value='" + item.id + "'> " + item.name + " "
+                res.feature.forEach(function (item) {
+                    html += '<div class="col-4">\n' +
+                        '   <div class="card">\n' +
+                        '      <div class="card-header" id="headingOne' + item.id + '">\n' +
+                        '         <h2 class="mb-0">\n' +
+                        '            <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne' + item.id + '">\n' +
+                        '            <i class="fa fa-plus"></i>\n' +
+                        '            ' + item.name + '\n' +
+                        '            </button>\n' +
+                        '         </h2>\n' +
+                        '      </div>\n' +
+                        '      <div id="collapseOne' + item.id + '" class="collapse" aria-labelledby="headingOne' + item.id + '" data-parent="#accordionExample">\n' +
+                        '         <div class="card-body">\n';
+
+                    item.sub.forEach(function (item) {
+                        html +=
+
+                            '            <div class="custom-control custom-checkbox">\n' +
+                            '               <input name="feature[]" class="custom-control-input" type="checkbox" id="customCheckbox' + item.id + '" value="' + item.id + '">\n' +
+                            '               <label for="customCheckbox' + item.id + '" class="custom-control-label">' + item.name + '</label>\n' +
+                            '            </div>\n';
+
+                    })
+
+                    html += '         </div>\n' +
+                        '      </div>\n' +
+                        '   </div>\n' +
+                        '</div>';
                 })
-                productLineList.html(html)
-                if (result.length === 0) {
-                    productTypeList.html("<option value=''> -- Vui lòng chọn --- ")
-                }
 
-                console.log(result)
-            },
-            error: function (err) {
-                console.log(err)
-            }
-        })
-    })
-})
-
-$(function () {
-    $("#productTypeList").change(function () {
-        var productTypeId = $(this).val()
-
-        $.ajax({
-            type: 'GET',
-            url: '/quan-tri/product_feature_list/' + productTypeId,
-            success: function (result) {
-                var productFeature = $("#productFeature")
-
-                var html = '';
-                result.forEach(function (item) {
-                    html += '<div class="custom-control custom-checkbox col-4">\n' +
-                        '                                    <input name="feature[]" class="custom-control-input" type="checkbox" id="customCheckbox' + item.id + '" value="' + item.id + '">\n' +
-                        '                                    <label for="customCheckbox' + item.id + '" class="custom-control-label">' + item.name + '</label>\n' +
-                        '                                </div>'
-                })
-                productLineList.html(html)
-                if (result.length === 0) {
-                    productTypeList.html("<option value=''> -- Vui lòng chọn --- ")
-                }
-
-                console.log(result)
+                $('#accordionExample').html(html)
+                console.log(res)
             },
             error: function (err) {
                 console.log(err)
@@ -305,32 +279,33 @@ $(function () {
 
 
 //Choose Image Galery
-var button1 = document.getElementById('ckfinder-popup-1');
-button1.onclick = function () {
-    selectFileWithCKFinder('img-avatar');
-};
+$(function () {
+    $('#ckfinder-popup-1').click(function () {
+        selectFileWithCKFinder('img-avatar');
+    })
 
-function selectFileWithCKFinder(elementId) {
-    CKFinder.popup({
-        chooseFiles: true,
-        width: 1200,
-        height: 600,
-        onInit: function (finder) {
-            finder.on('files:choose', function (evt) {
-                var file = evt.data.files.first();
-                var output = document.getElementById(elementId);
-                // output.value = file.getUrl();
-                $('#img-avatar').attr('src', file.getUrl());
-                $('#img_avatar_path').val(file.getUrl());
-            });
+    function selectFileWithCKFinder(elementId) {
+        CKFinder.popup({
+            chooseFiles: true,
+            width: 1200,
+            height: 600,
+            onInit: function (finder) {
+                finder.on('files:choose', function (evt) {
+                    var file = evt.data.files.first();
+                    var output = document.getElementById(elementId);
+                    // output.value = file.getUrl();
+                    $('#img-avatar').attr('src', file.getUrl());
+                    $('#img_avatar_path').val(file.getUrl());
+                });
 
-            finder.on('file:choose:resizedImage', function (evt) {
-                var output = document.getElementById(elementId);
-                output.value = evt.data.resizedUrl;
-            });
-        }
-    });
-}
+                finder.on('file:choose:resizedImage', function (evt) {
+                    var output = document.getElementById(elementId);
+                    output.value = evt.data.resizedUrl;
+                });
+            }
+        });
+    }
+})
 
 function selectImageGalery(id) {
     CKFinder.popup({
@@ -341,7 +316,8 @@ function selectImageGalery(id) {
             finder.on('files:choose', function (evt) {
                 var file = evt.data.files.first();
                 // output.value = file.getUrl();
-                $('#image-preview-src' + id).attr('src', file.getUrl());
+                var img = "<img id='image-preview-src' + id  src='" + file.getUrl() + "'/>"
+                $('#image-preview' + id).html(img);
                 $('#image-input' + id).val(file.getUrl());
                 console.log($('#image-input' + id).val())
             });
@@ -356,24 +332,154 @@ function selectImageGalery(id) {
 
 
 //POST SEO
-$('#news_title').on('input', function (){
+$('#news_title').on('input', function () {
     var seo_title = $(this).val()
 
     $('.preview_snippet_title').html(seo_title)
 })
-$('#news_description').on('input', function(){
+$('#news_description').on('input', function () {
     var seo_description = $(this).val()
 
     $('.preview_snippet_des').html(seo_description)
 })
 
-$(function(){
-    $('#seo-url').on('input', function (){
+$(function () {
+    $('#seo-url').on('input', function () {
         var repalce = $(this).val();
         var url = $('#url_seo').val();
-
-        var seo_url = $('.preview_snippet_link').html(url+repalce)
+        var seo_url = $('.preview_snippet_link').html(url + repalce)
 
     })
 
 })
+
+function changeStatus(id) {
+    var status = $('#status' + id).is(':checked')
+    status = status ? 1 : 0
+    var statusText = status ? 'Bật' : 'Tắt'
+    $('.status' + id).html(statusText)
+    console.log(status)
+    $.ajax({
+        type: 'GET',
+        url: '/quan-tri/dong-san-pham/update-status',
+        data: {
+            id: id,
+            status: status
+        },
+        success: function (res) {
+            console.log(res)
+        },
+        error: function (err) {
+            console.log(err)
+        }
+    })
+}
+
+function changeShowHome(id) {
+    var status = $('#show-home' + id).is(':checked')
+    status = status ? 1 : 0
+    var statusText = status ? 'Bật' : 'Tắt'
+    $('.show-home' + id).html(statusText)
+    console.log(status)
+    $.ajax({
+        type: 'GET',
+        url: '/quan-tri/dong-san-pham/showhome',
+        data: {
+            id: id,
+            show_home: status
+        },
+        success: function (res) {
+            console.log(res)
+        },
+        error: function (err) {
+            console.log(err)
+        }
+    })
+}
+
+$(function () {
+    $('#add-sub-category').click(function () {
+        $('#add-sub-category-form').show()
+        $(this).hide()
+        $('#cancel-sub-category').show()
+    })
+    $('#cancel-sub-category').click(function () {
+        $('#add-sub-category-form').hide()
+        $(this).hide()
+        $('#add-sub-category').show()
+    })
+})
+
+$(function () {
+    $('#sub-category-name').on('input', function () {
+        $('#subNameCate').val($(this).val())
+    })
+})
+
+$(function () {
+    $("#add-sub-category-btn").click(function () {
+        var cateName = $('#subNameCate').val()
+        var idCate = $("#id_category").val()
+        var token = $('#token').val()
+        $.ajax({
+            type: 'POST',
+            url: '/quan-tri/san-pham/tinh-nang/add-sub-category',
+            data: {
+                name: cateName,
+                parent: idCate,
+                _token: token
+            },
+            success: function (res) {
+                var table = $('#sub-cate-tbl tbody').html()
+
+                var html = ''
+                html += "<tr>" +
+                    "<td>" +
+                    "<a href='/quan-tri/san-pham/tinh-nang/danh-muc-con/sua/" + res.data.id + "'>" + res.data.name +
+                    "</a>" +
+                    "</td>" +
+                    "<td>" + new Date(res.data.created_at).toISOString().split('T')[0] + "</td>" +
+                    "<td>" + new Date(res.data.updated_at).toISOString().split('T')[0] + "</td>" +
+                    "<td>" +
+                    "<div class='custom-control custom-checkbox'>\n" +
+                    "    <input name='favourite" + res.data.id + "' class='custom-control-input' type='checkbox'\n" +
+                    "             id='favourite" + res.data.id + "' onclick='makeFavourite("+res.data.id+")'>\n" +
+                    "    <label for='favourite" + res.data.id + "' class='custom-control-label'></label>\n" +
+                    "</div>" +
+                    "</td>" +
+                    "<td>" +
+                    "<button class='btn btn-danger'>" + "<i class='fas fa-trash'></i>" + "</button>" +
+                    "</td>" +
+                    "</tr>";
+                html += table
+                $('#sub-cate-tbl tbody').html(html)
+                console.log(res)
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+    })
+})
+
+function makeFavourite(id){
+    $('#favourite'+id).change(function (){
+        var status = $(this).val()
+        status = (status === 'on') ? 1 : 0
+
+        $.ajax({
+            type: 'GET',
+            url: '/quan-tri/san-pham/tinh-nang/danh-muc-con/yeu-thich',
+            data: {
+                id: id,
+                status: status
+            },
+            success: function (res){
+                console.log(res)
+            },
+            error: function (err){
+                console.log(err)
+            }
+        })
+    })
+}

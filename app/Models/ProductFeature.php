@@ -10,10 +10,18 @@ class ProductFeature extends Model
     use HasFactory;
     protected $table = 'product_feature';
     protected $fillable = [
-        'name', 'product_type'
+        'name', 'product_type', 'avatar', 'favourite', 'description'
     ];
 
     public function productType(){
         return $this->hasOne(ProductType::class, 'id', 'product_type');
+    }
+
+    public function sub(){
+        return $this->hasMany(SubCategory::class, 'id_category_parent', 'id');
+    }
+
+    public function line(){
+        return $this->hasOne(ProductLine::class, 'id', 'product_line');
     }
 }

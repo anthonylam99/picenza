@@ -17,7 +17,11 @@ if (!function_exists('get_related_product')) {
     {
         $product = Product::findOrFail($id);
 
-        return Product::with('productImage.color')->where('product_type', $product->product_type)->where('id', '!=', $id)->orderBy('id', 'DESC')->get();
+        return Product::with('productImage.color')
+            ->where('product_type', $product->product_line)
+            ->where('id', '!=', $id)
+            ->orderBy('id', 'DESC')
+            ->get();
     }
 }
 

@@ -55,6 +55,26 @@
                                    value="{{$product['sale_percent']}}" id="pricePercent"
                                    placeholder="Nhập phần trăm giảm giá....">
                         </div>
+
+{{--                        <div class="form-group">--}}
+{{--                            <label for="company">Loại sản phẩm</label>--}}
+{{--                            <select name="product_type" id="productTypeList" class="form-control m-r-10 input-sm" required>--}}
+{{--                                <option value="">-- Vui lòng chọn --</option>--}}
+{{--                                @foreach($productType as $value)--}}
+{{--                                    @if(isset($product['product_type']) && $product['product_type']['id'] === $value->id)--}}
+{{--                                        <option value="{{$value->id}}" selected>{{$value->name}}</option>--}}
+{{--                                    @else--}}
+{{--                                        <option value="{{$value->id}}">{{$value->name}}</option>--}}
+
+{{--                                    @endif--}}
+
+{{--                                @endforeach--}}
+{{--                            </select>--}}
+{{--                        </div>--}}
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card-body">
                         <div class="form-group">
                             <label for="company">Hãng sản xuất</label>
                             <select name="company" id="companyList" class="form-control m-r-10 input-sm" required>
@@ -71,68 +91,10 @@
                         <div class="form-group">
                             <label for="company">Danh mục</label>
                             <select name="product_line" id="productLineList" class="form-control m-r-10 input-sm" required>
-                                @foreach($productLine as $value)
-                                    <option value="">-- Vui lòng chọn --</option>
-                                    @if($product['product_line']['id'] === $value->id)
-                                        <option value="{{$value->id}}" selected>{{$value->name}}</option>
-                                    @else
-                                    @endif
 
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="company">Loại sản phẩm</label>
-                            <select name="product_type" id="productTypeList" class="form-control m-r-10 input-sm" required>
                                 <option value="">-- Vui lòng chọn --</option>
-                                @foreach($productType as $value)
-                                    @if(isset($product['product_type']) && $product['product_type']['id'] === $value->id)
-                                        <option value="{{$value->id}}" selected>{{$value->name}}</option>
-                                    @else
-{{--                                        <option value="{{$value->id}}">{{$value->name}}</option>--}}
-
-                                    @endif
-
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="shape">Hình dáng</label>
-                            <select name="shape_type" class="form-control m-r-10 input-sm">
-                                @foreach($productShape as $value)
-                                    @if($product['shape_type']['id'] === $value->id)
-                                        <option value="{{$value->id}}" selected>{{$value->name}}</option>
-                                    @else
-                                        <option value="{{$value->id}}">{{$value->name}}</option>
-                                    @endif
-
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="technology">Công nghệ xả</label>
-                            <select name="technology_type" class="form-control m-r-10 input-sm">
-                                @foreach($productTechnology as $value)
-                                    @if($product['technology_type']['id'] === $value->id)
-                                        <option value="{{$value->id}}" selected>{{$value->name}}</option>
-                                    @else
-                                        <option value="{{$value->id}}">{{$value->name}}</option>
-                                    @endif
-
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="company">Độ bền</label>
-                            <select name="reliability_type" class="form-control m-r-10 input-sm">
-                                @foreach($productReliability as $value)
-                                    @if($product['reliability_type']['id'] === $value->id)
+                                @foreach($productLine as $value)
+                                    @if($product['product_line']['id'] === $value->id)
                                         <option value="{{$value->id}}" selected>{{$value->name}}</option>
                                     @else
                                         <option value="{{$value->id}}">{{$value->name}}</option>
@@ -143,15 +105,41 @@
                         </div>
                         <div class="form-group">
                             <label for="company">Tính năng</label>
-                            <div class="form-group row" id="productFeature" style="margin-left: 0">
-                               @foreach($feature as $value)
-                                    <div class="custom-control custom-checkbox col-4">
-                                        <input name="feature[]" class="custom-control-input" type="checkbox"
-                                               id="customCheckbox{{$value->id}}" value="{{$value->id}}" {{in_array($value->id, $featureList) ? 'checked' : ''}}>
-                                        <label for="customCheckbox{{$value->id}}" class="custom-control-label">{{$value->name}}</label>
-                                    </div>
-                                @endforeach
+                            <div class="form-group">
+                                <div class="accordion row" id="accordionExample">
+                                    @foreach($feature as $item)
+                                        <div class="col-4">
+                                            <div class="card">
+                                                <div class="card-header" id="headingOne{{$item->id}}">
+                                                    <h2 class="mb-0">
+                                                        <button type="button" class="btn btn-link"
+                                                                data-toggle="collapse"
+                                                                data-target="#collapseOne{{$item->id}}">
+                                                            <i class="fa fa-plus"></i>
+                                                            {{$item->name}}
+                                                        </button>
+                                                    </h2>
+                                                </div>
+                                                <div id="collapseOne{{$item->id}}" class="collapse"
+                                                     aria-labelledby="headingOne{{$item->id}}"
+                                                     data-parent="#accordionExample">
+                                                    <div class="card-body">
+                                                        @if(!empty($item['sub']))
 
+                                                            @foreach($item['sub'] as $sub)
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input name="feature[]" class="custom-control-input" type="checkbox"
+                                                                           id="customCheckbox{{$sub->id}}" value="{{$sub->id}}" {{in_array($sub->id, $featureList) ? 'checked' : '' }}>
+                                                                    <label for="customCheckbox{{$sub->id}}" class="custom-control-label">{{$sub->name}}</label>
+                                                                </div>
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -161,16 +149,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-12">
                     <div class="card-body">
-                        <div class="form-group">
-                            <label for="ckfinder-popup-1">Ảnh đại diện</label>
-                            <button type="button" id="ckfinder-popup-1" class="btn btn-sm btn-success">
-                                Chọn ảnh
-                            </button>
-                            <div id="show-img-avatar">
-                                <img id="img-avatar" src="{{$product['avatar_path']}}" alt="">
-                                <input type="hidden" id="img_avatar_path" name="img_avatar_path" value="">
+                        <div class="form-group row">
+                            <label for="ckfinder-popup-1" class="col-md-2 col-sm-2 col-xs-12">Ảnh đại diện</label>
+
+                            <div id="show-img-avatar col-sm-9">
+                                <button type="button" id="ckfinder-popup-1" class="btn btn-sm btn-success">
+                                    Chọn ảnh
+                                </button>
+                                <div class="img-avt">
+                                    <img id="img-avatar" src="{{$product['avatar_path']}}" alt="">
+                                </div>
+                                <input type="hidden" id="img_avatar_path" name="img_avatar_path" value="{{$product['avatar_path']}}">
                             </div>
                         </div>
                     </div>
@@ -178,7 +169,7 @@
                 <div class="col-12">
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="image-and-color">Ảnh sản phẩm</label>
+                            <label for="image-and-color"><b>Ảnh sản phẩm</b></label>
                             <div class="body-card-image row" id="card-image">
                                 <?php $i = 0; ?>
                                 @foreach($product['product_image'] as $value)
@@ -193,14 +184,17 @@
                                                id="color-picker<?php echo $i; ?>" value="{{$value['color']['hex']}}">
                                         <input type="hidden" id="color-choose<?php echo $i; ?>"
                                                name="hex<?php echo $i; ?>" value="{{$value['color']['hex']}}">
+                                        <input class="form-control m-r-10 input-sm" type="text" name="price<?php echo $i; ?>"
+                                               value="{{$value['price']}}" placeholder="Nhập giá...."
+                                               required="">
                                         <input class="form-control m-r-10 input-sm" type="text" name="color<?php echo $i; ?>"
                                                value="{{$value['color']['color']}}" placeholder="Nhập tên màu...."
                                                required="">
                                         <label for="image-input<?php echo $i; ?>" class="image-upload"><i
                                                 class="fas fa-upload"></i>Chọn ảnh</label>
                                         <input style="display: none" onclick="selectImageGalery({{$i}})"
-                                               value="{{asset($value['image_path'])}}" id="image-input<?php echo $i; ?>"
-                                               type="file" name="image<?php echo $i; ?>" data-photo="<?php echo $i; ?>">
+                                               value="" id="image-input<?php echo $i; ?>"
+                                               type="text" name="image<?php echo $i; ?>" data-photo="<?php echo $i; ?>" >
                                         <button type="button" class="btn-danger btn-deleteimg btn-delete-img-edit"
                                                 onclick="removeImage({{$i}}, '{{$value['color']['id']}}')">Xóa ảnh
                                         </button>
@@ -226,6 +220,4 @@
 
 
 @section('admin.js')
-    <script src="{{asset('js/admin.js')}}"></script>
-    @include('ckfinder::setup')
 @endsection
