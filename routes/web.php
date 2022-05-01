@@ -59,6 +59,7 @@ Route::group(['prefix' => 'quan-tri'], function () {
 
     Route::group(['prefix' => 'san-pham'], function () {
         Route::get('danh-sach', [AdminController::class, 'productList'])->name('admin.product.list');
+        Route::get('update-status-prod', [AdminController::class, 'updateStatusProd'])->name('updateStatus-prod');
         Route::get('loai-san-pham', [AdminController::class, 'productType'])->name('admin.product.type');
         Route::get('loai-san-pham/them-moi', [AdminController::class, 'addProductType'])->name('admin.product.type.add');
 
@@ -85,7 +86,7 @@ Route::group(['prefix' => 'quan-tri'], function () {
 
     Route::group(['prefix' => 'khach-hang'], function () {
         Route::get('danh-sach', [AdminController::class, 'customerList']);
-        Route::get('don-hang', [AdminController::class, 'orderList']);
+        Route::get('don-hang', [AdminController::class, 'orderList'])->name('admin.order.list');
     });
 
     Route::group(['prefix' => 'hang-san-xuat'], function(){

@@ -36,4 +36,9 @@ class Orders extends Model
         'total_price',
         'quantity',
     ];
+
+    public function user()
+    {
+        return $this->BelongsTo(User::class);
+    }
 }

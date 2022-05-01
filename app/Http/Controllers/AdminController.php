@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Entity\Options;
+use App\Models\Orders;
 use App\Models\Product;
 use App\Models\ProductColor;
 use App\Models\ProductCompany;
@@ -329,5 +330,62 @@ class AdminController extends Controller
         $menu = DB::table('admin_menus')->get();
 
         return view('admin.menu.list', compact('menu'));
+    }
+
+    /**
+     * Update status product
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function updateStatusProd(Request $request)
+    {
+        $update = Product::where('id', $request->get('id'))->update([
+            'status' => $request->status
+        ]);
+        if($update){
+            return response()->json(['message' => 'Success']);
+        }
+    }
+
+    /**
+     * Get list order
+     *
+     * @return void
+     */
+    public function orderList ()
+    {
+        // if ($request->has('s')) {
+        //     $query = $request->get('s');
+        //     $product = Product::with([
+        //         'productType',
+        //         'companyName'
+        //     ])
+        //         ->whereHas(
+        //             'productType', function ($q) use ($query) {
+        //             $q->where('name', 'like', '%' . $query . '%');
+        //         })
+        //         ->orWhereHas('companyName', function ($q) use ($query) {
+        //             $q->where('name', 'like', '%' . $query . '%');
+        //         })
+        //         ->orWhere('name', 'like', '%' . $query . '%')
+        //         ->orWhere('price', $query)
+        //         ->paginate(10);
+        // } else if (!empty($request->get('s')) || !$request->has('s')) {
+        //     $product = Product::with(['productType', 'companyName'])->paginate(10);
+        // }
+
+        $aryOrder = Orders::with('user')->latest()->get()->toArray();
+
+        foreach ($aryOrder as $key => $order) {
+            $item = $order['item'];
+            foreach ($item as $action => $prod) {
+                $aryOrder[$key]['info-product'][] = get_product_by_prod_id_and_color($prod['product_id'], $prod['color_id']);
+            }
+        }
+
+        // dd($aryOrder);
+
+        return view('admin.order.list', compact('aryOrder'));
     }
 }

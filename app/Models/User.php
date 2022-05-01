@@ -50,4 +50,14 @@ class User extends Authenticatable
             $query->whereNull('publish_at')->orWhere('publish_at', '<=', now());
         });
     }
+
+    /**
+     * Get all of the order for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function order()
+    {
+        return $this->hasMany(Orders::class, 'user_id', 'id');
+    }
 }

@@ -69,8 +69,8 @@
                                 <div class="clr"></div>
                             </div>
                         </li>
-                        <input type="hidden" name="item[id][]" value="{{ $item->id }}">
-                        <input type="hidden" name="item[color][]" value="{{ $item->options->color }}">
+                        <input type="hidden" name="product_id[]" value="{{ $item->id }}">
+                        <input type="hidden" name="color_id[]" value="{{ $item->options->color }}">
                         <input type="hidden" name="total_price" value="{{ Cart::subtotal() }}">
                         <input type="hidden" name="qty" value="{{ $item->qty }}">
                         @empty

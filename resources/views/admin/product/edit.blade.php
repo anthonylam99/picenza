@@ -151,17 +151,14 @@
                 </div>
                 <div class="col-12">
                     <div class="card-body">
-                        <div class="form-group row">
-                            <label for="ckfinder-popup-1" class="col-md-2 col-sm-2 col-xs-12">Ảnh đại diện</label>
-
-                            <div id="show-img-avatar col-sm-9">
-                                <button type="button" id="ckfinder-popup-1" class="btn btn-sm btn-success">
-                                    Chọn ảnh
-                                </button>
-                                <div class="img-avt">
-                                    <img id="img-avatar" src="{{$product['avatar_path']}}" alt="">
-                                </div>
-                                <input type="hidden" id="img_avatar_path" name="img_avatar_path" value="{{$product['avatar_path']}}">
+                        <div class="form-group">
+                            <label for="ckfinder-popup-1">Ảnh đại diện</label>
+                            <button type="button" id="ckfinder-popup-1" class="btn btn-sm btn-success">
+                                Chọn ảnh
+                            </button>
+                            <div id="show-img-avatar">
+                                <img id="img-avatar" src="{{$product['avatar_path'] ?? ''}}" alt="">
+                                <input type="hidden" id="img_avatar_path" name="img_avatar_path" value="">
                             </div>
                         </div>
                     </div>

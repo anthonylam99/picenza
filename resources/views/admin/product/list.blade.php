@@ -37,6 +37,7 @@
                         <th>Tên sản phẩm</th>
                         <th>Giá</th>
                         <th>Danh mục</th>
+                        <th>Trạng thái</th>
                         <th>Hãng sản xuất</th>
                         <th></th>
                     </tr>
@@ -51,6 +52,12 @@
                             <td>{{$value->name}}</td>
                             <td>{{number_format($value->price)}}</td>
                             <td>{{isset($value->productLine['name']) ? $value->productLine['name'] : ''}}</td>
+                            <td>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="status{{$value->id}}" {{ $value->status ? 'checked' : '' }} name="status" onclick="changeStatusProd({{$value->id}})">
+                                    <label name="status{{$value->id}}" class="custom-control-label status{{$value->id}}" for="status{{$value->id}}">{{ $value->status ? 'Bật' : 'Tắt' }}</label>
+                                </div>
+                            </td>
                             <td>{{isset($value->companyName['name']) ? $value->companyName['name'] : ''}}
                             <td>
                                 <button class="btn btn-info">

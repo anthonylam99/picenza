@@ -27,7 +27,7 @@ class CommentStoreRequest extends FormRequest
             'body'          => 'required|min:20',
             'full_name'     => 'required',
             'phone_number'  => 'required',
-            'email'         => 'required|email|unique:users,email',
+            'email'         => 'required|email',
             'address'       => 'nullable',
             'gender'        => 'numeric',
             'file'          => 'nullable',

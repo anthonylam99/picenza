@@ -214,12 +214,19 @@ class ProductController extends Controller
             'email'     => $request->email,
         ]);
 
+       $aryProd = [];
+
+       foreach ($request->product_id as $key => $value) {
+            $aryProd[] = ['product_id' => $value, 'color_id' => $request->color_id[$key]];
+       }
+
+
         $order = Orders::create([
             'user_id'       => $user->id,
             'province_id'   => $request->province_id,
             'district_id'   => $request->district_id,
             'address'       => $request->address ,
-            'item'          => $request->item,
+            'item'          =>  $aryProd,
             'quantity'      => $request->qty ,
             'note'          => $request->note ,
             'total_price'   => $request->total_price ,

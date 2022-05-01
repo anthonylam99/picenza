@@ -44,7 +44,7 @@ class CommentController extends Controller
             'count_worth'   => $data['count_worth'],
             'count_quality' => $data['count_quality'],
             'publish_at'    => Carbon::now(),
-            'file'          => $data['file'],
+            'file'          => $data['file'] ?? '',
         ]);
 
         $averageStar = calculateAverageReview($data['product_id'], 'rating');

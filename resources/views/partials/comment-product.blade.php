@@ -51,13 +51,13 @@
                             </h6>
                         </div>
                         <div class="review-image row">
-                            @forelse ($comment->file as $image)
+                            @if (!empty($comment->file))
+                                @foreach ($comment->file as $image)
                                 <div class="col-3">
                                     <img src="{{ $image }}" >
                                 </div>
-                            @empty
-
-                            @endforelse
+                                @endforeach
+                            @endif
                         </div>
                         <div class="make-review-useful">
                             <h6>Hữu ích ?</h6>
