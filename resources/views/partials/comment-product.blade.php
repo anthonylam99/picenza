@@ -32,7 +32,9 @@
                     @endfor
                     <i class="fa fa-circle" style="font-size: 4px; padding: 0 10px; color: #444444;"></i>
                     <div class="dot">
-                        <h6 class="timer">15 phút trước</h6>
+                        <h6 class="timer">
+                            {{ conver_date_to_time_ago($comment->created_at) }}
+                        </h6>
                     </div>
                 </div>
                 <div class="review-title">
@@ -49,27 +51,27 @@
                             </h6>
                         </div>
                         <div class="review-image row">
-                            @forelse ($comment->file as $image)
+                            @if (!empty($comment->file))
+                                @foreach ($comment->file as $image)
                                 <div class="col-3">
                                     <img src="{{ $image }}" >
                                 </div>
-                            @empty
-
-                            @endforelse
+                                @endforeach
+                            @endif
                         </div>
                         <div class="make-review-useful">
                             <h6>Hữu ích ?</h6>
-                            <button class="useful">
+                            <button class="useful" data-id="{{ $comment->id }}" data-like="{{ $comment->count_like }}">
                                 Có
                                 <i class="fa fa-circle"
                                    style="font-size: 4px; padding: 0 4px; color: #444444;"></i>
-                                <text>{{ $comment->count_like }}</text>
+                                <text class="count-like" >{{ $comment->count_like }}</text>
                             </button>
-                            <button class="unuseful">
+                            <button class="unuseful" data-id="{{ $comment->id }}" data-dislike="{{ $comment->count_dislike }}">
                                 Không
                                 <i class="fa fa-circle"
                                    style="font-size: 4px; padding: 0 4px; color: #444444;"></i>
-                                <text>{{ $comment->count_dislike }}</text>
+                                <text class="count-dislike" >{{ $comment->count_dislike }}</text>
                             </button>
                             <button class="report">
                                 Báo cáo
@@ -113,3 +115,51 @@
     </div>
     @endif
 </div>
+
+@push('scripts')
+    <script>
+        $('.useful').on('click', function(){
+            var countLike = $(this).data('like');
+            var idComment = $(this).data('id');
+            addToSessionAndSave(idComment, countLike, 'count_like')
+        });
+
+        $('.unuseful').on('click', function(){
+            var countDisLike = $(this).data('dislike');
+            var idComment = $(this).data('id');
+            addToSessionAndSave(idComment, countDisLike, 'count_dislike')
+        });
+
+        function addToSessionAndSave(idComment, countParam, action = 'count_like') {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+
+                url: '{{route('updateLikeAndDisLikeCommment')}}',
+                type: 'POST',
+                data: {
+                    count: countParam,
+                    action: action,
+                    id: idComment
+                },
+                success: function (response) {
+                    console.log(response);
+                    console.log(countParam);
+                    console.log(action);
+                    console.log(idComment);
+                    if (action == 'count_like') {
+                        $('.count-like').text(response.count);
+                        $('.useful').data('like', response.count);
+                    }
+                    else {
+                        $('.count-dislike').text(response.count);
+                        $('.unuseful').data('dislike', response.count);
+                    }
+                }
+            })
+        }
+    </script>
+@endpush

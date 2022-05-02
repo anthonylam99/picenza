@@ -124,6 +124,7 @@
       <path value="$PROJECT_DIR$/vendor/graham-campbell/guzzle-factory" />
       <path value="$PROJECT_DIR$/vendor/pimple/pimple" />
       <path value="$PROJECT_DIR$/vendor/ckfinder/ckfinder-laravel-package" />
+      <path value="$PROJECT_DIR$/vendor/bumbummen99/shoppingcart" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Entity\Options;
+use App\Models\Orders;
 use App\Models\Product;
 use App\Models\ProductColor;
 use App\Models\ProductCompany;
@@ -329,5 +330,76 @@ class AdminController extends Controller
         $menu = DB::table('admin_menus')->get();
 
         return view('admin.menu.list', compact('menu'));
+    }
+
+    /**
+     * Update status product
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function updateStatusProd(Request $request)
+    {
+        $update = Product::where('id', $request->get('id'))->update([
+            'status' => $request->status
+        ]);
+        if($update){
+            return response()->json(['message' => 'Success']);
+        }
+    }
+
+    /**
+     * Get list order
+     *
+     * @return void
+     */
+    public function orderList ()
+    {
+        $aryOrder = Orders::with('user')->latest()->get()->toArray();
+
+        foreach ($aryOrder as $key => $order) {
+            $item = $order['item'];
+            foreach ($item as $index => $prod) {
+                $aryOrder[$key]['info-product'][] = get_product_by_prod_id_and_color($prod['product_id'], $prod['color_id']);
+                $aryOrder[$key]['info-product'][$index]['qty'] = $prod['qty'];
+            }
+        }
+
+
+        return view('admin.order.list', compact('aryOrder'));
+    }
+
+    /**
+     * Get detail order
+     *
+     * @param [type] $id
+     * @return void
+     */
+    public function orderDetail($id)
+    {
+        $aryProd = [];
+        $order = Orders::find($id);
+        foreach ($order->item as $action => $prod) {
+            $aryProd[] = get_product_by_prod_id_and_color($prod['product_id'], $prod['color_id']);
+        }
+
+        return view('admin.order.detail', compact('aryProd', 'order'));
+    }
+
+    /**
+     * Update order status
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function updateOrder(Request $request)
+    {
+        $request->type == 1 ? $message = 'Xác nhận đơn hàng thành công' : $message = 'Hủy đơn hàng thành công';
+        $order = Orders::find($request->id);
+        $order->update([
+            'payment_status' => $request->type,
+        ]);
+
+        return response()->json(['message' => $message]);
     }
 }

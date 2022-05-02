@@ -131,6 +131,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/graham-campbell/guzzle-factory" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/pimple/pimple" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/ckfinder/ckfinder-laravel-package" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/bumbummen99/shoppingcart" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

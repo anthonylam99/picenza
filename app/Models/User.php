@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'gender', 'address'
+        'name', 'email', 'password', 'gender', 'address', 'phone'
     ];
 
     /**
@@ -49,5 +49,15 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class)->where(function (Builder $query) {
             $query->whereNull('publish_at')->orWhere('publish_at', '<=', now());
         });
+    }
+
+    /**
+     * Get all of the order for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function order()
+    {
+        return $this->hasMany(Orders::class, 'user_id', 'id');
     }
 }

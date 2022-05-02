@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <script src="{{ asset('js/boostrap.js') }}"></script>
+    @yield('style')
+
 
 
     <style type="text/css">
@@ -275,7 +277,7 @@
                                         </button>
                                     </div>
                                     <button class="cart">
-                                        <a href="" class="text-center">
+                                        <a href="{{ route('product.cart') }}" class="text-center">
                                             <img src="{{ asset('images/cart.png') }}" alt="tag">
                                         </a>
                                     </button>

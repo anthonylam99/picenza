@@ -30,7 +30,7 @@
         <div class="category">
             <div class="content-category container">
                 <div class="content-1 row">
-                    <div class="filter col-3">
+                    <div class="filter col-12 col-sm-12 col-lg-3 col-md-3 col-xs-3">
                         <div class="content-filter">
                             <div class="title">
                                 <div class="title-1">
@@ -124,7 +124,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="product col-9">
+                    <div class="product col-12 col-sm-12 col-lg-9 col-md-9 col-xs-9">
                         <div class="content-product">
                             <div class="title">
                                 <div class="title-1">
@@ -166,7 +166,7 @@
                             </div>
                             <div class="main-content row">
                                 @foreach($product as $value)
-                                    <div class="product-main-item col-4">
+                                    <div class="product-main-item col-6 col-sm-3 col-lg-4 col-xl-4">
                                         <div class="product-item">
                                             <a class="product-box"
                                                href="{{ route('product.detail', ['id' => $value->id]) }}">

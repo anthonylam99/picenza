@@ -159,7 +159,7 @@
                                     Chọn ảnh
                                 </button>
                                 <div class="img-avt">
-                                    <img id="img-avatar" src="{{$product['avatar_path']}}" alt="">
+                                    <img id="img-avatar" src="{{$product['avatar_path'] ?? ''}}" alt="">
                                 </div>
                                 <input type="hidden" id="img_avatar_path" name="img_avatar_path" value="{{$product['avatar_path']}}">
                             </div>

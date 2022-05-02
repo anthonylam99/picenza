@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comments;
+use App\Models\Orders;
 use App\Models\Product;
 use App\Models\ProductFeature;
 use App\Models\ProductImage;
 use App\Models\ProductLine;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Cart;
 
 class ProductController extends Controller
 {
@@ -45,8 +47,6 @@ class ProductController extends Controller
             $stars['noneStar'] = (int)abs($starCaculate);
             $stars['halfStar'] = 5 - $stars['fullStar'] - $stars['noneStar'];
         }
-
-        $detailProduct = Product::with(['productImage.color', 'comment'])->find($id);
 
         $aryRelatedProd = get_related_product($id);
 
@@ -119,6 +119,127 @@ class ProductController extends Controller
     {
         $imageUrl = ProductImage::where('color', $request->color_id)->where('product_id', $request->product_id)->first();
 
-        return response()->json(['url' => $imageUrl->image_path]);
+        return response()->json([
+            'url' => $imageUrl->image_path,
+            'price' => $imageUrl->price ?? 0
+        ]);
+    }
+
+    /**
+     * Get view cart
+     *
+     * @return void
+     */
+    public function cart()
+    {
+        return view('product.cart');
+    }
+
+    /**
+     * Add item to cart
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function addToCart(Request $request)
+    {
+        $options = [
+            'options' => [
+
+                'image' => $request->image,
+                'color' => $request->color,
+            ]
+        ];
+        Cart::add(array_merge($request->all(), $options));
+
+        return redirect()->route('product.cart');
+    }
+
+    /**
+     * Update qty card
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function updateQtyCart(Request $request)
+    {
+        Cart::update($request->rowId, $request->qty);
+
+        return response()->json(['message' => 'success']);
+    }
+
+    /**
+     * Remove item from cart
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function removeItemCart(Request $request)
+    {
+        Cart::remove($request->rowId);
+        return response()->json(['message' => 'success']);
+    }
+
+    /**
+     * Get district by province
+     *
+     */
+
+    public function district(Request $request)
+    {
+        $provinceId = $request->get("province_id");
+        return view('partials.district', compact('provinceId'));
+    }
+
+    /**
+     * Get district by province
+     *
+     */
+
+    public function ward(Request $request)
+    {
+        $districtId = $request->get("district_id");
+        return view('partials.ward', compact('districtId'));
+    }
+
+    /**
+     * Save order info
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function saveOrder(Request $request)
+    {
+        $user = action_create_user([
+            'full_name' => $request->user_name,
+            'email'     => $request->email,
+            'phone'     => $request->phone
+        ]);
+
+       $aryProd = [];
+
+       foreach ($request->product_id as $key => $value) {
+            $aryProd[] = [
+                'product_id'    => $value,
+                'color_id'      => $request->color_id[$key],
+                'qty'           => $request->qty[$key],
+            ];
+       }
+
+
+        $order = Orders::create([
+            'user_id'       => $user->id,
+            'province_id'   => $request->province_id,
+            'district_id'   => $request->district_id,
+            'address'       => $request->address ,
+            'item'          => $aryProd,
+            'note'          => $request->note ,
+            'total_price'   => $request->total_price ,
+
+        ]);
+
+        Cart::destroy();
+
+        return redirect()->route('index');
     }
 }
