@@ -133,7 +133,7 @@
                             @csrf
                             <input type="hidden" value="{{ $detailProduct->id }}" name="id"/>
                             <input type="hidden" value="{{ $detailProduct->name }}" name="name"/>
-                            <input type="hidden" id="hidden-price" value="{{$detailProduct->price}}" name="price" />
+                            <input type="hidden" id="hidden-price" value="{{ $detailProduct->price }}" name="price"/>
                             <input type="hidden" value="0" name="weight"/>
                             <input type="hidden" value="{{ !empty($detailProduct->productImage) ? asset($detailProduct->productImage[0]->image_path) : 'images/product/product_demo_2.png' }}" name="image"/>
                             <div class="quantity">

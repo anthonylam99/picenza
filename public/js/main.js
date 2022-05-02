@@ -112,6 +112,16 @@ $(document).ready(function(){
                 dots: true
             }
         }
+    });
+
+    $('.owl-carousel.subcate').owlCarousel({
+        loop:true,
+        items: 3
+    })
+
+    $('.owl-carousel.bestseller').owlCarousel({
+        loop:true,
+        items: 3
     })
 
     $('.owl-carousel.options3').owlCarousel({

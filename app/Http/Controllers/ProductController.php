@@ -104,8 +104,11 @@ class ProductController extends Controller
             array_push($ids, $value->id);
         }
         $favourite = SubCategory::where('favourite', 1)->whereIn('id_category_parent', $ids)->where('status' , 1)->get();
+        $subNormalCate = SubCategory::where('favourite', '!=', 1)->whereIn('id_category_parent', $ids)->where('status' , 1)->get();
 
-        return view('product.index', compact('category', 'favourite'));
+        $aryBestSeller = Product::with('productImage.color')->where('is_bestseller', 1)->where('product_line', $category->id)->get();
+
+        return view('product.index', compact('category', 'favourite', 'subNormalCate', 'aryBestSeller'));
     }
 
     /**
@@ -213,12 +216,17 @@ class ProductController extends Controller
         $user = action_create_user([
             'full_name' => $request->user_name,
             'email'     => $request->email,
+            'phone'     => $request->phone
         ]);
 
        $aryProd = [];
 
        foreach ($request->product_id as $key => $value) {
-            $aryProd[] = ['product_id' => $value, 'color_id' => $request->color_id[$key]];
+            $aryProd[] = [
+                'product_id'    => $value,
+                'color_id'      => $request->color_id[$key],
+                'qty'           => $request->qty[$key],
+            ];
        }
 
 
@@ -227,8 +235,7 @@ class ProductController extends Controller
             'province_id'   => $request->province_id,
             'district_id'   => $request->district_id,
             'address'       => $request->address ,
-            'item'          =>  $aryProd,
-            'quantity'      => $request->qty ,
+            'item'          => $aryProd,
             'note'          => $request->note ,
             'total_price'   => $request->total_price ,
 

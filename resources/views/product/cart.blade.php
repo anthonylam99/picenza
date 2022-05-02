@@ -72,7 +72,9 @@
                         <input type="hidden" name="product_id[]" value="{{ $item->id }}">
                         <input type="hidden" name="color_id[]" value="{{ $item->options->color }}">
                         <input type="hidden" name="total_price" value="{{ Cart::subtotal() }}">
-                        <input type="hidden" name="qty" value="{{ $item->qty }}">
+                        <input type="hidden" name="qty[]" value="{{ $item->qty }}">
+
+                        <input type="hidden" id="sub-qty-{{ $item->rowId }}" name="sub-qty" value="{{ $item->qty }}">
                         @empty
                         <span class="text-center">Không có sản phẩm nào trong giỏ hàng</span>
                         @endforelse
@@ -234,9 +236,9 @@
         });
 
         // Substract qty cart
-        var qty = $("input[name=qty]").val();
         $('.btnMinus').click(function(){
             var rowId = $(this).data('row');
+            var qty = $("#sub-qty-"+rowId).val();
             if (qty == 1) {
                 alert('Sản phẩm đã đặt ở số lượng tối thiểu');
                 return;
@@ -248,6 +250,7 @@
 
         $('.btnPlus').click(function(){
             var rowId = $(this).data('row');
+            var qty = $("#sub-qty-"+rowId).val();
             qty = (+qty) + 1;
             updateQty(rowId, qty);
         })

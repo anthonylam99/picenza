@@ -4,7 +4,7 @@
             <h6>SẢN PHẨM LIÊN QUAN</h6>
         </div>
     </div>
-    <div class="content w-100">
+    <div class="content w-100 pb-2">
         <div class="owl-carousel product-relate owl-theme">
 
             @foreach ($aryRelatedProd as $relatedProd)

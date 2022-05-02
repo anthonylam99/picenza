@@ -29,7 +29,8 @@ class Product extends Model
         'feature',
         'avatar_path',
         'show_home',
-        'status'
+        'status',
+        'is_bestseller',
     ];
 
 
