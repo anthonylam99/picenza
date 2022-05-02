@@ -48,7 +48,7 @@
                         <p>Mô tả</p>
                     </div>
                 </div>
-                <form action="/add-to-cart">
+                <form action="{{ route('addToCart') }}" method="POST" id="form-addcart">
                     <div class="rating-star">
                         <div class="rating-group-star">
                             <div class="rating-group">
@@ -98,7 +98,7 @@
                     <div class="product-price">
                         <div class="price">
                             <h5>Giá niêm yết:
-                                <text>@money($detailProduct->price)</text>
+                                <text id="bind-price">@money($detailProduct->price)</text>
                             </h5>
                         </div>
                         <div class="price-description">
@@ -130,14 +130,20 @@
                         </div>
                     </div>
                     <div class="product-quantity-addcart">
-                        <div class="quantity">
-                            <input type="number" name="quantity" value="1">
-                        </div>
-                        <div class="addcart col-9">
-                            <button type="submit" class="btn btn_add_cart btn-cart add_to_cart">
-                                THÊM VÀO GIỎ HÀNG
-                            </button>
-                        </div>
+                            @csrf
+                            <input type="hidden" value="{{ $detailProduct->id }}" name="id"/>
+                            <input type="hidden" value="{{ $detailProduct->name }}" name="name"/>
+                            <input type="hidden" id="hidden-price" value="" name="price"/>
+                            <input type="hidden" value="0" name="weight"/>
+                            <input type="hidden" value="{{ !empty($detailProduct->productImage) ? asset($detailProduct->productImage[0]->image_path) : 'images/product/product_demo_2.png' }}" name="image"/>
+                            <div class="quantity">
+                                <input type="number" name="qty" value="1">
+                            </div>
+                            <div class="addcart col-9">
+                                <button type="submit" class="btn btn_add_cart btn-cart add_to_cart">
+                                    THÊM VÀO GIỎ HÀNG
+                                </button>
+                            </div>
                     </div>
                     <div class="compare-product">
                         <div class="div-btn-compare">

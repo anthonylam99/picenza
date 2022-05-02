@@ -1,9 +1,13 @@
 <?php
 
 use App\Models\Comments;
+use App\Models\Districts;
 use App\Models\Product;
 use App\Models\ProductColor;
+use App\Models\ProductImage;
+use App\Models\Provinces;
 use App\Models\User;
+use Carbon\Carbon;
 
 if (!function_exists('get_related_product')) {
     /**
@@ -33,12 +37,13 @@ if (!function_exists('action_create_user')) {
      */
     function action_create_user($dataUser = [])
     {
-        return User::create([
+        return User::updateOrCreate(['email' => $dataUser['email']], [
             'name'      => $dataUser['full_name'],
             'email'     => $dataUser['email'],
             'password'  => bcrypt('12345678'),
             'gender'    => $dataUser['gender'] ?? 0,
             'address'   => $dataUser['address'] ?? '',
+            'address'   => $dataUser['phone'] ?? '',
         ]);
     }
 }
@@ -68,5 +73,62 @@ if (!function_exists('calculateAverageReview')) {
         $averageStar = Comments::where('product_id', $product_id)->avg($coloum);
 
         return !empty($averageStar) ? ceil($averageStar) : 0;
+    }
+}
+
+if (!function_exists('conver_date_to_time_ago')) {
+    /**
+     * Create user from simple data and return user id
+     *
+     * @param array $dataUser
+     * @return void
+     */
+    function conver_date_to_time_ago($dateTime)
+    {
+        Carbon::setLocale('vi');
+        $now = Carbon::now();
+
+        $dateDiff = Carbon::parse($dateTime);
+
+        return $dateDiff->diffForHumans($now);
+    }
+}
+
+if (!function_exists('get_product_by_prod_id_and_color')) {
+    /**
+     * Create user from simple data and return user id
+     *
+     * @param array $dataUser
+     * @return void
+     */
+    function get_product_by_prod_id_and_color($product_id, $color_id)
+    {
+        return ProductImage::with(['product', 'color'])->where('product_id', $product_id)->where('color', $color_id)->first()->toArray();
+    }
+}
+
+if (!function_exists('get_name_province')) {
+    /**
+     * Create user from simple data and return user id
+     *
+     * @param array $dataUser
+     * @return void
+     */
+    function get_name_province($id)
+    {
+        return Provinces::find($id)->name;
+    }
+}
+
+if (!function_exists('get_name_district')) {
+    /**
+     * Create user from simple data and return user id
+     *
+     * @param array $dataUser
+     * @return void
+     */
+    function get_name_district($id)
+    {
+        return Districts::find($id)->name;
     }
 }

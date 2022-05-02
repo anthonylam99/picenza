@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <script src="{{ asset('js/boostrap.js') }}"></script>
+    @yield('style')
+
 
 
     <style type="text/css">

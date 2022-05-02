@@ -353,6 +353,28 @@ $(function () {
 
 })
 
+function changeStatusProd(id) {
+    var status = $('#status' + id).is(':checked')
+    status = status ? 1 : 0
+    var statusText = status ? 'Bật' : 'Tắt'
+    $('.status' + id).html(statusText)
+    console.log(status)
+    $.ajax({
+        type: 'GET',
+        url: '/quan-tri/san-pham/update-status-prod',
+        data: {
+            id: id,
+            status: status
+        },
+        success: function (res) {
+            console.log(res)
+        },
+        error: function (err) {
+            console.log(err)
+        }
+    })
+}
+
 function changeStatus(id) {
     var status = $('#status' + id).is(':checked')
     status = status ? 1 : 0

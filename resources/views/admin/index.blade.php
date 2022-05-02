@@ -359,7 +359,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/khach-hang/don-hang" class="nav-link">
+                                <a href="{{route('admin.order.list')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>ĐƠN HÀNG</p>
                                 </a>

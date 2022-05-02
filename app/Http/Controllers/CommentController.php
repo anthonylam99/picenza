@@ -7,6 +7,7 @@ use App\Http\Requests\CommentStoreRequest;
 use App\Models\Comments;
 use App\Models\Product;
 use Carbon\Carbon;
+use Session;
 
 class CommentController extends Controller
 {
@@ -43,7 +44,7 @@ class CommentController extends Controller
             'count_worth'   => $data['count_worth'],
             'count_quality' => $data['count_quality'],
             'publish_at'    => Carbon::now(),
-            'file'          => $data['file'],
+            'file'          => $data['file'] ?? '',
         ]);
 
         $averageStar = calculateAverageReview($data['product_id'], 'rating');
@@ -70,4 +71,50 @@ class CommentController extends Controller
 
         return response()->json(['data' => $aryComment], 200);
     }
+
+    /**
+     * Ajax update like and dislike comment
+     *
+     * Operator 1 = plus, 0 = subtract
+     * @param Request $request
+     * @return json
+     */
+    public function updateLikeAndDisLikeCommment(Request $request)
+    {
+        $comment =  Comments::find($request->id);
+        $action = $request->action;
+        if ($request->count == 0) {
+            Session::put('operator', 1);
+            $count = $comment->$action + 1;
+
+            $comment->update([
+                $action => $count
+            ]);
+
+            return response()->json(['count' => $count], 200);
+        }
+
+        if (Session::has('operator')) {
+            if ( Session::get('operator') == 1 ) { // last session is plus and now we must subtract the like
+                Session::put('operator', 0);
+                $count = $comment->$action - 1;
+
+                $comment->update([
+                    $action => $count
+                ]);
+
+                return response()->json(['count' => $count], 200);
+            }
+            else {
+                Session::put('operator', 1);
+                $count = $comment->$action + 1;
+
+                $comment->update([
+                    $action => $count
+                ]);
+
+                return response()->json(['count' => $count], 200);
+            }
+        }
+}
 }
