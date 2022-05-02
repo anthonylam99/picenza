@@ -87,6 +87,8 @@ Route::group(['prefix' => 'quan-tri'], function () {
     Route::group(['prefix' => 'khach-hang'], function () {
         Route::get('danh-sach', [AdminController::class, 'customerList']);
         Route::get('don-hang', [AdminController::class, 'orderList'])->name('admin.order.list');
+        Route::get('chi-tiet-don-hang/{id}', [AdminController::class, 'orderDetail'])->name('admin.order.edit');
+        Route::get('cap-nhat-don-hang', [AdminController::class, 'updateOrder'])->name('admin.order.update');
     });
 
     Route::group(['prefix' => 'hang-san-xuat'], function(){

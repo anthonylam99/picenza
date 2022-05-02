@@ -43,7 +43,7 @@ if (!function_exists('action_create_user')) {
             'password'  => bcrypt('12345678'),
             'gender'    => $dataUser['gender'] ?? 0,
             'address'   => $dataUser['address'] ?? '',
-            'address'   => $dataUser['phone'] ?? '',
+            'phone'     => $dataUser['phone'] ?? '',
         ]);
     }
 }

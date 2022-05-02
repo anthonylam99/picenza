@@ -36,13 +36,33 @@
                         <th>Sản phẩm</th>
                         <th>Thông tin người đặt hàng</th>
                         <th>Note</th>
-                        <th>Địa chỉ</th>
                         <th>Tổng tiền</th>
                         <th>Trạng thái</th>
+                        <th>Ngày tạo đơn</th>
+                        <th>Chi tiết</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($aryOrder as $value)
+                    @php
+                        switch ($value['payment_status']) {
+                            case 0:
+                                $label = 'Chưa thanh toán';
+                                break;
+
+                            case 1:
+                                $label = 'Đã thanh toán';
+                                break;
+
+                            case 2:
+                                $label = 'Đã hủy';
+                                break;
+                            
+                            default:
+                                $label = 'Chưa thanh toán';
+                                break;
+                        }
+                    @endphp
                         <tr>
                             <td>{{$value['id']}}</td>
                             <td>
@@ -54,21 +74,30 @@
                                     <div class="col-md-7">
                                         <h5>{{ $prod['product']['name'] }}</h5>
                                         <p>Màu: {{ $prod['color']['color'] }}</p>
+                                        <p>SL: {{ $prod['qty'] }}</p>
                                     </div>
                                 </div>
                                 @endforeach
                             </td>
                             <td>
-                                <h6>{{ $value['user']['name'] }}</h6>
-                                <h6>{{ $value['user']['email'] }}</h6>
-                                <h6>{{ $value['user']['phone'] }}</h6>
+                                <h6><b>Name: </b>{{ $value['user']['name'] }}</h6>
+                                <h6><b>Email: </b>{{ $value['user']['email'] }}</h6>
+                                <h6><b>Phone: </b>{{ $value['user']['phone'] }}</h6>
+                                <h6><b>Địa chỉ: </b>{{ $value['address'] . ', ' . get_name_district($value['district_id']) . ', ' . get_name_province($value['province_id'])  }}</h6>
                             </td>
                             <td>{{ $value['note'] }}</td>
+                            <td>{{ $value['total_price'] }}₫</td>
+                            <td>{{ $label }}</td>
+                            <td>{{ date('d-m-Y', strtotime($value['created_at'])) }}</td>
                             <td>
-                                {{ $value['address'] . ', ' . get_name_district($value['district_id']) . ', ' . get_name_province($value['province_id'])  }}
+                                <button class="btn btn-info">
+                                    <a style="color: #FFFFFF" href="{{ route('admin.order.edit', $value['id']) }}">
+                                        <i class="far fa-edit"></i>Chi tiết đơn hàng
+                                    </a>
+                                </button>
                             </td>
-                            <td>{{ $value['total_price'] }}</td>
-                            <td>{{ $value['payment_status'] == 0 ? 'Chưa thanh toán' : 'Đã thanh toán' }}</td>
+                            
+                            
                         </tr>
                     @endforeach
                     </tbody>
