@@ -25,7 +25,6 @@
                         case 2:
                             $label = 'Đã hủy';
                             break;
-
                         default:
                             $label = 'Chưa thanh toán';
                             break;
@@ -132,3 +131,4 @@
     </div>
 </div>
 @endsection
+

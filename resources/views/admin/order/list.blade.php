@@ -56,7 +56,11 @@
                             case 2:
                                 $label = 'Đã hủy';
                                 break;
+<<<<<<< HEAD
 
+=======
+                            
+>>>>>>> f7b1741e2d8c7e7c700e8a36d20ee4f996b0c6ac
                             default:
                                 $label = 'Chưa thanh toán';
                                 break;
@@ -81,8 +85,13 @@
                                     </a>
                                 </button>
                             </td>
+<<<<<<< HEAD
 
 
+=======
+                            
+                            
+>>>>>>> f7b1741e2d8c7e7c700e8a36d20ee4f996b0c6ac
                         </tr>
                     @endforeach
                     </tbody>

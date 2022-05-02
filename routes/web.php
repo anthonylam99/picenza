@@ -12,6 +12,7 @@ use App\Http\Controllers\ProductTypeController;
 use App\Http\Controllers\ProductLineController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,7 +51,19 @@ Route::post('save-order', [ProductController::class, 'saveOrder'])->name('saveOr
 Route::post('update-quantity-cart', [ProductController::class, 'updateQtyCart'])->name('updateQtyCart');
 
 Route::get('/quan-tri', [AdminController::class, 'index']);
+Route::get('/quan-tri/dang-nhap', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/post-login', [LoginController::class, 'authenticate'])->name('postLogin');
+Route::post('/post-logout', [LoginController::class, 'postLogout'])->name('postLogout');
 
+Route::group(['prefix' => 'quan-tri', 'middleware' => 'CheckAdmin'], function () {
+    Route::group(['middleware' => 'auth'], function(){
+        Route::get('/', [AdminController::class, 'index'])->name('dashboard');
+        Route::get('product_line_list/{id}', [AdminController::class, 'getProductLine']);
+        Route::get('product_type_list/{id}/{id2}', [AdminController::class, 'getProductType']);
+        Route::get('product_feature_list/{id}', [AdminController::class, 'getProductFeature']);
+    });
+
+<<<<<<< HEAD
 Route::group(['prefix' => 'quan-tri'], function () {
     Route::get('update-page-image', [AdminController::class, 'updatePageImage']);
 
@@ -60,6 +73,9 @@ Route::group(['prefix' => 'quan-tri'], function () {
     Route::get('product_feature_list/{id}', [AdminController::class, 'getProductFeature']);
 
     Route::group(['prefix' => 'san-pham'], function () {
+=======
+    Route::group(['prefix' => 'san-pham', 'middleware' => 'auth'], function () {
+>>>>>>> f7b1741e2d8c7e7c700e8a36d20ee4f996b0c6ac
         Route::get('danh-sach', [AdminController::class, 'productList'])->name('admin.product.list');
         Route::get('update-status-prod', [AdminController::class, 'updateStatusProd'])->name('updateStatus-prod');
         Route::get('loai-san-pham', [AdminController::class, 'productType'])->name('admin.product.type');
@@ -86,14 +102,14 @@ Route::group(['prefix' => 'quan-tri'], function () {
     });
 
 
-    Route::group(['prefix' => 'khach-hang'], function () {
+    Route::group(['prefix' => 'khach-hang', 'middleware' => 'auth'], function () {
         Route::get('danh-sach', [AdminController::class, 'customerList']);
         Route::get('don-hang', [AdminController::class, 'orderList'])->name('admin.order.list');
         Route::get('chi-tiet-don-hang/{id}', [AdminController::class, 'orderDetail'])->name('admin.order.edit');
         Route::get('cap-nhat-don-hang', [AdminController::class, 'updateOrder'])->name('admin.order.update');
     });
 
-    Route::group(['prefix' => 'hang-san-xuat'], function(){
+    Route::group(['prefix' => 'hang-san-xuat', 'middleware' => 'auth'], function(){
         Route::get('/', [CompanyController::class, 'listCompany'])->name('admin.company.list');
         Route::get('them-moi', [CompanyController::class, 'addCompany'])->name('admin.company.add');
         Route::post('them-moi', [CompanyController::class, 'addCompanyPost'])->name('admin.company.add.post');
@@ -101,7 +117,7 @@ Route::group(['prefix' => 'quan-tri'], function () {
         Route::get('xoa/{id}', [CompanyController::class, 'delCompany'])->name('admin.company.del');
     });
 
-    Route::group(['prefix' => 'dong-san-pham'], function(){
+    Route::group(['prefix' => 'dong-san-pham', 'middleware' => 'auth'], function(){
         Route::get('/', [ProductLineController::class, 'listLine'])->name('admin.line.list');
         Route::get('them-moi', [ProductLineController::class, 'addLine'])->name('admin.line.add');
         Route::post('them-moi', [ProductLineController::class, 'addLinePost'])->name('admin.line.add.post');
@@ -111,7 +127,7 @@ Route::group(['prefix' => 'quan-tri'], function () {
         Route::get('showhome', [ProductLineController::class, 'updateStatusHome']);
     });
 
-    Route::group(['prefix' => 'loai-san-pham'], function(){
+    Route::group(['prefix' => 'loai-san-pham', 'middleware' => 'auth'], function(){
         Route::get('/', [ProductTypeController::class, 'listType'])->name('admin.type.list');
         Route::get('them-moi', [ProductTypeController::class, 'addType'])->name('admin.type.add');
         Route::post('them-moi', [ProductTypeController::class, 'addTypePost'])->name('admin.type.add.post');
@@ -119,7 +135,7 @@ Route::group(['prefix' => 'quan-tri'], function () {
         Route::get('xoa/{id}', [ProductTypeController::class, 'delType'])->name('admin.type.del');
     });
 
-    Route::group(['prefix' => 'khoang-gia'], function() {
+    Route::group(['prefix' => 'khoang-gia', 'middleware' => 'auth'], function() {
         Route::get('/', [PriceController::class, 'listPrice'])->name('admin.price.list');
         Route::get('them-moi', [PriceController::class, 'addPrice'])->name('admin.price.add');
         Route::post('them-moi', [PriceController::class, 'addPricePost'])->name('admin.price.add.post');
@@ -127,14 +143,14 @@ Route::group(['prefix' => 'quan-tri'], function () {
         Route::get('xoa/{id}', [PriceController::class, 'delPrice'])->name('admin.price.del');
     });
 
-    Route::group(['prefix' => 'quan-ly-trang'], function() {
+    Route::group(['prefix' => 'quan-ly-trang', 'middleware' => 'auth'], function() {
         Route::get('danh-sach', [PageController::class, 'list'])->name('admin.page.list');
         Route::get('them-moi', [PageController::class, 'add'])->name('admin.page.add');
         Route::post('them-moi', [PageController::class, 'addPage'])->name('admin.page.add.post');
         Route::get('sua/{id}', [PageController::class, 'editPage'])->name('admin.page.edit');
     });
 
-    Route::group(['prefix' => 'bai-viet'], function() {
+    Route::group(['prefix' => 'bai-viet', 'middleware' => 'auth'], function() {
         Route::get('/', [PostController::class, 'listPost'])->name('admin.post.list');
         Route::get('them-moi', [PostController::class, 'addPost'])->name('admin.post.add');
         Route::post('them-moi', [PostController::class, 'addPost'])->name('admin.post.add.post');

@@ -37,6 +37,7 @@ class LoginController extends Controller
             return redirect('/quan-tri');
         }
 
+
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);
