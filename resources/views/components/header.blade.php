@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="@yield('font-awsomes')">
     <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/toastr.min.css')}}">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <script src="{{ asset('js/boostrap.js') }}"></script>
     @yield('style')

@@ -53,6 +53,7 @@ Route::post('update-quantity-cart', [ProductController::class, 'updateQtyCart'])
 Route::get('/quan-tri', [AdminController::class, 'index']);
 Route::get('/quan-tri/dang-nhap', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/post-login', [LoginController::class, 'authenticate'])->name('postLogin');
+Route::get('/post-login', [LoginController::class, 'redirectLogin'])->name('getLogin');
 Route::post('/post-logout', [LoginController::class, 'postLogout'])->name('postLogout');
 
 Route::group(['prefix' => 'quan-tri', 'middleware' => 'CheckAdmin'], function () {

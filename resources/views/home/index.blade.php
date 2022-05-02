@@ -227,3 +227,11 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+<script>
+    @if (session()->has('order-success'))
+    console.log(123123123);
+    toastr.success('Thành công', 'Đặt hàng thành công')
+    @endif
+</script>
+@endpush

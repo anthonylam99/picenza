@@ -11,6 +11,7 @@ use App\Models\ProductLine;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Cart;
+use Session;
 
 class ProductController extends Controller
 {
@@ -242,6 +243,8 @@ class ProductController extends Controller
         ]);
 
         Cart::destroy();
+
+        Session::flash('order-success', 'Đặt hàng thành công'); 
 
         return redirect()->route('index');
     }
