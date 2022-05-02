@@ -21,7 +21,7 @@ if (!function_exists('get_related_product')) {
         $product = Product::findOrFail($id);
 
         return Product::with('productImage.color')
-            ->where('product_type', $product->product_line)
+            ->where('product_line', $product->product_line)
             ->where('id', '!=', $id)
             ->orderBy('id', 'DESC')
             ->get();
@@ -43,7 +43,7 @@ if (!function_exists('action_create_user')) {
             'password'  => bcrypt('12345678'),
             'gender'    => $dataUser['gender'] ?? 0,
             'address'   => $dataUser['address'] ?? '',
-            'address'   => $dataUser['phone'] ?? '',
+            'phone'     => $dataUser['phone'] ?? '',
         ]);
     }
 }
@@ -131,4 +131,17 @@ if (!function_exists('get_name_district')) {
     {
         return Districts::find($id)->name;
     }
+}
+
+function strip_tags_content($string) {
+    // ----- remove HTML TAGs -----
+    $string = preg_replace ('/<[^>]*>/', ' ', $string);
+    // ----- remove control characters -----
+    $string = str_replace("\r", '', $string);
+    $string = str_replace("\n", ' ', $string);
+    $string = str_replace("\t", ' ', $string);
+    // ----- remove multiple spaces -----
+    $string = trim(preg_replace('/ {2,}/', ' ', $string));
+    return $string;
+
 }

@@ -52,6 +52,8 @@ Route::post('update-quantity-cart', [ProductController::class, 'updateQtyCart'])
 Route::get('/quan-tri', [AdminController::class, 'index']);
 
 Route::group(['prefix' => 'quan-tri'], function () {
+    Route::get('update-page-image', [AdminController::class, 'updatePageImage']);
+
     Route::get('/', [AdminController::class, 'index']);
     Route::get('product_line_list/{id}', [AdminController::class, 'getProductLine']);
     Route::get('product_type_list/{id}/{id2}', [AdminController::class, 'getProductType']);
@@ -87,6 +89,8 @@ Route::group(['prefix' => 'quan-tri'], function () {
     Route::group(['prefix' => 'khach-hang'], function () {
         Route::get('danh-sach', [AdminController::class, 'customerList']);
         Route::get('don-hang', [AdminController::class, 'orderList'])->name('admin.order.list');
+        Route::get('chi-tiet-don-hang/{id}', [AdminController::class, 'orderDetail'])->name('admin.order.edit');
+        Route::get('cap-nhat-don-hang', [AdminController::class, 'updateOrder'])->name('admin.order.update');
     });
 
     Route::group(['prefix' => 'hang-san-xuat'], function(){

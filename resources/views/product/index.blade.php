@@ -2,6 +2,10 @@
 
 @section('title', 'Sản phẩm')
 
+@section('scripts')
+    <script src="{{asset('js/owl.carousel.js')}}"></script>
+@endsection
+
 @section('content')
     <div class="main-product-show">
         <div class="banner-div">
@@ -121,40 +125,25 @@
                         <h5>CHẬU RỬA BÁN CHẠY NHẤT</h5>
                     </div>
                     <div class="feature">
-                        <div class="feature-item row">
-                            <div class="feature-item-main col-4">
+                        <div class="feature-item row owl-carousel bestseller owl-theme">
+                            @foreach ($aryBestSeller as $item)
+                            <div class="feature-item-main">
+                                <a href="{{ route('product.detail', $item->id) }}">
                                 <div class="image">
-                                    <img src="{{asset('images/product/a.png')}}" alt="">
+                                    <img src="{{ !empty($item->productImage) ? asset($item->productImage[0]->image_path) : asset('images/product/c.png') }}" alt="">
                                 </div>
                                 <div class="title">
-                                    <h5 class="text-uppercase">Tự động vệ sinh liên tục</h5>
+                                    <h5 class="text-uppercase">{{ $item->name }}</h5>
                                 </div>
+                                </a>
                                 <div class="sub-title">
-                                    <p>Chậu rửa tự động vệ sinh liên tục khi bẩn</p>
+                                    <p>{{ $item->description }}</p>
+                                </div>
+                                <div class="price">
+                                    <text id="bind-price">@money($item->price)</text>
                                 </div>
                             </div>
-                            <div class="feature-item-main col-4">
-                                <div class="image">
-                                    <img src="{{asset('images/product/b.png')}}" alt="">
-                                </div>
-                                <div class="title">
-                                    <h5 class="text-uppercase">Tự động vệ sinh liên tục</h5>
-                                </div>
-                                <div class="sub-title">
-                                    <p>Chậu rửa tự động vệ sinh liên tục khi bẩn</p>
-                                </div>
-                            </div>
-                            <div class="feature-item-main col-4">
-                                <div class="image">
-                                    <img src="{{asset('images/product/c.png')}}" alt="">
-                                </div>
-                                <div class="title">
-                                    <h5 class="text-uppercase">Tự động vệ sinh liên tục</h5>
-                                </div>
-                                <div class="sub-title">
-                                    <p>Chậu rửa tự động vệ sinh liên tục khi bẩn</p>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -167,46 +156,20 @@
                         <h5>PHỤ KIỆN NHÀ VỆ SINH</h5>
                     </div>
                     <div class="feature">
-                        <div class="feature-item row">
-                            <div class="feature-item-main col-4">
+                        <div class="feature-item row owl-carousel subcate owl-theme">
+                            @foreach ($subNormalCate as $sub)
+                            <div class="feature-item-main">
                                 <div class="image">
-                                    <div class="main-image">
-                                        <img src="{{asset('images/product/d.png')}}" alt="">
-                                    </div>
+                                    <img src="{{ !empty($sub->avatar) ? $sub->avatar : asset('images/product/c.png') }}" alt="">
                                 </div>
                                 <div class="title">
-                                    <h5 class="text-uppercase">Tự động vệ sinh liên tục</h5>
+                                    <h5 class="text-uppercase">{{ $sub->name }}</h5>
                                 </div>
                                 <div class="sub-title">
-                                    <p>Chậu rửa tự động vệ sinh liên tục khi bẩn</p>
+                                    <p>{{ $sub->description }}</p>
                                 </div>
                             </div>
-                            <div class="feature-item-main col-4">
-                                <div class="image">
-                                    <div class="main-image">
-                                        <img src="{{asset('images/product/e.png')}}" alt="">
-                                    </div>
-                                </div>
-                                <div class="title">
-                                    <h5 class="text-uppercase">Tự động vệ sinh liên tục</h5>
-                                </div>
-                                <div class="sub-title">
-                                    <p>Chậu rửa tự động vệ sinh liên tục khi bẩn</p>
-                                </div>
-                            </div>
-                            <div class="feature-item-main col-4">
-                                <div class="image">
-                                    <div class="main-image">
-                                        <img src="{{asset('images/product/f.png')}}" alt="">
-                                    </div>
-                                </div>
-                                <div class="title">
-                                    <h5 class="text-uppercase">Tự động vệ sinh liên tục</h5>
-                                </div>
-                                <div class="sub-title">
-                                    <p>Chậu rửa tự động vệ sinh liên tục khi bẩn</p>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

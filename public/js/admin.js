@@ -531,3 +531,25 @@ function makeFavourite(id) {
         })
     })
 }
+
+
+// function showPost(id, tag){
+//     var status = $('#customCheckbox'+id).is(':checked')
+//     status = status ? 1 : 0;
+//
+//     $.ajax({
+//         type: 'GET',
+//         url: '/quan-tri/update-page-image',
+//         data: {
+//             status: status,
+//             post_id: id,
+//             tag: tag
+//         },
+//         success: function (res){
+//             console.log(res)
+//         },
+//         error: function (err){
+//             console.log(err)
+//         }
+//     })
+// }

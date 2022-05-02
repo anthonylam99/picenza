@@ -142,6 +142,14 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group row" id="productFeature" style="margin-left: 0">
+                            <div class="custom-control custom-checkbox col-4">
+                                <input name="is_bestseller" class="custom-control-input" type="checkbox" value="1"
+                                       id="status" {{ $product['is_bestseller'] == 1 ? 'checked' : ''}}
+                                >
+                                <label for="status" class="custom-control-label">Sản phẩm bán chạy</label>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="pricePercent">Mô tả</label>
                             <textarea class="w-100" name="description" id=""
@@ -193,8 +201,8 @@
                                         <label for="image-input<?php echo $i; ?>" class="image-upload"><i
                                                 class="fas fa-upload"></i>Chọn ảnh</label>
                                         <input style="display: none" onclick="selectImageGalery({{$i}})"
-                                               value="" id="image-input<?php echo $i; ?>"
-                                               type="text" name="image<?php echo $i; ?>" data-photo="<?php echo $i; ?>" >
+                                               id="image-input<?php echo $i; ?>"
+                                               type="text" name="image<?php echo $i; ?>" data-photo="<?php echo $i; ?>" value="{{$value['image_path']}}">
                                         <button type="button" class="btn-danger btn-deleteimg btn-delete-img-edit"
                                                 onclick="removeImage({{$i}}, '{{$value['color']['id']}}')">Xóa ảnh
                                         </button>

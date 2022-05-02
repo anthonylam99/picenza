@@ -3,8 +3,8 @@
 @section('pageTitle', '')
 
 @section('breadcrumbContent')
-    <li class="breadcrumb-item"><a href="#">Sản phẩm</a></li>
-    <li class="breadcrumb-item active">Danh sách khoảng giá</li>
+    <li class="breadcrumb-item"><a href="#">Quản lý trang</a></li>
+    <li class="breadcrumb-item active">Danh sách</li>
 @endsection
 
 @section('content')
@@ -22,7 +22,7 @@
 
                 <div class="form-search float-right">
                     <form style="margin-bottom: 0" class="form-group" action="{{route('admin.price.add')}}">
-                        <input class="form-control" type="text" name="s" value="" placeholder="Tìm kiếm ....">
+{{--                        <input class="form-control" type="text" name="s" value="" placeholder="Tìm kiếm ....">--}}
                     </form>
                 </div>
             </div>
@@ -50,16 +50,18 @@
                             <td>
                                 <button class="btn btn-info">
                                     <a target="_blank" style="color: #FFFFFF"
-                                       href="{{ route('page.show.custom', ['slug' => $value->slug]) }}">
+                                       href="{{ $value->name === 'Trang chủ' ? '/' : route('page.show.custom', ['slug' => $value->slug]) }}">
                                         Xem Trang
                                     </a>
                                 </button>
-                                <button class="btn btn-danger">
-                                    <a style="color: #FFFFFF"
-                                       href="{{ route('admin.page.edit', ['id' => $value->id]) }}">
-                                        Xoá
-                                    </a>
-                                </button>
+                                @if($value->name !== 'Trang chủ')
+                                    <button class="btn btn-danger">
+                                        <a style="color: #FFFFFF"
+                                           href="{{ route('admin.page.edit', ['id' => $value->id]) }}">
+                                            Xoá
+                                        </a>
+                                    </button>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

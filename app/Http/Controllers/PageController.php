@@ -6,6 +6,7 @@ use App\Http\Controllers\Entity\Options;
 use App\Models\Page;
 use App\Models\PageImage;
 use App\Models\Post;
+use App\Models\PostTag;
 use App\Models\ProductColor;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
@@ -44,37 +45,66 @@ class PageController extends Controller
             $id = $res->id;
         }
 
+        $this->upImagePage($request, 'postDes', 'section3');
+        $this->upImagePage($request, 'section4', 'section4');
+
+        $this->insertImage($request, 'imagebanner', 'banner');
+        $this->insertImage($request, 'imagebrand', 'brand');
+
+        if (!empty($res)) {
+            return redirect()->route('admin.page.edit', ['id' => $id]);
+        }
+    }
+
+    public function upImagePage($request, $field, $tag)
+    {
         $arrPost = [];
-        if($request->has('postDes')){
-            $postDes = Post::whereIn('id', $request->get('postDes'))->get();
+        if ($request->has($field)) {
+            $postDes = Post::whereIn('id', $request->get($field))->get();
 
+            if (!empty($postDes)) {
+                $i = 0;
+                $postIdStr = '';
+                foreach ($postDes as $value) {
+                    $i++;
 
-
-            if(!empty($postDes)){
-                foreach ($postDes as $value){
+                    if ($i < count($postDes)) {
+                        $postIdStr .= $value->id . ',';
+                    } else {
+                        $postIdStr .= $value->id;
+                    }
                     $arr = [];
                     $arr['page_id'] = $request->get('page_id');
-                    $arr['tag'] = 'des';
+                    $arr['tag'] = $tag;
                     $arr['title'] = $value->title;
                     $arr['content'] = substr($value->content, 0, 300);
                     $arr['url'] = $value->url;
                     $arr['image_path'] = $value->avatar;
+                    $arr['post_id'] = $value->id;
 
 
                     array_push($arrPost, $arr);
                 }
+
+                $postTag = PostTag::where('page_tag', $tag)->update([
+                    'posts' => $postIdStr
+                ]);
             }
+        }else{
+            PostTag::where('page_tag', $tag)->update([
+                'posts' => ''
+            ]);
         }
-        if(!empty($arrPost)){
+        if (!empty($arrPost)) {
             foreach ($arrPost as $value) {
-                PageImage::create($value);
+                $find = PageImage::where([
+                    'post_id' => $value['post_id'],
+                    'tag' => $value['tag']
+                ])->get();
+                if (empty(collect($find)->toArray())) {
+                    PageImage::create($value);
+                }
             }
-        }
-
-        $this->insertImage($request, 'imagebanner', 'banner');
-
-        if (!empty($res)) {
-            return redirect()->route('admin.page.edit', ['id' => $id]);
         }
     }
 
@@ -108,19 +138,28 @@ class PageController extends Controller
 
         if (!empty($arrImg)) {
             foreach ($arrImg as $value) {
-                PageImage::updateOrCreate(
-                    [
-                        'page_id' => $value->page_id,
-                        'image_path' => $value->image_path
-                    ],
-                    $value
-                );
+                if (!empty($value['image_path'])) {
+                    PageImage::updateOrCreate(
+                        [
+                            'page_id' => $value['page_id'],
+                            'image_path' => $value['image_path'],
+                        ],
+                        $value
+                    );
+
+                }
             }
         }
     }
 
     public function editPage(Request $request, $id = null)
     {
+        $dataPost = PostTag::all();
+        $arrPostPage = [];
+        foreach ($dataPost as $value) {
+            $arrPostPage[$value->page_tag] = explode(',', $value->posts);
+        }
+
         $page = Page::findOrFail($id);
         $post = Post::all();
         $image = PageImage::where('page_id', $id)->get();
@@ -131,7 +170,7 @@ class PageController extends Controller
             }
         }
 
-        return view('admin.page.edit', compact('page', 'arrImg', 'post'));
+        return view('admin.page.edit', compact('page', 'arrImg', 'post', 'arrPostPage'));
     }
 
     public function showPage(Request $request, $slug = null)

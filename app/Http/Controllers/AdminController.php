@@ -171,7 +171,8 @@ class AdminController extends Controller
             'reliability_type' => $request->get('reliability_type'),
             'description' => $request->get('description', ''),
             'feature' => $feature,
-            'avatar_path' => $request->get('img_avatar_path')
+            'avatar_path' => $request->get('img_avatar_path'),
+            'is_bestseller' => $request->get('is_bestseller') ?? 0,
         ];
 
 
@@ -193,6 +194,7 @@ class AdminController extends Controller
                 $arr = [];
                 $arr['image_path'] = $request->get('image' . $index);
                 $arr['product_id'] = $product->id;
+                $arr['price'] = $request->get('price'.$index);
 
                 $arrColor = [];
                 $color = $request->get('color' . $index);
@@ -201,7 +203,7 @@ class AdminController extends Controller
                     ['color' => $color],
                     [
                         'color' => $color,
-                        'hex' => $hex
+                        'hex' => $hex,
                     ]
                 );
                 $arr['color'] = $insert->id;
@@ -222,12 +224,13 @@ class AdminController extends Controller
                         ProductImage::updateOrCreate(
                             [
                                 'product_id' => $value['product_id'],
-                                'color' => $value['color']
+                                'color' => $value['color'],
                             ],
                             [
                                 'product_id' => $value['product_id'],
                                 'color' => $value['color'],
-                                'image_path' => $value['image_path']
+                                'image_path' => $value['image_path'],
+                                'price' => $value['price']
                             ]
                         );
                     }
@@ -355,37 +358,52 @@ class AdminController extends Controller
      */
     public function orderList ()
     {
-        // if ($request->has('s')) {
-        //     $query = $request->get('s');
-        //     $product = Product::with([
-        //         'productType',
-        //         'companyName'
-        //     ])
-        //         ->whereHas(
-        //             'productType', function ($q) use ($query) {
-        //             $q->where('name', 'like', '%' . $query . '%');
-        //         })
-        //         ->orWhereHas('companyName', function ($q) use ($query) {
-        //             $q->where('name', 'like', '%' . $query . '%');
-        //         })
-        //         ->orWhere('name', 'like', '%' . $query . '%')
-        //         ->orWhere('price', $query)
-        //         ->paginate(10);
-        // } else if (!empty($request->get('s')) || !$request->has('s')) {
-        //     $product = Product::with(['productType', 'companyName'])->paginate(10);
-        // }
-
         $aryOrder = Orders::with('user')->latest()->get()->toArray();
 
-        foreach ($aryOrder as $key => $order) {
-            $item = $order['item'];
-            foreach ($item as $action => $prod) {
-                $aryOrder[$key]['info-product'][] = get_product_by_prod_id_and_color($prod['product_id'], $prod['color_id']);
-            }
-        }
+        // foreach ($aryOrder as $key => $order) {
+        //     $item = $order['item'];
+        //     foreach ($item as $index => $prod) {
+        //         $aryOrder[$key]['info-product'][] = get_product_by_prod_id_and_color($prod['product_id'], $prod['color_id']);
+        //         $aryOrder[$key]['info-product'][$index]['qty'] = $prod['qty'];
+        //     }
+        // }
 
-        // dd($aryOrder);
 
         return view('admin.order.list', compact('aryOrder'));
+    }
+
+    /**
+     * Get detail order
+     *
+     * @param [type] $id
+     * @return void
+     */
+    public function orderDetail($id)
+    {
+        $aryProd = [];
+        $order = Orders::find($id);
+        foreach ($order->item as $key => $prod) {
+            $aryProd[] = get_product_by_prod_id_and_color($prod['product_id'], $prod['color_id']);
+            $aryProd[$key]['qty'] = $prod['qty'];
+        }
+
+        return view('admin.order.detail', compact('aryProd', 'order'));
+    }
+
+    /**
+     * Update order status
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function updateOrder(Request $request)
+    {
+        $request->type == 1 ? $message = 'Xác nhận đơn hàng thành công' : $message = 'Hủy đơn hàng thành công';
+        $order = Orders::find($request->id);
+        $order->update([
+            'payment_status' => $request->type,
+        ]);
+
+        return response()->json(['message' => $message]);
     }
 }
