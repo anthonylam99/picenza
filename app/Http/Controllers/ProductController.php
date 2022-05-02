@@ -48,8 +48,6 @@ class ProductController extends Controller
             $stars['halfStar'] = 5 - $stars['fullStar'] - $stars['noneStar'];
         }
 
-        $detailProduct = Product::with(['productImage.color', 'comment'])->find($id);
-
         $aryRelatedProd = get_related_product($id);
 
         // Recent view
@@ -147,6 +145,7 @@ class ProductController extends Controller
     {
         $options = [
             'options' => [
+
                 'image' => $request->image,
                 'color' => $request->color,
             ]

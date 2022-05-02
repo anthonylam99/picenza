@@ -44,6 +44,7 @@ function addImageBox(tag) {
         $(".body-card-image" + tag).append("" +
             "<div class='col-3 img-box" + tag + "' id='label-image" + tag + i + "' data-photo='" + i + "'>" +
             "<div style='height: 100px; border: 2px dashed #cccccc; margin-bottom: 10px;' id='image-preview" + tag + i + "' class='show-img'>" +
+            "<img id='image-preview-src" + tag + i + "' >" +
             "</div>" +
 
             "<label for='image-input" + tag + i + "' class='image-upload'>" +
@@ -52,19 +53,20 @@ function addImageBox(tag) {
             "<input style='margin-bottom: 3px' class='form-control' type='text' name='title" + tag + i + "' value='' placeholder='Nhập tiêu đề..' />" +
             "<input style='margin-bottom: 3px' class='form-control' type='text' name='url" + tag + i + "' value='' placeholder='Nhập đường dẫn bài viết..' />" +
             "<input style='margin-bottom: 3px' class='form-control' type='text' name='content" + tag + i + "' value='' placeholder='Nhập nội dung mô tả..' />" +
-            "<input style='display: none' onchange='previewImageCustom(" + i + ", " + ' "' + tag + '" ' + ")'  id='image-input" + tag + i + "' type='file' name='image" + tag + i + "' data-photo='" + i + "'> " +
+            "<input style='display: none' onclick='selectImageGaleryCustom(" + i + ", " + ' "' + tag + '" ' + ")'  id='image-input" + tag + i + "' type='text' name='image" + tag + i + "' data-photo='" + i + "'> " +
             "<button type='button' class='btn-danger btn-deleteimg' onclick='removeImage(" + i + ", " + ' "' + tag + '" ' + ")'>Xóa ảnh</button>" +
             "</div>");
     } else {
         $(".body-card-image" + tag).append("" +
             "<div class='col-3 img-box" + tag + "' id='label-image" + tag + i + "' data-photo='" + i + "'>" +
             "<div style='height: 100px; border: 2px dashed #cccccc; margin-bottom: 10px;' id='image-preview" + tag + i + "' class='show-img'>" +
+            "<img id='image-preview-src" + tag + i + "' >" +
             "</div>" +
 
             "<label for='image-input" + tag + i + "' class='image-upload'>" +
             "<i class='fas fa-upload'></i>Chọn ảnh" +
             "</label>" +
-            "<input style='display: none' onchange='previewImageCustom(" + i + ", " + ' "' + tag + '" ' + ")'  id='image-input" + tag + i + "' type='file' name='image" + tag + i + "' data-photo='" + i + "'> " +
+            "<input style='display: none' onclick='selectImageGaleryCustom(" + i + ", " + ' "' + tag + '" ' + ")'  id='image-input" + tag + i + "' type='text' name='image" + tag + i + "' data-photo='" + i + "'> " +
             "<button type='button' class='btn-danger btn-deleteimg' onclick='removeImage(" + i + ", " + ' "' + tag + '" ' + ")'>Xóa ảnh</button>" +
             "</div>");
     }
@@ -330,6 +332,30 @@ function selectImageGalery(id) {
     });
 }
 
+function selectImageGaleryCustom(id, tag) {
+    console.log(id, tag)
+    CKFinder.popup({
+        chooseFiles: true,
+        width: 1200,
+        height: 600,
+        onInit: function (finder) {
+            finder.on('files:choose', function (evt) {
+                var file = evt.data.files.first();
+                // output.value = file.getUrl();
+                var img = "<img id='image-preview-src' + tag + id  src='" + file.getUrl() + "'/>"
+                $('#image-preview'+tag + id).html(img);
+                $('#image-input'+tag + id).val(file.getUrl());
+                console.log($('#image-input'+tag + id).val())
+            });
+
+            finder.on('file:choose:resizedImage', function (evt) {
+                var output = document.getElementById(elementId);
+                output.value = evt.data.resizedUrl;
+            });
+        }
+    });
+}
+
 
 //POST SEO
 $('#news_title').on('input', function () {
@@ -465,7 +491,7 @@ $(function () {
                     "<td>" +
                     "<div class='custom-control custom-checkbox'>\n" +
                     "    <input name='favourite" + res.data.id + "' class='custom-control-input' type='checkbox'\n" +
-                    "             id='favourite" + res.data.id + "' onclick='makeFavourite("+res.data.id+")'>\n" +
+                    "             id='favourite" + res.data.id + "' onclick='makeFavourite(" + res.data.id + ")'>\n" +
                     "    <label for='favourite" + res.data.id + "' class='custom-control-label'></label>\n" +
                     "</div>" +
                     "</td>" +
@@ -484,8 +510,8 @@ $(function () {
     })
 })
 
-function makeFavourite(id){
-    $('#favourite'+id).change(function (){
+function makeFavourite(id) {
+    $('#favourite' + id).change(function () {
         var status = $(this).val()
         status = (status === 'on') ? 1 : 0
 
@@ -496,10 +522,10 @@ function makeFavourite(id){
                 id: id,
                 status: status
             },
-            success: function (res){
+            success: function (res) {
                 console.log(res)
             },
-            error: function (err){
+            error: function (err) {
                 console.log(err)
             }
         })

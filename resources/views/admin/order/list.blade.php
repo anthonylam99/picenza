@@ -69,8 +69,6 @@
                             </td>
                             <td>{{ $value['total_price'] }}</td>
                             <td>{{ $value['payment_status'] == 0 ? 'Chưa thanh toán' : 'Đã thanh toán' }}</td>
-
-
                         </tr>
                     @endforeach
                     </tbody>

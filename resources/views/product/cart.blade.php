@@ -244,3 +244,32 @@
             qty = qty - 1;
             updateQty(rowId, qty);
         })
+
+
+        $('.btnPlus').click(function(){
+            var rowId = $(this).data('row');
+            qty = (+qty) + 1;
+            updateQty(rowId, qty);
+        })
+
+        function updateQty(rowId, newQty) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "{{ route('updateQtyCart') }}",
+                type: 'POST',
+                data: {
+                    rowId: rowId,
+                    qty: newQty
+                },
+                success: function(response){
+                    location.reload();
+                }
+            });
+        }
+    });
+</script>
+@endpush

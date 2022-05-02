@@ -84,6 +84,7 @@ class CommentController extends Controller
         $comment =  Comments::find($request->id);
         $action = $request->action;
         if ($request->count == 0) {
+
             Session::put('operator', 1);
             $count = $comment->$action + 1;
 
@@ -96,6 +97,7 @@ class CommentController extends Controller
 
         if (Session::has('operator')) {
             if ( Session::get('operator') == 1 ) { // last session is plus and now we must subtract the like
+
                 Session::put('operator', 0);
                 $count = $comment->$action - 1;
 
@@ -106,6 +108,7 @@ class CommentController extends Controller
                 return response()->json(['count' => $count], 200);
             }
             else {
+
                 Session::put('operator', 1);
                 $count = $comment->$action + 1;
 

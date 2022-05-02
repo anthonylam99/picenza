@@ -216,7 +216,7 @@
         let starId
         let qualityID
         let worthId
-
+        
         // Star
         $('.rate-star-product i').bind('mouseover', function (e) {
             e.preventDefault()

@@ -277,7 +277,7 @@
                                         </button>
                                     </div>
                                     <button class="cart">
-                                        <a href="" class="text-center">
+                                        <a href="{{ route('product.cart') }}" class="text-center">
                                             <img src="{{ asset('images/cart.png') }}" alt="tag">
                                         </a>
                                     </button>

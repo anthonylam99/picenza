@@ -30,8 +30,8 @@ class AppServiceProvider extends ServiceProvider
             <?php
              if($amount==0){
                  echo 'Liên hệ';
-             }else {
-              echo number_format($amount,0,',','.').'₫';
+             }else { 
+              echo number_format($amount,0,',','.').'₫'; 
              }
             ?>
             ";

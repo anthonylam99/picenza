@@ -2420,6 +2420,17 @@ footer .copyright h6 {
         display: initial;
         justify-content: space-between;
     }
+
+    ul.listorder {
+        margin: 0;
+        padding: 0;
+    }
+    .colimg a img{
+        width: 100%;
+    }
+    .choosenumber{
+        width: 38% !important;
+    }
 }
 
 @media (min-width: 481px) {
@@ -2572,8 +2583,10 @@ footer .copyright h6 {
         display: flex;
         justify-content: space-between;
     }
+    .colimg a img{
+        width: 100%;
+    }
 }
-
 
 .rate-star-product i.selected, .rate-star-product-list i.selected, .rate-star-product i.hover, .rate-star-product-list i.hover,
 .rate-quality-product i.selected, .rate-quality-product-list i.selected, .rate-quality-product i.hover, .rate-quality-product-list i.hover,
@@ -2586,6 +2599,18 @@ footer .copyright h6 {
     height: 7px;
 }
 
+.rate-star-product i.selected, .rate-star-product-list i.selected, .rate-star-product i.hover, .rate-star-product-list i.hover,
+.rate-quality-product i.selected, .rate-quality-product-list i.selected, .rate-quality-product i.hover, .rate-quality-product-list i.hover,
+.rate-worth-product i.selected, .rate-worth-product-list i.selected, .rate-worth-product i.hover, .rate-worth-product-list i.hover  {
+    color: #ED2027;
+}
+#form_testimonial .point-group .point-item {
+    display: flex;
+    width: 120px;
+    height: 7px;
+}
+
+
 #form_testimonial .point-item .point-active{
     background: #ED2027;
     border-radius: 2px 0px 0px 2px;
@@ -2596,3 +2621,4 @@ footer .copyright h6 {
     background: #C4C4C4;
     border-radius: 2px;
 }
+

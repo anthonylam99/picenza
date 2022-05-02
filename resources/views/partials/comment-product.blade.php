@@ -137,6 +137,7 @@
                 }
             });
             $.ajax({
+
                 url: '{{route('updateLikeAndDisLikeCommment')}}',
                 type: 'POST',
                 data: {
