@@ -2447,7 +2447,9 @@ footer .copyright h6 {
     .main-product-show .slider-box .slider-box-main .caption-container .content-sl .content-sl-main .sub-title {
         padding-bottom: 20px !important;
     }
+}
 
+@media (max-width: 767px){
     .contact .main-contact .banner-contact .image .contact-form {
         width: 95%;
         position: absolute;
