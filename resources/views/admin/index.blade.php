@@ -45,6 +45,12 @@
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
             <!-- Navbar Search -->
+            <li class="nav-item d-none d-sm-inline-block">
+                <form action="{{ route('postLogout') }}" method="post">
+                    @csrf
+                    <button class="btn btn-warning" type="submit" class="nav-link">Đăng xuất</button>
+                </form>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" data-widget="navbar-search" href="#" role="button">
                     <i class="fas fa-search"></i>
