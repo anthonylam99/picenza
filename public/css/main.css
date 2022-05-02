@@ -2368,7 +2368,7 @@ footer .copyright h6 {
         padding: 0px 4px;
     }
 
-    .product-relate-to, .list-of-review {
+    .product-relate-to, .list-of-review, .product-recent {
         padding: 0 10px;
     }
 
@@ -2430,6 +2430,21 @@ footer .copyright h6 {
     }
     .choosenumber{
         width: 38% !important;
+    }
+
+    .main-product-show .main-product-content-show .content-1 .content-1-main .feature .feature-item .feature-item-main .image img {
+        width: 100%;
+        -o-object-fit: contain;
+        object-fit: contain;
+        height: auto !important;
+    }
+
+    .main-product-show .slider-box .slider-box-main .caption-container .content-sl {
+        padding: 15px 70px !important;
+    }
+
+    .main-product-show .slider-box .slider-box-main .caption-container .content-sl .content-sl-main .sub-title {
+        padding-bottom: 20px !important;
     }
 }
 
