@@ -21,7 +21,7 @@ if (!function_exists('get_related_product')) {
         $product = Product::findOrFail($id);
 
         return Product::with('productImage.color')
-            ->where('product_type', $product->product_line)
+            ->where('product_line', $product->product_line)
             ->where('id', '!=', $id)
             ->orderBy('id', 'DESC')
             ->get();

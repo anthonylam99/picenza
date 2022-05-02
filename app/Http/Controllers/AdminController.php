@@ -171,7 +171,8 @@ class AdminController extends Controller
             'reliability_type' => $request->get('reliability_type'),
             'description' => $request->get('description', ''),
             'feature' => $feature,
-            'avatar_path' => $request->get('img_avatar_path')
+            'avatar_path' => $request->get('img_avatar_path'),
+            'is_bestseller' => $request->get('is_bestseller') ?? 0,
         ];
 
 
@@ -357,13 +358,13 @@ class AdminController extends Controller
     {
         $aryOrder = Orders::with('user')->latest()->get()->toArray();
 
-        foreach ($aryOrder as $key => $order) {
-            $item = $order['item'];
-            foreach ($item as $index => $prod) {
-                $aryOrder[$key]['info-product'][] = get_product_by_prod_id_and_color($prod['product_id'], $prod['color_id']);
-                $aryOrder[$key]['info-product'][$index]['qty'] = $prod['qty'];
-            }
-        }
+        // foreach ($aryOrder as $key => $order) {
+        //     $item = $order['item'];
+        //     foreach ($item as $index => $prod) {
+        //         $aryOrder[$key]['info-product'][] = get_product_by_prod_id_and_color($prod['product_id'], $prod['color_id']);
+        //         $aryOrder[$key]['info-product'][$index]['qty'] = $prod['qty'];
+        //     }
+        // }
 
 
         return view('admin.order.list', compact('aryOrder'));
@@ -379,8 +380,9 @@ class AdminController extends Controller
     {
         $aryProd = [];
         $order = Orders::find($id);
-        foreach ($order->item as $action => $prod) {
+        foreach ($order->item as $key => $prod) {
             $aryProd[] = get_product_by_prod_id_and_color($prod['product_id'], $prod['color_id']);
+            $aryProd[$key]['qty'] = $prod['qty'];
         }
 
         return view('admin.order.detail', compact('aryProd', 'order'));

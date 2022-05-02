@@ -33,7 +33,6 @@
                     <thead>
                     <tr>
                         <th style="width: 10px">ID</th>
-                        <th>Sản phẩm</th>
                         <th>Thông tin người đặt hàng</th>
                         <th>Note</th>
                         <th>Tổng tiền</th>
@@ -65,20 +64,6 @@
                     @endphp
                         <tr>
                             <td>{{$value['id']}}</td>
-                            <td>
-                                @foreach ($value['info-product'] as $prod)
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <img src="{{ asset($prod['image_path']) }}" alt="">
-                                    </div>
-                                    <div class="col-md-7">
-                                        <h5>{{ $prod['product']['name'] }}</h5>
-                                        <p>Màu: {{ $prod['color']['color'] }}</p>
-                                        <p>SL: {{ $prod['qty'] }}</p>
-                                    </div>
-                                </div>
-                                @endforeach
-                            </td>
                             <td>
                                 <h6><b>Name: </b>{{ $value['user']['name'] }}</h6>
                                 <h6><b>Email: </b>{{ $value['user']['email'] }}</h6>

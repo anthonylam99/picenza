@@ -142,6 +142,14 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group row" id="productFeature" style="margin-left: 0">
+                            <div class="custom-control custom-checkbox col-4">
+                                <input name="is_bestseller" class="custom-control-input" type="checkbox" value="1"
+                                       id="status" {{ $product['is_bestseller'] == 1 ? 'checked' : ''}}
+                                >
+                                <label for="status" class="custom-control-label">Sản phẩm bán chạy</label>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="pricePercent">Mô tả</label>
                             <textarea class="w-100" name="description" id=""

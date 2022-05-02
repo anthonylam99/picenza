@@ -104,8 +104,11 @@ class ProductController extends Controller
             array_push($ids, $value->id);
         }
         $favourite = SubCategory::where('favourite', 1)->whereIn('id_category_parent', $ids)->where('status' , 1)->get();
+        $subNormalCate = SubCategory::where('favourite', '!=', 1)->whereIn('id_category_parent', $ids)->where('status' , 1)->get();
 
-        return view('product.index', compact('category', 'favourite'));
+        $aryBestSeller = Product::with('productImage.color')->where('is_bestseller', 1)->where('product_line', $category->id)->get();
+
+        return view('product.index', compact('category', 'favourite', 'subNormalCate', 'aryBestSeller'));
     }
 
     /**
