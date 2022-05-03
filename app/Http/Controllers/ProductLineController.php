@@ -34,18 +34,23 @@ class ProductLineController extends Controller
     public function addLine(Request $request)
     {
         $company = ProductCompany::all();
-        return view('admin.line.add', compact('company'));
+        $post = Post::all();
+        return view('admin.line.add', compact('company', 'post'));
     }
 
     public function addLinePost(Request $request)
     {
-        dd($request->all());
         $options = new Options;
         $lineName = $request->get('lineName');
 
         $avatar = $request->get('img_avatar_path');
         $status = $request->get('status') === 'on' ? 1 : 0;
         $description = $request->get('description');
+
+        $posts = '';
+        if($request->has('posts')){
+            $posts = implode(',', $request->get('posts'));
+        }
 
         if(!$request->has('id')){
             $slug = $options->create_slug($lineName);
@@ -57,7 +62,8 @@ class ProductLineController extends Controller
                 'slug' => $slug,
                 'seo_url' => $seo_url,
                 'url' => collect($request->server)['HTTP_ORIGIN'].'/san-pham/'.$slug,
-                'description' => $description
+                'description' => $description,
+                'posts' => $posts
             ]);
             if($insert){
                 return redirect()->route('admin.line.edit', ['id' => $insert->id]);
@@ -72,7 +78,8 @@ class ProductLineController extends Controller
                 'slug' => $slug,
                 'seo_url' => $seo_url,
                 'url' => collect($request->server)['HTTP_ORIGIN'].'/san-pham/'.$slug,
-                'description' => $description
+                'description' => $description,
+                'posts' => $posts
             ]);
             if($update){
                 return redirect()->route('admin.line.edit', ['id' => $request->get('id')]);
@@ -85,8 +92,10 @@ class ProductLineController extends Controller
         $line = ProductLine::findOrFail($id);
         $company = ProductCompany::all();
         $post = Post::all();
+        $arrPostPage = explode(',',$line->posts);
 
-        return view('admin.line.edit', compact('line', 'company', 'post'));
+
+        return view('admin.line.edit', compact('line', 'company', 'post', 'arrPostPage'));
     }
 
     public function delLine(Request $request, $id = null)
