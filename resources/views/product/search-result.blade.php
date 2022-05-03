@@ -1,6 +1,6 @@
 @extends('main')
 
-@section('title', 'Danh mục sản phẩm')
+@section('title', 'Tìm kiếm sản phẩm')
 @section('font-awsomes' ,'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
 
 @section('breadcrumb')
@@ -8,7 +8,7 @@
         <div class="breadcrumb-s-content container middle">
             <div class="breadcrumb-content middle">
                 <img width="10" height="10" src="{{ asset('images/arrow-right.png') }}" alt="tag">
-                <a href="">Danh mục {{ $categoryName }}</a>
+                <a href="">Tìm kiếm</a>
             </div>
             <div class="breadcrumb-path">
                 <ul class="middle">
@@ -16,7 +16,7 @@
                         <a href="">Trang chủ</a> /&nbsp;
                     </li>
                     <li>
-                        <a href="">Danh mục {{$categoryName}}</a>
+                        <a href="">Kết quả tìm kiếm cho: {{ $keyWord }}</a>
                     </li>
                 </ul>
             </div>
@@ -56,8 +56,8 @@
                             <div class="title">
                                 <div class="title-1">
                                     <div class="sub-title">
-                                        <h5 style="text-transform: uppercase">DANH MỤC {{$categoryName}}</h5>
-                                        <p>{{count($product)}} sản phẩm</p>
+                                        <h5 style="text-transform: uppercase">Kết quả tìm kiếm cho: {{ $keyWord }}</h5>
+                                        <p>{{count($aryProduct)}} sản phẩm</p>
                                     </div>
                                     <div class="order-title">
                                         <select name="orderBy" id="orderBy" onChange="this.form.submit()">
@@ -92,7 +92,7 @@
                                 </div>
                             </div>
                             <div class="main-content row">
-                                @foreach($product as $value)
+                                @foreach($aryProduct as $value)
                                     <div class="product-main-item col-6 col-sm-3 col-lg-4 col-xl-4">
                                         <div class="product-item">
                                             <a class="product-box"
@@ -105,8 +105,8 @@
                                                         <h5>{{ $value->name }}</h5>
                                                     </div>
                                                     <div class="price">
-                                                        <div class="sale">{{ number_format($value->sale_price) }}đ</div>
-                                                        <div class="unsale">{{number_format($value->price)}}đ</div>
+                                                        <div class="sale">@money($value->sale_price)</div>
+                                                        <div class="unsale">@money($value->price)</div>
                                                     </div>
                                                 </div>
                                             </a>

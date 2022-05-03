@@ -7,8 +7,10 @@ use App\Models\Orders;
 use App\Models\Product;
 use App\Models\ProductFeature;
 use App\Models\ProductImage;
-use App\Models\ProductLine;
 use App\Models\SubCategory;
+use App\Models\ProductCompany;
+use App\Models\ProductLine;
+use App\Models\ProductPrice;
 use Illuminate\Http\Request;
 use Cart;
 use Session;
@@ -247,5 +249,23 @@ class ProductController extends Controller
         Session::flash('order-success', 'Đặt hàng thành công'); 
 
         return redirect()->route('index');
+    }
+
+    /**
+     * Action search product
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function searchProduct(Request $request)
+    {
+        $keyWord =  $request->search;
+        $aryProduct = Product::where('name', 'like', '%'.$keyWord.'%')->get();
+
+        $productPrice = ProductPrice::all();
+        $featureData = ProductFeature::with('sub')->get();
+        $company = ProductCompany::all();
+
+        return view('product.search-result', compact('aryProduct', 'keyWord', 'featureData', 'productPrice', 'company'));
     }
 }

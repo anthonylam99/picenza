@@ -271,17 +271,19 @@
                             </ul>
                             <div class="header-3  menu-web ">
                                 <div class="search">
+                                    <form action="{{ route('action-search') }}" method="GET">
                                     <div class="form-search">
                                         <input type="text" placeholder="Tìm kiếm" name="search">
                                         <button type="submit">
                                             <img src="{{ asset('images/search-icon.svg') }}" alt="tag">
                                         </button>
                                     </div>
-                                    <button class="cart">
-                                        <a href="{{ route('product.cart') }}" class="text-center">
-                                            <img src="{{ asset('images/cart.png') }}" alt="tag">
-                                        </a>
-                                    </button>
+                                </form>
+                                <button class="cart">
+                                    <a href="{{ route('product.cart') }}" class="text-center">
+                                        <img src="{{ asset('images/cart.png') }}" alt="tag">
+                                    </a>
+                                </button>
                                 </div>
                             </div>
                         </div>

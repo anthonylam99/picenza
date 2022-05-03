@@ -49,6 +49,7 @@ Route::get('locations/district', [ProductController::class, 'district'])->name('
 Route::get('locations/ward', [ProductController::class, 'ward'])->name('locations.ward');
 Route::post('save-order', [ProductController::class, 'saveOrder'])->name('saveOrder');
 Route::post('update-quantity-cart', [ProductController::class, 'updateQtyCart'])->name('updateQtyCart');
+Route::get('tim-kiem-san-pham', [ProductController::class, 'searchProduct'])->name('action-search');
 
 Route::get('/quan-tri', [AdminController::class, 'index']);
 Route::get('/quan-tri/dang-nhap', [LoginController::class, 'showLoginForm'])->name('login');
