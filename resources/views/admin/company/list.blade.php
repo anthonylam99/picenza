@@ -21,7 +21,7 @@
                 <h2 class="card-title" style="font-size: 19px; font-weight: 700">DANH SÁCH HÃNG SẢN XUẤT</h2>
 
                 <div class="form-search float-right">
-                    <form style="margin-bottom: 0" class="form-group" action="{{route('admin.product.add')}}">
+                    <form style="margin-bottom: 0" class="form-group" action="{{route('admin.company.list')}}">
                         <input  class="form-control" type="text" name="s" value="" placeholder="Tìm kiếm sản phẩm....">
                     </form>
                 </div>
@@ -59,7 +59,7 @@
                 </table>
             </div>
 
-
+            @include('admin.partials.pagination', ['itemPaginate' => $company])
         </div>
     </div>
 @endsection

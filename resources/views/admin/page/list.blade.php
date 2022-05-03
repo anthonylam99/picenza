@@ -21,7 +21,7 @@
                 <h2 class="card-title" style="font-size: 19px; font-weight: 700">DANH SÁCH</h2>
 
                 <div class="form-search float-right">
-                    <form style="margin-bottom: 0" class="form-group" action="{{route('admin.price.add')}}">
+                    <form style="margin-bottom: 0" class="form-group" action="{{route('admin.page.list')}}">
                         <input class="form-control" type="text" name="s" value="" placeholder="Tìm kiếm ....">
                     </form>
                 </div>
@@ -67,7 +67,7 @@
                 </table>
             </div>
 
-
+            @include('admin.partials.pagination', ['itemPaginate' => $page])
         </div>
     </div>
 @endsection

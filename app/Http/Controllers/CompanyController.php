@@ -12,8 +12,12 @@ class CompanyController extends Controller
 {
     public function listCompany(Request $request)
     {
-
-        $company = ProductCompany::all();
+        if ($request->has('s')) {
+            $query = $request->get('s');
+            $company = ProductCompany::where('name', 'like', '%' . $query . '%')->paginate(10);
+        } else if (!empty($request->get('s')) || !$request->has('s')) {
+            $company = ProductCompany::paginate(10);
+        }
 
         return view('admin.company.list', compact('company'));
     }

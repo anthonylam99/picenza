@@ -9,7 +9,14 @@ class TagController extends Controller
 {
     public function listTag(Request $request)
     {
-        $tag = Tag::all();
+        $tag = Tag::paginate(10);
+
+        if ($request->has('s')) {
+            $query = $request->get('s');
+            $tag = Tag::where('name', 'like', '%' . $query . '%')->paginate(10);
+        } else if (!empty($request->get('s')) || !$request->has('s')) {
+            $tag = Tag::paginate(10);
+        }
 
         return view('admin.tag.list', compact('tag'));
     }

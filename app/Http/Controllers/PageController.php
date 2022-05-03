@@ -15,7 +15,12 @@ class PageController extends Controller
 {
     public function list(Request $request)
     {
-        $page = Page::all();
+        if ($request->has('s')) {
+            $query = $request->get('s');
+            $page = Page::where('name', 'like', '%' . $query . '%')->paginate(10);
+        } else if (!empty($request->get('s')) || !$request->has('s')) {
+            $page = Page::paginate(10);
+        }
         return view('admin.page.list', compact('page'));
     }
 

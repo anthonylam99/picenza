@@ -21,8 +21,8 @@
                 <h2 class="card-title" style="font-size: 19px; font-weight: 700">DANH SÁCH TAG</h2>
 
                 <div class="form-search float-right">
-                    <form style="margin-bottom: 0" class="form-group" action="{{route('admin.tag.add')}}">
-{{--                        <input  class="form-control" type="text" name="s" value="" placeholder="Tìm kiếm sản phẩm....">--}}
+                    <form style="margin-bottom: 0" class="form-group" action="{{route('admin.tag.list')}}">
+                       <input  class="form-control" type="text" name="s" value="" placeholder="Tìm kiếm sản phẩm....">
                     </form>
                 </div>
             </div>
@@ -70,6 +70,8 @@
                     </tbody>
                 </table>
             </div>
+
+            @include('admin.partials.pagination', ['itemPaginate' => $tag])
         </div>
     </div>
 @endsection

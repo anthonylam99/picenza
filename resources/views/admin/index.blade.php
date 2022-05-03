@@ -372,6 +372,24 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item">
+                        <a href="./khach-hang/danh-sach" class="nav-link">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Liên hệ
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{route('admin.contact.list')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Liên hệ</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    
 
                 </ul>
             </nav>

@@ -16,25 +16,16 @@
             <div class="card-header">
                 <h2 class="card-title" style="font-size: 19px; font-weight: 700">Danh sách thuộc tính</h2>
 
-                <div class="form-search float-right">
-                    <form style="margin-bottom: 0" class="form-group" action="{{route('admin.type.add.post')}}">
-{{--                        <input  class="form-control" type="text" name="s" value="" placeholder="Tìm kiếm sản phẩm....">--}}
+                <div class="form-search float-right" style="display:flex">
+                    <form style="margin-bottom: 0; margin-right: 10px" class="form-group" action="{{route('admin.product.feature.list')}}">
+                        <input  class="form-control" type="text" name="s" value="" placeholder="Tìm kiếm sản phẩm....">
                     </form>
-                </div>
-            </div>
-            <div class="card-header p-0 align-middle">
-                <h2 class="card-title" style="font-size: 19px; font-weight: 700"></h2>
-
-                <div class="form-search float-right" style="padding-top: 10px">
-                    <form style="margin-bottom: 0" class="form-group" action="{{route('admin.line.add')}}">
-                        {{--                        <input  class="form-control" type="text" name="s" value="" placeholder="Tìm kiếm sản phẩm....">--}}
-                        <button style="margin-bottom: 10px" type="button" class="btn btn-success">
-                            <a style="color: #FFFFFF;" href="{{route('admin.product.feature.add.post')}}">
-                                <i class="fa fa-plus" aria-hidden="true"></i>
-                                Thêm mới
-                            </a>
-                        </button>
-                    </form>
+                    <button style="margin-bottom: 10px; margin-right: 10px" type="button" class="btn btn-success">
+                        <a style="color: #FFFFFF;" href="{{route('admin.product.feature.add.post')}}">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                            Thêm mới
+                        </a>
+                    </button>
                 </div>
             </div>
             <!-- /.card-header -->
@@ -75,6 +66,7 @@
                 </table>
             </div>
 
+            @include('admin.partials.pagination', ['itemPaginate' => $feature])
 
         </div>
     </div>

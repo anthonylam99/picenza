@@ -44,6 +44,7 @@ if (!function_exists('action_create_user')) {
             'gender'    => $dataUser['gender'] ?? 0,
             'address'   => $dataUser['address'] ?? '',
             'phone'     => $dataUser['phone'] ?? '',
+            'age'       => $dataUser['age'] ?? '',
         ]);
     }
 }
@@ -130,5 +131,32 @@ if (!function_exists('get_name_district')) {
     function get_name_district($id)
     {
         return Districts::find($id)->name;
+    }
+}
+
+if (!function_exists('count_comment_by_user_id')) {
+    /**
+     * Count all comment of specific user
+     *
+     * @param array $dataUser
+     * @return void
+     */
+    function count_comment_by_user_id($user_id, $product_id = null)
+    {
+        $countComment = 0;
+
+        $count =  Comments::select([\DB::raw('COUNT(*) as count_comment')])->where('user_id', $user_id);
+
+        if ($product_id != null) {
+            $count = $count->where('product_id', $product_id);
+        }
+
+        $count = $count->groupBy('user_id')->first();
+
+        if ($count) {
+            $countComment = $count->count_comment;
+        }
+
+        return $countComment;
     }
 }

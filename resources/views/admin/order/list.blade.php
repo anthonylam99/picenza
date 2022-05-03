@@ -22,7 +22,7 @@
                 <h2 class="card-title" style="font-size: 20px; font-weight: 500">DANH SÁCH SẢN PHẨM</h2>
 
                 <div class="form-search float-right">
-                    <form style="margin-bottom: 0" class="form-group" action="{{route('admin.product.list')}}">
+                    <form style="margin-bottom: 0" class="form-group" action="{{route('admin.order.list')}}">
                         <input  class="form-control" type="text" name="s" value="" placeholder="Tìm kiếm sản phẩm....">
                     </form>
                 </div>
@@ -44,7 +44,7 @@
                     <tbody>
                     @foreach($aryOrder as $value)
                     @php
-                        switch ($value['payment_status']) {
+                        switch ($value->payment_status) {
                             case 0:
                                 $label = 'Chưa thanh toán';
                                 break;
@@ -63,20 +63,20 @@
                         }
                     @endphp
                         <tr>
-                            <td>{{$value['id']}}</td>
+                            <td>{{$value->id}}</td>
                             <td>
-                                <h6><b>Name: </b>{{ $value['user']['name'] }}</h6>
-                                <h6><b>Email: </b>{{ $value['user']['email'] }}</h6>
-                                <h6><b>Phone: </b>{{ $value['user']['phone'] }}</h6>
-                                <h6><b>Địa chỉ: </b>{{ $value['address'] . ', ' . get_name_district($value['district_id']) . ', ' . get_name_province($value['province_id'])  }}</h6>
+                                <h6><b>Name: </b>{{ $value->user->name }}</h6>
+                                <h6><b>Email: </b>{{ $value->user->email }}</h6>
+                                <h6><b>Phone: </b>{{ $value->user->phone }}</h6>
+                                <h6><b>Địa chỉ: </b>{{ $value->address . ', ' . get_name_district($value->district_id) . ', ' . get_name_province($value->province_id)  }}</h6>
                             </td>
-                            <td>{{ $value['note'] }}</td>
-                            <td>{{ $value['total_price'] }}₫</td>
+                            <td>{{ $value->note }}</td>
+                            <td>{{ $value->total_price }}₫</td>
                             <td>{{ $label }}</td>
-                            <td>{{ date('d-m-Y', strtotime($value['created_at'])) }}</td>
+                            <td>{{ date('d-m-Y', strtotime($value->created_at)) }}</td>
                             <td>
                                 <button class="btn btn-info">
-                                    <a style="color: #FFFFFF" href="{{ route('admin.order.edit', $value['id']) }}">
+                                    <a style="color: #FFFFFF" href="{{ route('admin.order.edit', $value->id) }}">
                                         <i class="far fa-edit"></i>Chi tiết đơn hàng
                                     </a>
                                 </button>
@@ -89,6 +89,7 @@
                 </table>
             </div>
 
+            @include('admin.partials.pagination', ['itemPaginate' => $aryOrder])
         </div>
     </div>
 @endsection
