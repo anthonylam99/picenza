@@ -41,7 +41,7 @@ class CategoryController extends Controller
         $companySearch = $request->get('company');
         $orderBy = $request->get('orderBy');
 
-        $productQ = Product::where('product_line', $category->id);
+        $productQ = Product::where('product_line', $category->id)->where('status', 1)->where('show_home', 1);
         $product = [];
 
         if(!empty($price)){

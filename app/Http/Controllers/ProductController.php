@@ -260,7 +260,7 @@ class ProductController extends Controller
     public function searchProduct(Request $request)
     {
         $keyWord =  $request->search;
-        $aryProduct = Product::where('name', 'like', '%'.$keyWord.'%')->get();
+        $aryProduct = Product::where('name', 'like', '%'.$keyWord.'%')->where('status', 1)->where('show_home', 1)->get();
 
         $productPrice = ProductPrice::all();
         $featureData = ProductFeature::with('sub')->get();
