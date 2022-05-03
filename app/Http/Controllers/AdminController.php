@@ -261,7 +261,7 @@ class AdminController extends Controller
         $company = ProductCompany::all();
         $productShape = ProductShape::all();
         $productTechnology = ProductTechnology::all();
-        $productLine = ProductLine::all();
+        $productLine = ProductLine::where('status', 1)->get();
         $productReliability = ProductReliability::all();
         $featureData = ProductLine::with(['feature', 'feature.sub'])->where('id', $product->product_line)->first();
         $feature = $featureData->feature;
