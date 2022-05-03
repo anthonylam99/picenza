@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    @yield('seo')
     <title>@yield('title')</title>
     <link href="{{ asset('css/boostrap.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
@@ -147,7 +148,11 @@
         </div>
         <div class="bd-example container">
             <?php
-            $headerMenu = \Harimayco\Menu\Facades\Menu::getByName('Header');
+                $location = \App\Models\MenuLocation::where('id', 1)->first('location');
+
+                if(!empty($location->location)){
+                    $headerMenu = \Harimayco\Menu\Facades\Menu::get($location->location);
+                }
             ?>
             <div class="">
                 <nav class="navbar navbar-expand-lg ">
@@ -162,111 +167,113 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                @foreach($headerMenu as $menu)
-                                    @if($menu['child'])
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="{{$menu['link']}}"
-                                               data-bs-toggle="dropdown"
-                                               aria-expanded="true">
-                                                {{$menu['label']}}
-                                            </a>
-                                            @if( $menu['child'] )
-                                                <ul class="dropdown-menu">
-                                                    @foreach($menu['child'] as $child)
-                                                        @if($child['child'])
-                                                            <li>
-                                                                <a class="dropdown-item" href="#">
-                                                                    {{$child['label']}} &raquo;</a>
-                                                                <ul class="submenu dropdown-menu">
-                                                                    @foreach($child['child'] as $child1)
-                                                                        <li>
-                                                                            <a class="dropdown-item"
-                                                                               href="#">{{$child1['label']}}</a>
-                                                                            @if($child1['child'])
-                                                                                <ul class="submenu dropdown-menu">
-                                                                                    @foreach($child1['child'] as $child2)
-                                                                                        <li>
-                                                                                            <a class="dropdown-item"
-                                                                                               href="#">{{$child2['label']}}</a>
-                                                                                            @if($child2['child'])
-                                                                                                <ul class="submenu dropdown-menu">
-                                                                                                    @foreach($child2['child'] as $child3)
-                                                                                                        <li>
-                                                                                                            <a class="dropdown-item"
-                                                                                                               href="#">{{$child3['label']}}</a>
-                                                                                                            @if($child3['child'])
-                                                                                                                <ul class="submenu dropdown-menu">
-                                                                                                                    @foreach($child3['child'] as $child4)
-                                                                                                                        <li>
-                                                                                                                            <a class="dropdown-item"
-                                                                                                                               href="#">{{$child4['label']}}</a>
-                                                                                                                            @if($child4['child'])
-                                                                                                                                <ul class="submenu dropdown-menu">
-                                                                                                                                    @foreach($child4['child'] as $child5)
-                                                                                                                                        <li>
-                                                                                                                                            <a class="dropdown-item"
-                                                                                                                                               href="#">{{$child5['label']}}</a>
-                                                                                                                                            @if($child5['child'])
-                                                                                                                                                <ul class="submenu dropdown-menu">
-                                                                                                                                                    @foreach($child5['child'] as $child6)
-                                                                                                                                                        <li>
-                                                                                                                                                            <a class="dropdown-item"
-                                                                                                                                                               href="#">{{$child6['label']}}</a>
-                                                                                                                                                            @if($child6['child'])
-                                                                                                                                                                <ul class="submenu dropdown-menu">
-                                                                                                                                                                    @foreach($child6['child'] as $child7)
-                                                                                                                                                                        <li>
-                                                                                                                                                                            <a class="dropdown-item"
-                                                                                                                                                                               href="#">{{$child7['label']}}</a>
-                                                                                                                                                                            @if($child7['child'])
-                                                                                                                                                                                <ul class="submenu dropdown-menu">
+                                @if(!empty($headerMenu) && isset($headerMenu))
+                                    @foreach($headerMenu as $menu)
+                                        @if($menu['child'])
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="{{$menu['link']}}"
+                                                   data-bs-toggle="dropdown"
+                                                   aria-expanded="true">
+                                                    {{$menu['label']}}
+                                                </a>
+                                                @if( $menu['child'] )
+                                                    <ul class="dropdown-menu">
+                                                        @foreach($menu['child'] as $child)
+                                                            @if($child['child'])
+                                                                <li>
+                                                                    <a class="dropdown-item" href="#">
+                                                                        {{$child['label']}} &raquo;</a>
+                                                                    <ul class="submenu dropdown-menu">
+                                                                        @foreach($child['child'] as $child1)
+                                                                            <li>
+                                                                                <a class="dropdown-item"
+                                                                                   href="#">{{$child1['label']}}</a>
+                                                                                @if($child1['child'])
+                                                                                    <ul class="submenu dropdown-menu">
+                                                                                        @foreach($child1['child'] as $child2)
+                                                                                            <li>
+                                                                                                <a class="dropdown-item"
+                                                                                                   href="#">{{$child2['label']}}</a>
+                                                                                                @if($child2['child'])
+                                                                                                    <ul class="submenu dropdown-menu">
+                                                                                                        @foreach($child2['child'] as $child3)
+                                                                                                            <li>
+                                                                                                                <a class="dropdown-item"
+                                                                                                                   href="#">{{$child3['label']}}</a>
+                                                                                                                @if($child3['child'])
+                                                                                                                    <ul class="submenu dropdown-menu">
+                                                                                                                        @foreach($child3['child'] as $child4)
+                                                                                                                            <li>
+                                                                                                                                <a class="dropdown-item"
+                                                                                                                                   href="#">{{$child4['label']}}</a>
+                                                                                                                                @if($child4['child'])
+                                                                                                                                    <ul class="submenu dropdown-menu">
+                                                                                                                                        @foreach($child4['child'] as $child5)
+                                                                                                                                            <li>
+                                                                                                                                                <a class="dropdown-item"
+                                                                                                                                                   href="#">{{$child5['label']}}</a>
+                                                                                                                                                @if($child5['child'])
+                                                                                                                                                    <ul class="submenu dropdown-menu">
+                                                                                                                                                        @foreach($child5['child'] as $child6)
+                                                                                                                                                            <li>
+                                                                                                                                                                <a class="dropdown-item"
+                                                                                                                                                                   href="#">{{$child6['label']}}</a>
+                                                                                                                                                                @if($child6['child'])
+                                                                                                                                                                    <ul class="submenu dropdown-menu">
+                                                                                                                                                                        @foreach($child6['child'] as $child7)
+                                                                                                                                                                            <li>
+                                                                                                                                                                                <a class="dropdown-item"
+                                                                                                                                                                                   href="#">{{$child7['label']}}</a>
+                                                                                                                                                                                @if($child7['child'])
+                                                                                                                                                                                    <ul class="submenu dropdown-menu">
 
-                                                                                                                                                                                </ul
-                                                                                                                                                                            @endif
-                                                                                                                                                                        </li>
-                                                                                                                                                                    @endforeach
-                                                                                                                                                                </ul
-                                                                                                                                                            @endif
-                                                                                                                                                        </li>
-                                                                                                                                                    @endforeach
-                                                                                                                                                </ul
-                                                                                                                                            @endif
-                                                                                                                                        </li>
-                                                                                                                                    @endforeach
-                                                                                                                                </ul
-                                                                                                                            @endif
-                                                                                                                        </li>
-                                                                                                                    @endforeach
-                                                                                                                </ul
-                                                                                                            @endif
-                                                                                                        </li>
-                                                                                                    @endforeach
-                                                                                                </ul
-                                                                                            @endif
-                                                                                        </li>
-                                                                                    @endforeach
-                                                                                </ul
-                                                                            @endif
-                                                                        </li>
-                                                                    @endforeach
-                                                                </ul>
-                                                            </li>
-                                                        @else
-                                                            <li><a class="dropdown-item"
-                                                                   href="#"> {{$child['label']}} </a></li>
-                                                        @endif
-                                                    @endforeach
-                                                </ul>
-                                            @endif
-                                        </li>
-                                    @else
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle"
-                                               href="{{$menu['link']}}">{{$menu['label']}} </a>
-                                        </li>
-                                    @endif
+                                                                                                                                                                                    </ul
+                                                                                                                                                                                @endif
+                                                                                                                                                                            </li>
+                                                                                                                                                                        @endforeach
+                                                                                                                                                                    </ul
+                                                                                                                                                                @endif
+                                                                                                                                                            </li>
+                                                                                                                                                        @endforeach
+                                                                                                                                                    </ul
+                                                                                                                                                @endif
+                                                                                                                                            </li>
+                                                                                                                                        @endforeach
+                                                                                                                                    </ul
+                                                                                                                                @endif
+                                                                                                                            </li>
+                                                                                                                        @endforeach
+                                                                                                                    </ul
+                                                                                                                @endif
+                                                                                                            </li>
+                                                                                                        @endforeach
+                                                                                                    </ul
+                                                                                                @endif
+                                                                                            </li>
+                                                                                        @endforeach
+                                                                                    </ul
+                                                                                @endif
+                                                                            </li>
+                                                                        @endforeach
+                                                                    </ul>
+                                                                </li>
+                                                            @else
+                                                                <li><a class="dropdown-item"
+                                                                       href="#"> {{$child['label']}} </a></li>
+                                                            @endif
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
+                                            </li>
+                                        @else
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle"
+                                                   href="{{$menu['link']}}">{{$menu['label']}} </a>
+                                            </li>
+                                        @endif
 
-                                @endforeach
+                                    @endforeach
+                                @endif
                             </ul>
                             <div class="header-3  menu-web ">
                                 <div class="search">

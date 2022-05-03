@@ -33,7 +33,10 @@
                     <tr>
                         <th>ID</th>
                         <th>TÊN</th>
-                        <th></th>
+                        <th>Thông tin</th>
+                        <th class="text-center">Xem</th>
+                        <th class="text-center">Sửa</th>
+                        <th class="text-center">Xóa</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -42,14 +45,27 @@
                                 <td>{{$value->id}}</td>
                                 <td>{{$value->name}}</td>
                                 <td>
+                                    <strong>Thêm lúc:</strong>{{$value->created_at}} <br>
+                                    <strong>Cập nhật:</strong>{{$value->updated_at}}
+                                </td>
+                                <td class="text-center">
                                     <button class="btn btn-info">
-                                        <a style="color: #FFFFFF" href="{{ route('admin.post.category.edit', ['id' => $value->id]) }}">
-                                            Chi tiết
+                                        <a style="color: #FFFFFF" href="{{ route('admin.tag.edit', ['id' => $value->id]) }}">
+                                            <i class="far fa-eye"></i>
                                         </a>
                                     </button>
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-info">
+                                        <a style="color: #FFFFFF" href="{{ route('admin.tag.edit', ['id' => $value->id]) }}">
+                                            <i class="far fa-edit"></i>
+                                        </a>
+                                    </button>
+                                </td>
+                                <td class="text-center">
                                     <button class="btn btn-danger">
-                                        <a style="color: #FFFFFF" href="{{ route('admin.post.category.del', ['id' => $value->id]) }}">
-                                            Xoá
+                                        <a style="color: #FFFFFF" href="{{ route('admin.tag.del', ['id' => $value->id]) }}">
+                                            <i class="fas fa-trash"></i>
                                         </a>
                                     </button>
                                 </td>

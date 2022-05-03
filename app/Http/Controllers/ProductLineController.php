@@ -57,7 +57,7 @@ class ProductLineController extends Controller
                 'status' => $status,
                 'slug' => $slug,
                 'seo_url' => $seo_url,
-                'url' => collect($request->server)['HTTP_ORIGIN'].'/'.$slug,
+                'url' => collect($request->server)['HTTP_ORIGIN'].'/san-pham/'.$slug,
                 'description' => $description
             ]);
             if($insert){
@@ -72,7 +72,7 @@ class ProductLineController extends Controller
                 'status' => $status,
                 'slug' => $slug,
                 'seo_url' => $seo_url,
-                'url' => collect($request->server)['HTTP_ORIGIN'].'/'.$slug,
+                'url' => collect($request->server)['HTTP_ORIGIN'].'/san-pham/'.$slug,
                 'description' => $description
             ]);
             if($update){

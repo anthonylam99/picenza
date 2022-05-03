@@ -49,6 +49,7 @@ Route::get('locations/district', [ProductController::class, 'district'])->name('
 Route::get('locations/ward', [ProductController::class, 'ward'])->name('locations.ward');
 Route::post('save-order', [ProductController::class, 'saveOrder'])->name('saveOrder');
 Route::post('update-quantity-cart', [ProductController::class, 'updateQtyCart'])->name('updateQtyCart');
+Route::get('tin-tuc', [HomeController::class, 'news'])->name('home.news.index');
 
 Route::get('/quan-tri', [AdminController::class, 'index']);
 Route::get('/quan-tri/dang-nhap', [LoginController::class, 'showLoginForm'])->name('login');
@@ -63,19 +64,8 @@ Route::group(['prefix' => 'quan-tri', 'middleware' => 'CheckAdmin'], function ()
         Route::get('product_feature_list/{id}', [AdminController::class, 'getProductFeature']);
     });
 
-<<<<<<< HEAD
-Route::group(['prefix' => 'quan-tri'], function () {
-    Route::get('update-page-image', [AdminController::class, 'updatePageImage']);
 
-    Route::get('/', [AdminController::class, 'index']);
-    Route::get('product_line_list/{id}', [AdminController::class, 'getProductLine']);
-    Route::get('product_type_list/{id}/{id2}', [AdminController::class, 'getProductType']);
-    Route::get('product_feature_list/{id}', [AdminController::class, 'getProductFeature']);
-
-    Route::group(['prefix' => 'san-pham'], function () {
-=======
     Route::group(['prefix' => 'san-pham', 'middleware' => 'auth'], function () {
->>>>>>> f7b1741e2d8c7e7c700e8a36d20ee4f996b0c6ac
         Route::get('danh-sach', [AdminController::class, 'productList'])->name('admin.product.list');
         Route::get('update-status-prod', [AdminController::class, 'updateStatusProd'])->name('updateStatus-prod');
         Route::get('loai-san-pham', [AdminController::class, 'productType'])->name('admin.product.type');
@@ -174,7 +164,7 @@ Route::group(['prefix' => 'quan-tri'], function () {
 
 
 });
-Route::get('menu', [AdminController::class, 'menu'])->name('admin.menu.add');
+Route::get('menu', [AdminController::class, 'menu'])->name('admin.menu.add')->middleware(['CheckAdmin' , 'auth']);
 Route::post('menu', [AdminController::class, 'menu']);
 Route::get('danh-sach-menu', [AdminController::class, 'menuList'])->name('admin.menu.list');
 

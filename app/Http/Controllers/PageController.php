@@ -78,7 +78,7 @@ class PageController extends Controller
                     $arr['tag'] = $tag;
                     $arr['title'] = $value->title;
                     $arr['content'] = substr($value->content, 0, 300);
-                    $arr['url'] = $value->url;
+                    $arr['url'] = config('app.url').'/bai-viet/'.$value->seo_url;
                     $arr['image_path'] = $value->avatar;
                     $arr['post_id'] = $value->id;
 
@@ -111,7 +111,6 @@ class PageController extends Controller
     public function insertImage($request, $name, $tag)
     {
         $dataPos = $request->all();
-
         $arrImg = [];
         foreach ($dataPos as $key => $value) {
             if (strpos($key, $name) !== false) {
@@ -175,7 +174,7 @@ class PageController extends Controller
 
     public function showPage(Request $request, $slug = null)
     {
-        $page = Page::where('slug', $slug)->firstOrFail();
+        $page = Page::where('seo_url', $slug)->firstOrFail();
 
         return view('admin.page.show', compact('page'));
     }

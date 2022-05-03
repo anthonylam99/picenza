@@ -31,6 +31,11 @@ class Product extends Model
         'show_home',
         'status',
         'is_bestseller',
+        'seo_title',
+        'seo_description',
+        'seo_keyword',
+        'seo_robots',
+        'seo_url'
     ];
 
 

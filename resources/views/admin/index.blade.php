@@ -353,17 +353,11 @@
                         <a href="./khach-hang/danh-sach" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
-                                KHÁCH HÀNG
+                                ĐƠN HÀNG
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="./khach-hang/danh-sach" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>DANH SÁCH</p>
-                                </a>
-                            </li>
                             <li class="nav-item">
                                 <a href="{{route('admin.order.list')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>

@@ -47,6 +47,7 @@
                         <th>Hiển thị trang chủ</th>
                         <th>Trạng thái</th>
                         <th>Thông tin</th>
+                        <th class="text-center">Xem</th>
                         <th class="text-center">Sửa</th>
                         <th class="text-center">Xóa</th>
                     </tr>
@@ -71,6 +72,14 @@
                                 <td>
                                     <strong>Thêm lúc:</strong>{{$value->created_at}} <br>
                                     <strong>Cập nhật:</strong>{{$value->updated_at}}
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-info ">
+                                        <a target="_blank" style="color: #FFFFFF" href="{{ config('app.url').'/san-pham/'.$value->seo_url }}">
+                                            <i class="far fa-eye"></i>
+
+                                        </a>
+                                    </button>
                                 </td>
                                 <td class="text-center">
                                     <button class="btn btn-info ">

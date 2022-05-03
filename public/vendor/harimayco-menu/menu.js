@@ -147,6 +147,7 @@ function actualizarmenu() {
     },
     success: function(response) {
       console.log('aqu llega');
+      $('#addCustomMenu').submit()
     },
     complete: function() {
       $('#spincustomu2').hide();

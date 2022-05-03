@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function showPost(Request $request, $slug = ''){
-        $post = Post::where('slug', $slug)->firstOrFail();
+        $post = Post::where('seo_url', $slug)->firstOrFail();
 
         $relatePost = Post::where('id', '!=', $post->id)->where(function ($q) use ($post){
             $q->where('category', 'LIKE', '%'.$post->category.'%');

@@ -4,6 +4,6 @@
 
 @section('content')
     <div class="container">
-        <?php echo("$page->content"); ?>
+        {!!html_entity_decode($page->content)!!}
     </div>
 @endsection

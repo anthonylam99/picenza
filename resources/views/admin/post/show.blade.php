@@ -1,6 +1,22 @@
 @extends('main')
 
 @section('title', $post->title)
+@section('seo')
+    @if(!empty($post->seo_title))
+        <meta name="title" content="{{$post->seo_title}}">
+    @else
+        <meta name="title" content="{{$post->name}}">
+    @endif
+    @if(!empty($post->seo_description))
+        <meta name="description" content="{{$post->seo_description}}">
+    @endif
+    @if(!empty($post->seo_keyword))
+        <meta name="keywords" content="{{$post->seo_keyword}}">
+    @endif
+    @if(!empty($post->seo_robots))
+        <meta name="robots" content="{{$post->seo_robots}}">
+    @endif
+@endsection
 
 @section('content')
     <div class="gd_breadcrumb">
