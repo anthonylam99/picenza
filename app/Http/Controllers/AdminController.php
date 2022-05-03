@@ -494,4 +494,17 @@ class AdminController extends Controller
 
         return view('admin.contact.list', compact('aryContact'));
     }
+
+    /**
+     * Get detail contact
+     *
+     * @param [type] $id
+     * @return void
+     */
+    public function getDetailContact($id)
+    {
+        $contact = Contact::find($id);
+
+        return view('admin.contact.detail', compact('contact'));
+    }
 }

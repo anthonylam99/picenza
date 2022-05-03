@@ -101,7 +101,7 @@ Route::group(['prefix' => 'quan-tri', 'middleware' => 'CheckAdmin'], function ()
         Route::get('chi-tiet-don-hang/{id}', [AdminController::class, 'orderDetail'])->name('admin.order.edit');
         Route::get('cap-nhat-don-hang', [AdminController::class, 'updateOrder'])->name('admin.order.update');
         Route::get('danh-sach-lien-he', [AdminController::class, 'contactList'])->name('admin.contact.list');
-        Route::get('chi-tiet-lien-he/{id}', [AdminController::class, 'contactDetail'])->name('admin.contact.detail');
+        Route::get('chi-tiet-lien-he/{id}', [AdminController::class, 'getDetailContact'])->name('admin.contact.detail');
     });
 
     Route::group(['prefix' => 'hang-san-xuat', 'middleware' => 'auth'], function(){
