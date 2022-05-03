@@ -105,8 +105,8 @@ class PostController extends Controller
                 return redirect()->route('admin.post.edit', ['id' => $id]);
             }
         }else{
-            $tag = Tag::all();
-            $category = PostCategory::all();
+            $tag = Tag::where('status', 1)->get();
+            $category = PostCategory::where('status', 1)->get();
 
             return view('admin.post.add', compact('tag', 'category'));
         }
@@ -116,8 +116,8 @@ class PostController extends Controller
     public function editPost(Request $request, $id = null)
     {
         $post = Post::findOrFail($id);
-        $listTag = Tag::all();
-        $listCategory = PostCategory::all();
+        $listTag = Tag::where('status', 1)->get();
+        $listCategory = PostCategory::where('status', 1)->get();
 
         $tag = [];
         if($post){

@@ -33,6 +33,7 @@
                     <tr>
                         <th>ID</th>
                         <th>TÊN</th>
+                        <th>TRẠNG THÁI</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -41,6 +42,12 @@
                             <tr>
                                 <td>{{$value->id}}</td>
                                 <td>{{$value->name}}</td>
+                                <td>
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="status{{$value->id}}" {{ $value->status == 1 ? 'checked' : '' }} name="status" onclick="changeStatusCategory({{$value->id}})">
+                                        <label name="status{{$value->id}}" class="custom-control-label status{{$value->id}}" for="status{{$value->id}}">{{ $value->status ? 'Bật' : 'Tắt' }}</label>
+                                    </div>
+                                </td>
                                 <td>
                                     <button class="btn btn-info">
                                         <a style="color: #FFFFFF" href="{{ route('admin.post.category.edit', ['id' => $value->id]) }}">
