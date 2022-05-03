@@ -150,3 +150,14 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+<script>
+    @if (session()->has('order-success'))
+    toastr.success('Thành công', 'Đặt hàng thành công')
+    @endif
+
+    @if (session()->has('contact-success'))
+    toastr.success('Cảm ơn bạn đã phản hồi với chúng tôi', 'Thành công')
+    @endif
+</script>
+@endpush

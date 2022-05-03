@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="@yield('font-awsomes')">
     <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/toastr.min.css')}}">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <script src="{{ asset('js/boostrap.js') }}"></script>
     @yield('style')
@@ -137,7 +138,7 @@
                     <a href="">Địa chỉ mua hàng</a> |
                     <img class="align-middle" width="15" height="15"
                          src="{{ asset('images/email.svg') }}" alt="tag">
-                    <a href="">Liên hệ</a>
+                    <a href="{{ route('contact') }}">Liên hệ</a>
                 </div>
             </div>
         </div>
@@ -277,17 +278,19 @@
                             </ul>
                             <div class="header-3  menu-web ">
                                 <div class="search">
+                                    <form action="{{ route('action-search') }}" method="GET">
                                     <div class="form-search">
                                         <input type="text" placeholder="Tìm kiếm" name="search">
                                         <button type="submit">
                                             <img src="{{ asset('images/search-icon.svg') }}" alt="tag">
                                         </button>
                                     </div>
-                                    <button class="cart">
-                                        <a href="{{ route('product.cart') }}" class="text-center">
-                                            <img src="{{ asset('images/cart.png') }}" alt="tag">
-                                        </a>
-                                    </button>
+                                </form>
+                                <button class="cart">
+                                    <a href="{{ route('product.cart') }}" class="text-center">
+                                        <img src="{{ asset('images/cart.png') }}" alt="tag">
+                                    </a>
+                                </button>
                                 </div>
                             </div>
                         </div>

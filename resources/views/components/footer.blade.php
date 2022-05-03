@@ -27,7 +27,6 @@
                         </div>
                     @endforeach
                 @endif
-
             </div>
         </div>
     </div>
@@ -37,6 +36,7 @@
 </footer>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{{asset('js/main.js')}}"></script>
+<script src="{{asset('js/toastr.min.js')}}"></script>
 @yield('scripts')
 @stack('scripts')
 </html>

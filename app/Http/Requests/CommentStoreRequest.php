@@ -36,6 +36,7 @@ class CommentStoreRequest extends FormRequest
             'count_worth'   => 'required',
             'count_quality' => 'required',
             'title'         => 'required',
+            'age'           => 'nullable',
         ];
     }
 

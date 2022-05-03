@@ -8,7 +8,12 @@ use Illuminate\Http\Request;
 class PriceController extends Controller
 {
     public function listPrice(Request $request){
-        $price = ProductPrice::paginate(10);
+        if ($request->has('s')) {
+            $query = $request->get('s');
+            $price = ProductPrice::where('name', 'like', '%' . $query . '%')->paginate(10);
+        } else if (!empty($request->get('s')) || !$request->has('s')) {
+            $price = ProductPrice::paginate(10);
+        }
 
         return view('admin.price.list', compact('price'));
     }

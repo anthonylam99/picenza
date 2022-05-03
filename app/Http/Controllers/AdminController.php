@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Entity\Options;
 use App\Models\MenuLocation;
+use App\Models\Contact;
 use App\Models\Orders;
 use App\Models\Post;
 use App\Models\Product;
@@ -389,7 +390,7 @@ class AdminController extends Controller
     public function menuList(Request $request)
     {
 
-        $menu = DB::table('admin_menus')->get();
+        $menu = DB::table('admin_menus')->paginate(10);
 
         return view('admin.menu.list', compact('menu'));
     }
@@ -415,18 +416,24 @@ class AdminController extends Controller
      *
      * @return void
      */
-    public function orderList ()
+    public function orderList (Request $request)
     {
-        $aryOrder = Orders::with('user')->latest()->get()->toArray();
-
-        // foreach ($aryOrder as $key => $order) {
-        //     $item = $order['item'];
-        //     foreach ($item as $index => $prod) {
-        //         $aryOrder[$key]['info-product'][] = get_product_by_prod_id_and_color($prod['product_id'], $prod['color_id']);
-        //         $aryOrder[$key]['info-product'][$index]['qty'] = $prod['qty'];
-        //     }
-        // }
-
+        if ($request->has('s')) {
+            $query = $request->get('s');
+            $aryOrder = Orders::with('user')
+            ->where('address', 'like', '%' . $query . '%')
+            ->orWhere('note', 'like', '%' . $query . '%')
+            ->whereHas(
+                'user', function ($q) use ($query) {
+                $q->where('email', 'like', '%' . $query . '%');
+            })
+            ->orWhereHas('user', function ($q) use ($query) {
+                $q->where('name', 'like', '%' . $query . '%');
+            })
+            ->paginate(10);
+        } else if (!empty($request->get('s')) || !$request->has('s')) {
+            $aryOrder = Orders::with('user')->paginate(10);
+        }
 
         return view('admin.order.list', compact('aryOrder'));
     }
@@ -464,5 +471,27 @@ class AdminController extends Controller
         ]);
 
         return response()->json(['message' => $message]);
+    }
+
+    /**
+     * Get list contact admin
+     *
+     * @return void
+     */
+    public function contactList(Request $request)
+    {
+        if ($request->has('s')) {
+            $query = $request->get('s');
+            $aryContact = Contact::where('name', 'like', '%' . $query . '%')
+            ->orWhere('email', 'like', '%' . $query . '%')
+            ->orWhere('phone', 'like', '%' . $query . '%')
+            ->orWhere('feedback', 'like', '%' . $query . '%')
+            ->orWhere('career', 'like', '%' . $query . '%')
+            ->paginate(10);
+        } else if (!empty($request->get('s')) || !$request->has('s')) {
+            $aryContact = Contact::paginate(10);
+        }
+
+        return view('admin.contact.list', compact('aryContact'));
     }
 }

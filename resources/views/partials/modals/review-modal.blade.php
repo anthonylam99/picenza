@@ -102,6 +102,11 @@
                                     </div>
                                     <small id="gender_div_alert" class="text-danger"></small>
                                 </div>
+                                <div class="col-lg-12 px-lg-1 pb-lg-1 mb-1 mb-lg-0 mb-md-0">
+                                    <input type="text" class="form-control" name="age"
+                                        placeholder="Tuổi">
+                                    <small id="age_div_alert" class="text-danger"></small>
+                                </div>
                                 <div class="col-lg-6 px-lg-1 pb-lg-1 mb-1 mb-lg-0 mb-md-0">
                                     <input type="text" class="form-control" name="phone_number"
                                         placeholder="Số điện thoại">

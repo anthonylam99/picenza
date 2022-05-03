@@ -63,7 +63,7 @@
                 </table>
             </div>
 
-
+            @include('admin.partials.pagination', ['itemPaginate' => $menu])
         </div>
     </div>
 @endsection

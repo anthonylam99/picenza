@@ -18,6 +18,11 @@ class LoginController extends Controller
         return view('admin.login');
     }
 
+    public function redirectLogin()
+    {
+        return redirect('/quan-tri/dang-nhap');
+    }
+
     /**
      * Handle an authentication attempt.
      *

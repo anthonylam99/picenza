@@ -16,14 +16,18 @@
     </div>
     <div class="review-detail-content">
         @foreach ($comments as $comment)
+        @php
+            $countCmtUser = count_comment_by_user_id($comment->user->id);
+            $countCmtUserProd = count_comment_by_user_id($comment->user->id, $product_id);
+        @endphp
         <div class="review-item row" id="comment-id-{{ $comment->id }}">
             <div class="customer-info col-sm-3 col-12">
-                <div class="name">{{ $comment->user->name }}</div>
+                <div class="name">{{ $comment->user->name}}</div>
                 <div class="address">{{ $comment->user->address ?? '' }}</div>
-                <div class="comment">Bình luận: 1</div>
-                <div class="has-review">Đã đánh giá: 61</div>
+                <div class="comment">Bình luận: {{ $countCmtUserProd }}</div>
+                <div class="has-review">Đã đánh giá: {{ $countCmtUser }}</div>
                 <div class="gender">Giới tính: {{ $comment->user->gender == 0 ? 'Nam' : 'Nữ' }}</div>
-                <div class="age">Tuổi: 35-44</div>
+                <div class="age">Tuổi: {{ $comment->user->age }}</div>
             </div>
             <div class="review-content col-sm-6 col-12">
                 <div class="rating-star">

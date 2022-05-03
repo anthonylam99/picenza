@@ -38,7 +38,7 @@ Route::get('remove-item-to-cart', [ProductController::class, 'removeItemCart'])-
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('danh-muc/{slug}', [CategoryController::class, 'index'])->name('product.category');
 Route::get('san-pham/{slug}', [ProductController::class, 'productContent']);
-Route::get('lien-he', [ContactController::class, 'index']);
+Route::get('lien-he', [ContactController::class, 'index'])->name('contact');
 Route::get('danh-muc-hinh-anh', [AdminController::class, 'galery'])->name('admin.galery');
 Route::post('/postRatingImage', [CommentController::class, 'postRatingImage'])->name('postRatingImage');
 Route::post('/submitRatingComment', [CommentController::class, 'submitRatingComment'])->name('submitRatingComment');
@@ -50,10 +50,13 @@ Route::get('locations/ward', [ProductController::class, 'ward'])->name('location
 Route::post('save-order', [ProductController::class, 'saveOrder'])->name('saveOrder');
 Route::post('update-quantity-cart', [ProductController::class, 'updateQtyCart'])->name('updateQtyCart');
 Route::get('tin-tuc', [HomeController::class, 'news'])->name('home.news.index');
+Route::get('tim-kiem-san-pham', [ProductController::class, 'searchProduct'])->name('action-search');
+Route::post('post-contact', [ContactController::class, 'postContact'])->name('post-contact');
 
 Route::get('/quan-tri', [AdminController::class, 'index']);
 Route::get('/quan-tri/dang-nhap', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/post-login', [LoginController::class, 'authenticate'])->name('postLogin');
+Route::get('/post-login', [LoginController::class, 'redirectLogin'])->name('getLogin');
 Route::post('/post-logout', [LoginController::class, 'postLogout'])->name('postLogout');
 
 Route::group(['prefix' => 'quan-tri', 'middleware' => 'CheckAdmin'], function () {
@@ -97,6 +100,8 @@ Route::group(['prefix' => 'quan-tri', 'middleware' => 'CheckAdmin'], function ()
         Route::get('don-hang', [AdminController::class, 'orderList'])->name('admin.order.list');
         Route::get('chi-tiet-don-hang/{id}', [AdminController::class, 'orderDetail'])->name('admin.order.edit');
         Route::get('cap-nhat-don-hang', [AdminController::class, 'updateOrder'])->name('admin.order.update');
+        Route::get('danh-sach-lien-he', [AdminController::class, 'contactList'])->name('admin.contact.list');
+        Route::get('chi-tiet-lien-he/{id}', [AdminController::class, 'contactDetail'])->name('admin.contact.detail');
     });
 
     Route::group(['prefix' => 'hang-san-xuat', 'middleware' => 'auth'], function(){

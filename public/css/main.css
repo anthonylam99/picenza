@@ -1389,7 +1389,7 @@ main {
 
 .home .banner img {
     width: 100%;
-    height: auto;
+    height: 538px;
     -o-object-fit: contain;
     object-fit: contain;
 }

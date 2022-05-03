@@ -430,7 +430,7 @@
             </div>
         </div>
         @if (!empty($aryComments))
-        @include('partials.comment-product', ['comments' => $aryComments])
+        @include('partials.comment-product', ['comments' => $aryComments, 'product_id' => $detailProduct->id])
         @endif
 
         @if (!empty($productList))
@@ -473,11 +473,11 @@
                 contentType: false,
                 success: function (data) {
                     if (data.success == 1) {
-                        alert('Đánh giá của bạn sẽ được hệ thống kiểm duyệt. Xin cám ơn.')
+                        toastr.success('Thành công', 'Đánh giá của bạn sẽ được hệ thống kiểm duyệt. Xin cám ơn.')
                         $('#reviewmodal').modal('hide');
                         setTimeout(() => {
                             location.reload();
-                        }, 1500);
+                        }, 2500);
                         resetFormTestimonial()
                     }
                 },

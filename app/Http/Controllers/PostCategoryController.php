@@ -10,7 +10,12 @@ class PostCategoryController extends Controller
 {
     public function listPostCategory(Request $request)
     {
-        $tag = PostCategory::all();
+        if ($request->has('s')) {
+            $query = $request->get('s');
+            $tag = PostCategory::where('name', 'like', '%' . $query . '%')->paginate(10);
+        } else if (!empty($request->get('s')) || !$request->has('s')) {
+            $tag = PostCategory::paginate(10);
+        }
 
         return view('admin.post.category.list', compact('tag'));
     }

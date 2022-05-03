@@ -51,7 +51,12 @@ class ProductFeatureController extends Controller
     }
     public function listProductFeature(Request $request)
     {
-        $feature = ProductFeature::all();
+        if ($request->has('s')) {
+            $query = $request->get('s');
+            $feature = ProductFeature::where('name', 'like', '%' . $query . '%')->paginate(10);
+        } else if (!empty($request->get('s')) || !$request->has('s')) {
+            $feature = ProductFeature::paginate(10);
+        }
 
         return view('admin.product.feature.list', compact('feature'));
     }
