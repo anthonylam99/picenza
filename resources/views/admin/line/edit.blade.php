@@ -82,6 +82,39 @@
             </div>
         </form>
     </div>
+    <div class="col-4">
+        <div class="card card-info">
+            <div class="card-header">
+                <h3 class="card-title">
+                    Danh sách bài viết
+                </h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"
+                            title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body" style="max-height: 300px; overflow-y: scroll">
+                <div class="form-group">
+                    <form enctype="multipart/form-data" method="POST" action="{{route('admin.line.add.post')}}">
+                        <div class="body-card-imagedes" id="card-imagedes">
+                            @foreach($post as $value)
+                                <div class="custom-control custom-checkbox">
+                                    <input name="posts[]" class="custom-control-input"
+                                           type="checkbox"
+                                           id="customCheckbox{{$value->id}}" value="{{$value->id}}">
+                                    <label for="customCheckbox{{$value->id}}"
+                                           class="custom-control-label">{{$value->title}}</label>
+                                </div>
+                            @endforeach
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 

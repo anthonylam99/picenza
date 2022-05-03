@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Entity\Options;
+use App\Models\Post;
 use App\Models\ProductCompany;
 use App\Models\ProductLine;
 use App\Models\ProductType;
@@ -45,13 +46,13 @@ class ProductLineController extends Controller
 
     public function addLinePost(Request $request)
     {
+        dd($request->all());
         $options = new Options;
         $lineName = $request->get('lineName');
 
         $avatar = $request->get('img_avatar_path');
         $status = $request->get('status') === 'on' ? 1 : 0;
         $description = $request->get('description');
-
 
         if(!$request->has('id')){
             $slug = $options->create_slug($lineName);
@@ -90,8 +91,9 @@ class ProductLineController extends Controller
     {
         $line = ProductLine::findOrFail($id);
         $company = ProductCompany::all();
+        $post = Post::all();
 
-        return view('admin.line.edit', compact('line', 'company'));
+        return view('admin.line.edit', compact('line', 'company', 'post'));
     }
 
     public function delLine(Request $request, $id = null)
