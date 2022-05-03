@@ -157,6 +157,7 @@ Route::group(['prefix' => 'quan-tri', 'middleware' => 'CheckAdmin'], function ()
             Route::post('them-moi', [\App\Http\Controllers\TagController::class, 'addTagPost'])->name('admin.tag.add.post');
             Route::get('sua/{id}', [\App\Http\Controllers\TagController::class, 'editTag'])->name('admin.tag.edit');
             Route::get('xoa/{id}', [\App\Http\Controllers\TagController::class, 'delTag'])->name('admin.tag.del');
+            Route::get('update-status', [\App\Http\Controllers\TagController::class, 'updateStatus'])->name('admin.tag.updateStatus');
         });
         Route::group(['prefix' => 'chuyen-muc'], function (){
             Route::get('/', [\App\Http\Controllers\PostCategoryController::class, 'listPostCategory'])->name('admin.post.category.list');
@@ -164,6 +165,7 @@ Route::group(['prefix' => 'quan-tri', 'middleware' => 'CheckAdmin'], function ()
             Route::post('them-moi', [\App\Http\Controllers\PostCategoryController::class, 'addPostCategoryPost'])->name('admin.post.category.add.post');
             Route::get('sua/{id}', [\App\Http\Controllers\PostCategoryController::class, 'editPostCategory'])->name('admin.post.category.edit');
             Route::get('xoa/{id}', [\App\Http\Controllers\PostCategoryController::class, 'delPostCategory'])->name('admin.post.category.del');
+            Route::get('update-status', [\App\Http\Controllers\PostCategoryController::class, 'updateStatus'])->name('admin.post.category.updateStatus');
         });
     });
 

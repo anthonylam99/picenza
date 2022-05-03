@@ -57,4 +57,19 @@ class PostCategoryController extends Controller
 
         return redirect()->route('admin.post.category.list');
     }
+
+    /**
+     * Update status cate
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function updateStatus(Request $request){
+        $update = PostCategory::where('id', $request->get('id'))->update([
+            'status' => $request->status
+        ]);
+        if($update){
+            return response()->json(['message' => 'Success']);
+        }
+    }
 }

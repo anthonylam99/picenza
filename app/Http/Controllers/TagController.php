@@ -61,4 +61,19 @@ class TagController extends Controller
 
         return redirect()->route('admin.tag.list');
     }
+
+    /**
+     * Update status tag
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function updateStatus(Request $request){
+        $update = Tag::where('id', $request->get('id'))->update([
+            'status' => $request->status
+        ]);
+        if($update){
+            return response()->json(['message' => 'Success']);
+        }
+    }
 }

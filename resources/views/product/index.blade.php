@@ -52,68 +52,66 @@
         </div>
         <div class="slider-box">
             <div class="slider-box-main container">
-                <div class="row">
-                    <div class="content-slider col-12 col-sm-12 col-md-8">
+                <div class="row w-100">
+                    <div class="content-slider col-12 col-sm-12 col-md-8 col-lg-8">
                         <div class="slider-show">
-                            <div class="mySlides">
-                                <div class="numbertext">1 / 6</div>
-                                <img class="demo cursor" src="{{asset('images/banner/banner_3.png')}}" style="width:100%" onclick="currentSlide(1)" alt="The Woods1">
-                            </div>
-
-                            <div class="mySlides">
-                                <div class="numbertext">2 / 6</div>
-                                <img class="demo cursor" src="{{asset('images/banner/banner_3.png')}}" style="width:100%" onclick="currentSlide(1)" alt="The Woods2">
-                            </div>
-
-                            <div class="mySlides">
-                                <div class="numbertext">3 / 6</div>
-                                <img class="demo cursor" src="{{asset('images/banner/banner_3.png')}}" style="width:100%" onclick="currentSlide(1)" alt="The Woods3">
-                            </div>
-
-                            <div class="mySlides">
-                                <div class="numbertext">4 / 6</div>
-                                <img class="demo cursor" src="{{asset('images/banner/banner_3.png')}}" style="width:100%" onclick="currentSlide(1)" alt="The Woods4">
-                            </div>
-
-                            <div class="mySlides">
-                                <div class="numbertext">5 / 6</div>
-                                <img class="demo cursor" src="{{asset('images/banner/banner_3.png')}}" style="width:100%" onclick="currentSlide(1)" alt="The Woods5">
-                            </div>
-
-                            <div class="mySlides">
-                                <div class="numbertext">6 / 6</div>
-                                <img class="demo cursor" src="{{asset('images/banner/banner_3.png')}}" style="width:100%" onclick="currentSlide(1)" alt="The Woods6">
-                            </div>
-
+                            @for($i = 0; $i < count($product); $i++)
+                                <div class="mySlides">
+                                    <div class="numbertext">{{$i + 1}} / {{count($product)}}</div>
+                                    <img class="demo cursor" src="{{(!empty($product[$i]->avatar_path))  ? $product[$i]->avatar_path : asset('/images/no-image.jpg')  }}"
+                                         style="width:100%; height: 473px; object-fit: contain" onclick="currentSlide(1)" alt="The Woods1">
+                                </div>
+                            @endfor
                             <a class="prev" onclick="plusSlides(-1)">❮</a>
                             <a class="next" onclick="plusSlides(1)">❯</a>
                             <div class="list-dots" style="text-align:center">
-                                <a href="javascript:void(0)" class="dot" onclick="currentSlide(1)" title="slide 1"></a>
-                                <a href="javascript:void(0)" class="dot" onclick="currentSlide(2)" title="slide 2"></a>
-                                <a href="javascript:void(0)" class="dot" onclick="currentSlide(3)" title="slide 3"></a>
-                                <a href="javascript:void(0)" class="dot" onclick="currentSlide(4)" title="slide 4"></a>
-                                <a href="javascript:void(0)" class="dot" onclick="currentSlide(5)" title="slide 4"></a>
-                                <a href="javascript:void(0)" class="dot" onclick="currentSlide(6)" title="slide 4"></a>
+                                <?php $i2 = 0; ?>
+                                @foreach($product as $item)
+                                        <?php $i2++ ?>
+                                    <a href="javascript:void(0)" class="dot" onclick="currentSlide({{$i2}})" title="slide {{$i2}}"></a>
+                                @endforeach
                             </div>
                         </div>
                     </div>
-                    <div class="caption-container col-12 col-sm-12 col-md-4">
+                    <div class="caption-container col-12 col-sm-12 col-md-4 col-lg-4">
                         {{--                    <p id="caption"></p>--}}
-                        <div class="content-sl text-center">
-                            <div class="content-sl-main">
-                                <div class="title">
-                                    <h5>PICENZA</h5>
-                                </div>
-                                <div class="sub-title">
-                                    <p>Phong cách linh hoạt trong các loại tùy chọn một hoặc hai mảnh</p>
-                                </div>
-                                <div class="button-buy">
-                                    <button>
-                                        <a href="">MUA NGAY</a>
-                                    </button>
-                                </div>
-                            </div>
+
+                        <div class="content-sl text-center" id="content-slide-show">
+                            <?php $i = 0; ?>
+                            @foreach($product as $item)
+                                <?php $i++ ?>
+                                @if($i == 1)
+                                    <div class="content-sl-main" id="content-sl-main" style="display:block;">
+                                        <div class="title">
+                                            <h5>{{$item->name}}</h5>
+                                        </div>
+                                        <div class="sub-title">
+                                            <p>{{$item->description}}</p>
+                                        </div>
+                                        <div class="button-buy">
+                                            <button>
+                                                <a href="{{config('app.url').'/chi-tiet-san-pham/'.$item->id}}">MUA NGAY</a>
+                                            </button>
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="content-sl-main" id="content-sl-main" style="display:none;">
+                                        <div class="title">
+                                            <h5>{{$item->name}}</h5>
+                                        </div>
+                                        <div class="sub-title">
+                                            <p>{{$item->description}}</p>
+                                        </div>
+                                        <div class="button-buy">
+                                            <button>
+                                                <a href="{{config('app.url').'/chi-tiet-san-pham/'.$item->id}}">MUA NGAY</a>
+                                            </button>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -127,22 +125,24 @@
                     <div class="feature">
                         <div class="feature-item row owl-carousel bestseller owl-theme">
                             @foreach ($aryBestSeller as $item)
-                            <div class="feature-item-main">
-                                <a href="{{ route('product.detail', $item->id) }}">
-                                <div class="image">
-                                    <img src="{{ !empty($item->productImage) ? asset($item->productImage[0]->image_path) : asset('images/product/c.png') }}" alt="">
+                                <div class="feature-item-main">
+                                    <a href="{{ route('product.detail', $item->id) }}">
+                                        <div class="image">
+                                            <img
+                                                src="{{ !empty($item->productImage) ? asset($item->productImage[0]->image_path) : asset('images/product/c.png') }}"
+                                                alt="">
+                                        </div>
+                                        <div class="title">
+                                            <h5 class="text-uppercase">{{ $item->name }}</h5>
+                                        </div>
+                                    </a>
+                                    <div class="sub-title">
+                                        <p>{{ $item->description }}</p>
+                                    </div>
+                                    <div class="price">
+                                        <text id="bind-price">@money($item->price)</text>
+                                    </div>
                                 </div>
-                                <div class="title">
-                                    <h5 class="text-uppercase">{{ $item->name }}</h5>
-                                </div>
-                                </a>
-                                <div class="sub-title">
-                                    <p>{{ $item->description }}</p>
-                                </div>
-                                <div class="price">
-                                    <text id="bind-price">@money($item->price)</text>
-                                </div>
-                            </div>
                             @endforeach
                         </div>
                     </div>
@@ -158,17 +158,19 @@
                     <div class="feature">
                         <div class="feature-item row owl-carousel subcate owl-theme">
                             @foreach ($subNormalCate as $sub)
-                            <div class="feature-item-main">
-                                <div class="image">
-                                    <img src="{{ !empty($sub->avatar) ? $sub->avatar : asset('images/product/c.png') }}" alt="">
+                                <div class="feature-item-main">
+                                    <div class="image">
+                                        <img
+                                            src="{{ !empty($sub->avatar) ? $sub->avatar : asset('images/product/c.png') }}"
+                                            alt="">
+                                    </div>
+                                    <div class="title">
+                                        <h5 class="text-uppercase">{{ $sub->name }}</h5>
+                                    </div>
+                                    <div class="sub-title">
+                                        <p>{{ $sub->description }}</p>
+                                    </div>
                                 </div>
-                                <div class="title">
-                                    <h5 class="text-uppercase">{{ $sub->name }}</h5>
-                                </div>
-                                <div class="sub-title">
-                                    <p>{{ $sub->description }}</p>
-                                </div>
-                            </div>
                             @endforeach
                         </div>
                     </div>

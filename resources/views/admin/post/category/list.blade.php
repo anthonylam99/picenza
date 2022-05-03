@@ -37,6 +37,7 @@
                         <th class="text-center">Xem</th>
                         <th class="text-center">Sửa</th>
                         <th class="text-center">Xóa</th>
+                        <th>TRẠNG THÁI</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -55,7 +56,7 @@
                                         </a>
                                     </button>
                                 </td>
-                                <td class="text-center">
+                                <td class=" text-center">
                                     <button class="btn btn-info">
                                         <a style="color: #FFFFFF" href="{{ route('admin.tag.edit', ['id' => $value->id]) }}">
                                             <i class="far fa-edit"></i>
@@ -68,6 +69,12 @@
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     </button>
+                                </td>
+                                <td class="text-center">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="status{{$value->id}}" {{ $value->status == 1 ? 'checked' : '' }} name="status" onclick="changeStatusCategory({{$value->id}})">
+                                        <label name="status{{$value->id}}" class="custom-control-label status{{$value->id}}" for="status{{$value->id}}">{{ $value->status ? 'Bật' : 'Tắt' }}</label>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

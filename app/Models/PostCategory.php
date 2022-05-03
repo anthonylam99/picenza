@@ -9,5 +9,5 @@ class PostCategory extends Model
 {
     use HasFactory;
     protected $table = 'post_category';
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'status'];
 }
