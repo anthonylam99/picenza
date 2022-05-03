@@ -428,10 +428,9 @@ function changeShowHome(id) {
     status = status ? 1 : 0
     var statusText = status ? 'Bật' : 'Tắt'
     $('.show-home' + id).html(statusText)
-    console.log(status)
     $.ajax({
         type: 'GET',
-        url: '/quan-tri/dong-san-pham/showhome',
+        url: '/quan-tri/san-pham/showhome',
         data: {
             id: id,
             show_home: status

@@ -19,14 +19,7 @@ class ProductLineController extends Controller
             return response()->json(['message' => 'Success']);
         }
     }
-    public function updateStatusHome(Request $request){
-        $update = ProductLine::where('id', $request->get('id'))->update([
-            'show_home' => $request->show_home
-        ]);
-        if($update){
-            return response()->json(['message' => 'Success']);
-        }
-    }
+
     public function listLine(Request $request)
     {
         if ($request->has('s')) {

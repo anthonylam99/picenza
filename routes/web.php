@@ -80,6 +80,7 @@ Route::group(['prefix' => 'quan-tri', 'middleware' => 'CheckAdmin'], function ()
         Route::get('xoa/{id}', [AdminController::class, 'delProduct'])->name('admin.product.del');
 
         Route::get('sua/{id}', [AdminController::class, 'editProduct'])->name('admin.product.edit');
+        Route::get('showhome', [AdminController::class, 'updateStatusHome']);
 
         Route::group(['prefix' => 'tinh-nang'], function (){
             Route::get('/', [\App\Http\Controllers\ProductFeatureController::class, 'listProductFeature'])->name('admin.product.feature.list');
@@ -119,7 +120,6 @@ Route::group(['prefix' => 'quan-tri', 'middleware' => 'CheckAdmin'], function ()
         Route::get('sua/{id}', [ProductLineController::class, 'editLine'])->name('admin.line.edit');
         Route::get('xoa/{id}', [ProductLineController::class, 'delLine'])->name('admin.line.del');
         Route::get('update-status', [ProductLineController::class, 'updateStatus']);
-        Route::get('showhome', [ProductLineController::class, 'updateStatusHome']);
     });
 
     Route::group(['prefix' => 'loai-san-pham', 'middleware' => 'auth'], function(){

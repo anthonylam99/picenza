@@ -104,7 +104,7 @@ class AdminController extends Controller
         $company = ProductCompany::all();
         $productShape = ProductShape::all();
         $productTechnology = ProductTechnology::all();
-        $productLine = ProductLine::all();
+        $productLine = ProductLine::where('status', 1)->get();
         $productReliability = ProductReliability::all();
         $feature = ProductFeature::whereHas('sub')->get();
 
@@ -506,5 +506,20 @@ class AdminController extends Controller
         $contact = Contact::find($id);
 
         return view('admin.contact.detail', compact('contact'));
+    }
+
+    /**
+     * Update show home product
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function updateStatusHome(Request $request){
+        $update = Product::where('id', $request->get('id'))->update([
+            'show_home' => $request->show_home
+        ]);
+        if($update){
+            return response()->json(['message' => 'Success']);
+        }
     }
 }
