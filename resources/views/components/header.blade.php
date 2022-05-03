@@ -137,7 +137,7 @@
                     <a href="">Địa chỉ mua hàng</a> |
                     <img class="align-middle" width="15" height="15"
                          src="{{ asset('images/email.svg') }}" alt="tag">
-                    <a href="">Liên hệ</a>
+                    <a href="{{ route('contact') }}">Liên hệ</a>
                 </div>
             </div>
         </div>

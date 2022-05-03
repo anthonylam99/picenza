@@ -230,8 +230,11 @@
 @push('scripts')
 <script>
     @if (session()->has('order-success'))
-    console.log(123123123);
     toastr.success('Thành công', 'Đặt hàng thành công')
+    @endif
+
+    @if (session()->has('contact-success'))
+    toastr.success('Cảm ơn bạn đã phản hồi với chúng tôi', 'Thành công')
     @endif
 </script>
 @endpush

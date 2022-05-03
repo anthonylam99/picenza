@@ -52,7 +52,7 @@
                             <b>TRỢ GIÚP</b>
                         </li>
                         <li>
-                            <a href="">Liên hệ chúng tôi</a>
+                            <a href="{{ route('contact') }}">Liên hệ chúng tôi</a>
                         </li>
                         <li>
                             <a href="">Chính sách Bảo hành</a>

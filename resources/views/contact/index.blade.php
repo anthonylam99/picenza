@@ -19,7 +19,13 @@
                                     nếu có thắc mắc gì hãy liên hệ chúng tôi. Rất vui lòng được phục vụ quý khách.</p>
                             </div>
                             <div class="form-make-contact">
-                                <form id="contact-ctn-form" action="">
+                                @if($errors->any())
+                                <div class="alert alert-danger">
+                                    {!! implode('', $errors->all('<div>:message</div>')) !!}
+                                </div>
+                                @endif
+                                <form id="contact-ctn-form" action="{{ route('post-contact') }}" method="POST">
+                                    @csrf
                                     <div class="name">
                                         <input class="w-100" type="text" name="name" id="" placeholder="Họ và tên"
                                                required>
@@ -37,11 +43,11 @@
                                         </div>
                                     </div>
                                     <div class="jobs">
-                                        <input class="w-100" type="text" name="job" id=""
+                                        <input class="w-100" type="text" name="career" id=""
                                                placeholder="Ngành nghề/lĩnh vực">
                                     </div>
                                     <div class="note">
-                                        <textarea class="w-100" name="note" id="" cols="5" rows="5"
+                                        <textarea class="w-100" name="feedback" id="" cols="5" rows="5"
                                                   placeholder="Điều bạn cần chúng tôi lưu ý"></textarea>
                                     </div>
                                     <div class="btn-smt">
