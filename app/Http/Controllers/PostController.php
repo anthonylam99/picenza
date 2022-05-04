@@ -64,27 +64,27 @@ class PostController extends Controller
                 }
             }
 
-            $category = '';
-            if($request->has('category')){
-                $categorys = $request->get('category');
-                $i = 0;
-                foreach ($categorys as $value){
-                    $i++;
-                    if($i < count($categorys)){
-                        $category .= $value.',';
-                    }else{
-                        $category .= $value;
-                    }
+            // $category = '';
+            // if($request->has('category')){
+            //     $categories = $request->get('category');
+            //     $i = 0;
+            //     foreach ($categories as $value){
+            //         $i++;
+            //         if($i < count($categories)){
+            //             $category .= $value.',';
+            //         }else{
+            //             $category .= $value;
+            //         }
 
-                }
-            }
+            //     }
+            // }
 
             $arr['title'] = $request->get('title');
             $arr['content'] = $request->get('content');
             $arr['slug'] = $slug;
             $arr['url'] = $url.'/bai-viet/'.$slug;
             $arr['tag'] = $tag;
-            $arr['category'] = $category;
+            $arr['category'] = $request->get('category');
             $arr['seo_url'] = $request->get('seo-url');
             $arr['avatar'] = $request->get('img_avatar_path');
             $arr['seo_title'] = $request->get('seo_title');
@@ -123,11 +123,11 @@ class PostController extends Controller
         if($post){
             $tag = explode(',', $post->tag);
         }
-        $category = [];
-        if($post){
-            $category = explode(',', $post->category);
-        }
-        return view('admin.post.edit', compact('post', 'tag', 'listTag', 'category', 'listCategory'));
+        // $category = [];
+        // if($post){
+        //     $category = explode(',', $post->category);
+        // }
+        return view('admin.post.edit', compact('post', 'tag', 'listTag', 'listCategory'));
     }
 
     public function delPost(Request $request, $id = null)
