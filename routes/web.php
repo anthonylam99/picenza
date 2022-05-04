@@ -50,6 +50,7 @@ Route::get('locations/ward', [ProductController::class, 'ward'])->name('location
 Route::post('save-order', [ProductController::class, 'saveOrder'])->name('saveOrder');
 Route::post('update-quantity-cart', [ProductController::class, 'updateQtyCart'])->name('updateQtyCart');
 Route::get('tin-tuc', [HomeController::class, 'news'])->name('home.news.index');
+Route::get('tin-tuc/{slug}', [HomeController::class, 'news'])->name('home.news.index.slug');
 Route::get('tim-kiem-san-pham', [ProductController::class, 'searchProduct'])->name('action-search');
 Route::post('post-contact', [ContactController::class, 'postContact'])->name('post-contact');
 

@@ -383,7 +383,7 @@
                             </li>
                         </ul>
                     </li>
-                    
+
 
                 </ul>
             </nav>
@@ -458,16 +458,16 @@
 
 <script src="{{asset('js/admin.js')}}"></script>
 <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
-<script>
-    CKEDITOR.replace('text', {
-        filebrowserBrowseUrl: '{{ asset(route('ckfinder_browser')) }}',
-        filebrowserImageBrowseUrl: '{{ asset(route('ckfinder_browser')) }}?type=Images',
-        filebrowserFlashBrowseUrl: '{{ asset(route('ckfinder_browser')) }}?type=Flash',
-        filebrowserUploadUrl: '{{ asset(route('ckfinder_connector')) }}?command=QuickUpload&type=Files',
-        filebrowserImageUploadUrl: '{{ asset(route('ckfinder_connector')) }}?command=QuickUpload&type=Images',
-        filebrowserFlashUploadUrl: '{{ asset(route('ckfinder_connector')) }}?command=QuickUpload&type=Flash'
-    });
-</script>
+{{--<script>--}}
+{{--    CKEDITOR.replace('text', {--}}
+{{--        filebrowserBrowseUrl: '{{ asset(route('ckfinder_browser')) }}',--}}
+{{--        filebrowserImageBrowseUrl: '{{ asset(route('ckfinder_browser')) }}?type=Images',--}}
+{{--        filebrowserFlashBrowseUrl: '{{ asset(route('ckfinder_browser')) }}?type=Flash',--}}
+{{--        filebrowserUploadUrl: '{{ asset(route('ckfinder_connector')) }}?command=QuickUpload&type=Files',--}}
+{{--        filebrowserImageUploadUrl: '{{ asset(route('ckfinder_connector')) }}?command=QuickUpload&type=Images',--}}
+{{--        filebrowserFlashUploadUrl: '{{ asset(route('ckfinder_connector')) }}?command=QuickUpload&type=Flash'--}}
+{{--    });--}}
+{{--</script>--}}
 @include('ckfinder::setup')
 </body>
 </html>

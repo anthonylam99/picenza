@@ -51,14 +51,14 @@
                                 </td>
                                 <td class="text-center">
                                     <button class="btn btn-info">
-                                        <a style="color: #FFFFFF" href="{{ route('admin.tag.edit', ['id' => $value->id]) }}">
+                                        <a target="_blank" style="color: #FFFFFF" href="{{ route('home.news.index.slug', ['slug' => $value->slug]) }}">
                                             <i class="far fa-eye"></i>
                                         </a>
                                     </button>
                                 </td>
                                 <td class=" text-center">
                                     <button class="btn btn-info">
-                                        <a style="color: #FFFFFF" href="{{ route('admin.tag.edit', ['id' => $value->id]) }}">
+                                        <a style="color: #FFFFFF" href="{{ route('admin.post.category.edit', ['id' => $value->id]) }}">
                                             <i class="far fa-edit"></i>
                                         </a>
                                     </button>

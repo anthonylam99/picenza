@@ -2,21 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Entity\Options;
 use App\Models\Page;
 use App\Models\PageImage;
 use App\Models\Post;
+use App\Models\PostCategory;
 use App\Models\PostTag;
 use App\Models\ProductLine;
+use http\Client\Response;
 use Illuminate\Http\Request;
+use DB;
 
 class HomeController extends Controller
 {
-    public function index(Request $request){
+    public function index(Request $request)
+    {
 
         $category = ProductLine::all();
         $postTag = PostTag::whereNotNull('posts')->get();
         $arrPostPage = [];
-        foreach ($postTag as $tag){
+        foreach ($postTag as $tag) {
             $posts = explode(',', $tag->posts);
             $postPage = PageImage::whereIn('post_id', $posts)->where('tag', $tag->page_tag)->get();
             $arrPostPage[$tag->page_tag] = $postPage;
@@ -27,9 +32,11 @@ class HomeController extends Controller
 
         return view('home.index', compact('category', 'arrPostPage', 'banner', 'brand'));
     }
-    function strip_tags_content($string) {
+
+    function strip_tags_content($string)
+    {
         // ----- remove HTML TAGs -----
-        $string = preg_replace ('/<[^>]*>/', ' ', $string);
+        $string = preg_replace('/<[^>]*>/', ' ', $string);
         // ----- remove control characters -----
         $string = str_replace("\r", '', $string);
         $string = str_replace("\n", ' ', $string);
@@ -40,19 +47,27 @@ class HomeController extends Controller
 
     }
 
-    public function news(Request $request){
+    public function news(Request $request, $slug = null)
+    {
         $newPost = Post::orderBy('id', 'desc')->limit(5)->get();
-        $posts = Post::paginate(5);
-        $posts = $posts->map(function ($item){
-            if(strlen($item->content) > 400){
-                $item->content = substr(html_entity_decode($item->content), 0, 400);
-                $item->content = $this->strip_tags_content($item->content);
+
+
+        $posts = DB::table('post');
+
+        $categoryData = [];
+
+        if (!empty($slug)) {
+            $category = PostCategory::where('seo_url', $slug)->first();
+
+            if(!empty(collect($category)->toArray())){
+                $category = collect($category)->toArray();
+                $categoryData = $category;
+                $posts = $posts->whereRaw("CONCAT(',', category, ',') LIKE '%," . $category['name'] . ",%' ");
             }
+        }
+        $posts = $posts->paginate(10);
 
-            return $item;
-        });
 
-
-        return view('news.index', compact('newPost', 'posts'));
+        return view('news.index', compact('newPost', 'posts', 'categoryData'));
     }
 }
