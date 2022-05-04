@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Entity\Options;
 use App\Models\MenuLocation;
+use App\Models\Comments;
 use App\Models\Contact;
 use App\Models\Orders;
 use App\Models\Post;
@@ -521,5 +522,66 @@ class AdminController extends Controller
         if($update){
             return response()->json(['message' => 'Success']);
         }
+    }
+
+    /**
+     * List comment admin
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function listComment(Request $request)
+    {
+        if ($request->has('s')) {
+            $query = $request->get('s');
+            $aryComment = Comments::where('title', 'like', '%' . $query . '%')
+            ->orWhere('body', 'like', '%' . $query . '%')
+            ->whereHas(
+                'user', function ($q) use ($query) {
+                $q->where('email', 'like', '%' . $query . '%');
+            })
+            ->whereHas(
+                'user', function ($q) use ($query) {
+                $q->where('name', 'like', '%' . $query . '%');
+            })
+            ->whereHas(
+                'product', function ($q) use ($query) {
+                $q->where('name', 'like', '%' . $query . '%');
+            })
+            ->orderBy('id', 'DESC')
+            ->paginate(10);
+        } else if (!empty($request->get('s')) || !$request->has('s')) {
+            $aryComment = Comments::orderBy('id', 'DESC')->paginate(10);
+        }
+
+        return view('admin.comment.list', compact('aryComment'));
+    }
+
+    /**
+     * Update status comment
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function updateStatus(Request $request)
+    {
+        $update = Comments::where('id', $request->get('id'))->update([
+            'status' => $request->status
+        ]);
+        if($update){
+            return response()->json(['message' => 'Success']);
+        }
+    }
+
+    /**
+     * Detail comment
+     *
+     * @param [type] $id
+     * @return void
+     */
+    public function detailComment($id)
+    {
+        $comment = Comments::with(['user', 'product'])->find($id);
+        return view('admin.comment.detail', compact('comment'));
     }
 }

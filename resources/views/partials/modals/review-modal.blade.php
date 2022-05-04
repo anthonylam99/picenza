@@ -117,7 +117,7 @@
                                     <small id="email_div_alert" class="text-danger"></small>
                                 </div>
                                 <div class="col-lg-6 px-lg-1 pb-lg-1 mb-1 mb-lg-0 mb-md-0">
-                                    <button type="submit" id="btn-review" class="btn btn-primary btn-block text-uppercase">Gửi nhận xét </button>
+                                    <button type="button" id="btn-review" class="btn btn-primary btn-block text-uppercase">Gửi nhận xét </button>
                                 </div>
                             </div>
                             <input type="hidden" name="product_id" value="{{ $product_id }}" class="product_id">
@@ -140,11 +140,10 @@
 </div>
 @push('scripts')
     <script>
-        $('#form_testimonial').on('submit', function (e) {
-            e.preventDefault()
-            var formdata = new FormData($(this)[0]);
+        $('#btn-review').on('click', function(){
+            var formdata = new FormData($('#form_testimonial')[0]);
             insertdata(formdata)
-        })
+        });
 
         function resetFormTestimonial() {
             $('#form_testimonial textarea[name="body"]').val('')
@@ -171,7 +170,7 @@
                 contentType: false,
                 success: function (data) {
                     if (data.success == 1) {
-                        alert('Đánh giá của bạn sẽ được hệ thống kiểm duyệt. Xin cám ơn.')
+                        toastr.success('Đánh giá của bạn sẽ được hệ thống kiểm duyệt. Xin cám ơn.')
                         $('#reviewmodal').modal('hide');
                         setTimeout(() => {
                             location.reload();
