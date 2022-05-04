@@ -520,6 +520,7 @@ class AdminController extends Controller
      */
     public function detailComment($id)
     {
-        # code...
+        $comment = Comments::with(['user', 'product'])->find($id);
+        return view('admin.comment.detail', compact('comment'));
     }
 }
