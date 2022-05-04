@@ -290,6 +290,7 @@
                                                 <option value="noindex,nofollow" {{$product['seo_robots'] === 'noindex,nofollow' ? 'selected' : ''}}>Noindex,Nofollow</option>
                                                 <option value="index,nofollow" {{$product['seo_robots'] === 'index,nofollow' ? 'selected' : ''}}>Index,Nofollow</option>
                                                 <option value="noindex,follow" {{$product['seo_robots'] === 'noindex,follow' ? 'selected' : ''}}>Noindex,Follow</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
