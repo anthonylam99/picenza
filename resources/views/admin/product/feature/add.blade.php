@@ -1,13 +1,13 @@
 @extends('admin.index')
 
-@section('pageTitle', 'Thêm mới tính năng')
+@section('pageTitle', 'Thêm mới thuộc tính')
 
 @section('admin.css')
     <link rel="stylesheet" href="{{asset('css/admin.css')}}">
 @endsection
 
 @section('breadcrumbContent')
-    <li class="breadcrumb-item"><a href="#">Tính năng</a></li>
+    <li class="breadcrumb-item"><a href="#">Thuộc tính</a></li>
     <li class="breadcrumb-item active">Thêm mới</li>
 @endsection
 
@@ -19,8 +19,8 @@
                 <div class="col-12">
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="productName">Loại sản phẩm</label>
-                            <select class="form-control"  name="product_type" required>
+                            <label for="productName">Danh mục</label>
+                            <select class="form-control"  name="category_id" required>
                                 <option>-- Vui lòng chọn ---</option>
                                 @foreach($productType as $value)
                                     <option value="{{$value->id}}">{{$value->name}}</option>
@@ -28,7 +28,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Tính năng</label>
+                            <label>Thuộc tính</label>
                             <input type="text" name="name" class="form-control" id="nameFeature" placeholder="Nhập tên tính năng..." required>
                         </div>
                     </div>

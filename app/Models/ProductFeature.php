@@ -10,7 +10,7 @@ class ProductFeature extends Model
     use HasFactory;
     protected $table = 'product_feature';
     protected $fillable = [
-        'name', 'product_type', 'avatar', 'favourite', 'description'
+        'name', 'product_type', 'avatar', 'favourite', 'description', 'product_line'
     ];
 
     public function productType(){

@@ -102,14 +102,14 @@ class ProductController extends Controller
     public function productContent(Request $request, $slug = null){
         $category = ProductLine::where('seo_url', $slug)->firstOrFail();
         $feature = ProductFeature::where('product_line', $category->id)->get('id');
-        $product = Product::where('product_line', $category->id)->get();
+        $product = Product::where('product_line', $category->id)->inRandomOrder()->limit(5)->get();
 
         $ids = [];
         foreach($feature as $value){
             array_push($ids, $value->id);
         }
         $favourite = SubCategory::where('favourite', 1)->whereIn('id_category_parent', $ids)->where('status' , 1)->get();
-        $subNormalCate = SubCategory::where('favourite', '!=', 1)->whereIn('id_category_parent', $ids)->where('status' , 1)->get();
+        $subNormalCate = SubCategory::whereIn('id_category_parent', $ids)->where('status' , 1)->get();
 
         $aryBestSeller = Product::with('productImage.color')->where('is_bestseller', 1)->where('product_line', $category->id)->get();
 

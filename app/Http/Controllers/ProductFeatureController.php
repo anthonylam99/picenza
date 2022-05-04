@@ -12,6 +12,13 @@ use function Aws\map;
 
 class ProductFeatureController extends Controller
 {
+    public function delSubCategory(Request $request){
+        $id = $request->get('id');
+        $subCate = SubCategory::findOrFail($id);
+        $subCate->delete();
+
+        return response()->json(['message'=> 'ok']);
+    }
     public function makeFavourite(Request $request){
         $id = $request->get('id');
         $status = $request->get('status');
@@ -63,7 +70,7 @@ class ProductFeatureController extends Controller
 
     public function addProductFeature(Request $request)
     {
-        $productType = ProductType::whereHas('company')->whereHas('productLine')->get();
+        $productType = ProductLine::where('status', 1)->get();
 
         return view('admin.product.feature.add', compact('productType'));
     }

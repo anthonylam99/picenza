@@ -1,13 +1,13 @@
 @extends('admin.index')
 
-@section('pageTitle', 'Thêm mới hãng sản xuất')
+@section('pageTitle', 'Thêm mới danh mục')
 
 @section('admin.css')
     <link rel="stylesheet" href="{{asset('css/admin.css')}}">
 @endsection
 
 @section('breadcrumbContent')
-    <li class="breadcrumb-item"><a href="#">Hãng sản xuất</a></li>
+    <li class="breadcrumb-item"><a href="#">Danh mục sản phẩm</a></li>
     <li class="breadcrumb-item active">Thêm mới</li>
 @endsection
 

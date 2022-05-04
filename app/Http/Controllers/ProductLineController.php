@@ -102,8 +102,7 @@ class ProductLineController extends Controller
     {
         $search = ProductLine::findOrFail($id);
         $search->delete();
-        $line = ProductLine::all();
 
-        return view('admin.line.list', compact('line'));
+        return redirect()->route('admin.line.list');
     }
 }

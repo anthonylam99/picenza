@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Entity\Options;
+use App\Models\MenuLocation;
 use App\Models\Comments;
 use App\Models\Contact;
 use App\Models\Orders;

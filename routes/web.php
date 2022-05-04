@@ -53,6 +53,7 @@ Route::get('tin-tuc', [HomeController::class, 'news'])->name('home.news.index');
 Route::get('tin-tuc/{slug}', [HomeController::class, 'news'])->name('home.news.index.slug');
 Route::get('tim-kiem-san-pham', [ProductController::class, 'searchProduct'])->name('action-search');
 Route::post('post-contact', [ContactController::class, 'postContact'])->name('post-contact');
+Route::get('/san-pham/so-sanh', [ProductController::class, 'compareProduct'])->name('product.compare');
 
 Route::get('/quan-tri', [AdminController::class, 'index']);
 Route::get('/quan-tri/dang-nhap', [LoginController::class, 'showLoginForm'])->name('login');
@@ -93,6 +94,7 @@ Route::group(['prefix' => 'quan-tri', 'middleware' => 'CheckAdmin'], function ()
             Route::get('danh-muc-con/sua/{id}', [\App\Http\Controllers\ProductFeatureController::class, 'editSubCategory'])->name('admin.sub.category.edit');
             Route::post('danh-muc-con/sua/{id}', [\App\Http\Controllers\ProductFeatureController::class, 'editSubCategory'])->name('admin.sub.category.edit.post');
             Route::get('danh-muc-con/yeu-thich', [\App\Http\Controllers\ProductFeatureController::class, 'makeFavourite']);
+            Route::post('danh-muc-con/xoa', [\App\Http\Controllers\ProductFeatureController::class, 'delSubCategory'])->name('admin.sub.category.del');
         });
     });
 
