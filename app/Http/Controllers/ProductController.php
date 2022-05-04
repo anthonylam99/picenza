@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comments;
 use App\Models\Orders;
+use App\Models\Post;
 use App\Models\Product;
 use App\Models\ProductFeature;
 use App\Models\ProductImage;
@@ -101,6 +102,7 @@ class ProductController extends Controller
     public function productContent(Request $request, $slug = null){
         $category = ProductLine::where('seo_url', $slug)->firstOrFail();
         $feature = ProductFeature::where('product_line', $category->id)->get('id');
+        $product = Product::where('product_line', $category->id)->get();
 
         $ids = [];
         foreach($feature as $value){
@@ -111,7 +113,7 @@ class ProductController extends Controller
 
         $aryBestSeller = Product::with('productImage.color')->where('is_bestseller', 1)->where('product_line', $category->id)->get();
 
-        return view('product.index', compact('category', 'favourite', 'subNormalCate', 'aryBestSeller'));
+        return view('product.index', compact('category', 'favourite', 'subNormalCate', 'aryBestSeller', 'product'));
     }
 
     /**
@@ -246,7 +248,7 @@ class ProductController extends Controller
 
         Cart::destroy();
 
-        Session::flash('order-success', 'Đặt hàng thành công'); 
+        Session::flash('order-success', 'Đặt hàng thành công');
 
         return redirect()->route('index');
     }

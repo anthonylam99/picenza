@@ -1,95 +1,32 @@
 <footer>
     <div class="footer-div">
         <div class="main-footer container">
+            <?php
+            $location = \App\Models\MenuLocation::where('menu_id', 2)->first('location');
+
+            if(!empty($location->location)){
+                $footer = \Harimayco\Menu\Facades\Menu::get($location->location);
+            }
+            ?>
             <div class="main-footer-content row">
-                <div class="footer-item col-12 col-sm-6 col-lg-3 col-xl-3">
-                    <ul>
-                        <li>
-                            <b>Thông tin</b>
-                        </li>
-                        <li>
-                            <a href="">Về chúng tôi</a>
-                        </li>
-                        <li>
-                            <a href="">Trung tâm trải nghiệm</a>
-                        </li>
-                        <li>
-                            <a href="">Địa chỉ mua hàng</a>
-                        </li>
-                        <li>
-                            <a href="">Cơ hội nghề nghiệp</a>
-                        </li>
-                        <li>
-                            <a href="">Sơ đồ trang web</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer-item col-12 col-sm-6 col-lg-3 col-xl-3">
-                    <ul>
-                        <li>
-                            <b>THƯƠNG HIỆU PICENZA</b>
-                        </li>
-                        <li>
-                            <a href="">Bình nóng picenza</a>
-                        </li>
-                        <li>
-                            <a href="">Chậu rửa picenza</a>
-                        </li>
-                        <li>
-                            <a href="">Vòi xịt picenza</a>
-                        </li>
-                        <li>
-                            <a href="">Năng lượng mặt trời</a>
-                        </li>
-                        <li>
-                            <a href="">Sản phẩm khác</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer-item col-12 col-sm-6 col-lg-3 col-xl-3">
-                    <ul>
-                        <li>
-                            <b>TRỢ GIÚP</b>
-                        </li>
-                        <li>
-                            <a href="{{ route('contact') }}">Liên hệ chúng tôi</a>
-                        </li>
-                        <li>
-                            <a href="">Chính sách Bảo hành</a>
-                        </li>
-                        <li>
-                            <a href="">Video sản phẩm</a>
-                        </li>
-                        <li>
-                            <a href="">Hướng dẫn bảo quản và vệ sinh</a>
-                        </li>
-                        <li>
-                            <a href="">Hướng dẫn sản phẩm</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer-item col-12 col-sm-6 col-lg-3 col-xl-3">
-                    <ul>
-                        <li>
-                            <b>KẾT NỐI</b>
-                        </li>
-                        <li>
-                            <a href="">Facebook</a>
-                        </li>
-                        <li>
-                            <a href="">Printerest</a>
-                        </li>
-                        <li>
-                            <a href="">Youtube</a>
-                        </li>
-                        <li>
-                            <a href="">Instagram</a>
-                        </li>
-                        <li>
-                            <a href="">Twitter</a>
-                        </li>
-                    </ul>
-                </div>
+                @if(!empty($footer) && isset($footer))
+                    @foreach($footer as $menu)
+                        <div class="footer-item col-12 col-sm-6 col-lg-3 col-xl-3">
+                            <ul>
+                                <li>
+                                    <b>{{$menu['label']}}</b>
+                                </li>
+                                @if($menu['child'])
+                                    @foreach($menu['child'] as $child)
+                                        <li>
+                                            <a href="{{$child['link']}}">{{$child['label']}}</a>
+                                        </li>
+                                    @endforeach
+                                @endif
+                            </ul>
+                        </div>
+                    @endforeach
+                @endif
             </div>
         </div>
     </div>

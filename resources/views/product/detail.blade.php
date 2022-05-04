@@ -7,6 +7,23 @@
 @endsection
 
 
+@section('seo')
+    @if(!empty($detailProduct->seo_title))
+        <meta name="title" content="{{$detailProduct->seo_title}}">
+    @else
+        <meta name="title" content="{{$detailProduct->name}}">
+    @endif
+    @if(!empty($detailProduct->seo_description))
+        <meta name="description" content="{{$detailProduct->seo_description}}">
+    @endif
+    @if(!empty($detailProduct->seo_keyword))
+        <meta name="keywords" content="{{$detailProduct->seo_keyword}}">
+    @endif
+    @if(!empty($detailProduct->seo_robots))
+        <meta name="robots" content="{{$detailProduct->seo_robots}}">
+    @endif
+@endsection
+
 @section('breadcrumb')
     <div class="breadcrumb-s">
         <div class="breadcrumb-s-content container middle">

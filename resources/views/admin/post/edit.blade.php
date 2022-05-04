@@ -48,7 +48,7 @@
                         <div class="form-group row">
                             <label for="title" class="col-md-2 col-sm-2 col-xs-12">Tag</label>
                             <select name="tag[]" class="form-control js-example-tags col-sm-9" multiple="multiple"
-                                    required>
+                                    >
                                 @foreach($listTag as $value)
                                     <option {{(in_array($value->name, $tag) ? 'selected' : '')}}>{{$value->name}}</option>
                                 @endforeach

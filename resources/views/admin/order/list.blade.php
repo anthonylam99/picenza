@@ -23,7 +23,7 @@
 
                 <div class="form-search float-right">
                     <form style="margin-bottom: 0" class="form-group" action="{{route('admin.order.list')}}">
-                        <input  class="form-control" type="text" name="s" value="" placeholder="Tìm kiếm sản phẩm....">
+                        <input  class="form-control" type="text" name="s" value="" placeholder="Tìm kiếm....">
                     </form>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                             case 2:
                                 $label = 'Đã hủy';
                                 break;
-                            
+
                             default:
                                 $label = 'Chưa thanh toán';
                                 break;
@@ -81,8 +81,7 @@
                                     </a>
                                 </button>
                             </td>
-                            
-                            
+
                         </tr>
                     @endforeach
                     </tbody>

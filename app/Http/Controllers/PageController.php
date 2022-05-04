@@ -6,6 +6,8 @@ use App\Http\Controllers\Entity\Options;
 use App\Models\Page;
 use App\Models\PageImage;
 use App\Models\Post;
+use App\Models\PostCategory;
+use App\Models\PostTag;
 use App\Models\ProductColor;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
@@ -49,44 +51,72 @@ class PageController extends Controller
             $id = $res->id;
         }
 
-        $arrPost = [];
-        if($request->has('postDes')){
-            $postDes = Post::whereIn('id', $request->get('postDes'))->get();
-
-
-
-            if(!empty($postDes)){
-                foreach ($postDes as $value){
-                    $arr = [];
-                    $arr['page_id'] = $request->get('page_id');
-                    $arr['tag'] = 'des';
-                    $arr['title'] = $value->title;
-                    $arr['content'] = substr($value->content, 0, 300);
-                    $arr['url'] = $value->url;
-                    $arr['image_path'] = $value->avatar;
-
-
-                    array_push($arrPost, $arr);
-                }
-            }
-        }
-        if(!empty($arrPost)){
-            foreach ($arrPost as $value) {
-                PageImage::create($value);
-            }
-        }
+        $this->upImagePage($request, 'postDes', 'section3');
+        $this->upImagePage($request, 'section4', 'section4');
 
         $this->insertImage($request, 'imagebanner', 'banner');
+        $this->insertImage($request, 'imagebrand', 'brand');
 
         if (!empty($res)) {
             return redirect()->route('admin.page.edit', ['id' => $id]);
         }
     }
 
+    public function upImagePage($request, $field, $tag)
+    {
+        $arrPost = [];
+        if ($request->has($field)) {
+            $postDes = PostCategory::whereIn('id', $request->get($field))->get();
+
+            if (!empty($postDes)) {
+                $i = 0;
+                $postIdStr = '';
+                foreach ($postDes as $value) {
+                    $i++;
+
+                    if ($i < count($postDes)) {
+                        $postIdStr .= $value->id . ',';
+                    } else {
+                        $postIdStr .= $value->id;
+                    }
+                    $arr = [];
+                    $arr['page_id'] = $request->get('page_id');
+                    $arr['tag'] = $tag;
+                    $arr['title'] = $value->title;
+                    $arr['content'] = substr($value->content, 0, 300);
+                    $arr['url'] = config('app.url').'/bai-viet/'.$value->seo_url;
+                    $arr['image_path'] = $value->avatar;
+                    $arr['post_id'] = $value->id;
+
+
+                    array_push($arrPost, $arr);
+                }
+
+                $postTag = PostTag::where('page_tag', $tag)->update([
+                    'posts' => $postIdStr
+                ]);
+            }
+        }else{
+            PostTag::where('page_tag', $tag)->update([
+                'posts' => ''
+            ]);
+        }
+        if (!empty($arrPost)) {
+            foreach ($arrPost as $value) {
+                $find = PageImage::where([
+                    'post_id' => $value['post_id'],
+                    'tag' => $value['tag']
+                ])->get();
+                if (empty(collect($find)->toArray())) {
+                    PageImage::create($value);
+                }
+            }
+        }
+    }
+
     public function insertImage($request, $name, $tag)
     {
         $dataPos = $request->all();
-
         $arrImg = [];
         foreach ($dataPos as $key => $value) {
             if (strpos($key, $name) !== false) {
@@ -113,21 +143,30 @@ class PageController extends Controller
 
         if (!empty($arrImg)) {
             foreach ($arrImg as $value) {
-                PageImage::updateOrCreate(
-                    [
-                        'page_id' => $value->page_id,
-                        'image_path' => $value->image_path
-                    ],
-                    $value
-                );
+                if (!empty($value['image_path'])) {
+                    PageImage::updateOrCreate(
+                        [
+                            'page_id' => $value['page_id'],
+                            'image_path' => $value['image_path'],
+                        ],
+                        $value
+                    );
+
+                }
             }
         }
     }
 
     public function editPage(Request $request, $id = null)
     {
+        $dataPost = PostTag::all();
+        $arrPostPage = [];
+        foreach ($dataPost as $value) {
+            $arrPostPage[$value->page_tag] = explode(',', $value->posts);
+        }
+
         $page = Page::findOrFail($id);
-        $post = Post::all();
+        $aryCategory = PostCategory::where('status', 1)->get();
         $image = PageImage::where('page_id', $id)->get();
         $arrImg = [];
         if (!empty($image)) {
@@ -136,12 +175,12 @@ class PageController extends Controller
             }
         }
 
-        return view('admin.page.edit', compact('page', 'arrImg', 'post'));
+        return view('admin.page.edit', compact('page', 'arrImg', 'aryCategory', 'arrPostPage'));
     }
 
     public function showPage(Request $request, $slug = null)
     {
-        $page = Page::where('slug', $slug)->firstOrFail();
+        $page = Page::where('seo_url', $slug)->firstOrFail();
 
         return view('admin.page.show', compact('page'));
     }

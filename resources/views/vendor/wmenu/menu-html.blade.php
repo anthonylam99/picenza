@@ -4,6 +4,35 @@ $currentUrl = url()->current();
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <link href="{{asset('vendor/harimayco-menu/style.css')}}" rel="stylesheet">
+<style>
+    #btn-submit-menu {
+        color: #555;
+        border-color: #ccc;
+        background: #f7f7f7;
+        -webkit-box-shadow: inset 0 1px 0 #fff, 0 1px 0 rgb(0 0 0 / 8%);
+        box-shadow: inset 0 1px 0 #fff, 0 1px 0 rgb(0 0 0 / 8%);
+        vertical-align: top;
+        outline: none;
+        display: inline-block;
+        text-decoration: none;
+        font-size: 13px !important;
+        line-height: 26px;
+        height: 28px;
+        margin: 0;
+        padding: 0 10px 1px;
+        cursor: pointer;
+        border-width: 1px;
+        border-style: solid;
+        -webkit-appearance: none;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        margin-top: 10px;
+    }
+</style>
 <div id="hwpwrap">
 	<div class="custom-wp-admin wp-admin wp-core-ui js   menu-max-depth-0 nav-menus-php auto-fold admin-bar">
 		<div id="wpwrap">
@@ -15,7 +44,7 @@ $currentUrl = url()->current();
 
 							<div class="manage-menus">
 								<form method="get" action="{{ $currentUrl }}">
-									<label for="menu" class="selected-menu">Select the menu you want to edit:</label>
+									<label for="menu" class="selected-menu">Chọn menu bạn muốn sửa:</label>
 
 									{!! Menu::select('menu', $menulist) !!}
 
@@ -34,65 +63,95 @@ $currentUrl = url()->current();
 
 {{--									<form id="nav-menu-meta" action="" class="nav-menu-meta" method="post" enctype="multipart/form-data">--}}
 										<div id="side-sortables" class="accordion-container">
-											<ul class="outer-border">
-												<li class="control-section accordion-section  open add-page" id="add-page">
-													<h3 class="accordion-section-title hndle" tabindex="0"> Custom Link <span class="screen-reader-text">Press return or enter to expand</span></h3>
-													<div class="accordion-section-content ">
-														<div class="inside">
-															<div class="customlinkdiv" id="customlinkdiv">
-																<p id="menu-item-url-wrap">
-																	<label class="howto" for="custom-menu-item-url"> <span>URL</span>&nbsp;&nbsp;&nbsp;
-																		<input id="custom-menu-item-url" name="url" type="text" class="menu-item-textbox " placeholder="url">
-																	</label>
-																</p>
-
-																<p id="menu-item-name-wrap">
-																	<label class="howto" for="custom-menu-item-name"> <span>Label</span>&nbsp;
-																		<input id="custom-menu-item-name" name="label" type="text" class="regular-text menu-item-textbox input-with-default-title" title="Label menu">
-																	</label>
-																</p>
-
-																@if(!empty($roles))
-																<p id="menu-item-role_id-wrap">
-																	<label class="howto" for="custom-menu-item-name"> <span>Role</span>&nbsp;
-																		<select id="custom-menu-item-role" name="role">
-																			<option value="0">Select Role</option>
-																			@foreach($roles as $role)
-																				<option value="{{ $role->$role_pk }}">{{ ucfirst($role->$role_title_field) }}</option>
-																			@endforeach
-																		</select>
-																	</label>
-																</p>
-																@endif
-
-																<p class="button-controls">
-
-																	<a  href="#" onclick="addcustommenu()"  class="button-secondary submit-add-to-menu right"  >Add menu item</a>
-																	<span class="spinner" id="spincustomu"></span>
-																</p>
-
-															</div>
-														</div>
-													</div>
-												</li>
-
-											</ul>
-                                            <ul class="outer-border">
-                                                <li class="control-section accordion-section  open add-page" id="add-page">
-                                                    <h3 class="accordion-section-title hndle" tabindex="0"> DANH MỤC SẢN PHẨM <span class="screen-reader-text">Press return or enter to expand</span></h3>
-                                                    <div class="accordion-section-content ">
-                                                        <div class="inside">
-                                                            <form action="#" method="POST" id="addCustomMenu">
-                                                                <input type="hidden" name="idmenu" value="@if(isset($indmenu)){{$indmenu->id}}@endif" />
-                                                                @csrf
+                                            <form action="#" method="POST" id="addCustomMenu">
+                                                <ul class="outer-border">
+                                                    <li class="control-section accordion-section add-page"
+                                                        id="add-page">
+                                                        <h3 class="accordion-section-title hndle" tabindex="0"> LIÊN KẾT TÙY CHỈNH <span class="screen-reader-text">Press return or enter to expand</span>
+                                                        </h3>
+                                                        <div class="accordion-section-content ">
+                                                            <div class="inside">
                                                                 <div class="customlinkdiv" id="customlinkdiv">
+                                                                    <p id="menu-item-url-wrap">
+                                                                        <label class="howto" for="custom-menu-item-url">
+                                                                            <span>URL</span>&nbsp;&nbsp;&nbsp;
+                                                                            <input id="custom-menu-item-url" name="url"
+                                                                                   type="text"
+                                                                                   class="menu-item-textbox "
+                                                                                   value=""
+                                                                                   placeholder="url">
+                                                                        </label>
+                                                                    </p>
+
+                                                                    <p id="menu-item-name-wrap">
+                                                                        <label class="howto"
+                                                                               for="custom-menu-item-name">
+                                                                            <span>Label</span>&nbsp;
+                                                                            <input id="custom-menu-item-name"
+                                                                                   name="label" type="text"
+                                                                                   class="regular-text menu-item-textbox input-with-default-title"
+                                                                                   placeholder="title"
+                                                                                   value=""
+                                                                            >
+                                                                        </label>
+                                                                    </p>
+
+                                                                    @if(!empty($roles))
+                                                                        <p id="menu-item-role_id-wrap">
+                                                                            <label class="howto"
+                                                                                   for="custom-menu-item-name"> <span>Role</span>&nbsp;
+                                                                                <select id="custom-menu-item-role"
+                                                                                        name="role">
+                                                                                    <option value="0">Select Role
+                                                                                    </option>
+                                                                                    @foreach($roles as $role)
+                                                                                        <option
+                                                                                            value="{{ $role->$role_pk }}">{{ ucfirst($role->$role_title_field) }}</option>
+                                                                                    @endforeach
+                                                                                </select>
+                                                                            </label>
+                                                                        </p>
+                                                                    @endif
+
+                                                                    <p class="button-controls">
+
+                                                                        <button class="float-right" id="btn-submit-menu"
+                                                                                type="submit" form="addCustomMenu"
+                                                                                value="Submit">Add menu item
+                                                                        </button>
+                                                                        <span class="spinner" id="spincustomu"></span>
+                                                                    </p>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+
+                                                </ul>
+                                                <ul class="outer-border">
+                                                    <li class="control-section accordion-section add-page"
+                                                        id="add-page">
+                                                        <h3 class="accordion-section-title hndle" tabindex="0"> DANH MỤC
+                                                            SẢN PHẨM <span class="screen-reader-text">Press return or enter to expand</span>
+                                                        </h3>
+                                                        <div class="accordion-section-content ">
+                                                            <div class="inside">
+                                                                <input type="hidden" name="idmenu"
+                                                                       value="@if(isset($indmenu)){{$indmenu->id}}@endif"/>
+                                                                @csrf
+                                                                <div class="customlinkdiv"
+                                                                     style="max-height: 200px; overflow-y: scroll"
+                                                                     id="customlinkdiv">
                                                                     <?php
                                                                     $data = \App\Models\ProductLine::all();
                                                                     foreach($data as $value){
                                                                     ?>
                                                                     <div class="productLine">
-                                                                        <input id="{{$value->name}}"  value="{{$value->id}}" type="checkbox" name="label_product[]">
-                                                                        <label for="{{$value->name}}">{{$value->name}}</label>
+                                                                        <input id="{{$value->name}}"
+                                                                               value="{{$value->id}}" type="checkbox"
+                                                                               name="label_product[]">
+                                                                        <label
+                                                                            for="{{$value->name}}">{{$value->name}}</label>
                                                                     </div>
                                                                     <?php
                                                                     }
@@ -100,11 +159,15 @@ $currentUrl = url()->current();
 
                                                                     @if(!empty($roles))
                                                                         <p id="menu-item-role_id-wrap">
-                                                                            <label class="howto" for="custom-menu-item-name"> <span>Role</span>&nbsp;
-                                                                                <select id="custom-menu-item-role" name="role">
-                                                                                    <option value="0">Select Role</option>
+                                                                            <label class="howto"
+                                                                                   for="custom-menu-item-name"> <span>Role</span>&nbsp;
+                                                                                <select id="custom-menu-item-role"
+                                                                                        name="role">
+                                                                                    <option value="0">Select Role
+                                                                                    </option>
                                                                                     @foreach($roles as $role)
-                                                                                        <option value="{{ $role->$role_pk }}">{{ ucfirst($role->$role_title_field) }}</option>
+                                                                                        <option
+                                                                                            value="{{ $role->$role_pk }}">{{ ucfirst($role->$role_title_field) }}</option>
                                                                                     @endforeach
                                                                                 </select>
                                                                             </label>
@@ -112,16 +175,179 @@ $currentUrl = url()->current();
                                                                     @endif
 
                                                                 </div>
-                                                            </form>
-                                                            <button class="float-right" type="submit" form="addCustomMenu" value="Submit">Submit</button>
+                                                                <button class="float-right" id="btn-submit-menu"
+                                                                        type="submit" form="addCustomMenu"
+                                                                        value="Submit">Add menu item
+                                                                </button>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </li>
+                                                    </li>
 
-                                            </ul>
+                                                </ul>
+                                                <ul class="outer-border">
+                                                    <li class="control-section accordion-section add-page"
+                                                        id="add-page">
+                                                        <h3 class="accordion-section-title hndle" tabindex="0"> BÀI VIẾT <span class="screen-reader-text">Press return or enter to expand</span>
+                                                        </h3>
+                                                        <div class="accordion-section-content ">
+                                                            <div class="inside">
+                                                                <input type="hidden" name="idmenu"
+                                                                       value="@if(isset($indmenu)){{$indmenu->id}}@endif"/>
+                                                                @csrf
+                                                                <div class="customlinkdiv"
+                                                                     style="max-height: 200px; overflow-y: scroll"
+                                                                     id="customlinkdiv">
+                                                                    <?php
+                                                                    $data = \App\Models\Post::all();
+                                                                    foreach($data as $value){
+                                                                    ?>
+                                                                    <div class="productLine">
+                                                                        <input id="{{$value->slug}}"
+                                                                               value="{{$value->id}}" type="checkbox"
+                                                                               name="posts[]">
+                                                                        <label
+                                                                            for="{{$value->slug}}">{{$value->title}}</label>
+                                                                    </div>
+                                                                    <?php
+                                                                    }
+                                                                    ?>
+
+                                                                    @if(!empty($roles))
+                                                                        <p id="menu-item-role_id-wrap">
+                                                                            <label class="howto"
+                                                                                   for="custom-menu-item-name"> <span>Role</span>&nbsp;
+                                                                                <select id="custom-menu-item-role"
+                                                                                        name="role">
+                                                                                    <option value="0">Select Role
+                                                                                    </option>
+                                                                                    @foreach($roles as $role)
+                                                                                        <option
+                                                                                            value="{{ $role->$role_pk }}">{{ ucfirst($role->$role_title_field) }}</option>
+                                                                                    @endforeach
+                                                                                </select>
+                                                                            </label>
+                                                                        </p>
+                                                                    @endif
+
+                                                                </div>
+                                                                <button class="float-right" id="btn-submit-menu"
+                                                                        type="submit" form="addCustomMenu"
+                                                                        value="Submit">Add menu item
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+
+                                                </ul>
+                                                <ul class="outer-border">
+                                                    <li class="control-section accordion-section add-page"
+                                                        id="add-page">
+                                                        <h3 class="accordion-section-title hndle" tabindex="0"> DANH SÁCH TRANG <span class="screen-reader-text">Press return or enter to expand</span>
+                                                        </h3>
+                                                        <div class="accordion-section-content ">
+                                                            <div class="inside">
+                                                                <input type="hidden" name="idmenu"
+                                                                       value="@if(isset($indmenu)){{$indmenu->id}}@endif"/>
+                                                                @csrf
+                                                                <div class="customlinkdiv"
+                                                                     style="max-height: 200px; overflow-y: scroll"
+                                                                     id="customlinkdiv">
+                                                                    <?php
+                                                                    $data = \App\Models\Page::all();
+                                                                    foreach($data as $value){
+                                                                    ?>
+                                                                    <div class="productLine">
+                                                                        <input id="{{$value->slug}}"
+                                                                               value="{{$value->id}}" type="checkbox"
+                                                                               name="pages[]">
+                                                                        <label
+                                                                            for="{{$value->slug}}">{{$value->name}}</label>
+                                                                    </div>
+                                                                    <?php
+                                                                    }
+                                                                    ?>
+
+                                                                    @if(!empty($roles))
+                                                                        <p id="menu-item-role_id-wrap">
+                                                                            <label class="howto"
+                                                                                   for="custom-menu-item-name"> <span>Role</span>&nbsp;
+                                                                                <select id="custom-menu-item-role"
+                                                                                        name="role">
+                                                                                    <option value="0">Select Role
+                                                                                    </option>
+                                                                                    @foreach($roles as $role)
+                                                                                        <option
+                                                                                            value="{{ $role->$role_pk }}">{{ ucfirst($role->$role_title_field) }}</option>
+                                                                                    @endforeach
+                                                                                </select>
+                                                                            </label>
+                                                                        </p>
+                                                                    @endif
+
+                                                                </div>
+                                                                <button class="float-right" id="btn-submit-menu"
+                                                                        type="submit" form="addCustomMenu"
+                                                                        value="Submit">Add menu item
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+
+                                                </ul>
+                                                <ul class="outer-border">
+                                                    <li class="control-section accordion-section add-page"
+                                                        id="add-page">
+                                                        <h3 class="accordion-section-title hndle" tabindex="0"> VỊ TRÍ HIỂN THỊ <span class="screen-reader-text">Press return or enter to expand</span>
+                                                        </h3>
+                                                        <div class="accordion-section-content ">
+                                                            <div class="inside">
+                                                                <div class="customlinkdiv" id="customlinkdiv">
+                                                                    <?php
+                                                                        $location = \App\Models\MenuLocation::where('menu_id', $indmenu->id )->first('location');
+                                                                        if(!empty($location)){
+                                                                            $location = $location->location;
+                                                                        }
+                                                                    ?>
+                                                                    <select name="location" id="productLineList" class="form-control" required="">
+                                                                        <option value="">-- Vui lòng chọn --</option>
+                                                                        <option value="1" {{$location === 1 ? 'selected' : ''}}>Đầu trang</option>
+                                                                        <option value="2"  {{$location === 2 ? 'selected' : ''}}>Cuối trang</option>
+                                                                    </select>
+
+                                                                    @if(!empty($roles))
+                                                                        <p id="menu-item-role_id-wrap">
+                                                                            <label class="howto"
+                                                                                   for="custom-menu-item-name"> <span>Role</span>&nbsp;
+                                                                                <select id="custom-menu-item-role"
+                                                                                        name="role">
+                                                                                    <option value="0">Select Role
+                                                                                    </option>
+                                                                                    @foreach($roles as $role)
+                                                                                        <option
+                                                                                            value="{{ $role->$role_pk }}">{{ ucfirst($role->$role_title_field) }}</option>
+                                                                                    @endforeach
+                                                                                </select>
+                                                                            </label>
+                                                                        </p>
+                                                                    @endif
+
+                                                                    <p class="button-controls">
+
+                                                                        <button class="float-right" id="btn-submit-menu"
+                                                                                type="submit" form="addCustomMenu"
+                                                                                value="Submit">Submit
+                                                                        </button>
+                                                                        <span class="spinner" id="spincustomu"></span>
+                                                                    </p>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+
+                                                </ul>
+                                            </form>
 										</div>
-{{--									</form>--}}
-
 								</div>
 								@endif
 								<div id="menu-management-liquid">

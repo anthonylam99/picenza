@@ -49,10 +49,15 @@ function showSlides(n) {
     let dots = document.getElementsByClassName("demo");
     let captionText = document.getElementById("caption");
     let listDots = document.getElementsByClassName("dot");
+    let listContent = document.getElementsByClassName("content-sl-main")
+
     if (n > slides.length) {slideIndex = 1}
     if (n < 1) {slideIndex = slides.length}
     for (i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";
+    }
+    for (i = 0; i < listContent.length; i++) {
+        listContent[i].style.display = "none";
     }
     for (i = 0; i < dots.length; i++) {
         dots[i].className = dots[i].className.replace(" active", "");
@@ -68,6 +73,9 @@ function showSlides(n) {
 
     if(slides.length > 0){
         slides[slideIndex-1].style.display = "block";
+    }
+    if(listContent.length > 0){
+        listContent[slideIndex-1].style.display = "block";
     }
     if(dots.length > 0){
         dots[slideIndex-1].className += " active";
@@ -211,6 +219,29 @@ $(document).ready(function(){
             },
             1000:{
                 items:6,
+                nav:false,
+                loop:false,
+                dots: true
+            }
+        }
+    })
+    $('.owl-carousel.banner').owlCarousel({
+        loop:true,
+        margin:10,
+        responsiveClass:true,
+        responsive:{
+            0:{
+                items:1,
+                nav:false,
+                dots: true
+            },
+            600:{
+                items:1,
+                nav:false,
+                dots: true
+            },
+            1000:{
+                items:1,
                 nav:false,
                 loop:false,
                 dots: true

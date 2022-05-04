@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PageImage extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $table = 'page_image';
 
     protected $fillable = [
-        'page_id', 'image_path', 'tag','title', 'content', 'url'
+        'page_id', 'image_path', 'tag','title', 'content', 'url', 'post_id', 'status'
     ];
 }

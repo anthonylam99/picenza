@@ -24,7 +24,8 @@
                         <div class="form-group">
                             <label for="title">Tên Trang</label>
                             <input type="text" name="name" id="title" class="form-control" value="{{$page->name}}"
-                                   placeholder="Nhập tên trang...">
+                                   placeholder="Nhập tên trang..." {{$page->name === 'Trang chủ' ? 'disabled' : ''}}>
+                            <input type="hidden" name="name" value="{{$page->name}}">
                             <input type="hidden" name="page_id" value="{{$page->id}}">
                         </div>
                     </div>
@@ -63,7 +64,8 @@
                                                                 class="fas fa-upload"></i>Chọn ảnh</label><input
                                                             style="display: none"
                                                             onclick="selectImageGaleryCustom({{$i}},  'banner' )"
-                                                            id="image-inputbanner{{$i}}" type="text" value="{{$value->image_path}}"
+                                                            id="image-inputbanner{{$i}}" type="text"
+                                                            value="{{$value->image_path}}"
                                                             name="imagebanner{{$i}}"
                                                             data-photo="1">
                                                         <button type="button" class="btn-danger btn-deleteimg"
@@ -82,10 +84,76 @@
                             <!-- /.card-body -->
                         </div>
 
-                        <div class="card card-info col-4">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="card card-info">
+                                    <div class="card-header">
+                                        <h3 class="card-title">
+                                            Khung thứ 3
+                                        </h3>
+
+                                        <div class="card-tools">
+                                            <button type="button" class="btn btn-tool" data-card-widget="collapse"
+                                                    title="Collapse">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <div class="body-card-imagedes" id="card-imagedes">
+                                                @foreach($aryCategory as $value)
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input name="postDes[]" class="custom-control-input"
+                                                               type="checkbox"
+                                                               id="customCheckbox{{$value->id}}" value="{{$value->id}}" {{ in_array($value->id, $arrPostPage['section3']) ? 'checked' : ''}}>
+                                                        <label for="customCheckbox{{$value->id}}"
+                                                               class="custom-control-label">{{$value->name}}</label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <div class="col-4">
+                                <div class="card card-info">
+                                    <div class="card-header">
+                                        <h3 class="card-title">
+                                            Khung thứ 4
+                                        </h3>
+
+                                        <div class="card-tools">
+                                            <button type="button" class="btn btn-tool" data-card-widget="collapse"
+                                                    title="Collapse">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <div class="body-card-imagedes" id="card-imagedes">
+                                                @foreach($aryCategory as $value)
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input name="section4[]" class="custom-control-input"
+                                                               type="checkbox"
+                                                               id="section4{{$value->id}}"  value="{{$value->id}}" {{ in_array($value->id, $arrPostPage['section4']) ? 'checked' : ''}}>
+                                                        <label for="section4{{$value->id}}"
+                                                               class="custom-control-label">{{$value->name}}</label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                        </div>
+                        <div class="card card-info">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                    Mô tả
+                                    Ảnh thương hiệu
                                 </h3>
 
                                 <div class="card-tools">
@@ -97,108 +165,11 @@
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <div class="body-card-imagedes" id="card-imagedes">
-                                        @foreach($post as $value)
-                                            <div class="custom-control custom-checkbox">
-                                                <input name="postDes[]" class="custom-control-input" type="checkbox"
-                                                       id="customCheckbox{{$value->id}}" value="{{$value->id}}">
-                                                <label for="customCheckbox{{$value->id}}" class="custom-control-label">{{$value->title}}</label>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
-
-                        @foreach($arrImg as $key => $tag)
-                            @if($key === 'discovery')
-                                <div class="card card-info">
-                                    <div class="card-header">
-                                        <h3 class="card-title">
-                                            Khung khám phá các khả năng
-                                        </h3>
-
-                                        <div class="card-tools">
-                                            <button type="button" class="btn btn-tool" data-card-widget="collapse"
-                                                    title="Collapse">
-                                                <i class="fas fa-minus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <label for="image-and-color">Ảnh mô tả</label>
-                                            <div class="body-card-imagediscovery row" id="card-imagediscovery">
-                                                <?php $i = 0; ?>
-                                                @foreach($tag as $value)
-
-                                                    <?php $i++; ?>
-                                                    <div class="col-3 img-boxdiscovery" id="label-imagediscovery{{$i}}"
-                                                         data-photo="1">
-                                                        <div
-                                                            style="height: 100px; border: 2px dashed #cccccc; margin-bottom: 10px;"
-                                                            id="image-previewdiscovery{{$i}}" class="show-img">
-                                                            <img src="{{asset($value->image_path)}}">
-                                                        </div>
-                                                        <label for="image-inputdiscovery{{$i}}" class="image-upload"><i
-                                                                class="fas fa-upload"></i>Chọn ảnh</label>
-                                                        <input
-                                                            style="margin-bottom: 3px" class="form-control" type="text"
-                                                            name="titlediscovery{{$i}}" value="{{$value->title}}"
-                                                            placeholder="Nhập tiêu đề..">
-                                                        <input
-                                                            style="margin-bottom: 3px" class="form-control" type="text"
-                                                            name="urldiscovery{{$i}}" value="{{$value->url}}"
-                                                            placeholder="Nhập đường dẫn bài viết..">
-                                                        <input
-                                                            style="margin-bottom: 3px" class="form-control" type="text"
-                                                            name="contentdiscovery{{$i}}" value="{{$value->content}}"
-                                                            placeholder="Nhập nội dung mô tả..">
-                                                        <input style="display: none"
-
-                                                               onchange="previewImageCustom({{$i}},  'discovery' )"
-                                                               id="image-inputdiscovery{{$i}}"
-                                                               type="file"
-                                                               name="imagediscovery{{$i}}"
-                                                               data-photo="{{$i}}">
-                                                        <button type="button" class="btn-danger btn-deleteimg"
-                                                                onclick="removeImageCustom({{$i}},  'discovery', {{$value->id}} )">
-                                                            Xóa ảnh
-                                                        </button>
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                            <button onclick="addImageBox('discovery')" type="button"
-                                                    class="btn-add-custom"
-                                                    id="btn-add-discovery"><i class="fas fa-plus"></i></button>
-                                        </div>
-                                    </div>
-                                    <!-- /.card-body -->
-                                </div>
-                            @endif
-                        @endforeach
-                        @foreach($arrImg as $key => $tag)
-                            @if($key === 'brand')
-                                <div class="card card-info">
-                                    <div class="card-header">
-                                        <h3 class="card-title">
-                                            Ảnh mô tả
-                                        </h3>
-
-                                        <div class="card-tools">
-                                            <button type="button" class="btn btn-tool" data-card-widget="collapse"
-                                                    title="Collapse">
-                                                <i class="fas fa-minus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <label for="image-and-color">Ảnh mô tả</label>
-                                            <div class="body-card-imagebrand row" id="card-imagebrand">
-
-                                                <?php $i = 0; ?>
+                                    <label for="image-and-color">Ảnh thương hiệu</label>
+                                    <div class="body-card-imagebrand row" id="card-imagebrand">
+                                        <?php $i = 0; ?>
+                                        @foreach($arrImg as $key => $tag)
+                                            @if($key === 'brand')
                                                 @foreach($tag as $value)
                                                     <?php $i++; ?>
                                                     <div class="col-3 img-boxbrand" id="label-imagebrand{{$i}}"
@@ -211,8 +182,9 @@
                                                         <label for="image-inputbrand{{$i}}" class="image-upload"><i
                                                                 class="fas fa-upload"></i>Chọn ảnh</label><input
                                                             style="display: none"
-                                                            onchange="previewImageCustom({{$i}},  'banner' )"
-                                                            id="image-inputbrand{{$i}}" type="file"
+                                                            onclick="selectImageGaleryCustom({{$i}},  'brand' )"
+                                                            id="image-inputbrand{{$i}}" type="text"
+                                                            value="{{$value->image_path}}"
                                                             name="imagebrand{{$i}}"
                                                             data-photo="1">
                                                         <button type="button" class="btn-danger btn-deleteimg"
@@ -221,39 +193,39 @@
                                                         </button>
                                                     </div>
                                                 @endforeach
-
-                                            </div>
-                                            <button onclick="addImageBox('des')" type="button" class="btn-add-custom"
-                                                    id="btn-add-des"><i class="fas fa-plus"></i></button>
-                                        </div>
+                                            @endif
+                                        @endforeach
                                     </div>
-                                    <!-- /.card-body -->
+                                    <button onclick="addImageBox('brand')" type="button" class="btn-add-custom"
+                                            id="btn-add-brand"><i class="fas fa-plus"></i></button>
                                 </div>
-                            @endif
-                        @endforeach
-
-                    @endif
-                    <div class="card card-info">
-                        <div class="card-header">
-                            <h3 class="card-title">
-                                NỘI DUNG TRANG
-                            </h3>
-
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
                             </div>
+                            <!-- /.card-body -->
                         </div>
-                        <div class="card-body p-0">
-                            <textarea name="content" id="text" cols="30" rows="10">{{$page->content}}</textarea>
-                        </div>
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-warning">Sửa</button>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
+                    @endif
+                    @if($page->name !== 'Trang chủ')
+                        <div class="card card-info">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    NỘI DUNG TRANG
+                                </h3>
 
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <textarea name="content" id="text" cols="30" rows="10">{{$page->content}}</textarea>
+                            </div>
+
+                            <!-- /.card-body -->
+                        </div>
+                    @endif
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-warning">Sửa</button>
+                    </div>
                 </form>
             </div>
         </div>

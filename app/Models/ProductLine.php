@@ -13,14 +13,24 @@ class ProductLine extends Model
 
     protected $fillable = [
         'name',
-        'company_id'
+        'company_id',
+        'name',
+        'avatar',
+        'status',
+        'slug',
+        'seo_url',
+        'url',
+        'description',
+        'posts',
     ];
 
-    public function company(){
+    public function company()
+    {
         return $this->hasOne(ProductCompany::class, 'id', 'company_id');
     }
 
-    public function feature(){
+    public function feature()
+    {
         return $this->hasMany(ProductFeature::class, 'product_line', 'id');
     }
 

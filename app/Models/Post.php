@@ -13,4 +13,8 @@ class Post extends Model
         'title', 'slug', 'content', 'tag', 'url', 'seo_url', 'category', 'avatar', 'status', 'seo_title',
         'seo_description', 'seo_keyword', 'seo_robots'
     ];
+
+    public function imageHome(){
+        return $this->hasMany(PageImage::class, 'post_id' ,'id');
+    }
 }

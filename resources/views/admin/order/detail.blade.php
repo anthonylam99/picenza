@@ -25,7 +25,6 @@
                         case 2:
                             $label = 'Đã hủy';
                             break;
-                        
                         default:
                             $label = 'Chưa thanh toán';
                             break;
@@ -119,7 +118,7 @@
                             type:type
                         },
                         beforeSend:function(){
-        
+
                         },
                         success:function(rest){
                             alert(rest.message);
@@ -132,3 +131,4 @@
     </div>
 </div>
 @endsection
+

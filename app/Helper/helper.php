@@ -134,6 +134,18 @@ if (!function_exists('get_name_district')) {
     }
 }
 
+function strip_tags_content($string)
+{
+    // ----- remove HTML TAGs -----
+    $string = preg_replace('/<[^>]*>/', ' ', $string);
+    // ----- remove control characters -----
+    $string = str_replace("\r", '', $string);
+    $string = str_replace("\n", ' ', $string);
+    $string = str_replace("\t", ' ', $string);
+    // ----- remove multiple spaces -----
+    $string = trim(preg_replace('/ {2,}/', ' ', $string));
+    return $string;
+}
 if (!function_exists('count_comment_by_user_id')) {
     /**
      * Count all comment of specific user
@@ -158,5 +170,21 @@ if (!function_exists('count_comment_by_user_id')) {
         }
 
         return $countComment;
+    }
+}
+
+if (!function_exists('truncate')) {
+    /**
+     * @param int $limit
+     * @param array $with
+     * @return \Illuminate\Support\Collection
+     */
+    function truncate($text, $limit) {
+        if (str_word_count($text, 0) > $limit) {
+            $words = str_word_count($text, 2);
+            $pos   = array_keys($words);
+            $text  = substr($text, 0, $pos[$limit]) . '...';
+        }
+        return $text;
     }
 }

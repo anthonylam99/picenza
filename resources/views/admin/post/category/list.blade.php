@@ -33,8 +33,11 @@
                     <tr>
                         <th>ID</th>
                         <th>TÊN</th>
+                        <th>Thông tin</th>
+                        <th class="text-center">Xem</th>
+                        <th class="text-center">Sửa</th>
+                        <th class="text-center">Xóa</th>
                         <th>TRẠNG THÁI</th>
-                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -43,22 +46,35 @@
                                 <td>{{$value->id}}</td>
                                 <td>{{$value->name}}</td>
                                 <td>
+                                    <strong>Thêm lúc:</strong>{{$value->created_at}} <br>
+                                    <strong>Cập nhật:</strong>{{$value->updated_at}}
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-info">
+                                        <a target="_blank" style="color: #FFFFFF" href="{{ route('home.news.index.slug', ['slug' => $value->slug]) }}">
+                                            <i class="far fa-eye"></i>
+                                        </a>
+                                    </button>
+                                </td>
+                                <td class=" text-center">
+                                    <button class="btn btn-info">
+                                        <a style="color: #FFFFFF" href="{{ route('admin.post.category.edit', ['id' => $value->id]) }}">
+                                            <i class="far fa-edit"></i>
+                                        </a>
+                                    </button>
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-danger">
+                                        <a style="color: #FFFFFF" href="{{ route('admin.tag.del', ['id' => $value->id]) }}">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </button>
+                                </td>
+                                <td class="text-center">
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input" id="status{{$value->id}}" {{ $value->status == 1 ? 'checked' : '' }} name="status" onclick="changeStatusCategory({{$value->id}})">
                                         <label name="status{{$value->id}}" class="custom-control-label status{{$value->id}}" for="status{{$value->id}}">{{ $value->status ? 'Bật' : 'Tắt' }}</label>
                                     </div>
-                                </td>
-                                <td>
-                                    <button class="btn btn-info">
-                                        <a style="color: #FFFFFF" href="{{ route('admin.post.category.edit', ['id' => $value->id]) }}">
-                                            Chi tiết
-                                        </a>
-                                    </button>
-                                    <button class="btn btn-danger">
-                                        <a style="color: #FFFFFF" href="{{ route('admin.post.category.del', ['id' => $value->id]) }}">
-                                            Xoá
-                                        </a>
-                                    </button>
                                 </td>
                             </tr>
                         @endforeach

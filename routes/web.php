@@ -49,6 +49,8 @@ Route::get('locations/district', [ProductController::class, 'district'])->name('
 Route::get('locations/ward', [ProductController::class, 'ward'])->name('locations.ward');
 Route::post('save-order', [ProductController::class, 'saveOrder'])->name('saveOrder');
 Route::post('update-quantity-cart', [ProductController::class, 'updateQtyCart'])->name('updateQtyCart');
+Route::get('tin-tuc', [HomeController::class, 'news'])->name('home.news.index');
+Route::get('tin-tuc/{slug}', [HomeController::class, 'news'])->name('home.news.index.slug');
 Route::get('tim-kiem-san-pham', [ProductController::class, 'searchProduct'])->name('action-search');
 Route::post('post-contact', [ContactController::class, 'postContact'])->name('post-contact');
 
@@ -65,6 +67,7 @@ Route::group(['prefix' => 'quan-tri', 'middleware' => 'CheckAdmin'], function ()
         Route::get('product_type_list/{id}/{id2}', [AdminController::class, 'getProductType']);
         Route::get('product_feature_list/{id}', [AdminController::class, 'getProductFeature']);
     });
+
 
     Route::group(['prefix' => 'san-pham', 'middleware' => 'auth'], function () {
         Route::get('danh-sach', [AdminController::class, 'productList'])->name('admin.product.list');
@@ -149,6 +152,7 @@ Route::group(['prefix' => 'quan-tri', 'middleware' => 'CheckAdmin'], function ()
         Route::post('them-moi', [PostController::class, 'addPost'])->name('admin.post.add.post');
         Route::get('sua/{id}', [PostController::class, 'editPost'])->name('admin.post.edit');
         Route::get('xoa/{id}', [PostController::class, 'delPost'])->name('admin.post.del');
+        Route::get('update-status', [PostController::class, 'updateStatus'])->name('admin.post.updateStatus');
         Route::group(['prefix' => 'tag'], function (){
             Route::get('/', [\App\Http\Controllers\TagController::class, 'listTag'])->name('admin.tag.list');
             Route::get('them-moi', [\App\Http\Controllers\TagController::class, 'addTag'])->name('admin.tag.add');
@@ -175,7 +179,7 @@ Route::group(['prefix' => 'quan-tri', 'middleware' => 'CheckAdmin'], function ()
 
 
 });
-Route::get('menu', [AdminController::class, 'menu'])->name('admin.menu.add');
+Route::get('menu', [AdminController::class, 'menu'])->name('admin.menu.add')->middleware(['CheckAdmin' , 'auth']);
 Route::post('menu', [AdminController::class, 'menu']);
 Route::get('danh-sach-menu', [AdminController::class, 'menuList'])->name('admin.menu.list');
 

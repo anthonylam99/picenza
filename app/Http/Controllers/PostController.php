@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function showPost(Request $request, $slug = ''){
-        $post = Post::where('slug', $slug)->firstOrFail();
+        $post = Post::where('seo_url', $slug)->firstOrFail();
 
         $relatePost = Post::where('id', '!=', $post->id)->where(function ($q) use ($post){
             $q->where('category', 'LIKE', '%'.$post->category.'%');
@@ -139,5 +139,21 @@ class PostController extends Controller
         $tag = Tag::all();
 
         return view('admin.post.tag', compact('tag'));
+    }
+
+    /**
+     * Update status post
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function updateStatus(Request $request)
+    {
+        $update = Post::where('id', $request->get('id'))->update([
+            'status' => $request->status
+        ]);
+        if($update){
+            return response()->json(['message' => 'Success']);
+        }
     }
 }

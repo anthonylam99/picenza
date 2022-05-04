@@ -6,6 +6,7 @@ use App\Http\Controllers\Entity\Options;
 use App\Models\Comments;
 use App\Models\Contact;
 use App\Models\Orders;
+use App\Models\Post;
 use App\Models\Product;
 use App\Models\ProductColor;
 use App\Models\ProductCompany;
@@ -175,6 +176,10 @@ class AdminController extends Controller
             'feature' => $feature,
             'avatar_path' => $request->get('img_avatar_path'),
             'is_bestseller' => $request->get('is_bestseller') ?? 0,
+            'seo_title' => $request->get('seo_title'),
+            'seo_description' => $request->get('seo_description'),
+            'seo_keyword' => $request->get('seo_keyword'),
+            'seo_robots' => $request->get('seo_robots')
         ];
 
 
@@ -196,6 +201,7 @@ class AdminController extends Controller
                 $arr = [];
                 $arr['image_path'] = $request->get('image' . $index);
                 $arr['product_id'] = $product->id;
+                $arr['price'] = $request->get('price'.$index);
 
                 $arrColor = [];
                 $color = $request->get('color' . $index);
@@ -204,7 +210,7 @@ class AdminController extends Controller
                     ['color' => $color],
                     [
                         'color' => $color,
-                        'hex' => $hex
+                        'hex' => $hex,
                     ]
                 );
                 $arr['color'] = $insert->id;
@@ -225,12 +231,13 @@ class AdminController extends Controller
                         ProductImage::updateOrCreate(
                             [
                                 'product_id' => $value['product_id'],
-                                'color' => $value['color']
+                                'color' => $value['color'],
                             ],
                             [
                                 'product_id' => $value['product_id'],
                                 'color' => $value['color'],
-                                'image_path' => $value['image_path']
+                                'image_path' => $value['image_path'],
+                                'price' => $value['price']
                             ]
                         );
                     }
@@ -295,17 +302,70 @@ class AdminController extends Controller
     {
         if ($request->method() == 'POST') {
             $idmenu = $request->get('idmenu');
-            $labelProduct = $request->get('label_product');
-            foreach ($labelProduct as $value) {
-                $data = ProductLine::find($value);
-                if (!empty($data)) {
-                    $arr = [
-                        'labelmenu' => $data->name,
-                        'linkmenu' => $data->url,
-                        'idmenu' => $idmenu
-                    ];
+            if(!empty($request->get('label'))){
+                $url = $request->get('url');
+                $label = $request->get('label');
+                $this->addMenu($idmenu, $label, $url);
+            }
+            if($request->has('label_product')){
+                $labelProduct = $request->get('label_product');
+                foreach ($labelProduct as $value) {
+                    $data = ProductLine::find($value);
+                    if (!empty($data)) {
+                        $arr = [
+                            'labelmenu' => $data->name,
+                            'linkmenu' => $data->url,
+                            'idmenu' => $idmenu
+                        ];
 
-                    $this->addMenu($arr['idmenu'], $arr['labelmenu'], $arr['linkmenu']);
+                        $this->addMenu($arr['idmenu'], $arr['labelmenu'], $arr['linkmenu']);
+                    }
+                }
+            }
+            if($request->has('posts')){
+                $posts = $request->get('posts');
+                foreach ($posts as $value) {
+                    $data = Post::find($value);
+                    if (!empty($data)) {
+                        $arr = [
+                            'labelmenu' => $data->title,
+                            'linkmenu' => $data->url,
+                            'idmenu' => $idmenu
+                        ];
+
+                        $this->addMenu($arr['idmenu'], $arr['labelmenu'], $arr['linkmenu']);
+                    }
+                }
+            }
+            if($request->has('pages')){
+                $pages = $request->get('pages');
+                foreach ($pages as $value) {
+                    $data = Post::find($value);
+                    if (!empty($data)) {
+                        $arr = [
+                            'labelmenu' => $data->title,
+                            'linkmenu' => $data->url,
+                            'idmenu' => $idmenu
+                        ];
+
+                        $this->addMenu($arr['idmenu'], $arr['labelmenu'], $arr['linkmenu']);
+                    }
+                }
+            }
+            if($request->has('location')){
+                $location = $request->get('location');
+                $arr = [
+                    'menu_id' => $idmenu,
+                    'location' => $location
+                ];
+                $find = MenuLocation::where('menu_id', $idmenu)->get();
+
+                if(!empty(collect($find)->toArray())){
+                    MenuLocation::where('location', $location)->update([
+                        'menu_id' => $idmenu
+                    ]);
+                }else{
+                    MenuLocation::create($arr);
                 }
             }
         }

@@ -43,7 +43,7 @@
                         </div>
                         <div class="form-group row">
                             <label for="title" class="col-md-2 col-sm-2 col-xs-12">Tag</label>
-                            <select name="tag[]" class="form-control js-example-tags col-sm-9" multiple="multiple" required>
+                            <select name="tag[]" class="form-control js-example-tags col-sm-9" multiple="multiple">
                                 @foreach($tag as $value)
                                     <option>{{$value->name}}</option>
                                 @endforeach

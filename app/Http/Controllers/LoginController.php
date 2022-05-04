@@ -35,13 +35,14 @@ class LoginController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
- 
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
- 
+
             return redirect('/quan-tri');
         }
- 
+
+
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);
