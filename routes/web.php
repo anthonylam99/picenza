@@ -167,6 +167,12 @@ Route::group(['prefix' => 'quan-tri', 'middleware' => 'CheckAdmin'], function ()
         });
     });
 
+    Route::group(['prefix' => 'binh-luan', 'middleware' => 'auth'], function() {
+        Route::get('/', [AdminController::class, 'listComment'])->name('admin.comment.list');
+        Route::get('chi-tiet/{id}', [AdminController::class, 'detailComment'])->name('admin.comment.edit');
+        Route::get('update-status', [AdminController::class, 'updateStatus'])->name('admin.comment.update.status');
+    });
+
 
 });
 Route::get('menu', [AdminController::class, 'menu'])->name('admin.menu.add');

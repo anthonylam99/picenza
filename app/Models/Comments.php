@@ -41,6 +41,7 @@ class Comments extends Model
         'file',
         'address',
         'gender',
+        'status',
     ];
 
     public function user()
