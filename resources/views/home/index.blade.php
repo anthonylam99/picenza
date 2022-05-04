@@ -89,7 +89,7 @@
                                                             {{$arrPostPage['section4'][$i]->title}}
                                                         </a>
                                                     </h5>
-                                                    <p>{{strip_tags_content($arrPostPage['section4'][$i]->content)}} </p>
+                                                    <p> {!!html_entity_decode($arrPostPage['section4'][$i]->content).'......'!!}</p>
                                                 </div>
                                                 <div class="content-right col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                                     <div class="context">

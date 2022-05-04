@@ -343,9 +343,9 @@ function selectImageGaleryCustom(id, tag) {
                 var file = evt.data.files.first();
                 // output.value = file.getUrl();
                 var img = "<img id='image-preview-src' + tag + id  src='" + file.getUrl() + "'/>"
-                $('#image-preview'+tag + id).html(img);
-                $('#image-input'+tag + id).val(file.getUrl());
-                console.log($('#image-input'+tag + id).val())
+                $('#image-preview' + tag + id).html(img);
+                $('#image-input' + tag + id).val(file.getUrl());
+                console.log($('#image-input' + tag + id).val())
             });
 
             finder.on('file:choose:resizedImage', function (evt) {
@@ -537,7 +537,7 @@ $(function () {
                     "</div>" +
                     "</td>" +
                     "<td>" +
-                    "<button class='btn btn-danger'>" + "<i class='fas fa-trash'></i>" + "</button>" +
+                    "<button class='btn btn-danger' onclick='deleteSubCate(" + res.data.id + ")'>" + "<i class='fas fa-trash'></i>" + "</button>" +
                     "</td>" +
                     "</tr>";
                 html += table
@@ -570,6 +570,25 @@ function makeFavourite(id) {
                 console.log(err)
             }
         })
+    })
+}
+
+function deleteSubCate(id) {
+    var token = $("#token").val();
+
+    $.ajax({
+        type: 'POST',
+        url: '/quan-tri/san-pham/tinh-nang/danh-muc-con/xoa',
+        data: {
+            _token: token,
+            id: id
+        },
+        success: function (res) {
+            window.location.reload()
+        },
+        error: function (err) {
+            console.log(err)
+        }
     })
 }
 

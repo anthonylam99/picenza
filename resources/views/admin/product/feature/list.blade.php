@@ -18,7 +18,7 @@
 
                 <div class="form-search float-right" style="display:flex">
                     <form style="margin-bottom: 0; margin-right: 10px" class="form-group" action="{{route('admin.product.feature.list')}}">
-                        <input  class="form-control" type="text" name="s" value="" placeholder="Tìm kiếm sản phẩm....">
+                        <input  class="form-control" type="text" name="s" value="" placeholder="Tìm kiếm thuộc tính....">
                     </form>
                     <button style="margin-bottom: 10px; margin-right: 10px" type="button" class="btn btn-success">
                         <a style="color: #FFFFFF;" href="{{route('admin.product.feature.add.post')}}">
@@ -34,6 +34,7 @@
                     <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Danh mục sản phẩm</th>
                         <th>Thuộc tính</th>
                         <th>Thông tin</th>
                         <th></th>
@@ -43,6 +44,7 @@
                         @foreach($feature as $value)
                             <tr>
                                 <td>{{$value->id}}</td>
+                                <td>{{(!empty($value->line->name) ? $value->line->name : '')}}</td>
                                 <td>{{$value->name}}</td>
                                 <td>
                                     <strong>Thêm lúc:</strong>{{$value->created_at}} <br>

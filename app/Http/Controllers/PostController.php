@@ -130,9 +130,11 @@ class PostController extends Controller
         return view('admin.post.edit', compact('post', 'tag', 'listTag', 'category', 'listCategory'));
     }
 
-    public function delPost(Request $request)
+    public function delPost(Request $request, $id = null)
     {
-        return view('admin.post.list');
+        $post = Post::findOrFail($id);
+        $post->delete();
+        return redirect()->route('admin.post.list');
     }
 
     public function listTag(Request $request){

@@ -15,7 +15,7 @@
   width: 100%;
   position: relative;
   -webkit-font-smoothing: subpixel-antialiased;
-  
+
 }
 #hwpwrap #wpcontent {
   height: 100%;
@@ -2159,8 +2159,8 @@
   padding-right: 10px;
 }
 #hwpwrap .js .input-with-default-title {
-  color: #aaa;
-  font-style: italic;
+  /*color: #aaa;*/
+  /*font-style: italic;*/
 }
 #hwpwrap #menu-management .inside {
   padding: 0 10px;

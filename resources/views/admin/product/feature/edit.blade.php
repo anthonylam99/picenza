@@ -36,19 +36,19 @@
                                 <input type="text" name="name" class="form-control" id="nameFeature"
                                        placeholder="Nhập tên tính năng..." value="{{$feature->name}}" required>
                             </div>
-                            <div class="form-group">
-                                <label for="ckfinder-popup-1" class="col-md-2 col-sm-2 col-xs-12">Ảnh đại diện</label>
+{{--                            <div class="form-group">--}}
+{{--                                <label for="ckfinder-popup-1" class="col-md-2 col-sm-2 col-xs-12">Ảnh đại diện</label>--}}
 
-                                <div id="show-img-avatar">
-                                    <button type="button" id="ckfinder-popup-1" class="btn btn-sm btn-success">
-                                        Chọn ảnh
-                                    </button>
-                                    <div class="img-avt">
-                                        <img id="img-avatar" src="{{$feature->avatar}}" alt="">
-                                    </div>
-                                    <input type="hidden" id="img_avatar_path" name="img_avatar_path" value="">
-                                </div>
-                            </div>
+{{--                                <div id="show-img-avatar">--}}
+{{--                                    <button type="button" id="ckfinder-popup-1" class="btn btn-sm btn-success">--}}
+{{--                                        Chọn ảnh--}}
+{{--                                    </button>--}}
+{{--                                    <div class="img-avt">--}}
+{{--                                        <img id="img-avatar" src="{{$feature->avatar}}" alt="">--}}
+{{--                                    </div>--}}
+{{--                                    <input type="hidden" id="img_avatar_path" name="img_avatar_path" value="">--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                             <div class="form-group">
                                 <label for="">Mô tả</label>
                                 <textarea class="form-control" rows="3" name="description" placeholder="Nhập mô tả ...">{{$feature->description}}</textarea>
@@ -127,7 +127,7 @@
                                 </div>
                             </td>
                             <td>
-                                <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                <button class="btn btn-danger" onclick="deleteSubCate({{$value->id}})"><i class="fas fa-trash"></i></button>
                             </td>
                         </tr>
                     @endforeach

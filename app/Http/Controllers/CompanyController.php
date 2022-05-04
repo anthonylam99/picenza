@@ -87,8 +87,11 @@ class CompanyController extends Controller
         return view('admin.company.edit', compact('data'));
     }
 
-    public function delCompany(Request $request)
+    public function delCompany(Request $request, $id = null)
     {
+        $data = ProductCompany::findOrFail($id);
+        $data->delete();
 
+        return redirect()->route('admin.company.list');
     }
 }

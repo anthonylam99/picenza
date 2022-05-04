@@ -92,6 +92,7 @@ Route::group(['prefix' => 'quan-tri', 'middleware' => 'CheckAdmin'], function ()
             Route::get('danh-muc-con/sua/{id}', [\App\Http\Controllers\ProductFeatureController::class, 'editSubCategory'])->name('admin.sub.category.edit');
             Route::post('danh-muc-con/sua/{id}', [\App\Http\Controllers\ProductFeatureController::class, 'editSubCategory'])->name('admin.sub.category.edit.post');
             Route::get('danh-muc-con/yeu-thich', [\App\Http\Controllers\ProductFeatureController::class, 'makeFavourite']);
+            Route::post('danh-muc-con/xoa', [\App\Http\Controllers\ProductFeatureController::class, 'delSubCategory'])->name('admin.sub.category.del');
         });
     });
 
