@@ -279,9 +279,17 @@ class ProductController extends Controller
 
     public function compareProduct(Request $request){
         $product = $request->get('product', []);
+        $feature = [];
         if(!empty($product)){
             $product = Product::whereIn('id', $product)->where('status', 1)->get();
-            return view('product.compare', compact('product'));
+
+            foreach($product as $item){
+                $dataFeature = explode(',', $item->feature);
+                $itemData = SubCategory::whereIn('id',$dataFeature)->get();
+
+                $feature[$item->id] = $itemData;
+            }
         }
+        return view('product.compare', compact('product', 'feature'));
     }
 }

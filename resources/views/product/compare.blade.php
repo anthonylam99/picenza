@@ -73,7 +73,8 @@
                             <div class="add-product">
                                 <h3 style="height: 43.2px;">Bạn muốn so sánh thêm sản phẩm?</h3>
                                 <div class="input" style="position: relative">
-                                    <input id="kwdCompare" type="text" placeholder="Tìm kiếm sản phẩm" autocomplete="off">
+                                    <input id="kwdCompare" type="text" placeholder="Tìm kiếm sản phẩm"
+                                           autocomplete="off">
                                 </div>
                             </div>
                         </td>
@@ -94,33 +95,25 @@
                         <td></td>
                     @endif
                 </tr>
-                <tr class="specs">
-                    <th class="text">Bộ sản phẩm tiêu chuẩn</th>
-                    <td class="data">
-                    </td>
-                    <td></td>
-                </tr>
-                <tr class="specs">
-                    <td class="text">Bảo hành</td>
-                    <td class="data">Bảo hành 12 tháng tại trung tâm uỷ quyền của Apple tại Việt Nam. Bao xài, đổi trả
-                        trong 15 ngày đầu.
-                    </td>
-                    <td></td>
-                </tr>
                 <tr class="specs-group">
-                    <th class="text" colspan="3">Chức năng</th>
+                    <th class="text" colspan="3">Tính năng</th>
                 </tr>
                 <tr class="specs">
-                    <th class="text">Mô tả</th>
-                    <td class="data">
-                        <ugit
-                        <li>Thanh toán qua VNPAY: Giảm 50.000đ cho đơn hàng từ 2 triệu đến 4 triệu. Giảm 100.000đ
-                            cho đơn hàng từ 4 triệu đến 10 triệu. Giảm 250.000đ cho đơn hàng từ 10 triệu đến 20
-                            triệu. Giảm 300.000đ cho đơn hàng từ 20 triệu trở lên (Từ ngày 29/04-30/06/2022).
-                        </li>
-                        </ul>
-                    </td>
-                    <td></td>
+                    <th class="text"</th>
+                    @foreach($product as $item)
+                        <td class="data">
+                            <ul>
+                                @if(isset($feature[$item->id]))
+                                    @foreach($feature[$item->id] as $feature)
+                                        <li>{{$feature->name}}</li>
+                                    @endforeach
+                                @endif
+                            </ul>
+                        </td>
+                    @endforeach
+                    @if(count($product) <= 1)
+                        <td></td>
+                    @endif
                 </tr>
                 </tbody>
             </table>
