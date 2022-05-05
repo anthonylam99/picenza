@@ -1,4 +1,5 @@
 $('.color-options:nth-child(1)').addClass('active')
+
 function changeColor(id, color, productId) {
     console.log(id);
     $('#color-selected').val(id)
@@ -18,15 +19,15 @@ function changeColor(id, color, productId) {
         success: function (response) {
             var img = `<img src="${response.url}" >`;
 
-            var price = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(response.price)
-           $('#img-product-color').html(img);
-           $('#bind-price').html(price);
-           $('#hidden-price').val(response.price);
+            var price = new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(response.price)
+            $('#img-product-color').html(img);
+            $('#bind-price').html(price);
+            $('#hidden-price').val(response.price);
         }
     })
 }
 
-function addParamCategory(){
+function addParamCategory() {
     const url = window.location.href
 
     console.log(url)
@@ -51,8 +52,12 @@ function showSlides(n) {
     let listDots = document.getElementsByClassName("dot");
     let listContent = document.getElementsByClassName("content-sl-main")
 
-    if (n > slides.length) {slideIndex = 1}
-    if (n < 1) {slideIndex = slides.length}
+    if (n > slides.length) {
+        slideIndex = 1
+    }
+    if (n < 1) {
+        slideIndex = slides.length
+    }
     for (i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";
     }
@@ -71,181 +76,231 @@ function showSlides(n) {
     // captionText.innerHTML = dots[slideIndex-1].alt;
     // listDots[slideIndex-1].className += ' slideractive';
 
-    if(slides.length > 0){
-        slides[slideIndex-1].style.display = "block";
+    if (slides.length > 0) {
+        slides[slideIndex - 1].style.display = "block";
     }
-    if(listContent.length > 0){
-        listContent[slideIndex-1].style.display = "block";
+    if (listContent.length > 0) {
+        listContent[slideIndex - 1].style.display = "block";
     }
-    if(dots.length > 0){
-        dots[slideIndex-1].className += " active";
+    if (dots.length > 0) {
+        dots[slideIndex - 1].className += " active";
     }
     // captionText.innerHTML = dots[slideIndex-1].alt;
-    if(listDots.length > 0){
-        listDots[slideIndex-1].className += ' slideractive';
+    if (listDots.length > 0) {
+        listDots[slideIndex - 1].className += ' slideractive';
     }
 }
-$('.dropdown-menu a.dropdown-item').on('click', function(e) {
+
+$('.dropdown-menu a.dropdown-item').on('click', function (e) {
     if (!$(this).next().hasClass('show')) {
         $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
     }
     var $subMenu = $(this).next(".dropdown-menu");
 
     $subMenu.toggleClass('show');
-    $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
+    $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function (e) {
         $('.dropdown-submenu .show').removeClass("show");
     });
     return false;
 });
-$(document).ready(function(){
+$(document).ready(function () {
     $('.owl-carousel.brands').owlCarousel({
-        loop:true,
-        margin:10,
-        responsiveClass:true,
-        responsive:{
-            0:{
-                items:2,
-                nav:false,
+        loop: true,
+        margin: 10,
+        responsiveClass: true,
+        responsive: {
+            0: {
+                items: 2,
+                nav: false,
                 dots: true
             },
-            600:{
-                items:3,
-                nav:false,
+            600: {
+                items: 3,
+                nav: false,
                 dots: true
             },
-            1000:{
-                items:5,
-                nav:false,
-                loop:false,
+            1000: {
+                items: 5,
+                nav: false,
+                loop: false,
                 dots: true
             }
         }
     });
 
     $('.owl-carousel.subcate').owlCarousel({
-        loop:true,
+        loop: true,
         items: 3
     })
 
     $('.owl-carousel.bestseller').owlCarousel({
-        loop:true,
+        loop: true,
         items: 3
     })
 
     $('.owl-carousel.options3').owlCarousel({
-        loop:true,
-        margin:10,
-        responsiveClass:true,
-        responsive:{
-            0:{
-                items:1,
-                nav:false,
+        loop: true,
+        margin: 10,
+        responsiveClass: true,
+        responsive: {
+            0: {
+                items: 1,
+                nav: false,
                 dots: true
             },
-            600:{
-                items:2,
-                nav:false,
+            600: {
+                items: 2,
+                nav: false,
                 dots: true
             },
-            1000:{
-                items:3,
-                nav:false,
-                loop:false,
+            1000: {
+                items: 3,
+                nav: false,
+                loop: false,
                 dots: true
             }
         }
     })
 
     $('.owl-carousel.category').owlCarousel({
-        loop:true,
-        margin:10,
-        responsiveClass:true,
-        responsive:{
-            0:{
-                items:2,
-                nav:false,
+        loop: true,
+        margin: 10,
+        responsiveClass: true,
+        responsive: {
+            0: {
+                items: 2,
+                nav: false,
                 dots: true
             },
-            600:{
-                items:4,
-                nav:false,
+            600: {
+                items: 4,
+                nav: false,
                 dots: true
             },
-            1000:{
-                items:6,
-                nav:false,
-                loop:false,
+            1000: {
+                items: 6,
+                nav: false,
+                loop: false,
                 dots: true
             }
         }
     })
     $('.owl-carousel.product-relate').owlCarousel({
-        loop:true,
-        margin:10,
-        responsiveClass:true,
-        responsive:{
-            0:{
-                items:2,
-                nav:false,
+        loop: true,
+        margin: 10,
+        responsiveClass: true,
+        responsive: {
+            0: {
+                items: 2,
+                nav: false,
                 dots: true
             },
-            600:{
-                items:4,
-                nav:false,
+            600: {
+                items: 4,
+                nav: false,
                 dots: true
             },
-            1000:{
-                items:6,
-                nav:false,
-                loop:false,
+            1000: {
+                items: 6,
+                nav: false,
+                loop: false,
                 dots: true
             }
         }
     })
     $('.owl-carousel.product-recent').owlCarousel({
-        loop:true,
-        margin:10,
-        responsiveClass:true,
-        responsive:{
-            0:{
-                items:2,
-                nav:false,
+        loop: true,
+        margin: 10,
+        responsiveClass: true,
+        responsive: {
+            0: {
+                items: 2,
+                nav: false,
                 dots: true
             },
-            600:{
-                items:4,
-                nav:false,
+            600: {
+                items: 4,
+                nav: false,
                 dots: true
             },
-            1000:{
-                items:6,
-                nav:false,
-                loop:false,
+            1000: {
+                items: 6,
+                nav: false,
+                loop: false,
                 dots: true
             }
         }
     })
     $('.owl-carousel.banner').owlCarousel({
-        loop:true,
-        margin:10,
-        responsiveClass:true,
-        responsive:{
-            0:{
-                items:1,
-                nav:false,
+        loop: true,
+        margin: 10,
+        responsiveClass: true,
+        responsive: {
+            0: {
+                items: 1,
+                nav: false,
                 dots: true
             },
-            600:{
-                items:1,
-                nav:false,
+            600: {
+                items: 1,
+                nav: false,
                 dots: true
             },
-            1000:{
-                items:1,
-                nav:false,
-                loop:false,
+            1000: {
+                items: 1,
+                nav: false,
+                loop: false,
                 dots: true
             }
         }
     })
 });
+
+
+$(function () {
+    $("body").click(function(){
+        $("#search-auto").hide()
+    })
+    $('#kwdCompare').click(function(){
+        $(this).show()
+    })
+    $('#kwdCompare').on('input', function () {
+        var query = $(this).val()
+
+        $.ajax({
+            type: 'GET',
+            url: '/search-product',
+            data: {
+                query: query
+            },
+            success: function (res) {
+                var html = ''
+
+                res.forEach(function (item) {
+                    $("#search-auto").show()
+                    var currentUrl = window.location.href + '&product[]=' + item.id
+                    html += "<div class='search-item' onclick='location.href="+'"'+currentUrl+'"'+"'>" +
+                                "<div class='img'>" +
+                                    "<img src='"+item.avatar_path+"'>" +
+                                "</div>"+
+                                    "<div class='info'>"+
+                                        "<h2>" +
+                                            "<a href='"+currentUrl+"'>" +
+                                                item.name +
+                                            "</a>" +
+                                        "</h2>"+
+                                                "<h3>"+
+                                                    "<strike>"+"</strike>"+
+                                                        parseInt(item.price).toLocaleString('en-US') + "VNĐ" +
+                                                "</h3>" +
+                                    "</div>"+
+                            "<div>"
+                })
+                $('#autocomplete-suggestion').html(html)
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+    })
+})

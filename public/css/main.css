@@ -2090,6 +2090,155 @@ footer .copyright h6 {
     font-weight: bold;
 }
 
+.compare {
+    margin: 30px 0;
+    padding: 25px;
+    background: #fff;
+    box-shadow: 0 3px 6px #00000029;
+    border-radius: 14px;
+    font-size: 14px;
+}
+.compare table {
+    border-collapse: collapse;
+}
+
+.compare table .specs-group th {
+    font-weight: bold;
+
+    color: #fff;
+    background: #ed2027;
+    text-align: center;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+.compare table td, .compare table th {
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    vertical-align: top;
+}
+.compare table td:nth-child(2n+1) {
+    background: #fafafa;
+}
+.compare table .specs .text {
+    font-weight: bold;
+    background: #efefef;
+    text-align: center;
+    vertical-align: middle;
+}
+.compare table .specs td.image {
+    position: relative;
+}
+.compare table .specs .remove {
+    color: #fff;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 4px 6px;
+    background: #fd5465;
+    height: 21px;
+    line-height: 16px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+.compare table .specs div.image {
+    text-align: center;
+}
+.compare h3 {
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 15px;
+    color: #555;
+    margin: 0 0 10px 0;
+}
+.compare p.price {
+    font-size: 25px;
+    color: #fd475a;
+    margin: 0 0 10px 0;
+    text-align: center;
+    clear: both;
+}
+.compare p.price strong {
+    display: block;
+    clear: both;
+}
+.compare p.price i {
+    color: #333;
+    font-size: 15px;
+    clear: both;
+}
+.compare p.price i {
+    color: #333;
+    font-size: 15px;
+    clear: both;
+}
+.compare table td:nth-child(2n+1) {
+    background: #fafafa;
+}
+.compare table .specs td.image {
+    position: relative;
+}
+.compare table .add-product {
+    padding: 20px 0;
+    text-align: center;
+}
+.compare table .add-product .input {
+    margin-top: 30px;
+    background: #e5e5e5;
+    border-radius: 15px;
+    padding: 5px 10px;
+    position: relative;
+}
+.compare table .add-product .input input {
+    padding: 8px 10px;
+    font-size: 14px;
+    color: #333;
+    border: 1px solid #eee;
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 7px 0;
+    font-weight: bold;
+    background: #e5e5e5;
+}
+.autocomplete-suggestions {
+    margin-top: 15px !important;
+    box-shadow: 0 4px 6px #00000029;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    background: #fff;
+    overflow: auto;
+    margin-top: 5px;
+}
+.autocomplete-suggestion {
+    overflow: hidden;
+    padding: 0 20px;
+}
+.autocomplete-suggestions .search-item {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+.autocomplete-suggestions .search-item .img {
+    width: 70px;
+    margin-right: 15px;
+}
+.autocomplete-suggestions .search-item .img img {
+    max-width: 100%;
+}
+.autocomplete-suggestions .search-item h2 {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.autocomplete-suggestions .search-item h2 a, .autocomplete-suggestions .search-item h2 a:link, .autocomplete-suggestions .search-item h2 a:visited {
+    color: #191919;
+    font-size: 15px;
+}
+.autocomplete-suggestions .search-item h3 {
+    color: #f00;
+    font-weight: bold;
+    font-size: 13px;
+}
 @media only screen and (max-width: 58.75em) {
     .menu li a {
         font-size: 1rem;

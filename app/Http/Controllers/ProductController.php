@@ -18,6 +18,12 @@ use Session;
 
 class ProductController extends Controller
 {
+    public function searchProductApi(Request $request){
+        $product = Product::where('name', 'LIKE', '%'.$request->get('query').'%')->get();
+
+        return response()->json($product);
+    }
+
     public function detailProduct(Request $request, $id){
         $stars = [
             "fullStar" => 0,
@@ -269,5 +275,13 @@ class ProductController extends Controller
         $company = ProductCompany::all();
 
         return view('product.search-result', compact('aryProduct', 'keyWord', 'featureData', 'productPrice', 'company'));
+    }
+
+    public function compareProduct(Request $request){
+        $product = $request->get('product', []);
+        if(!empty($product)){
+            $product = Product::whereIn('id', $product)->where('status', 1)->get();
+            return view('product.compare', compact('product'));
+        }
     }
 }

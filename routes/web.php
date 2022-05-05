@@ -53,7 +53,8 @@ Route::get('tin-tuc', [HomeController::class, 'news'])->name('home.news.index');
 Route::get('tin-tuc/{slug}', [HomeController::class, 'news'])->name('home.news.index.slug');
 Route::get('tim-kiem-san-pham', [ProductController::class, 'searchProduct'])->name('action-search');
 Route::post('post-contact', [ContactController::class, 'postContact'])->name('post-contact');
-Route::get('/san-pham/so-sanh', [ProductController::class, 'compareProduct'])->name('product.compare');
+Route::get('so-sanh-san-pham', [ProductController::class, 'compareProduct'])->name('product.compare');
+Route::get('search-product', [ProductController::class, 'searchProductApi']);
 
 Route::get('/quan-tri', [AdminController::class, 'index']);
 Route::get('/quan-tri/dang-nhap', [LoginController::class, 'showLoginForm'])->name('login');

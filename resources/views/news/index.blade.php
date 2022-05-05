@@ -4,7 +4,7 @@
 @section('seo')
     @if(!empty($categoryData['seo_title']))
         <meta name="title" content="{{$categoryData['seo_title']}}">
-    @else
+    @elseif(!empty($categoryData['name']))
         <meta name="title" content="{{$categoryData['name']}}">
     @endif
     @if(!empty($categoryData['seo_description']))
