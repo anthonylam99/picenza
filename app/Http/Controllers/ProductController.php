@@ -37,7 +37,7 @@ class ProductController extends Controller
 
         $detailProduct = Product::with(['productImage.color'])->find($id);
 
-        $aryComments = $detailProduct->comment()->orderBy('id', 'DESC')->paginate(3);
+        $aryComments = $detailProduct->comment()->where('status', 1)->orderBy('id', 'DESC')->paginate(3);
 
         $aryCountStar = Comments::select([\DB::raw('COUNT(*) as count_star'), 'rating'])
                                 ->where('product_id', $id)
