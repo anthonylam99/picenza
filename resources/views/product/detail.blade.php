@@ -53,7 +53,7 @@
         <div class="content-1 row">
             <div class="product-image col-12 col-md-7">
                 <div class="image" id="img-product-color">
-                    <img src="{{ count($detailProduct->productImage) > 0 ? asset($detailProduct->productImage[0]->image_path) : 'images/product/product_demo_2.png' }}" alt="tag">
+                    <img style="height: 350px !important;" src="{{ count($detailProduct->productImage) > 0 ? asset($detailProduct->productImage[0]->image_path) : asset('images/no-image.jpg') }}" alt="tag">
                 </div>
             </div>
             <div class="product-options col-12 col-md-5">
