@@ -39,8 +39,11 @@ class ProductController extends Controller
 
         $aryComments = $detailProduct->comment()->where('status', 1)->orderBy('id', 'DESC')->paginate(3);
 
+        $countCommentNotRating = $detailProduct->comment()->where('status', 1)->whereNull('rating')->orderBy('id', 'DESC')->count();
+
         $aryCountStar = Comments::select([\DB::raw('COUNT(*) as count_star'), 'rating'])
                                 ->where('product_id', $id)
+                                ->where('status', 1)
                                 ->groupBy('rating')
                                 ->get()
                                 ->toArray();
@@ -101,7 +104,8 @@ class ProductController extends Controller
             'aryComments',
             'averageWorth',
             'averageQuality',
-            'averageStar'
+            'averageStar',
+            'countCommentNotRating',
         ));
     }
 

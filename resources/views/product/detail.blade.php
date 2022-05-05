@@ -266,7 +266,7 @@
                 </div>
                 <div class="review-2">
                     <h6>
-                        42 trong số 45 (93%) người đánh giá giới thiệu sản phẩm này
+                        {{ ($aryComments->total()) - $countCommentNotRating }} trong số {{ $aryComments->total() }} ({{ ceil(( ($aryComments->total()) - $countCommentNotRating) * 100 / $aryComments->total()) }}%) người đánh giá giới thiệu sản phẩm này
                     </h6>
                 </div>
             </div>
