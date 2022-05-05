@@ -40,7 +40,7 @@
                                             <h5 class="text-uppercase">{{$item->name}}</h5>
                                         </div>
                                         <div class="sub-title">
-                                            <p>{{$item->description}}</p>
+                                            <p>{{$item->short_desc}}</p>
                                         </div>
                                     </a>
                                 </div>
@@ -86,7 +86,7 @@
                                             <h5>{{$item->name}}</h5>
                                         </div>
                                         <div class="sub-title">
-                                            <p>{{$item->description}}</p>
+                                            <p>{{$item->short_desc}}</p>
                                         </div>
                                         <div class="button-buy">
                                             <button>
@@ -100,7 +100,7 @@
                                             <h5>{{$item->name}}</h5>
                                         </div>
                                         <div class="sub-title">
-                                            <p>{{$item->description}}</p>
+                                            <p>{{$item->short_desc}}</p>
                                         </div>
                                         <div class="button-buy">
                                             <button>
@@ -129,7 +129,7 @@
                                     <a href="{{ route('product.detail', $item->id) }}">
                                         <div class="image">
                                             <img
-                                                src="{{ !empty($item->productImage) ? asset($item->productImage[0]->image_path) : asset('images/product/c.png') }}"
+                                                src="{{ count($item->productImage) > 0 ? asset($item->productImage[0]->image_path) : asset('images/product/c.png') }}"
                                                 alt="">
                                         </div>
                                         <div class="title">
@@ -137,7 +137,7 @@
                                         </div>
                                     </a>
                                     <div class="sub-title">
-                                        <p>{{ $item->description }}</p>
+                                        <p>{{ $item->short_desc }}</p>
                                     </div>
                                     <div class="price">
                                         <text id="bind-price">@money($item->price)</text>
@@ -168,7 +168,7 @@
                                         <h5 class="text-uppercase">{{ $sub->name }}</h5>
                                     </div>
                                     <div class="sub-title">
-                                        <p>{{ $sub->description }}</p>
+                                        <p>{{ $sub->short_desc }}</p>
                                     </div>
                                 </div>
                             @endforeach
