@@ -304,3 +304,21 @@ $(function () {
         })
     })
 })
+$('#kwdCompare').autocomplete({
+    serviceUrl: '/search-product',
+    transformResult : function(response) {
+        return {
+            // must convert json to javascript object before process
+            suggestions : $.map($.parseJSON(response), function(item) {
+                return item
+            })
+        };
+    },
+    formatResult: function (suggestion){
+        return suggestion.name
+    },
+    onSelect: function (suggestion) {
+        $('#kwdCompare').html(suggestion.name);
+    }
+
+})

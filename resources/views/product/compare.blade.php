@@ -76,13 +76,13 @@
                                 <h3 style="height: 43.2px;">Bạn muốn so sánh thêm sản phẩm?</h3>
                                 <div class="input" style="position: relative">
                                     <input id="kwdCompare" type="text" placeholder="Tìm kiếm sản phẩm" autocomplete="off">
-                                    <div class="autocomplete-suggestions" id="search-auto"
-                                         style="position: absolute; max-height: 350px; z-index: 9999; width: 100%; left: 0; display: none;">
-                                        <div onmousedown="return false;" class="autocomplete-suggestion"
-                                             id="autocomplete-suggestion" data-index="0">
+{{--                                    <div class="autocomplete-suggestions" id="search-auto"--}}
+{{--                                         style="position: absolute; max-height: 350px; z-index: 9999; width: 100%; left: 0; display: none;">--}}
+{{--                                        <div onmousedown="return false;" class="autocomplete-suggestion"--}}
+{{--                                             id="autocomplete-suggestion" data-index="0">--}}
 
-                                        </div>
-                                    </div>
+{{--                                        </div>--}}
+{{--                                    </div>--}}
                                 </div>
                             </div>
                         </td>

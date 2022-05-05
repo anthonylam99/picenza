@@ -35,9 +35,11 @@
     </div>
 </footer>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="{{asset('js/main.js')}}"></script>
-<script src="{{asset('js/toastr.min.js')}}"></script>
 
+<script src="{{asset('js/toastr.min.js')}}"></script>
+<script src="{{asset('js/jquery.mocjax.js')}}"></script>
+<script src="{{asset('js/jquery-autocomplete.js')}}"></script>
+<script src="{{asset('js/main.js')}}"></script>
 @yield('scripts')
 @stack('scripts')
 </html>
