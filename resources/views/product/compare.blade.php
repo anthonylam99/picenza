@@ -40,49 +40,40 @@
                 </tr>
                 <tr class="specs equaHeight" data-obj="h3">
                     <td class="text " style="width:17.5%;">Hình ảnh, giá</td>
-                    @if(count($product) >= 1)
-                        @foreach($product as $item)
-                            <td class="item image" style="width:41.25%">
-                                <p style="text-align:right;">
-                                    <a href="/so-sanh/" class="remove" title="So sánh sản phẩm: ">
-                                        <i class="fa fa-minus"></i>
-                                    </a>
+                    @foreach($product as $item)
+                        <td class="item image" style="width:41.25%">
+                            <p style="text-align:right;">
+                                <a href="/so-sanh/" class="remove" title="So sánh sản phẩm: ">
+                                    <i class="fa fa-minus"></i>
+                                </a>
+                            </p>
+                            <div class="image">
+                                <a href="/chi-tiet-san-pham/{{$item->id}}">
+                                    <img style="width: 100% !important; height: 350px"
+                                         src="{{(!empty($item->avatar_path) ? $item->avatar_path : asset('images/no-image.jpg'))}}">
+                                </a>
+                            </div>
+                            <h3 style="height: 43.2px;">
+                                <a href="/chi-tiet-san-pham/{{$item->id}}">
+                                    {{$item->name}}
+                                </a>
+                            </h3>
+                            <div class="price-note">
+                                <p class="price">
+                                    <strong>{{number_format($item->sale_price)}} ₫ </strong>
+                                    <i> <strike>{{number_format($item->price)}} ₫</strike></i>
+                                    <i> | Giá đã bao gồm 10% VAT</i>
                                 </p>
-                                <div class="image">
-                                    <a href="/chi-tiet-san-pham/{{$item->id}}">
-                                        <img style="width: 100% !important;"
-                                            src="{{$item->avatar_path}}">
-                                    </a>
-                                </div>
-                                <h3 style="height: 43.2px;">
-                                    <a href="/chi-tiet-san-pham/{{$item->id}}">
-                                        {{$item->name}}
-                                    </a>
-                                </h3>
-                                <div class="price-note">
-                                    <p class="price">
-                                        <strong>{{number_format($item->sale_price)}} ₫ </strong>
-                                        <i> <strike>{{number_format($item->price)}} ₫</strike></i>
-                                        <i> | Giá đã bao gồm 10% VAT</i>
-                                    </p>
-                                    <p class="note"></p>
-                                </div>
-                            </td>
-                        @endforeach
-                    @endif
+                                <p class="note"></p>
+                            </div>
+                        </td>
+                    @endforeach
                     @if(count($product) <= 1)
                         <td class="item" style="width:41.25%">
                             <div class="add-product">
                                 <h3 style="height: 43.2px;">Bạn muốn so sánh thêm sản phẩm?</h3>
                                 <div class="input" style="position: relative">
                                     <input id="kwdCompare" type="text" placeholder="Tìm kiếm sản phẩm" autocomplete="off">
-{{--                                    <div class="autocomplete-suggestions" id="search-auto"--}}
-{{--                                         style="position: absolute; max-height: 350px; z-index: 9999; width: 100%; left: 0; display: none;">--}}
-{{--                                        <div onmousedown="return false;" class="autocomplete-suggestion"--}}
-{{--                                             id="autocomplete-suggestion" data-index="0">--}}
-
-{{--                                        </div>--}}
-{{--                                    </div>--}}
                                 </div>
                             </div>
                         </td>
@@ -90,15 +81,18 @@
                 </tr>
                 <tr class="specs">
                     <th class="text">Mô tả</th>
-                    <td class="data">
-                        <ugit
-                            <li>Thanh toán qua VNPAY: Giảm 50.000đ cho đơn hàng từ 2 triệu đến 4 triệu. Giảm 100.000đ
-                                cho đơn hàng từ 4 triệu đến 10 triệu. Giảm 250.000đ cho đơn hàng từ 10 triệu đến 20
-                                triệu. Giảm 300.000đ cho đơn hàng từ 20 triệu trở lên (Từ ngày 29/04-30/06/2022).
+                    @foreach($product as $item)
+                        <td class="data">
+                            <ugit
+                            <li>
+                                {{$item->short_desc}}
                             </li>
-                        </ul>
-                    </td>
-                    <td></td>
+                            </ul>
+                        </td>
+                    @endforeach
+                    @if(count($product) <= 1)
+                        <td></td>
+                    @endif
                 </tr>
                 <tr class="specs">
                     <th class="text">Bộ sản phẩm tiêu chuẩn</th>
@@ -114,131 +108,17 @@
                     <td></td>
                 </tr>
                 <tr class="specs-group">
-                    <th class="text" colspan="3">Thông số kỹ thuật</th>
+                    <th class="text" colspan="3">Chức năng</th>
                 </tr>
                 <tr class="specs">
-                    <th class="text">Hãng sản xuất</th>
+                    <th class="text">Mô tả</th>
                     <td class="data">
-                        <span>Apple</span>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr class="specs">
-                    <th class="text">Kích thước</th>
-                    <td class="data">
-                        <span></span>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr class="specs">
-                    <th class="text">Trọng lượng</th>
-                    <td class="data">
-                        <span></span>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr class="specs">
-                    <th class="text">Pin</th>
-                    <td class="data">
-                        <span></span>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr class="specs">
-                    <th class="text">Cổng sạc:</th>
-                    <td class="data">
-                        <span></span>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr class="specs">
-                    <th class="text">Thời gian sạc đầy</th>
-                    <td class="data">
-                        <span></span>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr class="specs">
-                    <th class="text">Tính năng khác</th>
-                    <td class="data">
-                        <span></span>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr class="specs">
-                    <th class="text">Thời gian sử dụng tai nghe:</th>
-                    <td class="data">
-                        <span></span>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr class="specs">
-                    <th class="text">Thời gian sử dụng hộp sạc:</th>
-                    <td class="data">
-                        <span></span>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr class="specs">
-                    <th class="text">Công nghệ âm thanh:</th>
-                    <td class="data">
-                        <span></span>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr class="specs">
-                    <th class="text">Tương thích:</th>
-                    <td class="data">
-                        <span></span>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr class="specs">
-                    <th class="text">Tiện ích:</th>
-                    <td class="data">
-                        <span></span>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr class="specs">
-                    <th class="text">Kết nối cùng lúc:</th>
-                    <td class="data">
-                        <span></span>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr class="specs">
-                    <th class="text">Công nghệ kết nối:</th>
-                    <td class="data">
-                        <span></span>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr class="specs">
-                    <th class="text">Điều khiển:</th>
-                    <td class="data">
-                        <span></span>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr class="specs">
-                    <th class="text">Phím điều khiển:</th>
-                    <td class="data">
-                        <span></span>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr class="specs">
-                    <th class="text">Kích thước:</th>
-                    <td class="data">
-                        <span></span>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr class="specs">
-                    <th class="text">Trọng lượng:</th>
-                    <td class="data">
-                        <span></span>
+                        <ugit
+                        <li>Thanh toán qua VNPAY: Giảm 50.000đ cho đơn hàng từ 2 triệu đến 4 triệu. Giảm 100.000đ
+                            cho đơn hàng từ 4 triệu đến 10 triệu. Giảm 250.000đ cho đơn hàng từ 10 triệu đến 20
+                            triệu. Giảm 300.000đ cho đơn hàng từ 20 triệu trở lên (Từ ngày 29/04-30/06/2022).
+                        </li>
+                        </ul>
                     </td>
                     <td></td>
                 </tr>
