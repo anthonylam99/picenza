@@ -22,6 +22,16 @@
     @if(!empty($detailProduct->seo_robots))
         <meta name="robots" content="{{$detailProduct->seo_robots}}">
     @endif
+    @if(!empty($detailProduct->avatar_path))
+        <meta name="image" content="{{$detailProduct->avatar_path}}">
+        <meta property="og:image" content="{{$detailProduct->avatar_path}}">
+    @endif
+@endsection
+
+@section('logo')
+    <div class="img-logo" style="display: none">
+        <img src="{{$detailProduct->avatar_path}}" alt="tag">
+    </div>
 @endsection
 
 @section('breadcrumb')
