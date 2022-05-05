@@ -127,7 +127,7 @@
                             <h6>MÀU SẮC:
                                 <text class="color">
                                     @php
-                                        $firstColor = !empty($detailProduct->productImage) ? $detailProduct->productImage[0]->color : 1;
+                                        $firstColor = count($detailProduct->productImage) > 0 ? $detailProduct->productImage[0]->color : 1;
                                         $getColor = get_color_from_id($firstColor);
                                     @endphp
                                     {{ $getColor->color }}
@@ -135,6 +135,7 @@
                             </h6>
                         </div>
                         <div class="color-options-select">
+                            @if (count($detailProduct->productImage) > 0)
                             @foreach($detailProduct->productImage as $imageColor)
                             @php
                                 $detailColor = get_color_from_id($imageColor->color);
@@ -143,6 +144,7 @@
                                        onClick="changeColor({{ $imageColor->color }}, '{{ $detailColor->color }}', '{{ $detailProduct->id }}')" type="button"
                                        style="background-color: {{ $detailColor->hex }}"></input>
                             @endforeach
+                            @endif
                             <input type="hidden" id="color-selected" value="1" name="color"/>
                         </div>
                     </div>
@@ -152,7 +154,7 @@
                             <input type="hidden" value="{{ $detailProduct->name }}" name="name"/>
                             <input type="hidden" id="hidden-price" value="{{ $detailProduct->price }}" name="price"/>
                             <input type="hidden" value="0" name="weight"/>
-                            <input type="hidden" value="{{ !empty($detailProduct->productImage) ? asset($detailProduct->productImage[0]->image_path) : 'images/product/product_demo_2.png' }}" name="image"/>
+                            <input type="hidden" value="{{ count($detailProduct->productImage) > 0 ? asset($detailProduct->productImage[0]->image_path) : 'images/product/product_demo_2.png' }}" name="image"/>
                             <div class="quantity">
                                 <input type="number" name="qty" value="1">
                             </div>
