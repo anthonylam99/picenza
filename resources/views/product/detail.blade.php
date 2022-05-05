@@ -167,7 +167,9 @@
                     <div class="compare-product">
                         <div class="div-btn-compare">
                             <button class="btn-compare w-100">
-                                + SO SÁNH
+                                <a href="/so-sanh-san-pham?product[]={{$detailProduct->id}}">
+                                    + SO SÁNH
+                                </a>
                             </button>
                         </div>
                         <div class="div-btn-tag">
