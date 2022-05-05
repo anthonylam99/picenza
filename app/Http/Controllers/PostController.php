@@ -25,7 +25,7 @@ class PostController extends Controller
     {
         $post = Post::paginate(10);
         $tag = Tag::all();
-        $category = PostCategory::all();
+        $category = PostCategory::where('status', 1)->get();
 
         if($request->has('s')){
             $s = $request->get('s');

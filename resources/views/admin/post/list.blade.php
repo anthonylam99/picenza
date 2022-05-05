@@ -47,7 +47,7 @@
                             <td><a href="{{ route('admin.post.edit', ['id' => $value->id]) }}">
                                     {{$value->title}}
                                 </a></td>
-                            <td>{{$value->category}}</td>
+                            <td>{{$value->category_name}}</td>
                             <td>{{$value->tag}}</td>
                             <td>
                                 <div class="custom-control custom-switch">

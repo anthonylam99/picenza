@@ -35,7 +35,12 @@ class Product extends Model
         'seo_description',
         'seo_keyword',
         'seo_robots',
-        'seo_url'
+        'seo_url',
+        'short_desc'
+    ];
+
+    protected $casts = [
+        'description' => 'array',
     ];
 
 

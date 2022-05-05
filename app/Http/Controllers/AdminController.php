@@ -122,9 +122,6 @@ class AdminController extends Controller
 
     public function addProductPost(Request $request)
     {
-//        if(empty($request->feature)){
-//            return redirect()->back()->with('error', 'Sản phẩm chưa có tính năng');
-//        }
         $data = collect($request)->toArray();
 
         $productTechnology = ProductTechnology::all();
@@ -174,6 +171,7 @@ class AdminController extends Controller
             'technology_type' => $request->get('technology_type'),
             'reliability_type' => $request->get('reliability_type'),
             'description' => $request->get('description', ''),
+            'short_desc' => $request->get('short_desc', ''),
             'feature' => $feature,
             'avatar_path' => $request->get('img_avatar_path'),
             'is_bestseller' => $request->get('is_bestseller') ?? 0,
@@ -182,7 +180,6 @@ class AdminController extends Controller
             'seo_keyword' => $request->get('seo_keyword'),
             'seo_robots' => $request->get('seo_robots')
         ];
-
 
         if (!isset($data['id'])) {
             $product = Product::create($dataInsert);
