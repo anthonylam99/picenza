@@ -102,13 +102,13 @@
                                     <div class="card-body">
                                         <div class="form-group">
                                             <div class="body-card-imagedes" id="card-imagedes">
-                                                @foreach($post as $value)
+                                                @foreach($aryCategory as $value)
                                                     <div class="custom-control custom-checkbox">
                                                         <input name="postDes[]" class="custom-control-input"
                                                                type="checkbox"
                                                                id="customCheckbox{{$value->id}}" value="{{$value->id}}" {{ in_array($value->id, $arrPostPage['section3']) ? 'checked' : ''}}>
                                                         <label for="customCheckbox{{$value->id}}"
-                                                               class="custom-control-label">{{$value->title}}</label>
+                                                               class="custom-control-label">{{$value->name}}</label>
                                                     </div>
                                                 @endforeach
                                             </div>
@@ -134,13 +134,13 @@
                                     <div class="card-body">
                                         <div class="form-group">
                                             <div class="body-card-imagedes" id="card-imagedes">
-                                                @foreach($post as $value)
+                                                @foreach($aryCategory as $value)
                                                     <div class="custom-control custom-checkbox">
                                                         <input name="section4[]" class="custom-control-input"
                                                                type="checkbox"
                                                                id="section4{{$value->id}}"  value="{{$value->id}}" {{ in_array($value->id, $arrPostPage['section4']) ? 'checked' : ''}}>
                                                         <label for="section4{{$value->id}}"
-                                                               class="custom-control-label">{{$value->title}}</label>
+                                                               class="custom-control-label">{{$value->name}}</label>
                                                     </div>
                                                 @endforeach
                                             </div>

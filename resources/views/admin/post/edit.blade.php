@@ -41,7 +41,7 @@
                             <select name="category[]" class="form-control js-example-tags col-sm-9" multiple="multiple"
                                     required>
                                 @foreach($listCategory as $value)
-                                    <option {{(in_array($value->name, $category) ? 'selected' : '')}}>{{$value->name}}</option>
+                                    <option {{(in_array($value->id, $post->category) ? 'selected' : '')}}>{{$value->name}}</option>
                                 @endforeach
                             </select>
                         </div>

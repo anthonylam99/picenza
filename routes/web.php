@@ -155,6 +155,7 @@ Route::group(['prefix' => 'quan-tri', 'middleware' => 'CheckAdmin'], function ()
         Route::post('them-moi', [PostController::class, 'addPost'])->name('admin.post.add.post');
         Route::get('sua/{id}', [PostController::class, 'editPost'])->name('admin.post.edit');
         Route::get('xoa/{id}', [PostController::class, 'delPost'])->name('admin.post.del');
+        Route::get('update-status', [PostController::class, 'updateStatus'])->name('admin.post.updateStatus');
         Route::group(['prefix' => 'tag'], function (){
             Route::get('/', [\App\Http\Controllers\TagController::class, 'listTag'])->name('admin.tag.list');
             Route::get('them-moi', [\App\Http\Controllers\TagController::class, 'addTag'])->name('admin.tag.add');

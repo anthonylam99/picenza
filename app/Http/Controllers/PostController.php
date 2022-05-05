@@ -25,7 +25,7 @@ class PostController extends Controller
     {
         $post = Post::paginate(10);
         $tag = Tag::all();
-        $category = PostCategory::all();
+        $category = PostCategory::where('status', 1)->get();
 
         if($request->has('s')){
             $s = $request->get('s');
@@ -64,27 +64,27 @@ class PostController extends Controller
                 }
             }
 
-            $category = '';
-            if($request->has('category')){
-                $categorys = $request->get('category');
-                $i = 0;
-                foreach ($categorys as $value){
-                    $i++;
-                    if($i < count($categorys)){
-                        $category .= $value.',';
-                    }else{
-                        $category .= $value;
-                    }
+            // $category = '';
+            // if($request->has('category')){
+            //     $categories = $request->get('category');
+            //     $i = 0;
+            //     foreach ($categories as $value){
+            //         $i++;
+            //         if($i < count($categories)){
+            //             $category .= $value.',';
+            //         }else{
+            //             $category .= $value;
+            //         }
 
-                }
-            }
+            //     }
+            // }
 
             $arr['title'] = $request->get('title');
             $arr['content'] = $request->get('content');
             $arr['slug'] = $slug;
             $arr['url'] = $url.'/bai-viet/'.$slug;
             $arr['tag'] = $tag;
-            $arr['category'] = $category;
+            $arr['category'] = $request->get('category');
             $arr['seo_url'] = $request->get('seo-url');
             $arr['avatar'] = $request->get('img_avatar_path');
             $arr['seo_title'] = $request->get('seo_title');
@@ -123,11 +123,11 @@ class PostController extends Controller
         if($post){
             $tag = explode(',', $post->tag);
         }
-        $category = [];
-        if($post){
-            $category = explode(',', $post->category);
-        }
-        return view('admin.post.edit', compact('post', 'tag', 'listTag', 'category', 'listCategory'));
+        // $category = [];
+        // if($post){
+        //     $category = explode(',', $post->category);
+        // }
+        return view('admin.post.edit', compact('post', 'tag', 'listTag', 'listCategory'));
     }
 
     public function delPost(Request $request, $id = null)
@@ -141,5 +141,21 @@ class PostController extends Controller
         $tag = Tag::all();
 
         return view('admin.post.tag', compact('tag'));
+    }
+
+    /**
+     * Update status post
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function updateStatus(Request $request)
+    {
+        $update = Post::where('id', $request->get('id'))->update([
+            'status' => $request->status
+        ]);
+        if($update){
+            return response()->json(['message' => 'Success']);
+        }
     }
 }

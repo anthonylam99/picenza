@@ -35,6 +35,7 @@
                         <th>Tên</th>
                         <th>Chuyên mục</th>
                         <th>Tag</th>
+                        <th>Trạng thái</th>
                         <th>Thông tin</th>
                         <th></th>
                     </tr>
@@ -46,8 +47,14 @@
                             <td><a href="{{ route('admin.post.edit', ['id' => $value->id]) }}">
                                     {{$value->title}}
                                 </a></td>
-                            <td>{{$value->category}}</td>
+                            <td>{{$value->category_name}}</td>
                             <td>{{$value->tag}}</td>
+                            <td>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="status{{$value->id}}" {{ $value->status == 1 ? 'checked' : '' }} name="status" onclick="changeStatusPost({{$value->id}})">
+                                    <label name="status{{$value->id}}" class="custom-control-label status{{$value->id}}" for="status{{$value->id}}">{{ $value->status ? 'Bật' : 'Tắt' }}</label>
+                                </div>
+                            </td>
                             <td>
                                 <strong>Thêm lúc:</strong>{{$value->created_at}} <br>
                                 <strong>Cập nhật:</strong>{{$value->updated_at}}

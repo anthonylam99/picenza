@@ -49,7 +49,7 @@
                                 <a href="{{ route('product.detail', $value->product_id) }}">{{ route('product.detail', $value->product_id) }}</a>
                             </td>
                             <td>{{ $value->title }}</td>
-                            <td>{{ $value->body }}</td>
+                            <td>{{ truncate($value->body, 40) }}</td>
                             <td>
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="status{{$value->id}}" {{ $value->status == 1 ? 'checked' : '' }} name="status" onclick="changeStatusComment({{$value->id}})">

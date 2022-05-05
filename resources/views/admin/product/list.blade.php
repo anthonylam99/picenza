@@ -37,6 +37,7 @@
                         <th>Tên sản phẩm</th>
                         <th>Giá</th>
                         <th>Danh mục</th>
+                        <th>Đánh giá sao</th>
                         <th>Hiển thị trang chủ</th>
                         <th>Trạng thái</th>
                         <th>Hãng sản xuất</th>
@@ -52,6 +53,13 @@
                             <td>{{$value->name}}</td>
                             <td>{{number_format($value->price)}}</td>
                             <td>{{isset($value->productLine['name']) ? $value->productLine['name'] : ''}}</td>
+                            <td>
+                                <div class="rating-star">
+                                    @for ($i = 1; $i < 6; $i++)
+                                        <i class="fa fa-star" style="color: {{ $value->rating < $i ? '#DBDBDB' : '#ED2027' }}; "></i>
+                                    @endfor
+                                </div>
+                            </td>
                             <th>
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="show-home{{$value->id}}" {{ $value->show_home == 1 ? 'checked' : '' }} name="show-home" onclick="changeShowHome({{$value->id}})">

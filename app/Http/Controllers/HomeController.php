@@ -21,9 +21,16 @@ class HomeController extends Controller
         $category = ProductLine::all();
         $postTag = PostTag::whereNotNull('posts')->get();
         $arrPostPage = [];
+        $aryPostId = [];
         foreach ($postTag as $tag) {
-            $posts = explode(',', $tag->posts);
-            $postPage = PageImage::whereIn('post_id', $posts)->where('tag', $tag->page_tag)->get();
+            $categoryId = explode(',', $tag->posts);
+            $aryPost = Post::where('status', 1)->get();
+            foreach ($aryPost as $key => $post) {
+                if (count(array_intersect($categoryId,$post->category)) > 0) {
+                    $aryPostId[] = $post->id;
+                }
+            }
+            $postPage = PageImage::whereIn('post_id', $aryPostId)->where('tag', $tag->page_tag)->get();
             $arrPostPage[$tag->page_tag] = $postPage;
         }
 

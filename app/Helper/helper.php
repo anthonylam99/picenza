@@ -172,3 +172,19 @@ if (!function_exists('count_comment_by_user_id')) {
         return $countComment;
     }
 }
+
+if (!function_exists('truncate')) {
+    /**
+     * @param int $limit
+     * @param array $with
+     * @return \Illuminate\Support\Collection
+     */
+    function truncate($text, $limit) {
+        if (str_word_count($text, 0) > $limit) {
+            $words = str_word_count($text, 2);
+            $pos   = array_keys($words);
+            $text  = substr($text, 0, $pos[$limit]) . '...';
+        }
+        return $text;
+    }
+}

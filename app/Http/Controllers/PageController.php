@@ -6,6 +6,7 @@ use App\Http\Controllers\Entity\Options;
 use App\Models\Page;
 use App\Models\PageImage;
 use App\Models\Post;
+use App\Models\PostCategory;
 use App\Models\PostTag;
 use App\Models\ProductColor;
 use App\Models\ProductImage;
@@ -65,7 +66,7 @@ class PageController extends Controller
     {
         $arrPost = [];
         if ($request->has($field)) {
-            $postDes = Post::whereIn('id', $request->get($field))->get();
+            $postDes = PostCategory::whereIn('id', $request->get($field))->get();
 
             if (!empty($postDes)) {
                 $i = 0;
@@ -165,7 +166,7 @@ class PageController extends Controller
         }
 
         $page = Page::findOrFail($id);
-        $post = Post::all();
+        $aryCategory = PostCategory::where('status', 1)->get();
         $image = PageImage::where('page_id', $id)->get();
         $arrImg = [];
         if (!empty($image)) {
@@ -174,7 +175,7 @@ class PageController extends Controller
             }
         }
 
-        return view('admin.page.edit', compact('page', 'arrImg', 'post', 'arrPostPage'));
+        return view('admin.page.edit', compact('page', 'arrImg', 'aryCategory', 'arrPostPage'));
     }
 
     public function showPage(Request $request, $slug = null)

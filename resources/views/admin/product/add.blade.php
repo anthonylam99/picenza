@@ -68,14 +68,11 @@
                                 @endforeach
                             </select>
                         </div>
-{{--                        <div class="form-group">--}}
-{{--                            <label for="company">Loại sản phẩm</label>--}}
-{{--                            <select name="product_type" id="productTypeList" class="form-control" required>--}}
-{{--                                @foreach($productType as $value)--}}
-{{--                                    <option value="{{$value->id}}">{{$value->name}}</option>--}}
-{{--                                @endforeach--}}
-{{--                            </select>--}}
-{{--                        </div>--}}
+                        <div class="form-group">
+                            <label>Mô tả ngắn</label>
+                            <br>
+                            <textarea name="short_desc" id="" cols="116" rows="2"></textarea>
+                          </div>
                         <div class="form-group">
                             <label for="company">Tính năng</label>
                             <div class="form-group">
@@ -84,11 +81,25 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="pricePercent">Mô tả</label>
-                            <textarea class="w-100" name="description" id=""
-                                      value=""></textarea>
-                        </div>
+                            <button type="button" class="btn btn-success btn-add-desc"><i class="fa fa-plus-circle" aria-hidden="true"></i> Thêm mô tả</button>
+                            <p></p>
+                            <div class="list-desc">
+                                <div class="row" id="row-desc-0">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Tiêu đề</label>
+                                            <input type="text" class="form-control" name="description[0][title]"  placeholder="Tiêu đề mô tả">
+                                          </div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="form-group">
+                                            <label>Nội dung</label>
+                                            <br>
+                                            <textarea name="description[0][content]" id="" cols="60" rows="2"></textarea>
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                 </div>
                 <div class="col-4">
@@ -203,6 +214,42 @@
         </form>
     </div>
 @endsection
+@push('js')
+<script>
+    var i = 1;
+    $('.btn-add-desc').on('click', function(){
+        var rowDesc = `<div class="row" id="row-desc-${i}">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Tiêu đề</label>
+                                <input type="text" class="form-control" name="description[${i}][title]"  placeholder="Tiêu đề mô tả">
+                                </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <label>Nội dung</label>
+                                <br>
+                                <textarea name="description[${i}][content]" id="" cols="60" rows="2"></textarea>
+                                </div>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-danger btn-del-desc" data-index="${i}" style="margin-top: 40px"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</button>
+                        </div>
+                    </div>`;
+
+                    $('.list-desc').append(rowDesc);
+                    i++;
+    });
+
+    $(document).on('click', 'body .btn-del-desc', function(){
+        var index = $(this).data('index');
+
+        $('#row-desc-'+ index).remove();
+
+        i--;
+    })
+</script>
+@endpush
 
 
 

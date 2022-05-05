@@ -507,6 +507,27 @@ function changeStatusComment(id) {
     })
 }
 
+function changeStatusPost(id) {
+    var status = $('#status' + id).is(':checked')
+    status = status ? 1 : 0
+    var statusText = status ? 'Bật' : 'Tắt'
+    $('.status' + id).html(statusText)
+    $.ajax({
+        type: 'GET',
+        url: '/quan-tri/bai-viet/update-status',
+        data: {
+            id: id,
+            status: status
+        },
+        success: function (res) {
+            console.log(res)
+        },
+        error: function (err) {
+            console.log(err)
+        }
+    })
+}
+
 $(function () {
     $('#add-sub-category').click(function () {
         $('#add-sub-category-form').show()
