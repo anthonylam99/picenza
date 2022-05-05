@@ -43,7 +43,22 @@
                     @foreach($product as $item)
                         <td class="item image" style="width:41.25%">
                             <p style="text-align:right;">
-                                <a href="/so-sanh/" class="remove" title="So sánh sản phẩm: ">
+                                <?php
+                                    $url = config('app.url').'/so-sanh-san-pham/';
+                                    $arr = request()->input('product');
+                                    if(is_array($arr) && in_array($item->id, $arr) ){
+                                        if (($key = array_search($item->id, $arr)) !== false) {
+                                            unset($arr[$key]);
+                                        }
+                                    }
+
+                                    $param = '?';
+                                    foreach($arr as $value){
+                                        $param .= '&product[]='.$value;
+                                    }
+                                    $url = $url.$param;
+                                ?>
+                                <a href="{{ $url }}" class="remove" title="So sánh sản phẩm: ">
                                     <i class="fa fa-minus"></i>
                                 </a>
                             </p>
