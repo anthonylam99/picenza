@@ -38,7 +38,7 @@
                         </h1>
                         <div class="gd_news__meta">
 
-                            <span class="doctor">Danh mục: <br>{{$post->category}}<br></span>
+                            <span class="doctor">Danh mục: <br>{{$post->category_name}}<br></span>
                             <span class="date">
                                     Ngày đăng: <br>{{date('d/m/Y', strtotime($post->created_at))}}
                             </span>

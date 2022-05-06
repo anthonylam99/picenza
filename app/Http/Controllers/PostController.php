@@ -15,7 +15,7 @@ class PostController extends Controller
         $post = Post::where('seo_url', $slug)->firstOrFail();
 
         $relatePost = Post::where('id', '!=', $post->id)->where(function ($q) use ($post){
-            $q->where('category', 'LIKE', '%'.$post->category.'%');
+            $q->whereIn('category', $post->category);
             $q->orWhere('tag', 'like', '%'.$post->tag.'%');
             return $q;
         })->inRandomOrder()->limit(5)->get();
@@ -30,7 +30,7 @@ class PostController extends Controller
         if($request->has('s')){
             $s = $request->get('s');
             $post = Post::where('title', 'like', '%'.$s.'%')
-                ->orWhere('category', 'like', '%'.$s.'%')
+                ->whereIn('category', $s, 'or')
                 ->orWhere('tag', 'like', '%'.$s.'%')
                 ->paginate(10);
         }
