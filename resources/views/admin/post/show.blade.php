@@ -16,6 +16,10 @@
     @if(!empty($post->seo_robots))
         <meta name="robots" content="{{$post->seo_robots}}">
     @endif
+    @if(!empty($detailProduct->avatar_path))
+        <meta name="image" content="{{$item->avatar}}">
+        <meta property="og:image" content="{{$item->avatar}}">
+    @endif
 @endsection
 
 @section('content')

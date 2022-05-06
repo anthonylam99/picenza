@@ -22,6 +22,16 @@
     @if(!empty($detailProduct->seo_robots))
         <meta name="robots" content="{{$detailProduct->seo_robots}}">
     @endif
+    @if(!empty($detailProduct->avatar_path))
+        <meta name="image" content="{{$detailProduct->avatar_path}}">
+        <meta property="og:image" content="{{$detailProduct->avatar_path}}">
+    @endif
+@endsection
+
+@section('logo')
+    <div class="img-logo" style="display: none">
+        <img src="{{$detailProduct->avatar_path}}" alt="tag">
+    </div>
 @endsection
 
 @section('breadcrumb')
@@ -53,7 +63,7 @@
         <div class="content-1 row">
             <div class="product-image col-12 col-md-7">
                 <div class="image" id="img-product-color">
-                    <img src="{{ count($detailProduct->productImage) > 0 ? asset($detailProduct->productImage[0]->image_path) : 'images/product/product_demo_2.png' }}" alt="tag">
+                    <img style="height: 350px !important;" src="{{ count($detailProduct->productImage) > 0 ? asset($detailProduct->productImage[0]->image_path) : asset('images/no-image.jpg') }}" alt="tag">
                 </div>
             </div>
             <div class="product-options col-12 col-md-5">
@@ -166,23 +176,33 @@
                     </div>
                     <div class="compare-product">
                         <div class="div-btn-compare">
-                            <button class="btn-compare w-100">
-                                + SO SÁNH
+                            <button type="button" class="btn btn-compare w-100">
+                                <a href="/so-sanh-san-pham?product[]={{$detailProduct->id}}">
+                                    + SO SÁNH
+                                </a>
                             </button>
                         </div>
                         <div class="div-btn-tag">
-                            <button class="btn-tag w-100">
+                            <button type="button" class="btn btn-tag w-100">
                                 <img src="{{ asset('images/tag.png') }}" alt="tag">
                             </button>
                         </div>
                         <div class="div-btn-print">
-                            <button class="btn-print w-100">
+                            <button type="button" class="btn btn-print w-100" onclick="window.print()">
                                 <img src="{{ asset('images/printer.png') }}" alt="tag">
                             </button>
                         </div>
                         <div class="div-btn-share">
-                            <button class="btn-share w-100">
-                                <img src="{{ asset('images/share.png') }}" alt="tag">
+                            <button type="button" class="btn btn-share w-100" >
+                                <?php
+                                    $url = config('app.url').'/chi-tiet-san-pham/';
+                                ?>
+                                <a
+                                   onclick="window.open('https://www.facebook.com/sharer/sharer.php?u={{$url.$detailProduct->id}}', 'newwindow',
+                                       'width=300,height=250');  return false;"
+                                >
+                                    <img src="{{ asset('images/share.png') }}" alt="tag">
+                                </a>
                             </button>
                         </div>
                     </div>

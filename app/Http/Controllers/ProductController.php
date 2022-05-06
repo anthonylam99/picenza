@@ -35,7 +35,7 @@ class ProductController extends Controller
         $averageQuality = calculateAverageReview($id, 'count_quality');
         $averageWorth = calculateAverageReview($id, 'count_worth');
 
-        $detailProduct = Product::with(['productImage.color'])->find($id);
+        $detailProduct = Product::with(['productImage.color'])->findOrFail($id);
 
         $aryComments = $detailProduct->comment()->where('status', 1)->orderBy('id', 'DESC')->paginate(3);
 
@@ -283,9 +283,17 @@ class ProductController extends Controller
 
     public function compareProduct(Request $request){
         $product = $request->get('product', []);
+        $feature = [];
         if(!empty($product)){
             $product = Product::whereIn('id', $product)->where('status', 1)->get();
-            return view('product.compare', compact('product'));
+
+            foreach($product as $item){
+                $dataFeature = explode(',', $item->feature);
+                $itemData = SubCategory::whereIn('id',$dataFeature)->get();
+
+                $feature[$item->id] = $itemData;
+            }
         }
+        return view('product.compare', compact('product', 'feature'));
     }
 }

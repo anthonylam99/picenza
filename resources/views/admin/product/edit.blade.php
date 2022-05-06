@@ -217,7 +217,7 @@
                                     Chọn ảnh
                                 </button>
                                 <div class="img-avt">
-                                    <img id="img-avatar" src="{{$product['avatar_path'] ?? ''}}" alt="">
+                                    <img style="width: 300px !important;" id="img-avatar" src="{{$product['avatar_path'] ?? ''}}" alt="">
                                 </div>
                                 <input type="hidden" id="img_avatar_path" name="img_avatar_path" value="{{$product['avatar_path']}}">
                             </div>
@@ -234,9 +234,10 @@
                                     <?php $i++; ?>
                                     <div class="col-3 img-box" id="label-image{{$i}}" data-photo="{{$i}}">
                                         <div style="height: 100px; border: 2px dashed #cccccc; margin-bottom: 10px;"
-                                             id="image-preview1" class="show-img">
-                                            <img id="image-preview-src" src="{{asset($value['image_path'])}}" alt="">
+                                             id="image-preview{{$i}}" class="show-img">
+                                            <img id="image-preview-src{{$i}}" src="{{asset($value['image_path'])}}" alt="">
                                         </div>
+                                        <input type="hidden" name="idimg{{$i}}" value="{{$value['id']}}">
                                         <label for="color-choose<?php echo $i; ?>">Màu sắc:</label>
                                         <input onchange="setColor({{$i}})" type="color"
                                                id="color-picker<?php echo $i; ?>" value="{{$value['color']['hex']}}">

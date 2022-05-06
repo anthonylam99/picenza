@@ -318,7 +318,7 @@ function selectImageGalery(id) {
             finder.on('files:choose', function (evt) {
                 var file = evt.data.files.first();
                 // output.value = file.getUrl();
-                var img = "<img id='image-preview-src' + id  src='" + file.getUrl() + "'/>"
+                var img = "<img id='image-preview-src'" + id + " src='" + file.getUrl() + "'/>"
                 $('#image-preview' + id).html(img);
                 $('#image-input' + id).val(file.getUrl());
                 console.log($('#image-input' + id).val())
