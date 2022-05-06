@@ -329,5 +329,5 @@ function autoComplateFormat(n) {
     }
 
     var t = '<div class="search-item" onclick="location.href=\'' + url + "'\">";
-    return t += '<div class="img"><img src="' + n.avatar_path + '" /><\/a><\/div>', t += '   <div class="info">', t += '       <h2><a href="' + n.url + '">' + n.name + "<\/a><\/h2>", t += "       <h3><strike>" + "<\/strike> " + n.price + "<\/h3>", t += "   <\/div>", t += "<\/div>", t + "<\/div>"
+    return t += '<div class="img"><img src="' + n.avatar_path + '" /><\/a><\/div>', t += '   <div class="info">', t += '       <h2><a href="' + url + '">' + n.name + "<\/a><\/h2>", t += "       <h3><strike>" + "<\/strike> " + n.price + "<\/h3>", t += "   <\/div>", t += "<\/div>", t + "<\/div>"
 }

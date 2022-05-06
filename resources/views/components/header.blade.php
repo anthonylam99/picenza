@@ -127,17 +127,18 @@
 <div class="header">
     <div class="header-1">
         <div class="header-1__content container middle">
+            @yield('logo')
             <div class="lang">
-                <img width="15" height="15" src="{{ asset('images/vietnam.png') }}" alt="tag">
+                <img width="15" height="15" src="{{ asset('images/vietnam.png') }}" alt="">
                 <h5>Việt Nam</h5>
             </div>
             <div class="contact">
                 <div class="contact__content">
                     <img width="15" height="15" src="{{ asset('images/pin.svg') }}"
-                         alt="tag">
+                         alt="">
                     <a href="">Địa chỉ mua hàng</a> |
                     <img class="align-middle" width="15" height="15"
-                         src="{{ asset('images/email.svg') }}" alt="tag">
+                         src="{{ asset('images/email.svg') }}" alt="">
                     <a href="{{ route('contact') }}">Liên hệ</a>
                 </div>
             </div>
