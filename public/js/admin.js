@@ -132,6 +132,10 @@ $('#productPrice').on('input', function () {
     const price = $(this).val().replace(/[,]+/g, "");
     const format = parseInt(price).toLocaleString('en-US')
 
+    if ($(this).val() == '') {
+        format = '';
+    }
+
     $("#salePrice").val(0)
     $("#pricePercent").val(0)
     $(this).val(format)
