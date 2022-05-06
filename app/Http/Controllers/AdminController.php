@@ -227,10 +227,8 @@ class AdminController extends Controller
             if(!empty($arr['image_path'])){
                 if (!empty($arrImageColor)) {
                     foreach ($arrImageColor as $value) {
-                        ProductImage::updateOrCreate(
-                            [
-                                'id' => $value['id']
-                            ],
+                        ProductImage::where('product_id', $value['product_id'])->where('color', $value['color'])->delete();
+                        ProductImage::create(
                             [
                                 'product_id' => $value['product_id'],
                                 'color' => $value['color'],
