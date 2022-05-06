@@ -286,7 +286,11 @@
                 </div>
                 <div class="review-2">
                     <h6>
+                        @if ($aryComments->total() > 0)
                         {{ ($aryComments->total()) - $countCommentNotRating }} trong số {{ $aryComments->total() }} ({{ ceil(( ($aryComments->total()) - $countCommentNotRating) * 100 / $aryComments->total()) }}%) người đánh giá giới thiệu sản phẩm này
+                        @else
+                        0 trong số 0 (0%) người đánh giá giới thiệu sản phẩm này
+                        @endif
                     </h6>
                 </div>
             </div>
