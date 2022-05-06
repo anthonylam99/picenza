@@ -35,7 +35,7 @@ class ProductController extends Controller
         $averageQuality = calculateAverageReview($id, 'count_quality');
         $averageWorth = calculateAverageReview($id, 'count_worth');
 
-        $detailProduct = Product::with(['productImage.color'])->find($id);
+        $detailProduct = Product::with(['productImage.color'])->findOrFail($id);
 
         $aryComments = $detailProduct->comment()->where('status', 1)->orderBy('id', 'DESC')->paginate(3);
 

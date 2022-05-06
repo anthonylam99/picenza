@@ -200,6 +200,7 @@ class AdminController extends Controller
                 $arr['image_path'] = $request->get('image' . $index);
                 $arr['product_id'] = $product->id;
                 $arr['price'] = $request->get('price'.$index);
+                $arr['id'] = $request->get('idimg'.$index);
 
                 $arrColor = [];
                 $color = $request->get('color' . $index);
@@ -228,8 +229,7 @@ class AdminController extends Controller
                     foreach ($arrImageColor as $value) {
                         ProductImage::updateOrCreate(
                             [
-                                'product_id' => $value['product_id'],
-                                'color' => $value['color'],
+                                'id' => $value['id']
                             ],
                             [
                                 'product_id' => $value['product_id'],
@@ -242,7 +242,6 @@ class AdminController extends Controller
                 }
             }
         }
-
 
         return redirect()->route('admin.product.edit', ['id' => $productId])->with('success', 'Cập nhật thành công');
     }
@@ -258,6 +257,7 @@ class AdminController extends Controller
             'shapeType',
             'technologyType',
             'reliabilityType',
+            'productImage',
             'productImage.color',
         ])->findOrFail($id);
 
