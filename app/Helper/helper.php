@@ -71,7 +71,7 @@ if (!function_exists('calculateAverageReview')) {
      */
     function calculateAverageReview($product_id, $coloum = 'rating')
     {
-        $averageStar = Comments::where('product_id', $product_id)->avg($coloum);
+        $averageStar = Comments::where('product_id', $product_id)->where('status', 1)->avg($coloum);
 
         return !empty($averageStar) ? ceil($averageStar) : 0;
     }
