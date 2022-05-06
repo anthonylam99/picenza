@@ -135,7 +135,20 @@ $(document).ready(function () {
 
     $('.owl-carousel.bestseller').owlCarousel({
         loop: true,
-        items: 3
+        items: 3,
+        responsiveClass: true,
+        responsive: {
+            0: {
+                items: 2,
+                nav: false,
+                dots: true
+            },
+            767: {
+                items: 3,
+                nav: false,
+                dots: true
+            },
+        }
     })
 
     $('.owl-carousel.options3').owlCarousel({
