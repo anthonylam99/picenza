@@ -12,7 +12,7 @@
                 <div class="product-relate-item">
                     <div class="image">
                         <a href="">
-                            <img src="{{ count($detailProduct->productImage) > 0 ? asset($detailProduct->productImage[0]->image_path) : 'images/product/product_demo_2.png' }}" alt="tag">
+                            <img src="{{ $detailProduct->avatar_path }}" alt="tag">
                         </a>
                     </div>
                     <div class="name">
