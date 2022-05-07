@@ -49,6 +49,7 @@
                         <tr>
                             <td>{{$value->id}}</td>
                             <td>
+                                <img src="{{ $value->avatar_path }}" alt="" width="50px">
                             </td>
                             <td>{{$value->name}}</td>
                             <td>{{number_format($value->price)}}</td>

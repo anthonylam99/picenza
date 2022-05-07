@@ -205,14 +205,14 @@
                     data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a href="/quan-tri" class="nav-link">
                             <i class="nav-icon far fa-image"></i>
                             <p>
                                 TRANG CHỦ
                             </p>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <a href="{{route('admin.galery')}}" class="nav-link">
                             <i class="nav-icon far fa-image"></i>

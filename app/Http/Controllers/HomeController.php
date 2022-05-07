@@ -26,7 +26,7 @@ class HomeController extends Controller
             $categoryId = explode(',', $tag->posts);
             $aryPost = Post::where('status', 1)->get();
             foreach ($aryPost as $key => $post) {
-                if (count(array_intersect($categoryId,$post->category)) > 0) {
+                if (count(array_intersect($categoryId,$post->category)) >= 0) {
                     $aryPostId[] = $post->id;
                 }
             }

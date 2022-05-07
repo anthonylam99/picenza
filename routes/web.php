@@ -71,7 +71,7 @@ Route::group(['prefix' => 'quan-tri', 'middleware' => 'CheckAdmin'], function ()
     });
 
 
-    Route::group(['prefix' => 'san-pham', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'san-pham', /*'middleware' => 'auth'*/], function () {
         Route::get('danh-sach', [AdminController::class, 'productList'])->name('admin.product.list');
         Route::get('update-status-prod', [AdminController::class, 'updateStatusProd'])->name('updateStatus-prod');
         Route::get('loai-san-pham', [AdminController::class, 'productType'])->name('admin.product.type');
