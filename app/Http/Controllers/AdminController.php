@@ -191,6 +191,16 @@ class AdminController extends Controller
 
         $arrImageColor = [];
         $productId = $product->id;
+
+        ProductImage::create(
+            [
+                'product_id' => $productId,
+                'color' => 6,
+                'image_path' => $product->avatar_path,
+                'price' => $product->price,
+            ]
+        );
+
         foreach ($data as $key => $value) {
             if (strpos($key, 'image') !== false) {
 
@@ -447,6 +457,10 @@ class AdminController extends Controller
         foreach ($order->item as $key => $prod) {
             $aryProd[] = get_product_by_prod_id_and_color($prod['product_id'], $prod['color_id']);
             $aryProd[$key]['qty'] = $prod['qty'];
+
+            $aryProd[$key]['product_id'] = $prod['product_id'] ?? "";
+            $aryProd[$key]['product_name'] = $prod['product_name'] ?? "";
+
         }
 
         return view('admin.order.detail', compact('aryProd', 'order'));

@@ -80,10 +80,10 @@
                                     <tbody>
                                         @foreach ($aryProd as $prod)
                                         <tr>
-                                            <th scope="row">{{ $prod['id'] }}</th>
-                                            <td><img class="img-fluid" src="{{ asset($prod['image_path']) }}"></td>
+                                            <th scope="row">{{ $prod['product_id'] }}</th>
+                                            <td><img class="img-fluid" src="{{ asset($prod['image_path'] ?? '') }}"></td>
                                             <td>
-                                                <p>{{ $prod['product']['name'] }}</p>
+                                                <p>{{ @$prod['product_name'] }}</p>
                                             </td>
                                             <td style="text-align: center">{{ $prod['qty'] }}</td>
                                             <td style="color: #ff0000;text-align: right">@money($prod['price'] * $prod['qty'])</td>

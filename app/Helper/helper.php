@@ -104,7 +104,13 @@ if (!function_exists('get_product_by_prod_id_and_color')) {
      */
     function get_product_by_prod_id_and_color($product_id, $color_id)
     {
-        return ProductImage::with(['product', 'color'])->where('product_id', $product_id)->where('color', $color_id)->first()->toArray();
+        $productImange = ProductImage::with(['product', 'color'])->where('product_id', $product_id)->where('color', $color_id)->first();
+        if($productImange){
+            return $productImange->toArray();
+        } else {
+            $product = Product::find($product_id);
+            return $product ? $product->toArray() : [];
+        }
     }
 }
 
