@@ -460,6 +460,7 @@ class AdminController extends Controller
 
             $aryProd[$key]['product_id'] = $prod['product_id'] ?? "";
             $aryProd[$key]['product_name'] = $prod['product_name'] ?? "";
+            $aryProd[$key]['product_price'] = $prod['product_price'] ?? 0;
 
         }
 
