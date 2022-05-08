@@ -86,7 +86,7 @@
                                                 <p>{{ @$prod['product_name'] }}</p>
                                             </td>
                                             <td style="text-align: center">{{ $prod['qty'] }}</td>
-                                            <td style="color: #ff0000;text-align: right">@money($prod['price'] * $prod['qty'])</td>
+                                            <td style="color: #ff0000;text-align: right">@money($prod['product_price'] * $prod['qty'])</td>
                                         </tr>
                                         @endforeach
                                         <tr>
