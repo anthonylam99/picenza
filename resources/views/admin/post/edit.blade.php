@@ -40,18 +40,18 @@
                             <label for="title" class="col-md-2 col-sm-2 col-xs-12">Chuyên mục</label>
                             <select name="category[]" class="form-control js-example-tags col-sm-9" multiple="multiple"
                                     required>
-                                @foreach($listCategory as $value)
-                                    <option {{(in_array($value->id, $post->category) ? 'selected' : '')}}>{{$value->name}}</option>
-                                @endforeach
+                                    @foreach($listCategory as $value)
+                                        <option {{(in_array($value->name, $post->category) ? 'selected' : '')}}>{{$value->name}}</option>
+                                    @endforeach
                             </select>
                         </div>
                         <div class="form-group row">
                             <label for="title" class="col-md-2 col-sm-2 col-xs-12">Tag</label>
                             <select name="tag[]" class="form-control js-example-tags col-sm-9" multiple="multiple"
                                     >
-                                @foreach($listTag as $value)
-                                    <option {{(in_array($value->name, $tag) ? 'selected' : '')}}>{{$value->name}}</option>
-                                @endforeach
+                                    @foreach($listTag as $value)
+                                        <option {{(in_array($value->name, $tag) ? 'selected' : '')}}>{{$value->name}}</option>
+                                    @endforeach
                             </select>
                         </div>
                         <div class="form-group row">
@@ -68,7 +68,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card card-info col-8">
+                    <div class="card card-info col-12">
                         <div class="card-header">
                             <h3 class="card-title">
                                 NỘI DUNG
@@ -103,7 +103,7 @@
                     </div>
 
                     <div class="card">
-                        <div class="card card-info col-8">
+                        <div class="card card-info col-12">
                             <div class="card-header" style="margin-top: 10px">
                                 <h3 class="card-title">
                                     NỘI DUNG CHO SEO
