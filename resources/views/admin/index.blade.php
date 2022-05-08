@@ -482,5 +482,6 @@
 </script>
 @include('ckfinder::setup')
 @stack('js')
+
 </body>
 </html>

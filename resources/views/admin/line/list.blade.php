@@ -68,7 +68,7 @@
                                 </td>
                                 <td class="text-center">
                                     <button class="btn btn-info ">
-                                        <a target="_blank" style="color: #FFFFFF" href="{{ config('app.url').'/san-pham/'.$value->seo_url }}">
+                                        <a target="_blank" style="color: #FFFFFF" href="{{'/san-pham/'.$value->seo_url }}">
                                             <i class="far fa-eye"></i>
 
                                         </a>
