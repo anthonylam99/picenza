@@ -81,7 +81,7 @@
                             </div>
                         </div>
                         <div class="card-body p-0">
-                            <textarea name="content" id="text" cols="30" rows="10"
+                            <textarea name="content" id="text" cols="50" rows="50"
                                       required>{{$post->content}}</textarea>
                         </div>
                     </div>

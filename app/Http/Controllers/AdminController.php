@@ -462,7 +462,6 @@ class AdminController extends Controller
             $aryProd[$key]['product_name'] = $prod['product_name'] ?? "";
 
         }
-
         return view('admin.order.detail', compact('aryProd', 'order'));
     }
 

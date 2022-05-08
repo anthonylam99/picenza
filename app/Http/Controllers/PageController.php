@@ -71,46 +71,42 @@ class PageController extends Controller
 
             if (!empty($postDes)) {
                 $i = 0;
-                $postIdStr = '';
-                foreach ($postDes as $value) {
-                    $i++;
+                $postIdStr = [];
+                $posts = Post::all();
+                foreach ($posts as $post){
+                    foreach ($postDes as $value) {
+                        if(in_array($value->name, $post->category)){
+                            $arr = [];
+                            $arr['page_id'] = $request->get('page_id');
+                            $arr['tag'] = $tag;
+                            $arr['title'] = $post->title;
+                            $arr['content'] = substr($post->content, 0, 300);
+                            $arr['url'] = config('app.url') . '/bai-viet/' . $post->seo_url;
+                            $arr['image_path'] = $post->avatar;
+                            $arr['post_id'] = $post->id;
 
-                    if ($i < count($postDes)) {
-                        $postIdStr .= $value->id . ',';
-                    } else {
-                        $postIdStr .= $value->id;
+                            $arrPost[$post->id] = $arr;
+                            array_push($postIdStr, $post->id);
+                        }
                     }
-                    $arr = [];
-                    $arr['page_id'] = $request->get('page_id');
-                    $arr['tag'] = $tag;
-                    $arr['title'] = $value->title;
-                    $arr['content'] = substr($value->content, 0, 300);
-                    $arr['url'] = config('app.url').'/bai-viet/'.$value->seo_url;
-                    $arr['image_path'] = $value->avatar;
-                    $arr['post_id'] = $value->id;
-
-
-                    array_push($arrPost, $arr);
                 }
 
                 $postTag = PostTag::where('page_tag', $tag)->update([
-                    'posts' => $postIdStr
+                    'posts' => implode(',', array_unique($postIdStr)),
+                    'category_post' => implode(',', array_unique($request->get($field)))
                 ]);
             }
         }else{
             PostTag::where('page_tag', $tag)->update([
-                'posts' => ''
+                'posts' => '',
+                'category_post' => ''
             ]);
         }
+
         if (!empty($arrPost)) {
+            PageImage::where('tag', $tag)->delete();
             foreach ($arrPost as $value) {
-                $find = PageImage::where([
-                    'post_id' => $value['post_id'],
-                    'tag' => $value['tag']
-                ])->get();
-                if (empty(collect($find)->toArray())) {
-                    PageImage::create($value);
-                }
+                PageImage::create($value);
             }
         }
     }
@@ -161,10 +157,10 @@ class PageController extends Controller
     public function editPage(Request $request, $id = null)
     {
         $dataPost = PostTag::all();
-        dd($dataPost);
+//        return response()->json($dataPost);
         $arrPostPage = [];
         foreach ($dataPost as $value) {
-            $arrPostPage[$value->page_tag] = explode(',', $value->posts);
+            $arrPostPage[$value->page_tag] = explode(',', $value->category_post);
         }
 
         $page = Page::findOrFail($id);

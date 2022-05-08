@@ -50,9 +50,7 @@ class LoginController extends Controller
 
     public function postLogout(Request $request)
     {
-        auth()->guard()->logout();
-
-        session()->invalidate();
+        \Illuminate\Support\Facades\Auth::logout();
 
         return redirect('/quan-tri/dang-nhap');
     }

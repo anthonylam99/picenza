@@ -225,6 +225,16 @@
                     @endif
                     <div class="card-footer">
                         <button type="submit" class="btn btn-warning">Sửa</button>
+                        <button type="button" class="btn btn-info">
+                            <a target="_blank" style="color: #fff; text-transform: uppercase" href="/trang/{{$page->seo_url}}">
+                                Xem trang
+                            </a>
+                        </button>
+                        <button type="button" class="btn btn-default">
+                            <a target="_self" style="color: #000; text-transform: uppercase" href="/quan-tri/quan-ly-trang/danh-sach">
+                                Quay lại
+                            </a>
+                        </button>
                     </div>
                 </form>
             </div>
@@ -232,18 +242,3 @@
     </div>
 @endsection
 
-@section('admin.js')
-    <script src="{{asset('js/admin.js')}}"></script>
-    <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
-    <script>
-        CKEDITOR.replace( 'text', {
-            filebrowserBrowseUrl: '{{ asset(route('ckfinder_browser')) }}',
-            filebrowserImageBrowseUrl: '{{ asset(route('ckfinder_browser')) }}?type=Images',
-            filebrowserFlashBrowseUrl: '{{ asset(route('ckfinder_browser')) }}?type=Flash',
-            filebrowserUploadUrl: '{{ asset(route('ckfinder_connector')) }}?command=QuickUpload&type=Files',
-            filebrowserImageUploadUrl: '{{ asset(route('ckfinder_connector')) }}?command=QuickUpload&type=Images',
-            filebrowserFlashUploadUrl: '{{ asset(route('ckfinder_connector')) }}?command=QuickUpload&type=Flash'
-        });
-    </script>
-    @include('ckfinder::setup')
-@endsection

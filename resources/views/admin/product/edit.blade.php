@@ -169,6 +169,7 @@
                             @if (!empty($product['description']))
                             @foreach ($product['description'] as $key => $dec)
                             <div class="row desc-item" id="row-desc-{{$key}}">
+                                <input type="hidden" class="prod-des" data-des="{{$key}}">
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Tiêu đề</label>
@@ -358,11 +359,16 @@
 @push('js')
 <script>
     var i = 1;
-    if ($('.desc-item').length > 0) {
-        i = $('.desc-item').length;
+    var list = $(".prod-des").map(function () {
+        return $(this).attr('data-des');
+    }).get();
+    if (list.length > 0) {
+        i = list.splice(-1)[0]
     }
     $('.btn-add-desc').on('click', function(){
+        i++;
         var rowDesc = `<div class="row" id="row-desc-${i}">
+                        <input type="hidden" class="prod-des" data-des="${i}">
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Tiêu đề</label>
