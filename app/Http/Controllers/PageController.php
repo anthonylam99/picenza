@@ -42,6 +42,7 @@ class PageController extends Controller
         $arr['content'] = $request->get('content');
         $arr['slug'] = $slug;
         $arr['url'] = $url . '/trang/' . $slug;
+        $arr['seo_url'] = $slug;
 
         if ($request->has('page_id')) {
             $res = Page::where('id', $request->get('page_id'))->update($arr);
@@ -160,6 +161,7 @@ class PageController extends Controller
     public function editPage(Request $request, $id = null)
     {
         $dataPost = PostTag::all();
+        dd($dataPost);
         $arrPostPage = [];
         foreach ($dataPost as $value) {
             $arrPostPage[$value->page_tag] = explode(',', $value->posts);
