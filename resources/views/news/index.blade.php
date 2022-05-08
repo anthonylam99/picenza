@@ -148,14 +148,14 @@
                                     <article class="gd_news__item">
                                         <div class="gd_news__inner">
                                             <figure class="gd_news__image">
-                                                <a href="{{$item->url}}">
+                                                <a href="{{config('app.url').'/bai-viet/'.$item->seo_url}}">
                                                     <img
                                                         src="{{!empty($item->avatar) ? $item->avatar : asset('images/no-image.jpg') }}"
                                                         alt="">
                                                 </a>
                                             </figure>
                                             <div class="gd_news__content">
-                                                <a class="gd_news__title" href="{{$item->url}}">
+                                                <a class="gd_news__title" href="{{config('app.url').'/bai-viet/'.$item->seo_url}}">
                                                     <span class="gd_text">
                                                         {{$item->title}}
                                                     </span>

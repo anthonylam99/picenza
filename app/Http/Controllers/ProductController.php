@@ -236,9 +236,12 @@ class ProductController extends Controller
 
        $aryProd = [];
 
+       $products = Product::whereIn('id', $request->product_id)->get()->keyBy('id');
+
        foreach ($request->product_id as $key => $value) {
             $aryProd[] = [
                 'product_id'    => $value,
+                'product_name'  => $products[$value]->name ?? "",
                 'color_id'      => $request->color_id[$key],
                 'qty'           => $request->qty[$key],
             ];
