@@ -11,27 +11,29 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function showPost(Request $request, $slug = ''){
+    public function showPost(Request $request, $slug = '')
+    {
         $post = Post::where('slug', $slug)->firstOrFail();
 
-        $relatePost = Post::where('id', '!=', $post->id)->where(function ($q) use ($post){
+        $relatePost = Post::where('id', '!=', $post->id)->where(function ($q) use ($post) {
             $q->whereIn('category', $post->category);
-            $q->orWhere('tag', 'like', '%'.$post->tag.'%');
+            $q->orWhere('tag', 'like', '%' . $post->tag . '%');
             return $q;
         })->inRandomOrder()->limit(5)->get();
         return view('admin.post.show', compact('post', 'relatePost'));
     }
+
     public function listPost(Request $request)
     {
         $post = Post::paginate(10);
         $tag = Tag::all();
         $category = PostCategory::where('status', 1)->get();
 
-        if($request->has('s')){
+        if ($request->has('s')) {
             $s = $request->get('s');
-            $post = Post::where('title', 'like', '%'.$s.'%')
+            $post = Post::where('title', 'like', '%' . $s . '%')
                 ->whereIn('category', $s, 'or')
-                ->orWhere('tag', 'like', '%'.$s.'%')
+                ->orWhere('tag', 'like', '%' . $s . '%')
                 ->paginate(10);
         }
 
@@ -41,23 +43,21 @@ class PostController extends Controller
     public function addPost(Request $request)
     {
 
-        if($request->method() === 'POST'){
+        if ($request->method() === 'POST') {
             $options = new Options;
-
-            $slug = $options->create_slug($request->get('title'));
 
             $url = collect($request->server)['HTTP_ORIGIN'];
             $arr = [];
 
             $tag = '';
-            if($request->has('tag')){
+            if ($request->has('tag')) {
                 $tags = $request->get('tag');
                 $i = 0;
-                foreach ($tags as $value){
+                foreach ($tags as $value) {
                     $i++;
-                    if($i < count($tags)){
-                        $tag .= $value.',';
-                    }else{
+                    if ($i < count($tags)) {
+                        $tag .= $value . ',';
+                    } else {
                         $tag .= $value;
                     }
 
@@ -66,8 +66,7 @@ class PostController extends Controller
 
             $arr['title'] = $request->get('title');
             $arr['content'] = $request->get('content');
-            $arr['slug'] = $slug;
-            $arr['url'] = $url.'/bai-viet/'.$slug;
+
             $arr['tag'] = $tag;
             $arr['category'] = $request->get('category');
             $arr['seo_url'] = $request->get('seo-url');
@@ -78,18 +77,39 @@ class PostController extends Controller
             $arr['seo_robots'] = $request->get('seo_robots');
             $arr['status'] = $request->get('status') === 'on' ? 1 : 0;
 
-            if($request->has('post_id')){
+            if ($request->has('post_id')) {
+                $slug = $request->get('seo-url');
+                $post = Post::where('slug', $slug)->where('id', '!=', $request->get('post_id'))->get();
+
+                if (!empty(collect($post)->toArray()) && count(collect($post)->toArray()) >= 1) {
+                    $randomNumber = rand(0, 9999);
+                    $slug .= '-' . $randomNumber;
+                }
+                $arr['slug'] = $slug;
+                $arr['seo_url'] = $slug;
+                $arr['url'] = $url . '/bai-viet/' . $slug;
+
                 $res = Post::where('id', $request->get('post_id'))->update($arr);
                 $id = $request->get('post_id');
-            }else{
+            } else {
+                $slug = $options->create_slug($request->get('title'));
+                $post = Post::where('slug', $slug)->get();
+                if(!empty(collect($post)->toArray()) && count(collect($post)->toArray()) >= 1){
+                    $randomNumber = rand(0, 9999);
+                    $slug .= '-'.$randomNumber;
+                }
+                $arr['slug'] = $slug;
+                $arr['seo_url'] = $slug;
+                $arr['url'] = $url . '/trang/' . $slug;
+
                 $res = Post::create($arr);
                 $id = $res->id;
             }
 
-            if($res){
+            if ($res) {
                 return redirect()->route('admin.post.edit', ['id' => $id]);
             }
-        }else{
+        } else {
             $tag = Tag::where('status', 1)->get();
             $category = PostCategory::where('status', 1)->get();
 
@@ -101,11 +121,12 @@ class PostController extends Controller
     public function editPost(Request $request, $id = null)
     {
         $post = Post::findOrFail($id);
+
         $listTag = Tag::where('status', 1)->get();
         $listCategory = PostCategory::where('status', 1)->get();
 
         $tag = [];
-        if($post){
+        if ($post) {
             $tag = explode(',', $post->tag);
         }
         // $category = [];
@@ -122,7 +143,8 @@ class PostController extends Controller
         return redirect()->route('admin.post.list');
     }
 
-    public function listTag(Request $request){
+    public function listTag(Request $request)
+    {
         $tag = Tag::all();
 
         return view('admin.post.tag', compact('tag'));
@@ -139,7 +161,7 @@ class PostController extends Controller
         $update = Post::where('id', $request->get('id'))->update([
             'status' => $request->status
         ]);
-        if($update){
+        if ($update) {
             return response()->json(['message' => 'Success']);
         }
     }

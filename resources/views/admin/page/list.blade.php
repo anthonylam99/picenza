@@ -57,7 +57,7 @@
                                 @if($value->name !== 'Trang chủ')
                                     <button class="btn btn-danger">
                                         <a style="color: #FFFFFF"
-                                           href="{{ route('admin.page.edit', ['id' => $value->id]) }}">
+                                           href="{{ route('admin.page.del', ['id' => $value->id]) }}">
                                             Xoá
                                         </a>
                                     </button>

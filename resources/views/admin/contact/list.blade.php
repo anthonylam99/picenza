@@ -9,12 +9,12 @@
 
 @section('content')
     <div class="col-3">
-        <button style="margin-bottom: 10px" type="button" class="btn btn-success">
-            <a style="color: #FFFFFF;" href="{{route('admin.product.add')}}">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                Thêm mới
-            </a>
-        </button>
+{{--        <button style="margin-bottom: 10px" type="button" class="btn btn-success">--}}
+{{--            <a style="color: #FFFFFF;" href="{{route('admin.product.add')}}">--}}
+{{--                <i class="fa fa-plus" aria-hidden="true"></i>--}}
+{{--                Thêm mới--}}
+{{--            </a>--}}
+{{--        </button>--}}
     </div>
     <div class="col-12">
         <div class="card">

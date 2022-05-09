@@ -216,6 +216,14 @@
 @endsection
 @push('js')
 <script>
+    $(function (){
+        $("#productName").on('input', function (){
+            var slug  = slugify($(this).val())
+            $('#seo-url').val(slug)
+            console.log(slug)
+        })
+    })
+
     var i = 1;
     $('.btn-add-desc').on('click', function(){
         var rowDesc = `<div class="row" id="row-desc-${i}">

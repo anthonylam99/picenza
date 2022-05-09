@@ -147,6 +147,7 @@ Route::group(['prefix' => 'san-pham', 'middleware' => 'auth'], function () {
         Route::get('them-moi', [PageController::class, 'add'])->name('admin.page.add');
         Route::post('them-moi', [PageController::class, 'addPage'])->name('admin.page.add.post');
         Route::get('sua/{id}', [PageController::class, 'editPage'])->name('admin.page.edit');
+        Route::get('xoa/{id}', [PageController::class, 'delPage'])->name('admin.page.del');
     });
 
     Route::group(['prefix' => 'bai-viet', 'middleware' => 'auth'], function() {

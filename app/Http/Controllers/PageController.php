@@ -36,18 +36,45 @@ class PageController extends Controller
         $options = new Options;
         $arr = [];
         $url = collect($request->server)['HTTP_ORIGIN'];
-        $slug = $options->create_slug($request->get('name'));
 
-        $arr['name'] = $request->get('name');
-        $arr['content'] = $request->get('content');
-        $arr['slug'] = $slug;
-        $arr['url'] = $url . '/trang/' . $slug;
-        $arr['seo_url'] = $slug;
+
+
+        $arr['name'] = $request->get('name',$request->get('name_page'));
+        $arr['content'] = $request->get('content','');
+        $arr['seo_title'] = $request->get('seo_title', '');
+        $arr['seo_description'] = $request->get('seo_description', '');
+        $arr['seo_keyword'] = $request->get('seo_keyword', '');
+        $arr['seo_robots'] = $request->get('seo_robots', '');
 
         if ($request->has('page_id')) {
+            $slug = $request->get('slug', '');
+            $page = Page::where('slug', $slug)->where('id', '!=' ,$request->get('page_id'))->get();
+
+            if(!empty(collect($page)->toArray()) && count(collect($page)->toArray()) >= 1){
+                $randomNumber = rand(0, 9999);
+                $slug .= '-'.$randomNumber;
+                $arr['slug'] = $slug;
+                $arr['slug'] = $slug;
+            }
+            $arr['slug'] = $slug;
+            $arr['seo_url'] = $slug;
+            $arr['url'] = $url . '/trang/' . $slug;
+
             $res = Page::where('id', $request->get('page_id'))->update($arr);
             $id = $request->get('page_id');
         } else {
+            $slug = $options->create_slug($request->get('name'));
+            $page = Page::where('slug', $slug)->get();
+            if(!empty(collect($page)->toArray()) && count(collect($page)->toArray()) >= 1){
+                $randomNumber = rand(0, 9999);
+                $slug .= '-'.$randomNumber;
+                $arr['slug'] = $slug;
+                $arr['slug'] = $slug;
+            }
+            $arr['slug'] = $slug;
+            $arr['seo_url'] = $slug;
+            $arr['url'] = $url . '/trang/' . $slug;
+
             $res = Page::create($arr);
             $id = $res->id;
         }
@@ -181,5 +208,12 @@ class PageController extends Controller
         $page = Page::where('seo_url', $slug)->firstOrFail();
 
         return view('admin.page.show', compact('page'));
+    }
+
+    public function delPage(Request $request, $id = null){
+        $page = Page::findOrFail($id);
+        $page->delete();
+
+        return redirect()->route('admin.page.list');
     }
 }

@@ -46,7 +46,7 @@
                 </div>
                 <div class="review-main-content">
                     <div class="content-1">
-                        {{ $comment->body }}
+                        <p>{{ $comment->body }}</p>
                     </div>
                     <div class="content-2">
                         <div class="review-useful">

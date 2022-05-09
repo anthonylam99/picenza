@@ -40,6 +40,12 @@
                                    value="{{$product['name']}}" placeholder="Nhập tên sản phẩm..." required>
                         </div>
                         <div class="form-group">
+                            <label for="seo-url" class="">Đường dẫn</label>
+                            <input type="text" name="seo-url" id="seo-url" class="form-control"
+                                   value="{{$product['seo_url']}}"
+                                   placeholder="Nhập đường dẫn..." required>
+                        </div>
+                        <div class="form-group">
                             <label for="productPrice">Giá</label>
                             <input type="text" name="price" class="form-control m-r-10 input-sm" id="productPrice"
                                    value="{{$product['price']}}" placeholder="Nhập giá sản phẩm...." required>
@@ -358,6 +364,14 @@
 @endsection
 @push('js')
 <script>
+    $(function (){
+        $("#productName").on('input', function (){
+            var slug  = slugify($(this).val())
+            $('#seo-url').val(slug)
+            console.log(slug)
+        })
+    })
+
     var i = 1;
     var list = $(".prod-des").map(function () {
         return $(this).attr('data-des');

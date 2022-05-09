@@ -59,7 +59,7 @@ class HomeController extends Controller
         $newPost = Post::orderBy('id', 'desc')->limit(5)->get();
 
 
-        $posts = DB::table('post');
+        $posts = DB::table('post')->get();
 
         $categoryData = [];
 

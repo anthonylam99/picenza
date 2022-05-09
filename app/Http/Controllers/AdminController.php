@@ -160,6 +160,7 @@ class AdminController extends Controller
         $dataInsert = [
             'name' => $request->get('product_name'),
             'slug' => $slug,
+            'seo_url' => $slug,
             'price' => $price,
             'sale_price' => str_replace(",", '', $request->get('sale_price')),
             'sale_percent' => str_replace(",", '', $request->get('sale_percent')),

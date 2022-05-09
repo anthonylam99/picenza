@@ -20,8 +20,8 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="productName">Danh mục</label>
-                            <select class="form-control"  name="category_id" required>
-                                <option>-- Vui lòng chọn ---</option>
+                            <select class="form-control" id="productName" name="category_id" required>
+                                <option value="">-- Vui lòng chọn ---</option>
                                 @foreach($productType as $value)
                                     <option value="{{$value->id}}">{{$value->name}}</option>
                                 @endforeach

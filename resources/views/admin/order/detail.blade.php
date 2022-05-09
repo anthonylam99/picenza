@@ -81,7 +81,7 @@
                                         @foreach ($aryProd as $prod)
                                         <tr>
                                             <th scope="row">{{ $prod['product_id'] }}</th>
-                                            <td><img class="img-fluid" src="{{ asset($prod['image_path'] ?? '') }}"></td>
+                                            <td><img class="img-fluid" src="{{ $prod['image_path'] }}"></td>
                                             <td>
                                                 <p>{{ @$prod['product_name'] }}</p>
                                             </td>

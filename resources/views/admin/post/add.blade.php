@@ -27,12 +27,12 @@
                             <label for="title" class="col-md-2 col-sm-2 col-xs-12">Tiêu đề</label>
                             <input type="text" name="title" id="title" class="form-control col-sm-9" value="" placeholder="Nhập tiêu đề bài viết..." required>
                         </div>
-                        <div class="form-group row">
-                            <label for="seo-url" class="col-md-2 col-sm-2 col-xs-12">Đường dẫn</label>
-                            <input type="text" name="seo-url" id="seo-url" class="form-control col-sm-9"
-                                   value=""
-                                   placeholder="Nhập đường dẫn..." required>
-                        </div>
+{{--                        <div class="form-group row">--}}
+{{--                            <label for="seo-url" class="col-md-2 col-sm-2 col-xs-12">Đường dẫn</label>--}}
+{{--                            <input type="text" name="seo-url" id="seo-url" class="form-control col-sm-9"--}}
+{{--                                   value=""--}}
+{{--                                   placeholder="Nhập đường dẫn..." required>--}}
+{{--                        </div>--}}
                         <div class="form-group row">
                             <label for="title" class="col-md-2 col-sm-2 col-xs-12">Chuyên mục</label>
                             <select name="category[]" class="form-control js-example-tags col-sm-9" multiple="multiple" required>
