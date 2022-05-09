@@ -120,7 +120,7 @@
             <div class="content-1 container">
                 <div class="content-1-main">
                     <div class="title">
-                        <h5>CHẬU RỬA BÁN CHẠY NHẤT</h5>
+                        <h5 style="text-transform: uppercase;">{{$category->name}} BÁN CHẠY NHẤT</h5>
                     </div>
                     <div class="feature">
                         <div class="feature-item row owl-carousel bestseller owl-theme">

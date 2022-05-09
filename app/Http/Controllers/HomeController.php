@@ -26,7 +26,7 @@ class HomeController extends Controller
             $categoryId = explode(',', $tag->posts);
             $aryPost = Post::where('status', 1)->get();
             foreach ($aryPost as $key => $post) {
-                if (count(array_intersect($categoryId,$post->category)) >= 0) {
+                if (count(array_intersect($categoryId, $post->category)) >= 0) {
                     $aryPostId[] = $post->id;
                 }
             }
@@ -66,13 +66,21 @@ class HomeController extends Controller
         if (!empty($slug)) {
             $category = PostCategory::where('seo_url', $slug)->first();
 
-            if(!empty(collect($category)->toArray())){
+            if (!empty(collect($category)->toArray())) {
                 $category = collect($category)->toArray();
+
                 $categoryData = $category;
-                $posts = $posts->whereRaw("CONCAT(',', category, ',') LIKE '%," . $category['name'] . ",%' ");
+                $arrPosts = Post::all();
+                $posts = [];
+                foreach ($arrPosts as $post) {
+                    if (!empty($post->category)) {
+                        if (in_array($category['name'], $post->category)) {
+                            array_push($posts, $post);
+                        }
+                    }
+                }
             }
         }
-        $posts = $posts->paginate(10);
 
 
         return view('news.index', compact('newPost', 'posts', 'categoryData'));

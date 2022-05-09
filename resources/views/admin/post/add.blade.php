@@ -37,7 +37,7 @@
                             <label for="title" class="col-md-2 col-sm-2 col-xs-12">Chuyên mục</label>
                             <select name="category[]" class="form-control js-example-tags col-sm-9" multiple="multiple" required>
                                 @foreach($category as $value)
-                                    <option value="{{ $value->id }}">{{$value->name}}</option>
+                                    <option value="{{ $value->name }}">{{$value->name}}</option>
                                 @endforeach
                             </select>
                         </div>

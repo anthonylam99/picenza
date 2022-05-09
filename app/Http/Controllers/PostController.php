@@ -64,21 +64,6 @@ class PostController extends Controller
                 }
             }
 
-            // $category = '';
-            // if($request->has('category')){
-            //     $categories = $request->get('category');
-            //     $i = 0;
-            //     foreach ($categories as $value){
-            //         $i++;
-            //         if($i < count($categories)){
-            //             $category .= $value.',';
-            //         }else{
-            //             $category .= $value;
-            //         }
-
-            //     }
-            // }
-
             $arr['title'] = $request->get('title');
             $arr['content'] = $request->get('content');
             $arr['slug'] = $slug;

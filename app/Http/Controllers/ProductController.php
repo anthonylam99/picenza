@@ -241,7 +241,7 @@ class ProductController extends Controller
        foreach ($request->product_id as $key => $value) {
             $productImage = ProductImage::where('product_id', $value)->where('color', $request->color_id[$key])->first();
             $price = $productImage ? $productImage->price : $products[$value]->price;
-            
+
             $aryProd[] = [
                 'product_id'    => $value,
                 'product_name'  => $products[$value]->name ?? "",

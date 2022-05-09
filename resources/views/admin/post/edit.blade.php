@@ -40,18 +40,22 @@
                             <label for="title" class="col-md-2 col-sm-2 col-xs-12">Chuyên mục</label>
                             <select name="category[]" class="form-control js-example-tags col-sm-9" multiple="multiple"
                                     required>
-                                    @foreach($listCategory as $value)
+                                @foreach($listCategory as $value)
+                                    @if(!empty($listCategory) && !empty($post->category))
                                         <option {{(in_array($value->name, $post->category) ? 'selected' : '')}}>{{$value->name}}</option>
-                                    @endforeach
+                                    @else
+                                        <option >{{$value->name}}</option>
+                                    @endif
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group row">
                             <label for="title" class="col-md-2 col-sm-2 col-xs-12">Tag</label>
                             <select name="tag[]" class="form-control js-example-tags col-sm-9" multiple="multiple"
-                                    >
-                                    @foreach($listTag as $value)
-                                        <option {{(in_array($value->name, $tag) ? 'selected' : '')}}>{{$value->name}}</option>
-                                    @endforeach
+                            >
+                                @foreach($listTag as $value)
+                                    <option {{(in_array($value->name, $tag) ? 'selected' : '')}}>{{$value->name}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group row">
@@ -64,7 +68,8 @@
                                 <div class="img-avt">
                                     <img id="img-avatar" src="{{$post->avatar}}" alt="">
                                 </div>
-                                <input type="hidden" id="img_avatar_path" name="img_avatar_path" value="{{$post->avatar}}">
+                                <input type="hidden" id="img_avatar_path" name="img_avatar_path"
+                                       value="{{$post->avatar}}">
                             </div>
                         </div>
                     </div>
@@ -91,7 +96,7 @@
                             <div class="form-group row" id="productFeature" style="margin-left: 0">
                                 <div class="custom-control custom-checkbox col-4">
                                     <input name="status" class="custom-control-input" type="checkbox" id="status"
-                                          {{$post->status === 1 ? 'checked' : ''}}>
+                                        {{$post->status === 1 ? 'checked' : ''}}>
                                     <label for="status" class="custom-control-label">KÍCH HOẠT</label>
                                 </div>
                             </div>
@@ -124,29 +129,36 @@
                                             <h3 class="preview_snippet_title"></h3>
                                             <p class="preview_snippet_link">{{$post->url}}</p>
                                             <p class="preview_snippet_des"></p>
-                                            <input type="hidden" id="url_seo" value="{{str_replace($post->seo_url, '', $post->url)}}">
+                                            <input type="hidden" id="url_seo"
+                                                   value="{{str_replace($post->seo_url, '', $post->url)}}">
                                         </div>
                                     </div>
                                     <div class="form-body">
                                         <div class="form-group row">
-                                            <label for="news_title" class="control-label col-md-2 col-sm-2 col-xs-12"><span
-                                                    class="form-asterick"></span>Tiêu đề cho thẻ meta title (SEO)</label>
+                                            <label for="news_title"
+                                                   class="control-label col-md-2 col-sm-2 col-xs-12"><span
+                                                    class="form-asterick"></span>Tiêu đề cho thẻ meta title
+                                                (SEO)</label>
                                             <div class="controls col-sm-9">
                                                 <input type="text" placeholder="Tiêu đề tốt nhất 60 - 70 ký tự"
-                                                       class="form-control col-sm-9 in_title" id="news_title" value="{{$post->seo_title}}"
+                                                       class="form-control col-sm-9 in_title" id="news_title"
+                                                       value="{{$post->seo_title}}"
                                                        name="seo_title">
-                                                <span class="in_title_count">0</span> ký tự. Tiêu đề (title) tốt nhất khoảng
+                                                <span class="in_title_count">0</span> ký tự. Tiêu đề (title) tốt nhất
+                                                khoảng
                                                 60 - 70 ký tự
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="news_description" class="control-label col-md-2 col-sm-2 col-xs-12"><span
+                                            <label for="news_description"
+                                                   class="control-label col-md-2 col-sm-2 col-xs-12"><span
                                                     class="form-asterick"></span>Đoạn mô tả cho thẻ meta description
                                                 (SEO)</label>
                                             <div class="controls col-sm-9">
                                             <textarea placeholder="Mô tả khoảng 160 ký tự"
                                                       class="span6 form-control in_des" id="news_description"
-                                                      name="seo_description" style="width:100%;height:60px">{{$post->seo_description}}</textarea>
+                                                      name="seo_description"
+                                                      style="width:100%;height:60px">{{$post->seo_description}}</textarea>
                                                 <span class="in_des_count">0</span> ký tự. Mô tả (description) tốt nhất
                                                 khoảng 120 - 160 ký tự
                                             </div>
@@ -157,19 +169,33 @@
                                                     class="form-asterick"></span>Meta Keyword (SEO)</label>
                                             <div class="controls  col-sm-9">
                                                 <input type="text" placeholder="" class="form-control col-sm-9"
-                                                       id="news_keyword" value="{{$post->seo_keyword}}" name="seo_keyword">
+                                                       id="news_keyword" value="{{$post->seo_keyword}}"
+                                                       name="seo_keyword">
                                                 <span>Không nên lạm dụng thẻ Meta Keyword để tránh việc bị phản tác dụng.</span>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="news_robots" class="control-label col-md-2 col-sm-2 col-xs-12"><span
+                                            <label for="news_robots"
+                                                   class="control-label col-md-2 col-sm-2 col-xs-12"><span
                                                     class="form-asterick"></span>Điều hướng Robots</label>
                                             <div class="controls col-sm-3">
                                                 <select id="news_robots" name="seo_robots" class="form-control">
-                                                    <option value="index,follow" {{$post->seo_robots === 'index,follow' ? 'selected' : ''}}>Index,Follow</option>
-                                                    <option value="noindex,nofollow" {{$post->seo_robots === 'noindex,nofollow' ? 'selected' : ''}}>Noindex,Nofollow</option>
-                                                    <option value="index,nofollow" {{$post->seo_robots === 'index,nofollow' ? 'selected' : ''}}>Index,Nofollow</option>
-                                                    <option value="noindex,follow" {{$post->seo_robots === 'noindex,follow' ? 'selected' : ''}}>Noindex,Follow</option>
+                                                    <option
+                                                        value="index,follow" {{$post->seo_robots === 'index,follow' ? 'selected' : ''}}>
+                                                        Index,Follow
+                                                    </option>
+                                                    <option
+                                                        value="noindex,nofollow" {{$post->seo_robots === 'noindex,nofollow' ? 'selected' : ''}}>
+                                                        Noindex,Nofollow
+                                                    </option>
+                                                    <option
+                                                        value="index,nofollow" {{$post->seo_robots === 'index,nofollow' ? 'selected' : ''}}>
+                                                        Index,Nofollow
+                                                    </option>
+                                                    <option
+                                                        value="noindex,follow" {{$post->seo_robots === 'noindex,follow' ? 'selected' : ''}}>
+                                                        Noindex,Follow
+                                                    </option>
                                             </div>
                                         </div>
                                     </div>
