@@ -1,30 +1,38 @@
 $('.color-options:nth-child(1)').addClass('active')
 
-function changeColor(id, color, productId) {
+function changeColor(id, color_id, color, productId, pricent) {
     console.log(id);
-    $('#color-selected').val(id)
+    $('#color-selected').val(color_id)
     $('.color-option .color').html('<text class="color">' + color + '</text>')
 
     $('.color-options').removeClass('active')
     $('.color-options:nth-child(' + id + ')').addClass("active")
 
-    $.ajax({
-        url: '/get-image-from-color-and-product-id',
-        type: 'GET',
-        data: {
-            color_id: id,
-            product_id: productId,
-        },
-        //Ajax events
-        success: function (response) {
-            var img = `<img src="${response.url}" >`;
+    var price = new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(pricent)
+    $('#bind-price').html(price);
+    $('#hidden-price').val(pricent);
 
-            var price = new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(response.price)
-            $('#img-product-color').html(img);
-            $('#bind-price').html(price);
-            $('#hidden-price').val(response.price);
-        }
-    })
+    var list = $(".image-product").map(function () {
+        return $(this).hide();
+    }).get();
+    $('.image-product:nth-child(' + id + ')').show()
+    // $.ajax({
+    //     url: '/get-image-from-color-and-product-id',
+    //     type: 'GET',
+    //     data: {
+    //         color_id: id,
+    //         product_id: productId,
+    //     },
+    //     //Ajax events
+    //     success: function (response) {
+    //         var img = `<img src="${response.url}" >`;
+    //
+    //         var price = new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(response.price)
+    //         $('#img-product-color').html(img);
+    //         $('#bind-price').html(price);
+    //         $('#hidden-price').val(response.price);
+    //     }
+    // })
 }
 
 function addParamCategory() {

@@ -38,7 +38,7 @@
 <section id="body_w">
     <!-- Star Content Website -->
     <section class="clearfix wrapped_content">
-        <a href="{{ URL::previous() }}" class="btn_back_order"><i class="fa fa-arrow-left" aria-hidden="true"></i> Tiếp
+        <a href="{{ redirect()->getUrlGenerator()->previous()  }}" class="btn_back_order"><i class="fa fa-arrow-left" aria-hidden="true"></i> Tiếp
             tục xem sản phẩm</a>
         <div class="clearfix content_order">
             <form action="{{ route('saveOrder') }}" method="POST">

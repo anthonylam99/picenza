@@ -33,7 +33,7 @@
                     <thead>
                     <tr>
                         <th style="width: 10px">ID</th>
-                        <th>Link bài viết</th>
+                        <th>Sản phẩm</th>
                         <th style="width: 20%">Tiêu đề</th>
                         <th style="width: 40%">Nội dung</th>
                         <th>Trạng thái</th>
@@ -43,28 +43,30 @@
                     </thead>
                     <tbody>
                     @foreach($aryComment as $value)
-                        <tr>
-                            <td>{{$value->id}}</td>
-                            <td>
-                                <a href="{{ route('product.detail', $value->product_id) }}">{{ route('product.detail', $value->product_id) }}</a>
-                            </td>
-                            <td>{{ $value->title }}</td>
-                            <td>{{ truncate($value->body, 40) }}</td>
-                            <td>
-                                <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="status{{$value->id}}" {{ $value->status == 1 ? 'checked' : '' }} name="status" onclick="changeStatusComment({{$value->id}})">
-                                    <label name="status{{$value->id}}" class="custom-control-label status{{$value->id}}" for="status{{$value->id}}">{{ $value->status ? 'Bật' : 'Tắt' }}</label>
-                                </div>
-                            </td>
-                            <td>{{ date('d-m-Y', strtotime($value->created_at)) }}</td>
-                            <td>
-                                <button class="btn btn-info">
-                                    <a style="color: #FFFFFF" href="{{ route('admin.comment.edit', $value->id) }}">
-                                        <i class="far fa-edit"></i>Chi tiết
-                                    </a>
-                                </button>
-                            </td>
-                        </tr>
+                       @if(!empty($value->product))
+                           <tr>
+                               <td>{{$value->id}}</td>
+                               <td>
+                                   <a href="{{ route('product.detail', $value->product->slug) }}">{{ $value->product->name }}</a>
+                               </td>
+                               <td>{{ $value->title }}</td>
+                               <td style="word-break: break-all">{{ substr($value->body, 40).'....' }}</td>
+                               <td>
+                                   <div class="custom-control custom-switch">
+                                       <input type="checkbox" class="custom-control-input" id="status{{$value->id}}" {{ $value->status == 1 ? 'checked' : '' }} name="status" onclick="changeStatusComment({{$value->id}})">
+                                       <label name="status{{$value->id}}" class="custom-control-label status{{$value->id}}" for="status{{$value->id}}">{{ $value->status ? 'Bật' : 'Tắt' }}</label>
+                                   </div>
+                               </td>
+                               <td>{{ date('d-m-Y', strtotime($value->created_at)) }}</td>
+                               <td>
+                                   <button class="btn btn-info">
+                                       <a style="color: #FFFFFF" href="{{ route('admin.comment.edit', $value->id) }}">
+                                           <i class="far fa-edit"></i>Chi tiết
+                                       </a>
+                                   </button>
+                               </td>
+                           </tr>
+                       @endif
                     @endforeach
                     </tbody>
                 </table>

@@ -4,7 +4,7 @@
 
 @section('breadcrumbContent')
     <li class="breadcrumb-item"><a href="#">Hãng sản xuất</a></li>
-    <li class="breadcrumb-item active">Danh sách hãng sản xuấtt</li>
+    <li class="breadcrumb-item active">Danh sách hãng sản xuất</li>
 @endsection
 
 @section('content')
@@ -22,7 +22,7 @@
 
                 <div class="form-search float-right">
                     <form style="margin-bottom: 0" class="form-group" action="{{route('admin.company.list')}}">
-                        <input  class="form-control" type="text" name="s" value="" placeholder="Tìm kiếm sản phẩm....">
+                        <input  class="form-control" type="text" name="s" value="" placeholder="Tìm kiếm ....">
                     </form>
                 </div>
             </div>

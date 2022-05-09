@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Entity\Options;
 use App\Models\Page;
+use App\Models\PageImage;
 use App\Models\Post;
 use App\Models\PostCategory;
 use App\Models\Tag;
@@ -90,6 +91,12 @@ class PostController extends Controller
                 $arr['url'] = $url . '/bai-viet/' . $slug;
 
                 $res = Post::where('id', $request->get('post_id'))->update($arr);
+                PageImage::where('post_id', $request->get('post_id'))->update([
+                    'url' => $arr['url'],
+                    'content' => $arr['content'],
+                    'title' => $arr['title'],
+                    'image_path' => $arr['avatar'],
+                ]);
                 $id = $request->get('post_id');
             } else {
                 $slug = $options->create_slug($request->get('title'));

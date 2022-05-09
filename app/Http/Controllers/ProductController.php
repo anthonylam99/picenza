@@ -24,12 +24,15 @@ class ProductController extends Controller
         return response()->json($product);
     }
 
-    public function detailProduct(Request $request, $id){
+    public function detailProduct(Request $request, $slug = null){
         $stars = [
             "fullStar" => 0,
             "halfStar" => 0,
             "noneStar" => 0
         ];
+        $product = Product::where('slug', $slug)->firstOrFail();
+        $id = $product->id;
+        $category = ProductLine::findOrFail($product->product_line);
 
         $averageStar = calculateAverageReview($id, 'rating');
         $averageQuality = calculateAverageReview($id, 'count_quality');
@@ -106,6 +109,7 @@ class ProductController extends Controller
             'averageQuality',
             'averageStar',
             'countCommentNotRating',
+            'category'
         ));
     }
 
@@ -163,7 +167,6 @@ class ProductController extends Controller
     {
         $options = [
             'options' => [
-
                 'image' => $request->image,
                 'color' => $request->color,
             ]

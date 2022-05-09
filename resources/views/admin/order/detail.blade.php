@@ -73,6 +73,7 @@
                                             <th style="width: 30px;text-align: center">#</th>
                                             <th style="width: 80px;text-align: center">Ảnh</th>
                                             <th style="text-align: center">Tên sản phẩm</th>
+                                            <th style="text-align: center">Màu sắc</th>
                                             <th style="width: 50px;text-align: center">SL</th>
                                             <th style="width: 120px;text-align: center">Giá</th>
                                         </tr>
@@ -85,11 +86,15 @@
                                             <td>
                                                 <p>{{ @$prod['product_name'] }}</p>
                                             </td>
+                                            <td>
+                                                {{@$prod['color']['color']}}
+                                            </td>
                                             <td style="text-align: center">{{ $prod['qty'] }}</td>
                                             <td style="color: #ff0000;text-align: right">@money($prod['product_price'] * $prod['qty'])</td>
                                         </tr>
                                         @endforeach
                                         <tr>
+                                            <td></td>
                                             <td colspan="4" style="text-align: right">Tổng tiền: </td>
                                             <td style="color: #ff0000;text-align: right">{{ $order['total_price'] }}₫</td>
                                         </tr>

@@ -44,10 +44,10 @@
             <div class="breadcrumb-path">
                 <ul class="middle">
                     <li>
-                        <a href="">Trang chủ</a> /&nbsp;
+                        <a href="/">Trang chủ</a> /&nbsp;
                     </li>
                     <li>
-                        <a href="">Danh mục </a> /&nbsp;
+                        <a href="/danh-muc/{{$category}}">Danh mục </a> /&nbsp;
                     </li>
                     <li>
                         <a href="">Chậu rửa</a>
@@ -63,7 +63,18 @@
         <div class="content-1 row">
             <div class="product-image col-12 col-md-7">
                 <div class="image" id="img-product-color">
-                    <img style="height: 350px !important;" src="{{ count($detailProduct->productImage) > 0 ? asset($detailProduct->productImage[0]->image_path) : asset('images/no-image.jpg') }}" alt="tag">
+                    {{--                    <img style="height: 350px !important;" src="{{ count($detailProduct->productImage) > 0 ? asset($detailProduct->productImage[0]->image_path) : asset('images/no-image.jpg') }}" alt="tag">--}}
+                    <?php $i = 0; ?>
+                    @foreach($detailProduct->productImage as $image)
+                        <?php $i++; ?>
+                        @if($i == 1)
+                            <img class="image-product" style="height: 350px !important; display: block"
+                                 src="{{ asset($image->image_path) }}" alt="tag">
+                        @else
+                            <img class="image-product" style="height: 350px !important; display: none"
+                                 src="{{ asset($image->image_path) }}" alt="tag">
+                        @endif
+                    @endforeach
                 </div>
             </div>
             <div class="product-options col-12 col-md-5">
@@ -146,33 +157,40 @@
                         </div>
                         <div class="color-options-select">
                             @if (count($detailProduct->productImage) > 0)
-                            @foreach($detailProduct->productImage as $imageColor)
-                            @php
-                                $detailColor = get_color_from_id($imageColor->color);
-                            @endphp
-                                <input class="color-options"
-                                       onClick="changeColor({{ $imageColor->color }}, '{{ $detailColor->color }}', '{{ $detailProduct->id }}')" type="button"
-                                       style="background-color: {{ $detailColor->hex }}"></input>
-                            @endforeach
+                                <?php $i = 0; ?>
+                                @foreach($detailProduct->productImage as $imageColor)
+                                    <?php $i++; ?>
+                                    @php
+                                        $detailColor = get_color_from_id($imageColor->color);
+                                    @endphp
+                                    <input class="color-options"
+                                           onClick="changeColor({{ $i }},{{ $detailColor->id }}, '{{ $detailColor->color }}', '{{ $detailProduct->id }}', '{{ $imageColor->price }}')"
+                                           type="button"
+                                           style="background-color: {{ $detailColor->hex }}"></input>
+                                @endforeach
+                                <input type="hidden" id="color-selected"
+                                       value="{{$detailProduct->productImage[0]->color}}" name="color"/>
                             @endif
-                            <input type="hidden" id="color-selected" value="1" name="color"/>
+
                         </div>
                     </div>
                     <div class="product-quantity-addcart">
-                            @csrf
-                            <input type="hidden" value="{{ $detailProduct->id }}" name="id"/>
-                            <input type="hidden" value="{{ $detailProduct->name }}" name="name"/>
-                            <input type="hidden" id="hidden-price" value="{{ $detailProduct->price }}" name="price"/>
-                            <input type="hidden" value="0" name="weight"/>
-                            <input type="hidden" value="{{ count($detailProduct->productImage) > 0 ? asset($detailProduct->productImage[0]->image_path) : 'images/product/product_demo_2.png' }}" name="image"/>
-                            <div class="quantity">
-                                <input type="number" name="qty" value="1">
-                            </div>
-                            <div class="addcart col-9">
-                                <button type="submit" class="btn btn_add_cart btn-cart add_to_cart">
-                                    THÊM VÀO GIỎ HÀNG
-                                </button>
-                            </div>
+                        @csrf
+                        <input type="hidden" value="{{ $detailProduct->id }}" name="id"/>
+                        <input type="hidden" value="{{ $detailProduct->name }}" name="name"/>
+                        <input type="hidden" id="hidden-price" value="{{ $detailProduct->price }}" name="price"/>
+                        <input type="hidden" value="0" name="weight"/>
+                        <input type="hidden"
+                               value="{{ count($detailProduct->productImage) > 0 ? asset($detailProduct->productImage[0]->image_path) : 'images/product/product_demo_2.png' }}"
+                               name="image"/>
+                        <div class="quantity">
+                            <input type="number" name="qty" value="1">
+                        </div>
+                        <div class="addcart col-9">
+                            <button type="submit" class="btn btn_add_cart btn-cart add_to_cart">
+                                THÊM VÀO GIỎ HÀNG
+                            </button>
+                        </div>
                     </div>
                     <div class="compare-product">
                         <div class="div-btn-compare">
@@ -193,12 +211,12 @@
                             </button>
                         </div>
                         <div class="div-btn-share">
-                            <button type="button" class="btn btn-share w-100" >
+                            <button type="button" class="btn btn-share w-100">
                                 <?php
-                                    $url = config('app.url').'/chi-tiet-san-pham/';
+                                $url = config('app.url') . '/chi-tiet-san-pham/';
                                 ?>
                                 <a
-                                   onclick="window.open('https://www.facebook.com/sharer/sharer.php?u={{$url.$detailProduct->id}}', 'newwindow',
+                                    onclick="window.open('https://www.facebook.com/sharer/sharer.php?u={{$url.$detailProduct->id}}', 'newwindow',
                                        'width=300,height=250');  return false;"
                                 >
                                     <img src="{{ asset('images/share.png') }}" alt="tag">
@@ -212,30 +230,31 @@
         <div class="product-description">
             <div class="accordion accordion-flush" id="accordionFlushExample">
                 @if (!empty($detailProduct->description))
-                @foreach ($detailProduct->description as $key => $dec)
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingOne-{{ $key }}">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#flush-collapseOne-{{ $key }}" aria-expanded="false"
-                                aria-controls="flush-collapseOne-{{ $key }}">
-                            {{ $dec['title'] }}
-                        </button>
-                    </h2>
-                    <div id="flush-collapseOne-{{ $key }}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne-{{ $key }}"
-                         data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">
-                            {{ $dec['content'] }}
+                    @foreach ($detailProduct->description as $key => $dec)
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingOne-{{ $key }}">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseOne-{{ $key }}" aria-expanded="false"
+                                        aria-controls="flush-collapseOne-{{ $key }}">
+                                    {{ $dec['title'] }}
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne-{{ $key }}" class="accordion-collapse collapse"
+                                 aria-labelledby="flush-headingOne-{{ $key }}"
+                                 data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    {{ $dec['content'] }}
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                @endforeach
+                    @endforeach
                 @else
-                <p>Không có mô tả sản phẩm</p>
+                    <p>Không có mô tả sản phẩm</p>
                 @endif
             </div>
         </div>
         @if (!empty($aryRelatedProd))
-        @include('partials.related-product', ['aryRelatedProd' => $aryRelatedProd])
+            @include('partials.related-product', ['aryRelatedProd' => $aryRelatedProd])
         @endif
 
         <div class="review">
@@ -287,7 +306,9 @@
                 <div class="review-2">
                     <h6>
                         @if($aryComments->total() > 0)
-                            {{ ($aryComments->total()) - $countCommentNotRating }} trong số {{ $aryComments->total() }} ({{ ceil(( ($aryComments->total()) - $countCommentNotRating) * 100 / $aryComments->total()) }}%) người đánh giá giới thiệu sản phẩm này
+                            {{ ($aryComments->total()) - $countCommentNotRating }} trong số {{ $aryComments->total() }}
+                            ({{ ceil(( ($aryComments->total()) - $countCommentNotRating) * 100 / $aryComments->total()) }}
+                            %) người đánh giá giới thiệu sản phẩm này
                         @else
                             0 trong số 0% người đánh giá giới thiệu sản phẩm này
                         @endif
@@ -327,37 +348,37 @@
                 <h6>Chọn một hàng bên dưới để lọc đánh giá</h6>
                 <div class="review-list">
                     @for ($i = 0; $i < 5; $i++)
-                    @php
-                    $totalStar = 0;
-                        foreach ($aryCountStar as $key => $star) {
-                            if ($star['rating'] == $i + 1) {
-                                $totalStar = $star['count_star'];
-                            }
-                        }
-                    @endphp
-                    <div class="review-item">
-                        <p>{{ $i + 1 }}★</p>
-                        <div class="review-scale">
-                            <button style="margin: 0; padding: 0; border: none; outline: none;">
-                                <div class="scale-100" style="position: relative; width: 300px; height: 10px;">
-                                    <div class="scale-percent"
-                                         style="
+                        @php
+                            $totalStar = 0;
+                                foreach ($aryCountStar as $key => $star) {
+                                    if ($star['rating'] == $i + 1) {
+                                        $totalStar = $star['count_star'];
+                                    }
+                                }
+                        @endphp
+                        <div class="review-item">
+                            <p>{{ $i + 1 }}★</p>
+                            <div class="review-scale">
+                                <button style="margin: 0; padding: 0; border: none; outline: none;">
+                                    <div class="scale-100" style="position: relative; width: 300px; height: 10px;">
+                                        <div class="scale-percent"
+                                             style="
                                          position: absolute;
                                          width: {{( $totalStar /10) * 100}}%;
                                          background-color: #F31C1C;
                                          z-index: 10;
                                          height: 10px;
                                          left: 0;">
+                                        </div>
                                     </div>
+                                </button>
+                            </div>
+                            <div class="review-slg">
+                                <div class="ctn">
+                                    {{ $totalStar }}
                                 </div>
-                            </button>
-                        </div>
-                        <div class="review-slg">
-                            <div class="ctn">
-                                {{ $totalStar }}
                             </div>
                         </div>
-                    </div>
                     @endfor
                 </div>
             </div>
@@ -377,7 +398,8 @@
                                     <div class="rating-group">
                                         <span class="rate-star-product">
                                             @for ($i = 1; $i < 6; $i++)
-                                                <i class="rating__icon rating__icon--star fa fa-star" style="color: {{ $averageStar < $i ? '#DBDBDB' : '#ED2027' }}; "></i>
+                                                <i class="rating__icon rating__icon--star fa fa-star"
+                                                   style="color: {{ $averageStar < $i ? '#DBDBDB' : '#ED2027' }}; "></i>
                                             @endfor
                                         </span>
                                     </div>
@@ -389,7 +411,8 @@
                             <div class="point-group">
                                 <div class="point-item">
                                     @for ($i = 1; $i < 6; $i++)
-                                        <div class="point {{ $averageQuality < $i ? 'point-unactive' : 'point-active' }}"></div>
+                                        <div
+                                            class="point {{ $averageQuality < $i ? 'point-unactive' : 'point-active' }}"></div>
                                     @endfor
                                 </div>
                             </div>
@@ -399,7 +422,8 @@
                             <div class="point-group">
                                 <div class="point-item">
                                     @for ($i = 1; $i < 6; $i++)
-                                        <div class="point {{ $averageWorth < $i ? 'point-unactive' : 'point-active' }}"></div>
+                                        <div
+                                            class="point {{ $averageWorth < $i ? 'point-unactive' : 'point-active' }}"></div>
                                     @endfor
                                 </div>
                             </div>
@@ -409,11 +433,11 @@
             </div>
         </div>
         @if (!empty($aryComments))
-        @include('partials.comment-product', ['comments' => $aryComments, 'product_id' => $detailProduct->id])
+            @include('partials.comment-product', ['comments' => $aryComments, 'product_id' => $detailProduct->id])
         @endif
 
         @if (!empty($productList))
-        @include('partials.recently-viewed-product', ['aryRecentProd' => $productList])
+            @include('partials.recently-viewed-product', ['aryRecentProd' => $productList])
         @endif
         @include('partials.modals.review-modal', ['product_id' => $detailProduct->id])
     </div>
@@ -499,7 +523,7 @@
         }
     </script>
     <script>
-        $('.btn-search-review').on('click', function(){
+        $('.btn-search-review').on('click', function () {
             var keyword = $('#search-review').val();
             $.ajax({
                 url: '{{ route('findComment') }}',
@@ -510,25 +534,25 @@
                 //Ajax events
                 success: function (response) {
                     var star = '';
-                    for (let i = 1; i <6; i++) {
+                    for (let i = 1; i < 6; i++) {
                         star += `<i class="fa fa-star" style="color: ${response.data.rating < i ? '#DBDBDB' : '#ED2027'}; "></i>`
                     }
 
                     var quality = '';
-                    for (let q = 1; q <6; q++) {
+                    for (let q = 1; q < 6; q++) {
                         quality += `<i class="point ${response.data.count_quality < q ? 'point-unactive' : 'point-active'} "></i>`
                     }
 
                     var worth = '';
-                    for (let w = 1; w <6; w++) {
+                    for (let w = 1; w < 6; w++) {
                         worth += `<i class="point ${response.data.count_worth < w ? 'point-unactive' : 'point-active'} "></i>`
                     }
 
                     var img = ''
                     if (response.data.file.length > 0) {
-                        $.each(response.data.file, function( index, value ) {
+                        $.each(response.data.file, function (index, value) {
                             img += `<div class="col-3">
-                                        <img src="${ value }" >
+                                        <img src="${value}" >
                                     </div>`
                         });
                     }
@@ -538,7 +562,7 @@
                                         <div class="address">${response.data.user.address}</div>
                                         <div class="comment">Bình luận: 1</div>
                                         <div class="has-review">Đã đánh giá: 61</div>
-                                        <div class="gender">Giới tính: ${response.data.user.gender == 0 ? `Nam` :  `Nữ` }</div>
+                                        <div class="gender">Giới tính: ${response.data.user.gender == 0 ? `Nam` : `Nữ`}</div>
                                         <div class="age">Tuổi: 35-44</div>
                                     </div>
                                     <div class="review-content col-sm-6 col-12">
@@ -607,10 +631,10 @@
                                         </div>
                                     </div>
                                 </div>`;
-                   $('.review-detail-content').append(html);
+                    $('.review-detail-content').append(html);
 
-                   $('html, body').animate({
-                        scrollTop: $("#comment-id-"+response.data.id).offset().top
+                    $('html, body').animate({
+                        scrollTop: $("#comment-id-" + response.data.id).offset().top
                     }, 2000);
                 }
             })

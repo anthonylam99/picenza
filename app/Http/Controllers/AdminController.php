@@ -127,7 +127,7 @@ class AdminController extends Controller
         $productTechnology = ProductTechnology::all();
 
         $options = new Options;
-        $slug = $options->create_slug($request->get('product_name'));
+
         $price = str_replace(",", '', $request->get('price'));
 
         $priceData = ProductPrice::all();
@@ -159,8 +159,7 @@ class AdminController extends Controller
 
         $dataInsert = [
             'name' => $request->get('product_name'),
-            'slug' => $slug,
-            'seo_url' => $slug,
+
             'price' => $price,
             'sale_price' => str_replace(",", '', $request->get('sale_price')),
             'sale_percent' => str_replace(",", '', $request->get('sale_percent')),
@@ -183,8 +182,29 @@ class AdminController extends Controller
         ];
 
         if (!isset($data['id'])) {
+            $slug = $options->create_slug($request->get('product_name'));
+            $product = Product::where('slug', $slug)->get();
+
+            if (!empty(collect($product)->toArray()) && count(collect($product)->toArray()) >= 1) {
+                $randomNumber = rand(0, 9999);
+                $slug .= '-' . $randomNumber;
+            }
+
+            $dataInsert['slug'] = $slug;
+            $dataInsert['seo_url'] = $slug;
             $product = Product::create($dataInsert);
         } else {
+            $slug = $request->get('seo-url');
+            $product = Product::where('slug', $slug)->where('id', '!=' , $data['id'])->get();
+
+            if (!empty(collect($product)->toArray()) && count(collect($product)->toArray()) >= 1) {
+                $randomNumber = rand(0, 9999);
+                $slug .= '-' . $randomNumber;
+            }
+
+            $dataInsert['slug'] = $slug;
+            $dataInsert['seo_url'] = $slug;
+
             $update = Product::where('id', $data['id'])->update($dataInsert);
             $product = Product::find($data['id']);
 
@@ -455,6 +475,7 @@ class AdminController extends Controller
     {
         $aryProd = [];
         $order = Orders::find($id);
+
         foreach ($order->item as $key => $prod) {
             $aryProd[] = get_product_by_prod_id_and_color($prod['product_id'], $prod['color_id']);
             $aryProd[$key]['qty'] = $prod['qty'];
@@ -464,6 +485,7 @@ class AdminController extends Controller
             $aryProd[$key]['product_price'] = $prod['product_price'] ?? 0;
 
         }
+
         return view('admin.order.detail', compact('aryProd', 'order'));
     }
 
@@ -544,7 +566,7 @@ class AdminController extends Controller
     {
         if ($request->has('s')) {
             $query = $request->get('s');
-            $aryComment = Comments::where('title', 'like', '%' . $query . '%')
+            $aryComment = Comments::with(['product'])->where('title', 'like', '%' . $query . '%')
             ->orWhere('body', 'like', '%' . $query . '%')
             ->whereHas(
                 'user', function ($q) use ($query) {
@@ -561,9 +583,11 @@ class AdminController extends Controller
             ->orderBy('id', 'DESC')
             ->paginate(10);
         } else if (!empty($request->get('s')) || !$request->has('s')) {
-            $aryComment = Comments::orderBy('id', 'DESC')->paginate(10);
+            $aryComment = Comments::with(['product'])->orderBy('id', 'DESC')->paginate(10);
         }
 
+//
+//        return response()->json($aryComment);
         return view('admin.comment.list', compact('aryComment'));
     }
 

@@ -48,12 +48,12 @@
                         <div class="form-group">
                             <label for="productPrice">Giá</label>
                             <input type="text" name="price" class="form-control m-r-10 input-sm" id="productPrice"
-                                   value="{{$product['price']}}" placeholder="Nhập giá sản phẩm...." required>
+                                   value="{{number_format($product['price'])}}" placeholder="Nhập giá sản phẩm...." required>
                         </div>
                         <div class="form-group">
                             <label for="salePrice">Giá giảm giá</label>
                             <input type="text" name="sale_price" class="form-control m-r-10 input-sm" id="salePrice"
-                                   value="{{$product['sale_price']}}" placeholder="Nhập giá giảm giá...." >
+                                   value="{{number_format($product['sale_price'])}}" placeholder="Nhập giá giảm giá...." >
                         </div>
                         <div class="form-group">
                             <label for="pricePercent">Giảm giá (%)</label>

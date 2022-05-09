@@ -96,7 +96,7 @@
                                     <div class="product-main-item col-6 col-sm-3 col-lg-4 col-xl-4">
                                         <div class="product-item">
                                             <a class="product-box"
-                                               href="{{ route('product.detail', ['id' => $value->id]) }}">
+                                               href="{{ route('product.detail', ['slug' => $value->slug]) }}">
                                                 <div class="image">
                                                     <img src="{{$value->avatar_path}}" alt="">
                                                 </div>

@@ -23,12 +23,7 @@
                             <input type="text" name="product_name" class="form-control" id="productName"
                                    placeholder="Nhập tên sản phẩm..." required>
                         </div>
-                        <div class="form-group">
-                            <label for="seo-url" class="">Đường dẫn</label>
-                            <input type="text" name="seo-url" id="seo-url" class="form-control"
-                                   value=""
-                                   placeholder="Nhập đường dẫn..." required>
-                        </div>
+
                         <div class="form-group">
                             <label for="productPrice">Giá</label>
                             <input type="text" name="price" class="form-control" id="productPrice"

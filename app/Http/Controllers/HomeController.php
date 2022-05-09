@@ -85,4 +85,10 @@ class HomeController extends Controller
 
         return view('news.index', compact('newPost', 'posts', 'categoryData'));
     }
+
+    public function warrantyStation(Request $request){
+
+
+        return view('home.warranty.station');
+    }
 }

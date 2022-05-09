@@ -51,6 +51,10 @@ h5 {
 img {
     width: auto;
 }
+.carousel-control-prev, .carousel-control-next{
+    height: 90%;
+    width: 5%;
+}
 
 .navbar-toggler {
     border-color: rgb(255, 102, 203);
@@ -2020,7 +2024,7 @@ main {
     position: absolute;
     right: 0;
     bottom: 0;
-    left: 1000px;
+    left: 930px;
     top: 88px
 }
 
@@ -2461,6 +2465,9 @@ footer .copyright h6 {
     .product-recent .owl-stage {
         width: inherit !important;
     }
+    .header .breadcrumb-s .breadcrumb-s-content .breadcrumb-path ul li a{
+        font-size: 14px !important;
+    }
 
 }
 
@@ -2560,7 +2567,7 @@ footer .copyright h6 {
     }
 
     .header .breadcrumb-s .breadcrumb-s-content .breadcrumb-content a {
-        font-size: 17px;
+        font-size: 17px !important;
     }
 
     #form_testimonial .point-item .point-unactive {

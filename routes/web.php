@@ -31,7 +31,7 @@ use Illuminate\Support\Facades\Route;
 //});
 
 
-Route::get('chi-tiet-san-pham/{id}', [ProductController::class, 'detailProduct'])->name('product.detail');
+Route::get('chi-tiet-san-pham/{slug}', [ProductController::class, 'detailProduct'])->name('product.detail');
 Route::get('gio-hang', [ProductController::class, 'cart'])->name('product.cart');
 Route::post('add-to-cart', [ProductController::class, 'addToCart'])->name('addToCart');
 Route::get('remove-item-to-cart', [ProductController::class, 'removeItemCart'])->name('removeItemCart');
@@ -55,6 +55,7 @@ Route::get('tim-kiem-san-pham', [ProductController::class, 'searchProduct'])->na
 Route::post('post-contact', [ContactController::class, 'postContact'])->name('post-contact');
 Route::get('so-sanh-san-pham', [ProductController::class, 'compareProduct'])->name('product.compare');
 Route::get('search-product', [ProductController::class, 'searchProductApi']);
+Route::get('tram-bao-hanh', [HomeController::class, 'warrantyStation'])->name('home.warranty.station');
 
 Route::get('/quan-tri', [AdminController::class, 'index']);
 Route::get('/quan-tri/dang-nhap', [LoginController::class, 'showLoginForm'])->name('login');

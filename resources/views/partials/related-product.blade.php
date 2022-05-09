@@ -17,7 +17,7 @@
                     </div>
                     <div class="name">
                         <h6>
-                            <a href="{{ route('product.detail', $relatedProd->id) }}">{{ $relatedProd->name }}</a>
+                            <a href="{{ route('product.detail', $relatedProd->slug) }}">{{ $relatedProd->name }}</a>
                         </h6>
                     </div>
                     <div class="price">

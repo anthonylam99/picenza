@@ -51,7 +51,11 @@
                             <td>
                                 <img src="{{ $value->avatar_path }}" alt="" width="50px">
                             </td>
-                            <td>{{$value->name}}</td>
+                            <td>
+                                <a href="{{ route('admin.product.edit', ['id' => $value->id]) }}">
+                                    {{$value->name}}
+                                </a>
+                            </td>
                             <td>{{number_format($value->price)}}</td>
                             <td>{{isset($value->productLine['name']) ? $value->productLine['name'] : ''}}</td>
                             <td>
@@ -76,8 +80,8 @@
                             <td>{{isset($value->companyName['name']) ? $value->companyName['name'] : ''}}
                             <td>
                                 <button class="btn btn-info">
-                                    <a style="color: #FFFFFF" href="{{ route('admin.product.edit', ['id' => $value->id]) }}">
-                                        <i class="far fa-edit"></i>
+                                    <a target="_blank" style="color: #FFFFFF" href="{{ route('product.detail', ['slug' => $value->slug]) }}">
+                                        <i class="far fa-eye"></i>
                                     </a>
                                 </button>
                                 <button class="btn btn-danger">

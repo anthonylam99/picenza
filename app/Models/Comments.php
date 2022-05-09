@@ -51,6 +51,6 @@ class Comments extends Model
 
     public function product()
     {
-        return $this->BelongsTo(Product::class);
+        return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 }
