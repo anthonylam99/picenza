@@ -20,7 +20,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="productName">Tên hãng sản xuất</label>
-                            <input type="text" name="company" class="form-control" id="productName" placeholder="Nhập tên hãng sản xuất...">
+                            <input type="text" name="company" class="form-control" id="productName" placeholder="Nhập tên hãng sản xuất..." required>
                         </div>
                     </div>
                 </div>

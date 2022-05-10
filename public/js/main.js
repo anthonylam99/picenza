@@ -339,3 +339,32 @@ function autoComplateFormat(n) {
     var t = '<div class="search-item" onclick="location.href=\'' + url + "'\">";
     return t += '<div class="img"><img src="' + n.avatar_path + '" /><\/a><\/div>', t += '   <div class="info">', t += '       <h2><a href="' + url + '">' + n.name + "<\/a><\/h2>", t += "       <h3><strike>" + "<\/strike> " + n.price + "<\/h3>", t += "   <\/div>", t += "<\/div>", t + "<\/div>"
 }
+
+$(function(){
+
+    $('#city').change(function() {
+        var cityId = $(this).val()
+
+
+        $.ajax({
+            type: 'GET',
+            url: '/get-district',
+            data: {
+                city_id : cityId
+            },
+            success: function (res){
+                html = ''
+
+                res.forEach(function(item){
+                    html += `<option value="${item.id}">${item.name}</option>`
+                })
+
+                $('#district').prop('disabled', false)
+                $('#district').html(html)
+            },
+            error:  function (err){
+                console.log(err)
+            }
+        })
+    })
+})

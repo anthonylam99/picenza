@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Entity\Options;
+use App\Models\Districts;
 use App\Models\MenuLocation;
 use App\Models\Comments;
 use App\Models\Contact;
@@ -617,5 +618,13 @@ class AdminController extends Controller
     {
         $comment = Comments::with(['user', 'product'])->find($id);
         return view('admin.comment.detail', compact('comment'));
+    }
+
+
+    public function getDistrict(Request $request){
+        $cityId = $request->get('city_id');
+        $district = Districts::where('province_id', $cityId)->get();
+
+        return response()->json($district);
     }
 }

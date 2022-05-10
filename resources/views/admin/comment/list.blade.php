@@ -47,7 +47,7 @@
                            <tr>
                                <td>{{$value->id}}</td>
                                <td>
-                                   <a href="{{ route('product.detail', $value->product->slug) }}">{{ $value->product->name }}</a>
+                                   <a target="_blank" href="{{ route('product.detail', $value->product->slug) }}">{{ $value->product->name }}</a>
                                </td>
                                <td>{{ $value->title }}</td>
                                <td style="word-break: break-all">{{ substr($value->body, 40).'....' }}</td>

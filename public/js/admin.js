@@ -665,6 +665,78 @@ function deleteSubCate(id) {
     })
 }
 
+function checkValue(){
+    if($("#nameWarranty").val() === ''){
+        alert('Tên không được để trống !!')
+        return false
+    }
+
+    if($("#phoneWarranty").val() === ''){
+        alert('Số điện thoại không được để trống !!')
+        return false
+    }
+
+    if($("#city").val() === ''){
+        alert('Thành phố không được để trống !!')
+        return false
+    }
+
+    if($("#district").val() === ''){
+        alert('Quận huyện không được để trống !!')
+        return false
+    }
+
+    if($("#address").val() === ''){
+        alert('Địa chỉ không được để trống !!')
+        return false
+    }
+
+    var phone = $('#phoneWarranty').val()
+    const regexPhoneNumber = /(84|0[3|5|7|8|9])+([0-9]{8})\b/g;
+
+    if (phone.match(regexPhoneNumber)) {
+
+    } else {
+        alert('Số điện thoại sai !!')
+        return false
+    }
+    return true
+}
+
+function checkSubmit(){
+    if(checkValue()){
+        $('#warranty').submit()
+    }
+}
+
+$(function(){
+
+    $('#city').change(function() {
+        var cityId = $(this).val()
+
+
+        $.ajax({
+            type: 'GET',
+            url: '/get-district',
+            data: {
+                city_id : cityId
+            },
+            success: function (res){
+                html = ''
+
+                res.forEach(function(item){
+                    html += `<option value="${item.id}">${item.name}</option>`
+                })
+
+                $('#district').html(html)
+            },
+            error:  function (err){
+                console.log(err)
+            }
+        })
+    })
+})
+
 
 // function showPost(id, tag){
 //     var status = $('#customCheckbox'+id).is(':checked')

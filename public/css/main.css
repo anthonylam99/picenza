@@ -2315,7 +2315,138 @@ footer .copyright h6 {
     font-weight: bold;
     font-size: 13px;
 }
+.warranty {
+    background: #f4f4f4;
+}
+.warranty .banner {
+    background-image: url('/images/maps.png');
+    background-size: auto calc(100% - 20px);
+    padding: 150px 0 170px 0;
+    text-align: center;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.warranty .banner h3 {
+    font-weight: 300;
+    font-size: 60px;
+}
 
+.warranty .banner .red-bg {
+    display: inline-block;
+    position: relative;
+    padding: 15px;
+    padding-left: 40px;
+    text-transform: uppercase;
+    border: 0;
+    width: auto !important;
+    font-size: 16px !important;
+    background: #d83b36 !important;
+    color: #FFFFFF;
+}
+
+.warranty .banner .red-bg:before, .form-store .button:before {
+    content: '';
+    position: absolute;
+    top: 22px;
+    left: 20px;
+    height: 0;
+    width: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-right: 8px solid transparent;
+    border-left: 8px solid white;
+}
+.form-store {
+    max-width: 1200px;
+    background: white;
+    margin: -65px auto 65px auto;
+    padding: 40px;
+}
+.form-store> form div:nth-child(1), .form-store> form div:nth-child(2) {
+    width: calc(55% - 135px);
+}
+.form-store> form div {
+    display: inline-block;
+    padding: 0 15px;
+}
+.form-store select {
+    border: 1px solid #ccc;
+    height: 50px;
+    padding: 10px 20px;
+    width: 100%;
+    border-radius: 0;
+    text-indent: 30px;
+}
+.form-store .button {
+    display: inline-block;
+    background: #424242 !important;
+    position: relative;
+    padding: 15px;
+    padding-left: 40px;
+    text-transform: uppercase;
+    border: 0;
+    width: auto !important;
+    font-size: 16px !important;
+    color: #FFFFFF;
+}
+.warranty .title-section {
+    font-size: 44px;
+    font-weight: 300;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 80px;
+    position: relative;
+    color: rgb(63, 63, 63);
+}
+.warranty .title-section:after{
+    content: '';
+    position: absolute;
+    width: 120px;
+    height: 2px;
+    background: #eb716d;
+    bottom: -40px;
+    left: calc(50% - 60px);
+}
+.warranty .store-list .store-detail {
+    padding: 15px;
+}
+.warranty .store-list .store-detail img {
+    background-color: #ccc;
+    height: 250px;
+    width: 100%;
+    z-index: 0;
+    object-fit: cover;
+    position: relative;
+}
+.warranty .store-detail .store-content {
+    padding: 20px;
+    width: 80%;
+    margin-left: 20%;
+    background: white;
+    margin-top: -55px;
+    position: relative;
+    z-index: 1;
+}
+
+.warranty .store-detail .store-content h3 {
+    font-size: 16px;
+    margin: 0;
+    margin-bottom: 16px;
+}
+
+.warranty .store-detail .store-content p {
+    font-size: 14px;
+    margin: 0;
+    color: rgb(131, 131, 131);
+}
+.warranty .store-detail .store-content a {
+    font-size: 16px;
+    float: right;
+    top: 0;
+    text-transform: uppercase;
+    color: #e22658;
+}
 /*them*/
 
 
@@ -3052,6 +3183,21 @@ footer .copyright h6 {
         -o-object-fit: contain;
         object-fit: contain;
         height: 250px;
+    }
+}
+@media (max-width: 600px) {
+    .form-store> form div:nth-child(1),
+    .form-store> form div:nth-child(2){
+        width: 100% !important;
+        display: block;
+        margin: 10px 0;
+    }
+    .form-store> form div {
+        display: block !important;
+        text-align: center;
+    }
+    .warranty .banner {
+        background-size: auto calc(100%);
     }
 }
 

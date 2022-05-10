@@ -350,7 +350,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="./khach-hang/danh-sach" class="nav-link">
+                        <a href="{{route('admin.order.list')}}" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 ĐƠN HÀNG
@@ -367,10 +367,10 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="./khach-hang/danh-sach" class="nav-link">
+                        <a href="{{route('admin.contact.list')}}" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
-                                Liên hệ
+                                LIÊN HỆ
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
@@ -378,13 +378,13 @@
                             <li class="nav-item">
                                 <a href="{{route('admin.contact.list')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Liên hệ</p>
+                                    <p>LIÊN HỆ</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="./khach-hang/danh-sach" class="nav-link">
+                        <a href="{{route('admin.comment.list')}}" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 BÌNH LUẬN
@@ -400,7 +400,23 @@
                             </li>
                         </ul>
                     </li>
-
+                    <li class="nav-item">
+                        <a href="{{route('admin.warranty.list')}}" class="nav-link">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                TRẠM BẢO HÀNH
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{route('admin.warranty.list')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>DANH SÁCH</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->

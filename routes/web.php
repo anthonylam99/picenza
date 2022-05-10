@@ -13,6 +13,7 @@ use App\Http\Controllers\ProductLineController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\WarrantyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,6 +57,8 @@ Route::post('post-contact', [ContactController::class, 'postContact'])->name('po
 Route::get('so-sanh-san-pham', [ProductController::class, 'compareProduct'])->name('product.compare');
 Route::get('search-product', [ProductController::class, 'searchProductApi']);
 Route::get('tram-bao-hanh', [HomeController::class, 'warrantyStation'])->name('home.warranty.station');
+Route::get('get-district', [AdminController::class, 'getDistrict']);
+
 
 Route::get('/quan-tri', [AdminController::class, 'index']);
 Route::get('/quan-tri/dang-nhap', [LoginController::class, 'showLoginForm'])->name('login');
@@ -64,7 +67,7 @@ Route::get('/post-login', [LoginController::class, 'redirectLogin'])->name('getL
 Route::post('/post-logout', [LoginController::class, 'postLogout'])->name('postLogout');
 
 Route::group(['prefix' => 'quan-tri', 'middleware' => 'CheckAdmin'], function () {
-    Route::group(['middleware' => 'auth'], function(){
+    Route::group(['middleware' => 'auth'], function () {
         Route::get('/', [AdminController::class, 'index'])->name('dashboard');
         Route::get('product_line_list/{id}', [AdminController::class, 'getProductLine']);
         Route::get('product_type_list/{id}/{id2}', [AdminController::class, 'getProductType']);
@@ -72,7 +75,7 @@ Route::group(['prefix' => 'quan-tri', 'middleware' => 'CheckAdmin'], function ()
     });
 
 
-Route::group(['prefix' => 'san-pham', 'middleware' => 'auth'], function () {
+    Route::group(['prefix' => 'san-pham', 'middleware' => 'auth'], function () {
         Route::get('danh-sach', [AdminController::class, 'productList'])->name('admin.product.list');
         Route::get('update-status-prod', [AdminController::class, 'updateStatusProd'])->name('updateStatus-prod');
         Route::get('loai-san-pham', [AdminController::class, 'productType'])->name('admin.product.type');
@@ -86,7 +89,7 @@ Route::group(['prefix' => 'san-pham', 'middleware' => 'auth'], function () {
         Route::get('sua/{id}', [AdminController::class, 'editProduct'])->name('admin.product.edit');
         Route::get('showhome', [AdminController::class, 'updateStatusHome']);
 
-        Route::group(['prefix' => 'tinh-nang'], function (){
+        Route::group(['prefix' => 'tinh-nang'], function () {
             Route::get('/', [\App\Http\Controllers\ProductFeatureController::class, 'listProductFeature'])->name('admin.product.feature.list');
             Route::get('them-moi', [\App\Http\Controllers\ProductFeatureController::class, 'addProductFeature'])->name('admin.product.feature.add');
             Route::post('them-moi', [\App\Http\Controllers\ProductFeatureController::class, 'addPostProductFeature'])->name('admin.product.feature.add.post');
@@ -110,7 +113,7 @@ Route::group(['prefix' => 'san-pham', 'middleware' => 'auth'], function () {
         Route::get('chi-tiet-lien-he/{id}', [AdminController::class, 'getDetailContact'])->name('admin.contact.detail');
     });
 
-    Route::group(['prefix' => 'hang-san-xuat', 'middleware' => 'auth'], function(){
+    Route::group(['prefix' => 'hang-san-xuat', 'middleware' => 'auth'], function () {
         Route::get('/', [CompanyController::class, 'listCompany'])->name('admin.company.list');
         Route::get('them-moi', [CompanyController::class, 'addCompany'])->name('admin.company.add');
         Route::post('them-moi', [CompanyController::class, 'addCompanyPost'])->name('admin.company.add.post');
@@ -118,7 +121,7 @@ Route::group(['prefix' => 'san-pham', 'middleware' => 'auth'], function () {
         Route::get('xoa/{id}', [CompanyController::class, 'delCompany'])->name('admin.company.del');
     });
 
-    Route::group(['prefix' => 'dong-san-pham', 'middleware' => 'auth'], function(){
+    Route::group(['prefix' => 'dong-san-pham', 'middleware' => 'auth'], function () {
         Route::get('/', [ProductLineController::class, 'listLine'])->name('admin.line.list');
         Route::get('them-moi', [ProductLineController::class, 'addLine'])->name('admin.line.add');
         Route::post('them-moi', [ProductLineController::class, 'addLinePost'])->name('admin.line.add.post');
@@ -127,7 +130,7 @@ Route::group(['prefix' => 'san-pham', 'middleware' => 'auth'], function () {
         Route::get('update-status', [ProductLineController::class, 'updateStatus']);
     });
 
-    Route::group(['prefix' => 'loai-san-pham', 'middleware' => 'auth'], function(){
+    Route::group(['prefix' => 'loai-san-pham', 'middleware' => 'auth'], function () {
         Route::get('/', [ProductTypeController::class, 'listType'])->name('admin.type.list');
         Route::get('them-moi', [ProductTypeController::class, 'addType'])->name('admin.type.add');
         Route::post('them-moi', [ProductTypeController::class, 'addTypePost'])->name('admin.type.add.post');
@@ -135,7 +138,7 @@ Route::group(['prefix' => 'san-pham', 'middleware' => 'auth'], function () {
         Route::get('xoa/{id}', [ProductTypeController::class, 'delType'])->name('admin.type.del');
     });
 
-    Route::group(['prefix' => 'khoang-gia', 'middleware' => 'auth'], function() {
+    Route::group(['prefix' => 'khoang-gia', 'middleware' => 'auth'], function () {
         Route::get('/', [PriceController::class, 'listPrice'])->name('admin.price.list');
         Route::get('them-moi', [PriceController::class, 'addPrice'])->name('admin.price.add');
         Route::post('them-moi', [PriceController::class, 'addPricePost'])->name('admin.price.add.post');
@@ -143,7 +146,7 @@ Route::group(['prefix' => 'san-pham', 'middleware' => 'auth'], function () {
         Route::get('xoa/{id}', [PriceController::class, 'delPrice'])->name('admin.price.del');
     });
 
-    Route::group(['prefix' => 'quan-ly-trang', 'middleware' => 'auth'], function() {
+    Route::group(['prefix' => 'quan-ly-trang', 'middleware' => 'auth'], function () {
         Route::get('danh-sach', [PageController::class, 'list'])->name('admin.page.list');
         Route::get('them-moi', [PageController::class, 'add'])->name('admin.page.add');
         Route::post('them-moi', [PageController::class, 'addPage'])->name('admin.page.add.post');
@@ -151,14 +154,14 @@ Route::group(['prefix' => 'san-pham', 'middleware' => 'auth'], function () {
         Route::get('xoa/{id}', [PageController::class, 'delPage'])->name('admin.page.del');
     });
 
-    Route::group(['prefix' => 'bai-viet', 'middleware' => 'auth'], function() {
+    Route::group(['prefix' => 'bai-viet', 'middleware' => 'auth'], function () {
         Route::get('/', [PostController::class, 'listPost'])->name('admin.post.list');
         Route::get('them-moi', [PostController::class, 'addPost'])->name('admin.post.add');
         Route::post('them-moi', [PostController::class, 'addPost'])->name('admin.post.add.post');
         Route::get('sua/{id}', [PostController::class, 'editPost'])->name('admin.post.edit');
         Route::get('xoa/{id}', [PostController::class, 'delPost'])->name('admin.post.del');
         Route::get('update-status', [PostController::class, 'updateStatus'])->name('admin.post.updateStatus');
-        Route::group(['prefix' => 'tag'], function (){
+        Route::group(['prefix' => 'tag'], function () {
             Route::get('/', [\App\Http\Controllers\TagController::class, 'listTag'])->name('admin.tag.list');
             Route::get('them-moi', [\App\Http\Controllers\TagController::class, 'addTag'])->name('admin.tag.add');
             Route::post('them-moi', [\App\Http\Controllers\TagController::class, 'addTagPost'])->name('admin.tag.add.post');
@@ -166,7 +169,7 @@ Route::group(['prefix' => 'san-pham', 'middleware' => 'auth'], function () {
             Route::get('xoa/{id}', [\App\Http\Controllers\TagController::class, 'delTag'])->name('admin.tag.del');
             Route::get('update-status', [\App\Http\Controllers\TagController::class, 'updateStatus'])->name('admin.tag.updateStatus');
         });
-        Route::group(['prefix' => 'chuyen-muc'], function (){
+        Route::group(['prefix' => 'chuyen-muc'], function () {
             Route::get('/', [\App\Http\Controllers\PostCategoryController::class, 'listPostCategory'])->name('admin.post.category.list');
             Route::get('them-moi', [\App\Http\Controllers\PostCategoryController::class, 'addPostCategory'])->name('admin.post.category.add');
             Route::post('them-moi', [\App\Http\Controllers\PostCategoryController::class, 'addPostCategoryPost'])->name('admin.post.category.add.post');
@@ -176,18 +179,24 @@ Route::group(['prefix' => 'san-pham', 'middleware' => 'auth'], function () {
         });
     });
 
-    Route::group(['prefix' => 'binh-luan', 'middleware' => 'auth'], function() {
+    Route::group(['prefix' => 'binh-luan', 'middleware' => 'auth'], function () {
         Route::get('/', [AdminController::class, 'listComment'])->name('admin.comment.list');
         Route::get('chi-tiet/{id}', [AdminController::class, 'detailComment'])->name('admin.comment.edit');
         Route::get('update-status', [AdminController::class, 'updateStatus'])->name('admin.comment.update.status');
     });
 
-
+    Route::group(['prefix' => 'tram-bao-hanh' , 'middleware' => 'auth'], function () {
+        Route::get('/', [WarrantyController::class, 'listWarranty'])->name('admin.warranty.list');
+        Route::get('them-moi', [WarrantyController::class, 'addWarranty'])->name('admin.warranty.add');
+        Route::post('them-moi', [WarrantyController::class, 'addWarranty'])->name('admin.warranty.add.post');
+        Route::get('chi-tiet/{id}', [WarrantyController::class, 'detailWarranty'])->name('admin.warranty.detail');
+        Route::post('cap-nhat/{id}', [WarrantyController::class, 'updateWarranty'])->name('admin.warranty.update');
+        Route::get('xoa/{id}', [WarrantyController::class, 'delWarranty'])->name('admin.warranty.del');
+    });
 });
-Route::get('menu', [AdminController::class, 'menu'])->name('admin.menu.add')->middleware(['CheckAdmin' , 'auth']);
+Route::get('menu', [AdminController::class, 'menu'])->name('admin.menu.add')->middleware(['CheckAdmin', 'auth']);
 Route::post('menu', [AdminController::class, 'menu']);
 Route::get('danh-sach-menu', [AdminController::class, 'menuList'])->name('admin.menu.list');
-
 
 
 //Trang custom

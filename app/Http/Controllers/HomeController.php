@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Entity\Options;
+use App\Models\Districts;
 use App\Models\Page;
 use App\Models\PageImage;
 use App\Models\Post;
 use App\Models\PostCategory;
 use App\Models\PostTag;
 use App\Models\ProductLine;
+use App\Models\Provinces;
+use App\Models\Warranty;
 use http\Client\Response;
 use Illuminate\Http\Request;
 use DB;
@@ -87,8 +90,20 @@ class HomeController extends Controller
     }
 
     public function warrantyStation(Request $request){
+        $warranties = DB::table('warranty');
+        $city = Provinces::all();
+        $district = [];
 
+        if($request->has('city')){
+            $district = Districts::where('province_id', $request->get('city'))->get();
+            $warranties = $warranties->where('city', $request->get('city'));
+        }
 
-        return view('home.warranty.station');
+        if($request->has('district')){
+            $warranties = $warranties->where('district', $request->get('district'));
+        }
+
+        $warranties = $warranties->get();
+        return view('home.warranty.station', compact('warranties', 'city', 'district'));
     }
 }

@@ -20,15 +20,15 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="productName">Tên khoảng giá</label>
-                            <input type="text" name="name" class="form-control" id="productName" placeholder="1.000.000đ đến 2.000.000đ...">
+                            <input type="text" name="name" class="form-control" id="productName" placeholder="1.000.000đ đến 2.000.000đ..." required>
                         </div>
                         <div class="form-group">
                             <label for="productName">Giá thấp nhất</label>
-                            <input type="text" name="min_price" class="form-control" id="minPrice" placeholder="Nhập giá thấp nhất...">
+                            <input type="text" name="min_price" class="form-control" id="minPrice" placeholder="Nhập giá thấp nhất..." required>
                         </div>
                         <div class="form-group">
                             <label for="productName">Giá cao nhất</label>
-                            <input type="text" name="max_price" class="form-control" id="maxPrice" placeholder="Nhập giá cao nhất...">
+                            <input type="text" name="max_price" class="form-control" id="maxPrice" placeholder="Nhập giá cao nhất..." required>
                         </div>
                     </div>
                 </div>

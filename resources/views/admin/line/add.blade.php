@@ -20,7 +20,8 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="productName">Hãng sản xuất</label>
-                            <select class="form-control" name="company_id">
+                            <select class="form-control" name="company_id" required>
+                                <option value="">---Vui lòng chọn---</option>
                                 @foreach($company as $value)
                                     <option value="{{$value->id}}">{{$value->name}}</option>
                                 @endforeach
@@ -28,7 +29,7 @@
                         </div>
                         <div class="form-group">
                             <label>Danh mục</label>
-                            <input type="text" name="lineName" class="form-control" id="lineName" placeholder="Nhập dòng sản phẩm...">
+                            <input type="text" name="lineName" class="form-control" id="lineName" placeholder="Nhập dòng sản phẩm..." required>
                         </div>
                     </div>
                 </div>
