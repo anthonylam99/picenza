@@ -39,7 +39,7 @@ class PageController extends Controller
 
 
 
-        $arr['name'] = $request->get('name',$request->get('name_page'));
+        $arr['name'] = !empty($request->get('name')) ? $request->get('name')  : $request->get('name_page');
         $arr['content'] = $request->get('content','');
         $arr['seo_title'] = $request->get('seo_title', '');
         $arr['seo_description'] = $request->get('seo_description', '');
@@ -47,7 +47,7 @@ class PageController extends Controller
         $arr['seo_robots'] = $request->get('seo_robots', '');
 
         if ($request->has('page_id')) {
-            $slug = $request->get('slug', '');
+            $slug = !empty($request->get('slug')) ? $request->get('slug') : $options->create_slug($arr['name']);
             $page = Page::where('slug', $slug)->where('id', '!=' ,$request->get('page_id'))->get();
 
             if(!empty(collect($page)->toArray()) && count(collect($page)->toArray()) >= 1){

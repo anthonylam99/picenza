@@ -90,7 +90,7 @@
                                         </div>
                                         <div class="button-buy">
                                             <button>
-                                                <a href="{{config('app.url').'/chi-tiet-san-pham/'.$item->id}}">MUA NGAY</a>
+                                                <a href="{{config('app.url').'/chi-tiet-san-pham/'.$item->slug}}">MUA NGAY</a>
                                             </button>
                                         </div>
                                     </div>
@@ -104,7 +104,7 @@
                                         </div>
                                         <div class="button-buy">
                                             <button>
-                                                <a href="{{config('app.url').'/chi-tiet-san-pham/'.$item->id}}">MUA NGAY</a>
+                                                <a href="{{config('app.url').'/chi-tiet-san-pham/'.$item->slug}}">MUA NGAY</a>
                                             </button>
                                         </div>
                                     </div>
@@ -126,7 +126,7 @@
                         <div class="feature-item row owl-carousel bestseller owl-theme">
                             @foreach ($aryBestSeller as $item)
                                 <div class="feature-item-main">
-                                    <a href="{{ route('product.detail', $item->id) }}">
+                                    <a href="{{ route('product.detail', $item->slug) }}">
                                         <div class="image">
                                             <img
                                                 src="{{ count($item->productImage) > 0 ? asset($item->productImage[0]->image_path) : asset('images/product/c.png') }}"

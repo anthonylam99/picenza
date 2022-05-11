@@ -50,11 +50,11 @@
                             <td>
                                 <button class="btn btn-info">
                                     <a target="_blank" style="color: #FFFFFF"
-                                       href="{{ $value->name === 'Trang chủ' ? '/' : route('page.show.custom', ['slug' => $value->slug]) }}">
+                                       href="{{ in_array($value->name, ['Trang chủ', 'Trạm bảo hành']) ? $value->url : route('page.show.custom', ['slug' => $value->slug]) }}">
                                         Xem Trang
                                     </a>
                                 </button>
-                                @if($value->name !== 'Trang chủ')
+                                @if(!in_array($value->name, ['Trang chủ', 'Trạm bảo hành']))
                                     <button class="btn btn-danger">
                                         <a style="color: #FFFFFF"
                                            href="{{ route('admin.page.del', ['id' => $value->id]) }}">

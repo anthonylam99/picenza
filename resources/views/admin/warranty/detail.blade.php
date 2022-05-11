@@ -53,7 +53,7 @@
                                     Chọn ảnh
                                 </button>
                                 <div class="img-avt">
-                                    <img id="img-avatar" width="200" src="" alt="{{asset($warranty->avatar)}}">
+                                    <img id="img-avatar" width="200" src="{{asset($warranty->avatar)}}" alt="{{asset($warranty->avatar)}}">
                                 </div>
                                 <input type="hidden" id="img_avatar_path" name="img_avatar_path"
                                        value="{{asset($warranty->avatar)}}">
