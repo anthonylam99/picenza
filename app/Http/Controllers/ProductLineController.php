@@ -54,13 +54,18 @@ class ProductLineController extends Controller
 
         if(!$request->has('id')){
             $slug = $options->create_slug($lineName);
-            $seo_url = $slug;
+            $product = ProductLine::where('slug', $slug)->get();
+
+            if (!empty(collect($product)->toArray()) && count(collect($product)->toArray()) >= 1) {
+                $randomNumber = rand(0, 9999);
+                $slug .= '-' . $randomNumber;
+            }
             $insert = ProductLine::create([
                 'name' => $lineName,
                 'avatar' => $avatar,
                 'status' => $status,
                 'slug' => $slug,
-                'seo_url' => $seo_url,
+                'seo_url' => $slug,
                 'url' => collect($request->server)['HTTP_ORIGIN'].'/san-pham/'.$slug,
                 'description' => $description,
                 'posts' => $posts
@@ -69,8 +74,16 @@ class ProductLineController extends Controller
                 return redirect()->route('admin.line.edit', ['id' => $insert->id]);
             }
         }else{
-            $slug = $options->create_slug($lineName);
-            $seo_url = $request->get('seo-url');
+            $slug = $request->get('seo-url');
+
+            $product = ProductLine::where('slug', $slug)->get();
+
+            if (!empty(collect($product)->toArray()) && count(collect($product)->toArray()) >= 1) {
+                $randomNumber = rand(0, 9999);
+                $slug .= '-' . $randomNumber;
+            }
+
+            $seo_url = $slug;
             $update = ProductLine::where('id', $request->get('id'))->update([
                 'name' => $lineName,
                 'avatar' => $avatar,

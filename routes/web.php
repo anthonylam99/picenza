@@ -193,10 +193,13 @@ Route::group(['prefix' => 'quan-tri', 'middleware' => 'CheckAdmin'], function ()
         Route::post('cap-nhat/{id}', [WarrantyController::class, 'updateWarranty'])->name('admin.warranty.update');
         Route::get('xoa/{id}', [WarrantyController::class, 'delWarranty'])->name('admin.warranty.del');
     });
+
+    Route::get('danh-sach-menu/xoa/{id}', [AdminController::class, 'delMenu'])->name('admin.menu.del');
 });
 Route::get('menu', [AdminController::class, 'menu'])->name('admin.menu.add')->middleware(['CheckAdmin', 'auth']);
 Route::post('menu', [AdminController::class, 'menu']);
 Route::get('danh-sach-menu', [AdminController::class, 'menuList'])->name('admin.menu.list');
+
 
 
 //Trang custom

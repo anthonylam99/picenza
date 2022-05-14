@@ -37,6 +37,12 @@ class ProductFeatureController extends Controller
         $slug = $options->create_slug($request->get('name'));
 
         $productFeature = ProductFeature::findOrFail($request->get('parent'));
+        $sub = SubCategory::where('slug', $slug)->get();
+
+        if (!empty(collect($sub)->toArray()) && count(collect($sub)->toArray()) >= 1) {
+            $randomNumber = rand(0, 9999);
+            $slug .= '-' . $randomNumber;
+        }
         $parent = ProductLine::where('id',$productFeature->product_line)->firstOrFail();
         $create = SubCategory::create([
             'name' => $request->get('name'),
@@ -139,12 +145,21 @@ class ProductFeatureController extends Controller
             $parent = SubCategory::with(['feature', 'feature.line'])->where('id', $id)->firstOrFail();
             $slugSEO = $parent->feature->line->seo_url;
 
+            $slug = $request->get('url');
+            $sub = SubCategory::where('slug', $slug)->get();
+
+            if (!empty(collect($sub)->toArray()) && count(collect($sub)->toArray()) >= 1) {
+                $randomNumber = rand(0, 9999);
+                $slug .= '-' . $randomNumber;
+            }
+
             $update = SubCategory::where('id', $id)->update([
                 'name' => $name,
                 'avatar' => $avatar,
                 'description' => $description,
                 'favourite' => $favourite,
                 'status' => $status,
+                'slug' => $slug,
                 'url' => collect($request->server)['HTTP_ORIGIN'].'/danh-muc/'.$slugSEO.'?feature[]='.$id
             ]);
 

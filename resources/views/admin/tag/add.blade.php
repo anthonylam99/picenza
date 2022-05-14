@@ -1,6 +1,6 @@
 @extends('admin.index')
 
-@section('pageTitle', 'Thêm mới hãng sản xuất')
+@section('pageTitle', 'Thêm mới tag')
 
 @section('admin.css')
     <link rel="stylesheet" href="{{asset('css/admin.css')}}">

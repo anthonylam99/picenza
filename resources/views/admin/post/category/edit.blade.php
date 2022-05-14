@@ -7,7 +7,7 @@
 @endsection
 
 @section('breadcrumbContent')
-    <li class="breadcrumb-item"><a href="#">Tag</a></li>
+    <li class="breadcrumb-item"><a href="#">Chuyên mục</a></li>
     <li class="breadcrumb-item active">Cập nhật</li>
 @endsection
 

@@ -150,10 +150,10 @@
         </div>
         <div class="bd-example container">
             <?php
-                $location = \App\Models\MenuLocation::where('id', 1)->first('location');
+                $location = \App\Models\MenuLocation::where('location', 1)->first();
 
                 if(!empty($location->location)){
-                    $headerMenu = \Harimayco\Menu\Facades\Menu::get($location->location);
+                    $headerMenu = \Harimayco\Menu\Facades\Menu::get($location->menu_id);
                 }
             ?>
             <div class="">

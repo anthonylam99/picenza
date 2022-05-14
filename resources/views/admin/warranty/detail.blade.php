@@ -37,7 +37,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="productName">Tên trạm bảo hành</label>
-                            <input type="text" value="{{$warranty->name}}" name="name" class="form-control"
+                            <input type="text" value="{{json_decode($warranty->name)}}" name="name" class="form-control"
                                    id="nameWarranty" placeholder="Tên trạm bảo hành..." required>
                         </div>
                         <div class="form-group">

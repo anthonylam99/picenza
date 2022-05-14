@@ -42,7 +42,7 @@
                     @foreach($warranties as $value)
                         <tr>
                             <td>{{$value->id}}</td>
-                            <td>{{$value->name}}</td>
+                            <td>{{json_decode($value->name)}}</td>
                             <td>{{$value->phone}}</td>
                             <td>{{json_decode($value->address)}}</td>
                             <td>
