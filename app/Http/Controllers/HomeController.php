@@ -10,6 +10,7 @@ use App\Models\Post;
 use App\Models\PostCategory;
 use App\Models\PostTag;
 use App\Models\ProductLine;
+use App\Models\Project;
 use App\Models\Provinces;
 use App\Models\Warranty;
 use http\Client\Response;
@@ -39,8 +40,13 @@ class HomeController extends Controller
 
         $banner = PageImage::where('tag', 'banner')->get();
         $brand = PageImage::where('tag', 'brand')->get();
+        $subSection = Page::where('slug', 'trang-chu')->first();
+        $subSection = $subSection->toArray();
+        $subPage = json_decode($subSection['sub_section'], true);
 
-        return view('home.index', compact('category', 'arrPostPage', 'banner', 'brand'));
+        $project = Project::where('tagged', 1)->get();
+
+        return view('home.index', compact('category', 'arrPostPage', 'banner', 'brand', 'subPage', 'project'));
     }
 
     function strip_tags_content($string)
@@ -84,7 +90,6 @@ class HomeController extends Controller
                 }
             }
         }
-
 
         return view('news.index', compact('newPost', 'posts', 'categoryData'));
     }

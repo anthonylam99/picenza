@@ -5,11 +5,10 @@
 @section('admin.css')
     <link rel="stylesheet" href="{{asset('css/admin.css')}}">
 
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 
 @section('breadcrumbContent')
-    <li class="breadcrumb-item"><a href="#">Quản lý trang</a></li>
+    <li class="breadcrumb-item"><a href="#">Bài viết</a></li>
     <li class="breadcrumb-item active">Thêm mới</li>
 @endsection
 
@@ -33,19 +32,25 @@
 {{--                                   value=""--}}
 {{--                                   placeholder="Nhập đường dẫn..." required>--}}
 {{--                        </div>--}}
-                        <div class="form-group row">
+                        <div class="form-group select2-purple row">
                             <label for="title" class="col-md-2 col-sm-2 col-xs-12">Chuyên mục</label>
-                            <select name="category[]" class="form-control js-example-tags col-sm-9" multiple="multiple" required>
+                            <select name="category[]" class="select2 form-control col-sm-9" multiple="multiple"
+                                    required>
                                 @foreach($category as $value)
-                                    <option value="{{ $value->name }}">{{$value->name}}</option>
+                                    @if(!empty($category) && !empty($post->category))
+                                        <option >{{$value->name}}</option>
+                                    @else
+                                        <option >{{$value->name}}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group select2-purple row">
                             <label for="title" class="col-md-2 col-sm-2 col-xs-12">Tag</label>
-                            <select name="tag[]" class="form-control js-example-tags col-sm-9" multiple="multiple">
+                            <select name="tag[]" class="form-control select2 col-sm-9" multiple="multiple"
+                            >
                                 @foreach($tag as $value)
-                                    <option>{{$value->name}}</option>
+                                    <option >{{$value->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -177,23 +182,3 @@
     </div>
 @endsection
 
-@section('admin.js')
-    <script src="{{asset('js/admin.js')}}"></script>
-    <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script>
-        CKEDITOR.replace( 'text', {
-            filebrowserBrowseUrl: '{{ asset(route('ckfinder_browser')) }}',
-            filebrowserImageBrowseUrl: '{{ asset(route('ckfinder_browser')) }}?type=Images',
-            filebrowserFlashBrowseUrl: '{{ asset(route('ckfinder_browser')) }}?type=Flash',
-            filebrowserUploadUrl: '{{ asset(route('ckfinder_connector')) }}?command=QuickUpload&type=Files',
-            filebrowserImageUploadUrl: '{{ asset(route('ckfinder_connector')) }}?command=QuickUpload&type=Images',
-            filebrowserFlashUploadUrl: '{{ asset(route('ckfinder_connector')) }}?command=QuickUpload&type=Flash'
-        });
-        $(".js-example-tags").select2({
-            tags: true
-        });
-    </script>
-    @include('ckfinder::setup')
-@endsection

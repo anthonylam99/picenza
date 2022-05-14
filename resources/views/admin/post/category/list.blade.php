@@ -22,7 +22,7 @@
 
                 <div class="form-search float-right">
                     <form style="margin-bottom: 0" class="form-group" action="{{route('admin.post.category.list')}}">
-                       <input  class="form-control" type="text" name="s" value="" placeholder="Tìm kiếm sản phẩm....">
+                       <input  class="form-control" type="text" name="s" value="" placeholder="Tìm kiếm ....">
                     </form>
                 </div>
             </div>

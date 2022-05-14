@@ -16,6 +16,111 @@
                 @endforeach
             </div>
         </div>
+        @if(isset($subPage['intro']))
+            <?php
+                $intro = $subPage['intro'];
+                $post = \App\Models\Post::where('id', $intro['post'])->first();
+            ?>
+            <div class="intro">
+                <div class="intro-content container">
+                    <div class="intro-content__content row">
+                        <div class="intro-content__left col-xs-3 col-lg-3 col-sm-3 col-12">
+                            <h4 class="intro-title col-sm-10 col-12">
+                                {{$intro['title']}}
+                            </h4>
+                            <div class="intro-post">
+                                <button>
+                                    <a href="/bai-viet/{{$post->seo_url}}">
+                                        TÌM HIỂU THÊM
+                                    </a>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="intro-content__right col-xs-9 col-lg-9 col-sm-9 col-12">
+                            <div class="content">
+                                <p>
+                                    {{$intro['content']}}
+                                </p>
+                            </div>
+                            <div class="number-running text-center">
+                                <div class="number-running__content row">
+                                    <div class="item col-xs-4 col-lg-4 col-sm-4 col-12">
+                                        <div class="number number-count">
+                                            {{$intro['des'][0]['number']}}
+                                        </div>
+                                        <div class="title-number">
+                                            <h6>{{$intro['des'][0]['text']}}</h6>
+                                        </div>
+                                    </div>
+                                    <div class="item col-xs-4 col-lg-4 col-sm-4 col-12">
+                                        <div class="number d-flex justify-content-center">
+                                            <div class="number-count">
+                                                {{$intro['des'][1]['number']}}
+                                            </div>
+                                            <div class="plus">
+                                                +
+                                            </div>
+                                        </div>
+                                        <div class="title-number">
+                                            <h6>{{$intro['des'][1]['text']}}</h6>
+                                        </div>
+                                    </div>
+                                    <div class="item col-xs-4 col-lg-4 col-sm-4 col-12">
+                                        <div class="number d-flex justify-content-center">
+                                            <div class="number-count">
+                                                {{$intro['des'][2]['number']}}
+                                            </div>
+                                            <div class="plus">
+                                                +
+                                            </div>
+                                        </div>
+                                        <div class="title-number">
+                                            <h6>{{$intro['des'][2]['text']}}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+        @if(isset($subPage['diff']))
+            <?php
+            $diff = $subPage['diff'];
+            ?>
+            <div class="different">
+                <div class="different-content container">
+                    <div class="title">
+                        <h5>
+                            {{$diff['title']}}
+                        </h5>
+                    </div>
+                    <div class="content row">
+                        @foreach($diff['des'] as $des)
+                            <div class="item col-xs-4 col-lg-4 col-sm-4 col-12">
+                                <div class="item-content">
+                                    <div class="image">
+                                        <img src="{{asset($des['image'])}}" alt="">
+                                    </div>
+                                    <div class="sub-content">
+                                        <div class="title-sub">
+                                            <h5>{{$des['title']}}</h5>
+                                        </div>
+                                        <div class="line"></div>
+                                        <div class="content">
+                                            <p>
+                                                {{$des['content']}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        @endif
         <div class="product-category">
             <div class="product-category-content container">
                 <div class="title text-center">
@@ -59,6 +164,30 @@
                 </div>
             </div>
         </div>
+        <div class="options-3 container">
+            <div class="option-3-title">
+                <h4>DỰ ÁN TIÊU BIỂU</h4>
+            </div>
+            <div class="options-3-content">
+                <div class="owl-carousel options3 owl-theme">
+                    @if(isset($project))
+                        @foreach($project as $item)
+                            <div class="options-3-item">
+                                <div class="image">
+                                    <a href="/du-an/{{$item->seo_url}}">
+                                        <img src="{{!empty($item->avatar) ? asset($item->avatar) : asset('/images/no-image.jpg')}}" alt="">
+                                        <div class="text-title">
+                                            <h5>{{$item->title}}</h5>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
+        </div>
+
         <div class="section-4">
             <div class="section-4-content container">
                 <div class="title">

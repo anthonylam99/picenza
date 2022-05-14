@@ -11,6 +11,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductTypeController;
 use App\Http\Controllers\ProductLineController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\WarrantyController;
@@ -195,6 +196,31 @@ Route::group(['prefix' => 'quan-tri', 'middleware' => 'CheckAdmin'], function ()
     });
 
     Route::get('danh-sach-menu/xoa/{id}', [AdminController::class, 'delMenu'])->name('admin.menu.del');
+
+    Route::group(['prefix' => 'du-an', 'middleware' => 'auth'], function () {
+        Route::get('/', [ProjectController::class, 'listPost'])->name('admin.project.list');
+        Route::get('them-moi', [ProjectController::class, 'addPost'])->name('admin.project.add');
+        Route::post('them-moi', [ProjectController::class, 'addPost'])->name('admin.project.add.post');
+        Route::get('sua/{id}', [ProjectController::class, 'editPost'])->name('admin.project.edit');
+        Route::get('xoa/{id}', [ProjectController::class, 'delPost'])->name('admin.project.del');
+        Route::get('update-status', [ProjectController::class, 'updateStatus'])->name('admin.project.updateStatus');
+        Route::group(['prefix' => 'tag'], function () {
+            Route::get('/', [\App\Http\Controllers\ProjectTagController::class, 'listTag'])->name('admin.project.tag.list');
+            Route::get('them-moi', [\App\Http\Controllers\ProjectTagController::class, 'addTag'])->name('admin.project.tag.add');
+            Route::post('them-moi', [\App\Http\Controllers\ProjectTagController::class, 'addTagPost'])->name('admin.project.tag.add.post');
+            Route::get('sua/{id}', [\App\Http\Controllers\ProjectTagController::class, 'editTag'])->name('admin.project.tag.edit');
+            Route::get('xoa/{id}', [\App\Http\Controllers\ProjectTagController::class, 'delTag'])->name('admin.project.tag.del');
+            Route::get('update-status', [\App\Http\Controllers\ProjectTagController::class, 'updateStatus'])->name('admin.project.tag.updateStatus');
+        });
+        Route::group(['prefix' => 'chuyen-muc'], function () {
+            Route::get('/', [\App\Http\Controllers\ProjectCategoryController::class, 'listPostCategory'])->name('admin.project.category.list');
+            Route::get('them-moi', [\App\Http\Controllers\ProjectCategoryController::class, 'addPostCategory'])->name('admin.project.category.add');
+            Route::post('them-moi', [\App\Http\Controllers\ProjectCategoryController::class, 'addPostCategoryPost'])->name('admin.project.category.add.post');
+            Route::get('sua/{id}', [\App\Http\Controllers\ProjectCategoryController::class, 'editPostCategory'])->name('admin.project.category.edit');
+            Route::get('xoa/{id}', [\App\Http\Controllers\ProjectategoryController::class, 'delPostCategory'])->name('admin.project.category.del');
+            Route::get('update-status', [\App\Http\Controllers\ProjectCategoryController::class, 'updateStatus'])->name('admin.project.category.updateStatus');
+        });
+    });
 });
 Route::get('menu', [AdminController::class, 'menu'])->name('admin.menu.add')->middleware(['CheckAdmin', 'auth']);
 Route::post('menu', [AdminController::class, 'menu']);
@@ -205,6 +231,9 @@ Route::get('danh-sach-menu', [AdminController::class, 'menuList'])->name('admin.
 //Trang custom
 Route::get('/trang/{slug}', [PageController::class, 'showPage'])->name('page.show.custom');
 Route::get('/bai-viet/{slug}', [PostController::class, 'showPost'])->name('page.show.post');
+Route::get('/du-an/{slug}', [ProjectController::class, 'showPost'])->name('page.show.project');
+Route::get('danh-sach-du-an', [ProjectController::class, 'news'])->name('home.project.news');
+Route::get('danh-sach-du-an/{slug]', [ProjectController::class, 'news'])->name('home.project.news');
 
 Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderController@requestAction')
     ->name('ckfinder_connector');

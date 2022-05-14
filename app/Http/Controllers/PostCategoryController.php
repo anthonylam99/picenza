@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Entity\Options;
 use App\Models\Post;
 use App\Models\PostCategory;
+use App\Models\ProjectCategory;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -100,7 +101,7 @@ class PostCategoryController extends Controller
      * @return void
      */
     public function updateStatus(Request $request){
-        $update = PostCategory::where('id', $request->get('id'))->update([
+        $update = ProjectCategory::where('id', $request->get('id'))->update([
             'status' => $request->status
         ]);
         if($update){

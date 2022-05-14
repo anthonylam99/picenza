@@ -28,7 +28,8 @@
             <nav class="breadcrumbs">
                 <p id="breadcrumbs"><span><span><a href="">Trang chủ</a> » <span><a
                                     href="">Bài viết</a> » <span
-                                    class="breadcrumb_last" aria-current="page">{{$post->title}}</span></span></span></span>
+                                    class="breadcrumb_last"
+                                    aria-current="page">{{$post->title}}</span></span></span></span>
                 </p></nav>
         </div>
     </div>
@@ -65,21 +66,21 @@
                     <div id="gda-popular-post-12" class="widget widget_gda-popular-post">
                         <div class="gd_widget gd_widget_article">
                             <div class="gd_widget__title"><a class="gd_widget__text"
-                                                             href="https://decumar.vn/bai-viet-xem-nhieu"><span
+                                                             href=""><span
                                         class="gd_text">Bài viết liên quan</span></a></div>
                             <div class="gd_news__items gd_widget__content">
                                 @foreach($relatePost as $item)
                                     <article class="gd_news__item">
                                         <div class="gd_news__inner">
                                             <figure class="gd_news__image">
-                                                <a href="{{$item->url}}">
+                                                <a href="/bai-viet/{{$item->seo_url}}">
                                                     <img
                                                         src="{{!empty($item->avatar) ? $item->avatar : asset('images/no-image.jpg') }}"
                                                         alt="">
                                                 </a>
                                             </figure>
                                             <div class="gd_news__content">
-                                                <a class="gd_news__title" href="{{$item->url}}">
+                                                <a class="gd_news__title" href="/bai-viet/{{$item->seo_url}}">
                                                     <span class="gd_text">
                                                         {{$item->title}}
                                                     </span>

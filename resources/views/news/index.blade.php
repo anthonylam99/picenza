@@ -29,6 +29,9 @@
                             <span>
                                 <a href="">Tin tức</a> »
                             </span>
+                            <span
+                                class="breadcrumb_last"
+                                aria-current="page">{{$categoryData['name']}}</span>
                         </span>
                     </span>
                 </p>
@@ -81,21 +84,21 @@
                     <div id="gda-popular-post-12" class="widget widget_gda-popular-post">
                         <div class="gd_widget gd_widget_article">
                             <div class="gd_widget__title"><a class="gd_widget__text"
-                                                             href="https://decumar.vn/bai-viet-xem-nhieu"><span
+                                                             href=""><span
                                         class="gd_text">Bài viết liên quan</span></a></div>
                             <div class="gd_news__items gd_widget__content">
                                 @foreach($newPost as $item)
                                     <article class="gd_news__item">
                                         <div class="gd_news__inner">
                                             <figure class="gd_news__image">
-                                                <a href="{{config('app.url').'/bai-viet/'.$item->seo_url}}">
+                                                <a href="{{'/bai-viet/'.$item->seo_url}}">
                                                     <img
                                                         src="{{!empty($item->avatar) ? $item->avatar : asset('images/no-image.jpg') }}"
                                                         alt="">
                                                 </a>
                                             </figure>
                                             <div class="gd_news__content">
-                                                <a class="gd_news__title" href="{{config('app.url').'/bai-viet/'.$item->seo_url}}">
+                                                <a class="gd_news__title" href="{{'/bai-viet/'.$item->seo_url}}">
                                                     <span class="gd_text">
                                                         {{$item->title}}
                                                     </span>
