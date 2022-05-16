@@ -47,7 +47,6 @@ class PageController extends Controller
         $arr['seo_robots'] = $request->get('seo_robots', '');
 
         if ($request->has('page_id')) {
-
             $slug = !empty($request->get('slug')) ? $request->get('slug') : $options->create_slug($arr['name']);
             $page = Page::where('slug', $slug)->where('id', '!=' ,$request->get('page_id'))->get();
 

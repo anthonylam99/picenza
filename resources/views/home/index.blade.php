@@ -44,7 +44,7 @@
                             </div>
                             <div class="number-running text-center">
                                 <div class="number-running__content row">
-                                    <div class="item col-xs-4 col-lg-4 col-sm-4 col-12">
+                                    <div class="item col-xs-4 col-lg-4 col-sm-4 col-4">
                                         <div class="number number-count">
                                             {{$intro['des'][0]['number']}}
                                         </div>
@@ -52,7 +52,7 @@
                                             <h6>{{$intro['des'][0]['text']}}</h6>
                                         </div>
                                     </div>
-                                    <div class="item col-xs-4 col-lg-4 col-sm-4 col-12">
+                                    <div class="item col-xs-4 col-lg-4 col-sm-4 col-4">
                                         <div class="number d-flex justify-content-center">
                                             <div class="number-count">
                                                 {{$intro['des'][1]['number']}}
@@ -65,7 +65,7 @@
                                             <h6>{{$intro['des'][1]['text']}}</h6>
                                         </div>
                                     </div>
-                                    <div class="item col-xs-4 col-lg-4 col-sm-4 col-12">
+                                    <div class="item col-xs-4 col-lg-4 col-sm-4 col-4">
                                         <div class="number d-flex justify-content-center">
                                             <div class="number-count">
                                                 {{$intro['des'][2]['number']}}

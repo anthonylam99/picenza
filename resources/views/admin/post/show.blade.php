@@ -26,7 +26,7 @@
     <div class="gd_breadcrumb">
         <div class="container">
             <nav class="breadcrumbs">
-                <p id="breadcrumbs"><span><span><a href="">Trang chủ</a> » <span><a
+                <p id="breadcrumbs"><span><span><a href="/">Trang chủ</a> » <span><a
                                     href="">Bài viết</a> » <span
                                     class="breadcrumb_last"
                                     aria-current="page">{{$post->title}}</span></span></span></span>

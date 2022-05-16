@@ -31,7 +31,7 @@
                         <div class="form-group">
                             <label for="title">Đường dẫn</label>
                             <input type="text" name="slug" id="seo-url" class="form-control" value="{{$page->slug}}"
-                                   placeholder="Nhập đường dẫn..." {{$page->name === 'Trang chủ' ? 'disabled' : ''}}>
+                                   placeholder="Nhập đường dẫn..." {{$page->name === 'Trang chủ' ? 'disabled' : ''}} required>
                         </div>
                     </div>
                     @if($page->name == 'Trang chủ')
@@ -185,28 +185,28 @@
                                                 <label>Mô tả {{$desIds}}</label>
                                                 <div class="row">
                                                     <div class="col-12">
-                                                        <div style="text-align: center; height: 100px; border: 2px dashed #cccccc; margin-bottom: 10px; background: #000000" id="image-preview-diff1" class="show-img">
+                                                        <div style="text-align: center; height: 100px; border: 2px dashed #cccccc; margin-bottom: 10px; background: #000000" id="image-preview-diff{{$desIds}}" class="show-img">
                                                             <img style="width: 40px" src="{{asset($des['image'])}}" alt="">
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
-                                                        <input class="form-control" type="text" name="des-diff-title1"
+                                                        <input class="form-control" type="text" name="des-diff-title{{$desIds}}"
                                                                placeholder="Tiêu đề mô tả.." value="{{$des['title']}}" required>
                                                     </div>
                                                     <div class="col-12" style="margin-top: 10px">
-                                                        <textarea class="form-control" rows="3" name="des-diff-title1" id="" cols="30" rows="10">
+                                                        <textarea class="form-control" rows="3" name="des-diff-content{{$desIds}}" id="" cols="30" rows="10" required>
                                                             {{$des['content']}}
                                                         </textarea>
                                                     </div>
                                                     <div class="col-12 text-center justify-content-center">
-                                                        <label for="image-diff1" class="image-upload col-9">
+                                                        <label for="image-diff{{$desIds}}" class="image-upload col-9">
                                                             <i class="fas fa-upload"></i>Chọn ảnh
                                                         </label>
                                                         <input style="display: none"
-                                                               onclick="selectImageDiff(1,  'diff' )"
-                                                               id="image-diff1" type="text"
+                                                               onclick="selectImageDiff({{$desIds}},  'diff' )"
+                                                               id="image-diff{{$desIds}}" type="text"
                                                                value=""
-                                                               name="imagediff1" data-photo="1">
+                                                               name="imagediff{{$desIds}}" data-photo="{{$desIds}}">
                                                     </div>
                                                 </div>
                                             </div>

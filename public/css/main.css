@@ -70,6 +70,24 @@ img {
 .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,102,203, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
+.custom-nav {
+    display: block;
+    width: 100%;
+    padding: 0.25rem 1rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
+.custom-nav:hover {
+    border-left: 3px solid red;
+    transition: all 0.3s ease;
+    padding-left: 15px;
+}
 
 .fa-star,
 .fa-star-half,
@@ -339,6 +357,12 @@ a.nav-link:hover {
     color: #222222;
     font-weight: bold;
     margin-bottom: 15px;
+    transition: 0.3s;
+}
+
+.gd_news__title .gd_text:hover{
+    color: #ec2029;
+    transition: 0.3s;
 }
 
 .gd_widget_article .gd_news__title .gd_text {
@@ -1609,10 +1633,7 @@ main {
     padding: 70px 0;
 }
 
-.different .different-content .title {
-    width: 100%;
-    margin-bottom: 50px;
-}
+
 .different .different-content .title h5 {
     text-align: center;
     font-weight: 700;
@@ -1632,12 +1653,7 @@ main {
 .different .different-content .content .item .item-content .image{
 
 }
-.different .different-content .content .item .item-content .image img{
-    width: 90px;
-    height: 90px;
-    object-fit: contain;
-    margin-bottom: 20px
-}
+
 
 .different .different-content .content .item .item-content .sub-content{
     text-align: center;
@@ -1658,11 +1674,7 @@ main {
     margin: 0 auto;
     margin-bottom: 14px
 }
-.different .different-content .content .item .item-content .sub-content .content {
-    font-weight: 400;
-    font-size: 16px;
-    color: #FFFFFF;
-}
+
 .section-5 {
     padding: 60px 0;
     background-color: #FFFFFF;
@@ -3373,11 +3385,50 @@ footer .copyright h6 {
     }
 
     .intro .intro-content .intro-content__content .intro-content__right .number-running .number-running__content .item .number {
-        font-size: 70px;
+        font-size: 65px;
         font-weight: 500;
     }
     .different .different-content .content .item {
-        padding: 30px 10px;
+        padding: 30px 30px;
+    }
+    .intro .intro-content .intro-content__content .intro-content__right .number-running .number-running__content{
+        margin-top: 20px;
+    }
+    .different .different-content .content .item .item-content{
+        display: flex;
+    }
+    .different .different-content .content .item .item-content .image img{
+        width: 60px;
+        height: 60px;
+        object-fit: contain;
+        margin-bottom: 20px
+    }
+    .different .different-content .content .item .item-content .image{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .different .different-content .content .item .item-content .sub-content{
+        text-align: center;
+        padding-left: 40px;
+    }
+    .different .different-content .content .item .item-content .sub-content .content {
+        font-weight: 400;
+        font-size: 12px;
+        color: #FFFFFF;
+    }
+    .different .different-content .title {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .different{
+        padding: 40px 0;
+    }
+    .intro .intro-content .intro-content__content .intro-content__right .number-running .number-running__content .item .title-number h6 {
+        font-size: 14px;
+    }
+    .different .different-content .content .item .item-content .sub-content .title-sub h5 {
+        font-size: 15px;
     }
 }
 
@@ -3715,6 +3766,39 @@ footer .copyright h6 {
     }
     .intro .intro-content .intro-content__content .intro-content__left .intro-title{
         text-align: left;
+    }
+    .intro .intro-content .intro-content__content .intro-content__right .number-running .number-running__content{
+        margin-top: 0;
+    }
+    .different .different-content .content .item .item-content{
+        display: initial;
+    }
+    .different .different-content .content .item .item-content .sub-content{
+        text-align: center;
+    }
+    .different .different-content .content .item .item-content .image{
+
+    }
+    .different .different-content .content .item .item-content .image img{
+        width: 90px;
+        height: 90px;
+        object-fit: contain;f
+        margin-bottom: 20px
+    }
+    .different .different-content .content .item .item-content .sub-content .content {
+        font-weight: 400;
+        font-size: 16px;
+        color: #FFFFFF;
+    }
+    .different .different-content .title {
+        width: 100%;
+        margin-bottom: 50px;
+    }
+    .intro .intro-content .intro-content__content .intro-content__right .number-running .number-running__content .item .title-number h6 {
+        font-size: 16px;
+    }
+    .different .different-content .content .item .item-content .sub-content .title-sub h5 {
+        font-size: 18px;
     }
 }
 

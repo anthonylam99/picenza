@@ -56,7 +56,7 @@ class ProjectController extends Controller
         }
 
 
-        return view('news.index', compact('newPost', 'posts', 'categoryData'));
+        return view('project.view', compact('newPost', 'posts', 'categoryData'));
     }
 
     public function listPost(Request $request)

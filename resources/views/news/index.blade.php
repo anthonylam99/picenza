@@ -31,7 +31,7 @@
                             </span>
                             <span
                                 class="breadcrumb_last"
-                                aria-current="page">{{$categoryData['name']}}</span>
+                                aria-current="page">{{(!empty($categoryData['name'])) ? $categoryData['name'] : ''}}</span>
                         </span>
                     </span>
                 </p>
