@@ -9,6 +9,7 @@ use App\Models\MenuLocation;
 use App\Models\Comments;
 use App\Models\Contact;
 use App\Models\Orders;
+use App\Models\Page;
 use App\Models\Post;
 use App\Models\Product;
 use App\Models\ProductColor;
@@ -132,12 +133,19 @@ class AdminController extends Controller
         $options = new Options;
 
         $price = str_replace(",", '', $request->get('price'));
+        $salePrice = str_replace(",", '', $request->get('sale_price'));
+        $salePercent = str_replace(",", '', $request->get('sale_percent'));
+
+        if($salePrice == 0 || $salePercent == 0){
+            $salePrice = $price;
+            $salePercent = 0;
+        }
 
         $priceData = ProductPrice::all();
         $priceType = [];
 
         foreach ($priceData as $value) {
-            if ($price >= $value['min_price'] && $price <= $value['max_price'] ) {
+            if ($salePrice >= $value['min_price'] && $salePrice <= $value['max_price'] ) {
                 array_push($priceType, $value['id']);
             }
         }
@@ -164,8 +172,8 @@ class AdminController extends Controller
             'name' => $request->get('product_name'),
 
             'price' => $price,
-            'sale_price' => str_replace(",", '', $request->get('sale_price')),
-            'sale_percent' => str_replace(",", '', $request->get('sale_percent')),
+            'sale_price' => $salePrice,
+            'sale_percent' => $salePercent,
             'company' => $request->get('company'),
             'product_type' => $request->get('product_type'),
             'product_line' => $request->get('product_line'),
@@ -330,6 +338,7 @@ class AdminController extends Controller
 
     public function menu(Request $request)
     {
+
         if ($request->method() == 'POST') {
             $idmenu = $request->get('idmenu');
             if(!empty($request->get('label'))){
@@ -370,10 +379,10 @@ class AdminController extends Controller
             if($request->has('pages')){
                 $pages = $request->get('pages');
                 foreach ($pages as $value) {
-                    $data = Post::find($value);
+                    $data = Page::find($value);
                     if (!empty($data)) {
                         $arr = [
-                            'labelmenu' => $data->title,
+                            'labelmenu' => $data->name,
                             'linkmenu' => $data->url,
                             'idmenu' => $idmenu
                         ];
@@ -392,9 +401,13 @@ class AdminController extends Controller
 
                 if(!empty(collect($find)->toArray())){
                     MenuLocation::where('menu_id', $idmenu)->delete();
-                    MenuLocation::where('id', $find->id)->update([
+                    $update = MenuLocation::where('id', $find->id)->update([
                         'menu_id' => $idmenu,
                     ]);
+
+                    if(!$update){
+                        MenuLocation::create($arr);
+                    }
                 }else{
                     MenuLocation::where('menu_id', $idmenu)->delete();
                     MenuLocation::create($arr);
@@ -417,6 +430,32 @@ class AdminController extends Controller
         $menuitem->sort = MenuItems::getNextSortRoot($idmenu);
         $menuitem->save();
 
+    }
+
+    public function updateitem()
+    {
+        $arraydata = request()->input("arraydata");
+        if (is_array($arraydata)) {
+            foreach ($arraydata as $value) {
+                $menuitem = MenuItems::find($value['id']);
+                $menuitem->label = $value['label'];
+                $menuitem->link = $value['link'];
+                $menuitem->class = $value['class'];
+                if (config('menu.use_roles')) {
+                    $menuitem->role_id = $value['role_id'] ? $value['role_id'] : 0 ;
+                }
+                $menuitem->save();
+            }
+        } else {
+            $menuitem = MenuItems::find(request()->input("id"));
+            $menuitem->label = request()->input("label");
+            $menuitem->link = request()->input("url");
+            $menuitem->class = request()->input("clases");
+            if (config('menu.use_roles')) {
+                $menuitem->role_id = request()->input("role_id") ? request()->input("role_id") : 0 ;
+            }
+            $menuitem->save();
+        }
     }
 
     public function menuList(Request $request)
