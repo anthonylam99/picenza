@@ -60,8 +60,55 @@ class PageController extends Controller
             $arr['seo_url'] = $slug;
             $arr['url'] = $url . '/trang/' . $slug;
 
+            $sub_section = [
+                'intro' => [
+                    'title' => $request->get('title-intro', ''),
+                    'post' => $request->get('post-intro', 0),
+                    'content' => $request->get('content-intro', ''),
+                    'des' => [
+                        [
+                            'number' => $request->get('des-number1', 0),
+                            'text' => $request->get('des-text1', 0)
+                        ],
+                        [
+                            'number' => $request->get('des-number2', 0),
+                            'text' => $request->get('des-text2', '')
+                        ],
+                        [
+                            'number' => $request->get('des-number3', 0),
+                            'text' => $request->get('des-text3', '')
+                        ]
+                    ]
+                ],
+                'diff' => [
+                    'title' => $request->get('title-diff'),
+                    'des'   => [
+                        [
+                            'image' => $request->get('imagediff1', ''),
+                            'title' => $request->get('des-diff-title1', ''),
+                            'content' => $request->get('des-diff-content1', '')
+                        ],
+                        [
+                            'image' => $request->get('imagediff2', ''),
+                            'title' => $request->get('des-diff-title2', ''),
+                            'content' => $request->get('des-diff-content2', '')
+                        ],
+                        [
+                            'image' => $request->get('imagediff3', ''),
+                            'title' => $request->get('des-diff-title3', ''),
+                            'content' => $request->get('des-diff-content3', '')
+                        ]
+                    ]
+                ]
+            ];
+            $arr['sub_section'] = json_encode($sub_section);
+
             $res = Page::where('id', $request->get('page_id'))->update($arr);
             $id = $request->get('page_id');
+
+
+
+
         } else {
             $slug = $options->create_slug($request->get('name'));
             $page = Page::where('slug', $slug)->get();
@@ -190,6 +237,7 @@ class PageController extends Controller
             $arrPostPage[$value->page_tag] = explode(',', $value->category_post);
         }
 
+        $posts = Post::all();
         $page = Page::findOrFail($id);
         $aryCategory = PostCategory::where('status', 1)->get();
         $image = PageImage::where('page_id', $id)->get();
@@ -200,7 +248,7 @@ class PageController extends Controller
             }
         }
 
-        return view('admin.page.edit', compact('page', 'arrImg', 'aryCategory', 'arrPostPage'));
+        return view('admin.page.edit', compact('page', 'arrImg', 'aryCategory', 'arrPostPage', 'posts'));
     }
 
     public function showPage(Request $request, $slug = null)

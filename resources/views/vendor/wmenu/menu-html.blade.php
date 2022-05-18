@@ -308,7 +308,7 @@ $currentUrl = url()->current();
                                                                             $location = $location->location;
                                                                         }
                                                                     ?>
-                                                                    <select name="location" id="productLineList" class="form-control" required="">
+                                                                    <select name="location" id="productLineList" class="form-control">
                                                                         <option value="">-- Vui lòng chọn --</option>
                                                                         <option value="1" {{$location === 1 ? 'selected' : ''}}>Đầu trang</option>
                                                                         <option value="2"  {{$location === 2 ? 'selected' : ''}}>Cuối trang</option>
@@ -334,7 +334,7 @@ $currentUrl = url()->current();
                                                                     <p class="button-controls">
 
                                                                         <button class="float-right" id="btn-submit-menu"
-                                                                                type="submit" form="addCustomMenu"
+                                                                                type="submit"
                                                                                 value="Submit">Submit
                                                                         </button>
                                                                         <span class="spinner" id="spincustomu"></span>

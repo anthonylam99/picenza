@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Entity\Options;
+use App\Models\AdminMenus;
 use App\Models\Districts;
 use App\Models\MenuLocation;
 use App\Models\Comments;
@@ -20,6 +21,7 @@ use App\Models\ProductReliability;
 use App\Models\ProductShape;
 use App\Models\ProductTechnology;
 use App\Models\ProductType;
+use Harimayco\Menu\Facades\Menu;
 use Harimayco\Menu\Models\MenuItems;
 use Harimayco\Menu\Models\Menus;
 use Illuminate\Database\Query\Builder;
@@ -380,22 +382,24 @@ class AdminController extends Controller
                     }
                 }
             }
-            if($request->has('location')){
-                $location = $request->get('location');
+//            if($request->has('location')){
+                $location = $request->get('location', 0);
                 $arr = [
                     'menu_id' => $idmenu,
                     'location' => $location
                 ];
-                $find = MenuLocation::where('menu_id', $idmenu)->get();
+                $find = MenuLocation::where('location', $location)->first();
 
                 if(!empty(collect($find)->toArray())){
-                    MenuLocation::where('location', $location)->update([
-                        'menu_id' => $idmenu
+                    MenuLocation::where('menu_id', $idmenu)->delete();
+                    MenuLocation::where('id', $find->id)->update([
+                        'menu_id' => $idmenu,
                     ]);
                 }else{
+                    MenuLocation::where('menu_id', $idmenu)->delete();
                     MenuLocation::create($arr);
                 }
-            }
+//            }
         }
         return view('admin.menu');
     }
@@ -421,6 +425,14 @@ class AdminController extends Controller
         $menu = DB::table('admin_menus')->paginate(10);
 
         return view('admin.menu.list', compact('menu'));
+    }
+
+    public function delMenu(Request $request, $id = null){
+        $menu = AdminMenus::findOrFail($id);
+
+        $menu->delete();
+        MenuLocation::where('menu_id', $id)->delete();
+        return redirect()->route('admin.menu.list');
     }
 
     /**

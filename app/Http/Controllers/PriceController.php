@@ -22,6 +22,13 @@ class PriceController extends Controller
         return view('admin.price.add');
     }
 
+    public function delPrice(Request $request, $id = null){
+        $price = ProductPrice::findOrFail($id);
+        $price->delete();
+
+        return redirect()->route('admin.price.list');
+    }
+
     public function addPricePost(Request $request){
         if($request->has('id')){
             $id = $request->get('id');

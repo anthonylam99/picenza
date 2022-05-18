@@ -16,11 +16,13 @@ class PostController extends Controller
     {
         $post = Post::where('slug', $slug)->firstOrFail();
 
-        $relatePost = Post::where('id', '!=', $post->id)->where(function ($q) use ($post) {
-            $q->whereIn('category', $post->category);
-            $q->orWhere('tag', 'like', '%' . $post->tag . '%');
-            return $q;
-        })->inRandomOrder()->limit(5)->get();
+        $relatePost = Post::where('id', '!=', $post->id)
+            ->where('status', 1)
+            ->where(function ($q) use ($post) {
+                $q->whereIn('category', $post->category);
+                $q->orWhere('tag', 'like', '%' . $post->tag . '%');
+                return $q;
+            })->inRandomOrder()->limit(5)->get();
         return view('admin.post.show', compact('post', 'relatePost'));
     }
 
@@ -101,9 +103,9 @@ class PostController extends Controller
             } else {
                 $slug = $options->create_slug($request->get('title'));
                 $post = Post::where('slug', $slug)->get();
-                if(!empty(collect($post)->toArray()) && count(collect($post)->toArray()) >= 1){
+                if (!empty(collect($post)->toArray()) && count(collect($post)->toArray()) >= 1) {
                     $randomNumber = rand(0, 9999);
-                    $slug .= '-'.$randomNumber;
+                    $slug .= '-' . $randomNumber;
                 }
                 $arr['slug'] = $slug;
                 $arr['seo_url'] = $slug;

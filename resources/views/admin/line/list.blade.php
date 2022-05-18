@@ -18,7 +18,7 @@
 
                 <div class="form-search float-right">
                     <form style="margin-bottom: 0" class="form-group" action="{{route('admin.line.list')}}">
-                       <input  class="form-control" type="text" name="s" value="" placeholder="Tìm kiếm sản phẩm....">
+                       <input  class="form-control" type="text" name="s" value="" placeholder="Tìm kiếm danh mục....">
                     </form>
                 </div>
             </div>

@@ -2,10 +2,10 @@
     <div class="footer-div">
         <div class="main-footer container">
             <?php
-            $location = \App\Models\MenuLocation::where('menu_id', 2)->first('location');
+            $location = \App\Models\MenuLocation::where('location', 2)->first();
 
             if(!empty($location->location)){
-                $footer = \Harimayco\Menu\Facades\Menu::get($location->location);
+                $footer = \Harimayco\Menu\Facades\Menu::get($location->menu_id);
             }
             ?>
             <div class="main-footer-content row">

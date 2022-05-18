@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard 3</title>
+    <title>TRANG QUẢN TRỊ</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -11,10 +11,15 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
     <!-- IonIcons -->
+
+
+    <link rel="stylesheet" href="{{asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
+    <link rel="stylesheet" href="{{asset('plugins/select2/css/select2.min.css')}}">
     <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
     @yield('admin.css')
+
 </head>
 <!--
 `body` tag options:
@@ -223,7 +228,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <i class="nav-icon fas fa-bars"></i>
                             <p>
                                 QUẢN LÝ MENU
                                 <i class="right fas fa-angle-left"></i>
@@ -246,7 +251,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="./khach-hang/danh-sach" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <i class="nav-icon far fa-file"></i>
                             <p>
                                 TRANG
                                 <i class="right fas fa-angle-left"></i>
@@ -269,7 +274,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <i class="nav-icon far fa-copy"></i>
                             <p>
                                 BÀI VIẾT
                                 <i class="right fas fa-angle-left"></i>
@@ -304,7 +309,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="san-pham/danh-sach" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <i class="nav-icon fas fa-database"></i>
                             <p>
                                 SẢN PHẨM
                                 <i class="right fas fa-angle-left"></i>
@@ -351,7 +356,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{route('admin.order.list')}}" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <i class="nav-icon fas fa-shopping-cart"></i>
                             <p>
                                 ĐƠN HÀNG
                                 <i class="right fas fa-angle-left"></i>
@@ -368,7 +373,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{route('admin.contact.list')}}" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <i class="nav-icon fas fa-address-book"></i>
                             <p>
                                 LIÊN HỆ
                                 <i class="right fas fa-angle-left"></i>
@@ -385,7 +390,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{route('admin.comment.list')}}" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <i class="nav-icon fas fa-comment"></i>
                             <p>
                                 BÌNH LUẬN
                                 <i class="right fas fa-angle-left"></i>
@@ -402,7 +407,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{route('admin.warranty.list')}}" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <i class="nav-icon fas fa-charging-station"></i>
                             <p>
                                 TRẠM BẢO HÀNH
                                 <i class="right fas fa-angle-left"></i>
@@ -413,6 +418,41 @@
                                 <a href="{{route('admin.warranty.list')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>DANH SÁCH</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-project-diagram"></i>
+                            <p>
+                                DỰ ÁN
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{route('admin.project.list')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>DANH SÁCH</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.project.add')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>THÊM MỚI</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.project.category.list')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>CHUYÊN MỤC</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.project.tag.list')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>TAG</p>
                                 </a>
                             </li>
                         </ul>
@@ -470,6 +510,7 @@
 
 <!-- jQuery -->
 <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
+
 <!-- Bootstrap -->
 <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE -->
@@ -485,7 +526,9 @@
 @yield('admin.js')
 
 <script src="{{asset('js/admin.js')}}"></script>
+<script src="{{asset('plugins/select2/js/select2.full.min.js')}}"></script>
 <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
+
 <script>
     CKEDITOR.replace('text', {
         filebrowserBrowseUrl: '{{ asset(route('ckfinder_browser')) }}',

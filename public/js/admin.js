@@ -339,6 +339,29 @@ function selectImageGalery(id) {
     });
 }
 
+function selectImageDiff(id, tag){
+    CKFinder.popup({
+        chooseFiles: true,
+        width: 1200,
+        height: 600,
+        onInit: function (finder) {
+            finder.on('files:choose', function (evt) {
+                var file = evt.data.files.first();
+                // output.value = file.getUrl();
+                var img = "<img style='width: 40px' id='image-preview-src' + tag + id  src='" + file.getUrl() + "'/>"
+                $('#image-preview-' + tag + id).html(img);
+                $('#image-' + tag + id).val(file.getUrl());
+                console.log($('#image-input' + tag + id).val())
+            });
+
+            finder.on('file:choose:resizedImage', function (evt) {
+                var output = document.getElementById(elementId);
+                output.value = evt.data.resizedUrl;
+            });
+        }
+    });
+}
+
 function selectImageGaleryCustom(id, tag) {
     console.log(id, tag)
     CKFinder.popup({
@@ -490,6 +513,27 @@ function changeStatusTag(id) {
     $.ajax({
         type: 'GET',
         url: '/quan-tri/bai-viet/tag/update-status',
+        data: {
+            id: id,
+            status: status
+        },
+        success: function (res) {
+            console.log(res)
+        },
+        error: function (err) {
+            console.log(err)
+        }
+    })
+}
+
+function changeStatusProjectTag(id) {
+    var status = $('#status' + id).is(':checked')
+    status = status ? 1 : 0
+    var statusText = status ? 'Bật' : 'Tắt'
+    $('.status' + id).html(statusText)
+    $.ajax({
+        type: 'GET',
+        url: '/quan-tri/du-an/tag/update-status',
         data: {
             id: id,
             status: status
@@ -742,6 +786,9 @@ $(function(){
             }
         })
     })
+})
+$(function() {
+    $('.select2').select2()
 })
 
 

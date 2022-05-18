@@ -1,6 +1,6 @@
 @extends('admin.index')
 
-@section('pageTitle', 'Cập nhật hãng sản xuất')
+@section('pageTitle', 'Cập nhật tag')
 
 @section('admin.css')
 <link rel="stylesheet" href="{{asset('css/admin.css')}}">

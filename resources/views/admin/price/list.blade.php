@@ -3,7 +3,7 @@
 @section('pageTitle', '')
 
 @section('breadcrumbContent')
-    <li class="breadcrumb-item"><a href="#">Sản phẩm</a></li>
+    <li class="breadcrumb-item"><a href="#">Khoảng giá</a></li>
     <li class="breadcrumb-item active">Danh sách khoảng giá</li>
 @endsection
 
@@ -43,8 +43,8 @@
                         <tr>
                             <td>{{$value->id}}</td>
                             <td>{{$value->name}}</td>
-                            <td>{{$value->min_price}}</td>
-                            <td>{{$value->max_price}}</td>
+                            <td>{{number_format($value->min_price)}}</td>
+                            <td>{{number_format($value->max_price)}}</td>
                             <td>
                                 <button class="btn btn-info">
                                     <a style="color: #FFFFFF" href="{{ route('admin.price.edit', ['id' => $value->id]) }}">

@@ -3,7 +3,7 @@
 @section('pageTitle', '')
 
 @section('breadcrumbContent')
-    <li class="breadcrumb-item"><a href="#">Tính năng</a></li>
+    <li class="breadcrumb-item"><a href="#">Thuộc tính</a></li>
     <li class="breadcrumb-item active">Danh sách thuộc tính</li>
 @endsection
 

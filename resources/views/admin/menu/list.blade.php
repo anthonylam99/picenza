@@ -3,8 +3,8 @@
 @section('pageTitle', '')
 
 @section('breadcrumbContent')
-    <li class="breadcrumb-item"><a href="#">Sản phẩm</a></li>
-    <li class="breadcrumb-item active">Danh sách khoảng giá</li>
+    <li class="breadcrumb-item"><a href="#">Quản lý menu</a></li>
+    <li class="breadcrumb-item active">Danh sách</li>
 @endsection
 
 @section('content')
@@ -47,12 +47,12 @@
                             <td>{{date('d-m-Y', strtotime($value->created_at))}}</td>
                             <td>
                                 <button class="btn btn-info">
-                                    <a style="color: #FFFFFF" href="{{ route('admin.price.edit', ['id' => $value->id]) }}">
+                                    <a style="color: #FFFFFF" href="./menu?menu={{$value->id}}">
                                         Chi tiết
                                     </a>
                                 </button>
                                 <button class="btn btn-danger">
-                                    <a style="color: #FFFFFF" href="{{ route('admin.price.del', ['id' => $value->id]) }}">
+                                    <a style="color: #FFFFFF" href="{{ route('admin.menu.del', ['id' => $value->id]) }}">
                                         Xoá
                                     </a>
                                 </button>

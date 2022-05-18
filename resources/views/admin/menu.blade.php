@@ -1,6 +1,6 @@
 @extends('admin.index')
 
-@section('pageTitle', 'THÊM MỚI')
+@section('pageTitle', '')
 
 @section('admin.css')
     <link rel="stylesheet" href="{{asset('css/admin.css')}}">
@@ -8,7 +8,7 @@
 
 @section('breadcrumbContent')
     <li class="breadcrumb-item"><a href="#">Quản lý trang</a></li>
-    <li class="breadcrumb-item active">Thêm mới</li>
+    <li class="breadcrumb-item active"></li>
 @endsection
 
 @section('content')

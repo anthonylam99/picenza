@@ -29,7 +29,7 @@
                         </div>
                         <div class="form-group">
                             <label>Thuộc tính</label>
-                            <input type="text" name="name" class="form-control" id="nameFeature" placeholder="Nhập tên tính năng..." required>
+                            <input type="text" name="name" class="form-control" id="nameFeature" placeholder="Nhập tên thuộc tính..." required>
                         </div>
                     </div>
                 </div>

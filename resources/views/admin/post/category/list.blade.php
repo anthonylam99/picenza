@@ -3,7 +3,7 @@
 @section('pageTitle', '')
 
 @section('breadcrumbContent')
-    <li class="breadcrumb-item"><a href="#">Tag</a></li>
+    <li class="breadcrumb-item"><a href="#">Chuyên mục</a></li>
     <li class="breadcrumb-item active">Danh sách chuyên mục</li>
 @endsection
 
@@ -22,7 +22,7 @@
 
                 <div class="form-search float-right">
                     <form style="margin-bottom: 0" class="form-group" action="{{route('admin.post.category.list')}}">
-                       <input  class="form-control" type="text" name="s" value="" placeholder="Tìm kiếm sản phẩm....">
+                       <input  class="form-control" type="text" name="s" value="" placeholder="Tìm kiếm ....">
                     </form>
                 </div>
             </div>
@@ -65,7 +65,7 @@
                                 </td>
                                 <td class="text-center">
                                     <button class="btn btn-danger">
-                                        <a style="color: #FFFFFF" href="{{ route('admin.tag.del', ['id' => $value->id]) }}">
+                                        <a style="color: #FFFFFF" href="{{ route('admin.post.category.del', ['id' => $value->id]) }}">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     </button>

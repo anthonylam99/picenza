@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Entity\Options;
+use App\Models\Post;
 use App\Models\PostCategory;
+use App\Models\ProjectCategory;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -29,16 +31,22 @@ class PostCategoryController extends Controller
     public function addPostCategoryPost(Request $request)
     {
         $name = $request->get('name');
-        $options = new Options;
-        $slug = $options->create_slug($name);
+
 
         if ($request->has('id')) {
             $id = $request->get('id');
+            $slug = $request->get('seo_url');
+            $post = PostCategory::where('slug', $slug)->get();
+
+            if (!empty(collect($post)->toArray()) && count(collect($post)->toArray()) >= 1) {
+                $randomNumber = rand(0, 9999);
+                $slug .= '-' . $randomNumber;
+            }
 
             $tag = PostCategory::where('id', $id)->update([
                 'name' => $request->get('name'),
                 'slug' => $slug,
-                'seo_url' => $request->get('seo_url'),
+                'seo_url' => $slug,
                 'seo_title' => $request->get('seo_title'),
                 'seo_description' => $request->get('seo_description'),
                 'seo_keyword' => $request->get('seo_keyword'),
@@ -47,10 +55,21 @@ class PostCategoryController extends Controller
 
             return redirect()->route('admin.post.category.edit', ['id' => $id]);
         } else {
+            $options = new Options;
+            $slug = $options->create_slug($name);
+
+
+            $post = PostCategory::where('slug', $slug)->get();
+
+            if (!empty(collect($post)->toArray()) && count(collect($post)->toArray()) >= 1) {
+                $randomNumber = rand(0, 9999);
+                $slug .= '-' . $randomNumber;
+            }
+
             $tag = PostCategory::create([
                 'name' => $request->get('name'),
                 'slug' => $slug,
-                'seo_url' => $request->get('seo_url'),
+                'seo_url' => $slug,
                 'seo_title' => $request->get('seo_title'),
                 'seo_description' => $request->get('seo_description'),
                 'seo_keyword' => $request->get('seo_keyword'),
@@ -82,7 +101,7 @@ class PostCategoryController extends Controller
      * @return void
      */
     public function updateStatus(Request $request){
-        $update = PostCategory::where('id', $request->get('id'))->update([
+        $update = ProjectCategory::where('id', $request->get('id'))->update([
             'status' => $request->status
         ]);
         if($update){

@@ -51,7 +51,8 @@ h5 {
 img {
     width: auto;
 }
-.carousel-control-prev, .carousel-control-next{
+
+.carousel-control-prev, .carousel-control-next {
     height: 90%;
     width: 5%;
 }
@@ -68,6 +69,24 @@ img {
 
 .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,102,203, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+.custom-nav {
+    display: block;
+    width: 100%;
+    padding: 0.25rem 1rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
+.custom-nav:hover {
+    border-left: 3px solid red;
+    transition: all 0.3s ease;
+    padding-left: 15px;
 }
 
 .fa-star,
@@ -338,6 +357,12 @@ a.nav-link:hover {
     color: #222222;
     font-weight: bold;
     margin-bottom: 15px;
+    transition: 0.3s;
+}
+
+.gd_news__title .gd_text:hover{
+    color: #ec2029;
+    transition: 0.3s;
 }
 
 .gd_widget_article .gd_news__title .gd_text {
@@ -1513,6 +1538,142 @@ main {
     font-weight: 400;
     margin: 0;
 }
+.home .options-3 .option-3-title {
+    text-align: center;
+}
+
+.home .options-3 .option-3-title h4 {
+    font-weight: 700;
+    font-size: 28px;
+    color: #1B3358;
+}
+
+.intro {
+    padding: 70px 0;
+}
+
+.intro .intro-content {
+
+}
+
+.intro .intro-content .intro-content__content {
+
+}
+
+.intro .intro-content .intro-content__content .intro-content__left {
+
+}
+
+.intro .intro-content .intro-content__content .intro-content__left .intro-title {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 40px;
+    color: #1B3358;
+    padding-bottom: 38px;
+    text-align: left;
+}
+
+.intro .intro-content .intro-content__content .intro-content__left .intro-post {
+    text-align: initial;
+}
+
+.intro .intro-content .intro-content__content .intro-content__left .intro-post button {
+    background: #EC2029;
+    border: 1px solid #EC2029;
+    border-radius: 0px;
+    outline: none;
+    padding: 7px 30px;
+
+}
+
+.intro .intro-content .intro-content__content .intro-content__left .intro-post button a {
+    color: #FFFFFF;
+    font-weight: 900;
+    text-decoration: none;
+}
+
+.intro .intro-content .intro-content__content .intro-content__right {
+
+}
+
+.intro .intro-content .intro-content__content .intro-content__right .content {
+    text-align: justify;
+    font-weight: 400;
+    font-size: 16px;
+    margin-bottom: 27px;
+}
+
+.intro .intro-content .intro-content__content .intro-content__right .number-running {
+
+}
+
+.intro .intro-content .intro-content__content .intro-content__right .number-running .number-running__content {
+
+}
+
+.intro .intro-content .intro-content__content .intro-content__right .number-running .number-running__content .item {
+
+}
+
+.intro .intro-content .intro-content__content .intro-content__right .number-running .number-running__content .item .number {
+    font-weight: 400;
+    font-size: 80px;
+    color: #EC2029;
+}
+
+.intro .intro-content .intro-content__content .intro-content__right .number-running .number-running__content .item .title-number {
+    font-weight: 500;
+    font-size: 18px;
+    color: #666666;
+    text-transform: uppercase;
+}
+
+.different{
+    background: #EC2029;
+    padding: 70px 0;
+}
+
+
+.different .different-content .title h5 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 28px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+}
+.different .different-content .content{
+
+}
+.different .different-content .content .item{
+    padding: 0;
+}
+.different .different-content .content .item .item-content{
+    text-align: center;
+}
+.different .different-content .content .item .item-content .image{
+
+}
+
+
+.different .different-content .content .item .item-content .sub-content{
+    text-align: center;
+}
+
+.different .different-content .content .item .item-content .sub-content .title-sub{
+    font-weight: 900;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    margin-bottom: 20px;
+}
+
+.different .different-content .content .item .item-content .sub-content .line{
+    width: 80px;
+    height: 1px;
+    background: #FFFFFF;
+    margin: 0 auto;
+    margin-bottom: 14px
+}
 
 .section-5 {
     padding: 60px 0;
@@ -2315,9 +2476,11 @@ footer .copyright h6 {
     font-weight: bold;
     font-size: 13px;
 }
+
 .warranty {
     background: #f4f4f4;
 }
+
 .warranty .banner {
     background-image: url('/images/maps.png');
     background-size: auto calc(100% - 20px);
@@ -2327,6 +2490,7 @@ footer .copyright h6 {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
 .warranty .banner h3 {
     font-weight: 300;
     font-size: 60px;
@@ -2357,19 +2521,23 @@ footer .copyright h6 {
     border-right: 8px solid transparent;
     border-left: 8px solid white;
 }
+
 .form-store {
     max-width: 1200px;
     background: white;
     margin: -65px auto 65px auto;
     padding: 40px;
 }
-.form-store> form div:nth-child(1), .form-store> form div:nth-child(2) {
+
+.form-store > form div:nth-child(1), .form-store > form div:nth-child(2) {
     width: calc(55% - 135px);
 }
-.form-store> form div {
+
+.form-store > form div {
     display: inline-block;
     padding: 0 15px;
 }
+
 .form-store select {
     border: 1px solid #ccc;
     height: 50px;
@@ -2378,6 +2546,7 @@ footer .copyright h6 {
     border-radius: 0;
     text-indent: 30px;
 }
+
 .form-store .button {
     display: inline-block;
     background: #424242 !important;
@@ -2390,6 +2559,7 @@ footer .copyright h6 {
     font-size: 16px !important;
     color: #FFFFFF;
 }
+
 .warranty .title-section {
     font-size: 44px;
     font-weight: 300;
@@ -2399,7 +2569,8 @@ footer .copyright h6 {
     position: relative;
     color: rgb(63, 63, 63);
 }
-.warranty .title-section:after{
+
+.warranty .title-section:after {
     content: '';
     position: absolute;
     width: 120px;
@@ -2408,9 +2579,11 @@ footer .copyright h6 {
     bottom: -40px;
     left: calc(50% - 60px);
 }
+
 .warranty .store-list .store-detail {
     padding: 15px;
 }
+
 .warranty .store-list .store-detail img {
     background-color: #ccc;
     height: 250px;
@@ -2419,6 +2592,7 @@ footer .copyright h6 {
     object-fit: cover;
     position: relative;
 }
+
 .warranty .store-detail .store-content {
     padding: 20px;
     width: 80%;
@@ -2440,6 +2614,7 @@ footer .copyright h6 {
     margin: 0;
     color: rgb(131, 131, 131);
 }
+
 .warranty .store-detail .store-content a {
     font-size: 16px;
     float: right;
@@ -2447,6 +2622,7 @@ footer .copyright h6 {
     text-transform: uppercase;
     color: #e22658;
 }
+
 /*them*/
 
 
@@ -2596,7 +2772,8 @@ footer .copyright h6 {
     .product-recent .owl-stage {
         width: inherit !important;
     }
-    .header .breadcrumb-s .breadcrumb-s-content .breadcrumb-path ul li a{
+
+    .header .breadcrumb-s .breadcrumb-s-content .breadcrumb-path ul li a {
         font-size: 14px !important;
     }
 
@@ -2995,6 +3172,10 @@ footer .copyright h6 {
     padding-bottom: 20px;
 }
 
+#content-sl-main {
+    width: 100%;
+}
+
 /* ============ desktop view .end// ============ */
 
 /* ============ small devices ============ */
@@ -3184,18 +3365,86 @@ footer .copyright h6 {
         object-fit: contain;
         height: 250px;
     }
+
+    .intro {
+        padding: 50px 0;
+    }
+
+    .intro .intro-content .intro-content__content .intro-content__left .intro-title {
+        text-align: center;
+        font-size: 30px;
+    }
+
+    .intro .intro-content .intro-content__content .intro-content__left .intro-post {
+        text-align: center;
+        padding-bottom: 10px;
+    }
+
+    .intro .intro-content .intro-content__content .intro-content__right .content {
+        margin-bottom: 0;
+    }
+
+    .intro .intro-content .intro-content__content .intro-content__right .number-running .number-running__content .item .number {
+        font-size: 65px;
+        font-weight: 500;
+    }
+    .different .different-content .content .item {
+        padding: 30px 30px;
+    }
+    .intro .intro-content .intro-content__content .intro-content__right .number-running .number-running__content{
+        margin-top: 20px;
+    }
+    .different .different-content .content .item .item-content{
+        display: flex;
+    }
+    .different .different-content .content .item .item-content .image img{
+        width: 60px;
+        height: 60px;
+        object-fit: contain;
+        margin-bottom: 20px
+    }
+    .different .different-content .content .item .item-content .image{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .different .different-content .content .item .item-content .sub-content{
+        text-align: center;
+        padding-left: 40px;
+    }
+    .different .different-content .content .item .item-content .sub-content .content {
+        font-weight: 400;
+        font-size: 12px;
+        color: #FFFFFF;
+    }
+    .different .different-content .title {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .different{
+        padding: 40px 0;
+    }
+    .intro .intro-content .intro-content__content .intro-content__right .number-running .number-running__content .item .title-number h6 {
+        font-size: 14px;
+    }
+    .different .different-content .content .item .item-content .sub-content .title-sub h5 {
+        font-size: 15px;
+    }
 }
+
 @media (max-width: 600px) {
-    .form-store> form div:nth-child(1),
-    .form-store> form div:nth-child(2){
+    .form-store > form div:nth-child(1),
+    .form-store > form div:nth-child(2) {
         width: 100% !important;
         display: block;
         margin: 10px 0;
     }
-    .form-store> form div {
+
+    .form-store > form div {
         display: block !important;
         text-align: center;
     }
+
     .warranty .banner {
         background-size: auto calc(100%);
     }
@@ -3476,6 +3725,7 @@ footer .copyright h6 {
         padding: 0px 4px;
     }
 
+
 }
 
 @media (min-width: 481px) {
@@ -3511,5 +3761,44 @@ footer .copyright h6 {
 
 @media (min-width: 1025px) {
     /* big landscape tablets, laptops, and desktops */
+    .intro .intro-content .intro-content__content .intro-content__left .intro-post {
+        text-align: initial;
+    }
+    .intro .intro-content .intro-content__content .intro-content__left .intro-title{
+        text-align: left;
+    }
+    .intro .intro-content .intro-content__content .intro-content__right .number-running .number-running__content{
+        margin-top: 0;
+    }
+    .different .different-content .content .item .item-content{
+        display: initial;
+    }
+    .different .different-content .content .item .item-content .sub-content{
+        text-align: center;
+    }
+    .different .different-content .content .item .item-content .image{
+
+    }
+    .different .different-content .content .item .item-content .image img{
+        width: 90px;
+        height: 90px;
+        object-fit: contain;f
+        margin-bottom: 20px
+    }
+    .different .different-content .content .item .item-content .sub-content .content {
+        font-weight: 400;
+        font-size: 16px;
+        color: #FFFFFF;
+    }
+    .different .different-content .title {
+        width: 100%;
+        margin-bottom: 50px;
+    }
+    .intro .intro-content .intro-content__content .intro-content__right .number-running .number-running__content .item .title-number h6 {
+        font-size: 16px;
+    }
+    .different .different-content .content .item .item-content .sub-content .title-sub h5 {
+        font-size: 18px;
+    }
 }
 

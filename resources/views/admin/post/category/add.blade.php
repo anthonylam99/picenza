@@ -23,12 +23,6 @@
                             <input type="text" name="name" class="form-control" id="productName"
                                    placeholder="Nhập tên chuyên mục...">
                         </div>
-                        <div class="form-group">
-                            <label for="seo-url" class="">Đường dẫn</label>
-                            <input type="text" name="seo_url" id="seo-url" class="form-control"
-                                   value=""
-                                   placeholder="Nhập đường dẫn..." required>
-                        </div>
                     </div>
                 </div>
                 <div class="col-12">

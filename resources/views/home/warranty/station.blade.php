@@ -53,7 +53,7 @@
                         </a>
                         <div class="store-content">
                             <div>
-                                <h3 class="entry-title">{{$warranty->name}}</h3>
+                                <h3 class="entry-title">{{json_decode($warranty->name)}}</h3>
                                 <p>SĐT: <strong>{{$warranty->phone}}</strong></p>
                                 <p>
                                     {{json_decode($warranty->address)}}

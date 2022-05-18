@@ -42,7 +42,7 @@ class WarrantyController extends Controller
             $address = json_encode($address);
 
             $add = Warranty::create([
-                'name' => $name,
+                'name' => json_encode($name),
                 'phone' => $phone,
                 'address' => $address,
                 'district' => $district,
@@ -77,7 +77,7 @@ class WarrantyController extends Controller
         $address = json_encode($address);
 
         $update = Warranty::where('id', $id)->update([
-            'name' => $name,
+            'name' => json_encode($name),
             'phone' => $phone,
             'address' => $address,
             'district' => $district,
