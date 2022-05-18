@@ -26,6 +26,9 @@ function getmenus() {
     ) {
       padre = textoexplotado[textoexplotado.length - 2];
     }
+
+
+
     arraydata.push({
       depth: dept,
       id: id[2],
@@ -115,7 +118,7 @@ function updateitem(id = 0) {
   }
   $.ajax({
     data: data,
-    url: updateitemr,
+    url: '/menu/updateitem',
     type: 'POST',
     beforeSend: function(xhr) {
       if (id) {
@@ -146,7 +149,6 @@ function actualizarmenu() {
       $('#spincustomu2').show();
     },
     success: function(response) {
-      console.log('aqu llega');
       $('#addCustomMenu').submit()
     },
     complete: function() {
@@ -247,7 +249,7 @@ function insertParam(key, value) {
   //this will reload the page, it's likely better to store this until finished
   document.location.search = kvp.join('&');
 }
-
-wpNavMenu.registerChange = function() {
-  getmenus();
-};
+//
+// wpNavMenu.registerChange = function() {
+//   getmenus();
+// };

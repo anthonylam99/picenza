@@ -31,7 +31,6 @@ class ProjectController extends Controller
     {
         $newPost = Project::orderBy('id', 'desc')->limit(5)->get();
 
-
         $posts = Project::all();
 
         $categoryData = [];

@@ -224,6 +224,7 @@ Route::group(['prefix' => 'quan-tri', 'middleware' => 'CheckAdmin'], function ()
 });
 Route::get('menu', [AdminController::class, 'menu'])->name('admin.menu.add')->middleware(['CheckAdmin', 'auth']);
 Route::post('menu', [AdminController::class, 'menu']);
+Route::post('/menu/updateitem', [AdminController::class, 'updateitem']);
 Route::get('danh-sach-menu', [AdminController::class, 'menuList'])->name('admin.menu.list');
 
 
@@ -232,8 +233,8 @@ Route::get('danh-sach-menu', [AdminController::class, 'menuList'])->name('admin.
 Route::get('/trang/{slug}', [PageController::class, 'showPage'])->name('page.show.custom');
 Route::get('/bai-viet/{slug}', [PostController::class, 'showPost'])->name('page.show.post');
 Route::get('/du-an/{slug}', [ProjectController::class, 'showPost'])->name('page.show.project');
-Route::get('danh-sach-du-an', [ProjectController::class, 'news'])->name('home.project.news');
-Route::get('danh-sach-du-an/{slug]', [ProjectController::class, 'news'])->name('home.project.news');
+Route::get('/danh-sach-du-an/{slug}', [ProjectController::class, 'news'])->name('home.project.news');
+Route::get('danh-sach-du-an', [ProjectController::class, 'news'])->name('home.project.news.no-slug');
 
 Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderController@requestAction')
     ->name('ckfinder_connector');

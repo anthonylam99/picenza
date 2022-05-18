@@ -51,7 +51,7 @@
                             <td>{{$value->tag}}</td>
                             <td>
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="status{{$value->id}}" {{ $value->status == 1 ? 'checked' : '' }} name="status" onclick="changeStatusPost({{$value->id}})">
+                                    <input type="checkbox" class="custom-control-input" id="status{{$value->id}}" {{ $value->status == 1 ? 'checked' : '' }} name="status" onclick="changeStatusProject({{$value->id}})">
                                     <label name="status{{$value->id}}" class="custom-control-label status{{$value->id}}" for="status{{$value->id}}">{{ $value->status ? 'Bật' : 'Tắt' }}</label>
                                 </div>
                             </td>

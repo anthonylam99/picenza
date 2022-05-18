@@ -44,7 +44,7 @@ class HomeController extends Controller
         $subSection = $subSection->toArray();
         $subPage = json_decode($subSection['sub_section'], true);
 
-        $project = Project::where('tagged', 1)->get();
+        $project = Project::where('tagged', 1)->where('status', 1)->get();
 
         return view('home.index', compact('category', 'arrPostPage', 'banner', 'brand', 'subPage', 'project'));
     }

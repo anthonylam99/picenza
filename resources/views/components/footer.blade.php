@@ -19,7 +19,12 @@
                                 @if($menu['child'])
                                     @foreach($menu['child'] as $child)
                                         <li>
-                                            <a href="{{$child['link']}}">{{$child['label']}}</a>
+                                            <a href="{{$child['link']}}">
+                                                @if($child['class'])
+                                                    <i style="padding-right: 5px;" class="{{$child['class']}}" aria-hidden="true"></i>
+                                                @endif
+                                                {{$child['label']}}
+                                            </a>
                                         </li>
                                     @endforeach
                                 @endif
@@ -41,8 +46,8 @@
 <script src="{{asset('js/toastr.min.js')}}"></script>
 <script src="{{asset('js/jquery.mocjax.js')}}"></script>
 <script src="{{asset('js/jquery-autocomplete.js')}}"></script>
-<script src="{{asset('js/main.js')}}"></script>
+
 @yield('scripts')
 @stack('scripts')
-
+<script src="{{asset('js/main.js')}}"></script>
 </html>

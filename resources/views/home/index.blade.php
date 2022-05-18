@@ -164,12 +164,12 @@
                 </div>
             </div>
         </div>
-        <div class="options-3 container">
+        <div class="options-3 container" style="padding: 30px 15px;">
             <div class="option-3-title">
                 <h4>DỰ ÁN TIÊU BIỂU</h4>
             </div>
             <div class="options-3-content">
-                <div class="owl-carousel options3 owl-theme">
+                <div class="owl-carousel options4 projects owl-theme">
                     @if(isset($project))
                         @foreach($project as $item)
                             <div class="options-3-item">
@@ -263,7 +263,7 @@
         <div class="section-5">
             <div class="section-5-content container">
                 <div class="title">
-                    <h5>CÁC THƯƠNG HIỆU</h5>
+                    <h5>ĐỐI TÁC TIN CẬY</h5>
                 </div>
                 <div class="content">
                     <div class="owl-carousel brands owl-theme">

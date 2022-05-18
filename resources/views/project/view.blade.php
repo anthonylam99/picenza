@@ -48,7 +48,7 @@
                                <div class="gd_news__item" style="float: none; border: 1px solid #cccccc; border-radius: 10px">
                                    <div class="gd_news__inner" style="float: none; padding: 10px">
                                        <figure class="gd_news__image" style="height: 188.92px; width: 100%; float: none">
-                                           <a href="{{config('app.url').'/bai-viet/'.$post->seo_url}}"
+                                           <a href="{{'/du-an/'.$post->seo_url}}"
                                               title="">
                                                <img
                                                    src="{{(!empty($post->avatar) ? $post->avatar : asset('/images/no-image.jpg'))}}"

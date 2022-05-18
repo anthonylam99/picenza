@@ -40,7 +40,7 @@
                                             <h5 class="text-uppercase">{{$item->name}}</h5>
                                         </div>
                                         <div class="sub-title">
-                                            <p>{{$item->short_desc}}</p>
+                                            <p>{{$item->description}}</p>
                                         </div>
                                     </a>
                                 </div>
@@ -168,7 +168,7 @@
                                         <h5 class="text-uppercase">{{ $sub->name }}</h5>
                                     </div>
                                     <div class="sub-title">
-                                        <p>{{ $sub->short_desc }}</p>
+                                        <p>{{ $sub->description }}</p>
                                     </div>
                                 </div>
                             @endforeach

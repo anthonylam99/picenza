@@ -9,7 +9,7 @@
     <title>@yield('title')</title>
     <link href="{{ asset('css/boostrap.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="@yield('font-awsomes')">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/toastr.min.css')}}">
@@ -157,7 +157,7 @@
                 }
 
             ?>
-            <div class="">
+            <div class="" style="height: 100%; width: 100%">
                 <nav class="navbar navbar-expand-lg ">
                     <div class="container-fluid">
                         <a class="navbar-brand" href="/">
@@ -176,7 +176,7 @@
                                             <li class="nav-item dropdown">
                                                 <a class="nav-link dropdown-toggle" href="{{$menu['link']}}"
                                                    data-bs-toggle="dropdown"
-                                                   aria-expanded="true">
+                                                   aria-expanded="true" role="button">
                                                     {{$menu['label']}}
                                                 </a>
                                                 @if( $menu['child'] )
@@ -205,56 +205,22 @@
                                                                                                                    href="{{$child3['link']}}">{{$child3['label']}}</a>
                                                                                                                 @if($child3['child'])
                                                                                                                     <ul class="submenu dropdown-menu">
-                                                                                                                        @foreach($child3['child'] as $child4)
-                                                                                                                            <li>
-                                                                                                                                <a class="dropdown-item"
-                                                                                                                                   href="{{$child4['link']}}">{{$child4['label']}}</a>
-                                                                                                                                @if($child4['child'])
-                                                                                                                                    <ul class="submenu dropdown-menu">
-                                                                                                                                        @foreach($child4['child'] as $child5)
-                                                                                                                                            <li>
-                                                                                                                                                <a class="dropdown-item"
-                                                                                                                                                   href="{{$child5['link']}}">{{$child5['label']}}</a>
-                                                                                                                                                @if($child5['child'])
-                                                                                                                                                    <ul class="submenu dropdown-menu">
-                                                                                                                                                        @foreach($child5['child'] as $child6)
-                                                                                                                                                            <li>
-                                                                                                                                                                <a class="dropdown-item"
-                                                                                                                                                                   href="{{$child6['link']}}">{{$child6['label']}}</a>
-                                                                                                                                                                @if($child6['child'])
-                                                                                                                                                                    <ul class="submenu dropdown-menu">
-                                                                                                                                                                        @foreach($child6['child'] as $child7)
-                                                                                                                                                                            <li>
-                                                                                                                                                                                <a class="dropdown-item"
-                                                                                                                                                                                   href="{{$child['link']}}">{{$child7['label']}}</a>
-                                                                                                                                                                                @if($child7['child'])
-                                                                                                                                                                                    <ul class="submenu dropdown-menu">
 
-                                                                                                                                                                                    </ul>
-                                                                                                                                                                                @endif
-                                                                                                                                                                            </li>
-                                                                                                                                                                        @endforeach
-                                                                                                                                                                    </ul>
-                                                                                                                                                                @endif
-                                                                                                                                                            </li>
-                                                                                                                                                        @endforeach
-                                                                                                                                                    </ul>
-                                                                                                                                                @endif
-                                                                                                                                            </li>
-                                                                                                                                        @endforeach
-                                                                                                                                    </ul>
-                                                                                                                                @endif
-                                                                                                                            </li>
-                                                                                                                        @endforeach
                                                                                                                     </ul>
                                                                                                                 @endif
                                                                                                             </li>
                                                                                                         @endforeach
                                                                                                     </ul>
+                                                                                                @else
+                                                                                                    <li><a class="custom-nav"
+                                                                                                           href="{{$child2['link']}}"> {{$child2['label']}} </a></li>
                                                                                                 @endif
                                                                                             </li>
                                                                                         @endforeach
                                                                                     </ul>
+                                                                                @else
+                                                                                    <li><a class="custom-nav"
+                                                                                           href="{{$child1['link']}}"> {{$child1['label']}} </a></li>
                                                                                 @endif
                                                                             </li>
                                                                         @endforeach
@@ -299,6 +265,57 @@
 
                     </div>
                 </nav>
+                <div class="menu-display">
+                    <ul id="nav">
+                        <li class="banner">
+                            <a class="navbar-brand" href="/">
+                                <img src="{{asset('/images/logo.png')}}" alt="">
+                            </a>
+                        </li>
+                        @if(!empty($headerMenu) && isset($headerMenu))
+                            @foreach($headerMenu as $menu)
+                                <li>
+                                    <a href="{{$menu['link']}}">{{$menu['label']}}</a>
+                                    @if( $menu['child'] )
+                                        <ul>
+                                            @foreach($menu['child'] as $child1)
+                                                <li>
+                                                    <a href="{{$child1['link']}}">{{$child1['label']}}</a>
+                                                    @if( $child1['child'] )
+                                                        <ul>
+                                                            @foreach( $child1['child'] as $child2)
+                                                                <li>
+                                                                    <a href="{{$child2['link']}}">{{$child2['label']}}</a>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    @endif
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
+                                </li>
+                            @endforeach
+                        @endif
+                    </ul>
+                    <div class="header-3  menu-web " style="margin-right: 0px auto;">
+                        <div class="search">
+                            <form action="{{ route('action-search') }}" method="GET">
+                                <div class="form-search">
+                                    <input type="text" placeholder="Tìm kiếm" name="search">
+                                    <button type="submit">
+                                        <img src="{{ asset('images/search-icon.svg') }}" alt="tag">
+                                    </button>
+                                </div>
+                            </form>
+                            <button class="cart">
+                                <a href="{{ route('product.cart') }}" class="text-center">
+                                    <img src="{{ asset('images/cart.png') }}" alt="tag">
+                                </a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>

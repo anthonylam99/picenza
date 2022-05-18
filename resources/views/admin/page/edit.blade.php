@@ -205,7 +205,7 @@
                                                         <input style="display: none"
                                                                onclick="selectImageDiff({{$desIds}},  'diff' )"
                                                                id="image-diff{{$desIds}}" type="text"
-                                                               value=""
+                                                               value="{{asset($des['image'])}}"
                                                                name="imagediff{{$desIds}}" data-photo="{{$desIds}}">
                                                     </div>
                                                 </div>

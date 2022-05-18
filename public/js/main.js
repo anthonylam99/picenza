@@ -169,6 +169,29 @@ $(document).ready(function () {
             }
         }
     })
+    $('.owl-carousel.options4.projects').owlCarousel({
+        loop: true,
+        margin: 10,
+        responsiveClass: true,
+        responsive: {
+            0: {
+                items: 1,
+                nav: false,
+                dots: true
+            },
+            600: {
+                items: 2,
+                nav: false,
+                dots: true
+            },
+            1000: {
+                items: 4,
+                nav: false,
+                loop: false,
+                dots: true
+            }
+        }
+    })
 
     $('.owl-carousel.category').owlCarousel({
         loop: true,
@@ -209,7 +232,7 @@ $(document).ready(function () {
                 dots: true
             },
             1000: {
-                items: 6,
+                items: 4,
                 nav: false,
                 loop: false,
                 dots: true
@@ -232,7 +255,7 @@ $(document).ready(function () {
                 dots: true
             },
             1000: {
-                items: 6,
+                items: 4,
                 nav: false,
                 loop: false,
                 dots: true

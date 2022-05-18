@@ -5,8 +5,7 @@
         </div>
     </div>
     <div class="content w-100 pb-2">
-        <div class="owl-carousel product-relate owl-theme">
-
+        <div class="owl-carousel product-relate owl-theme row">
             @foreach ($aryRelatedProd as $relatedProd)
             <div class="product-relate-item-main">
                 <div class="product-relate-item">
