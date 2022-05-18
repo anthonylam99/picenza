@@ -115,15 +115,15 @@
                     <input type="hidden" value="1" name="sl">
                     <div class="clearfix box-form col-6-cus">
 
-                        <input type="text" placeholder="Họ và tên" class="required" name="user_name">
+                        <input type="text" placeholder="Họ và tên" class="required" name="user_name" required>
                     </div>
                     <div class="clearfix box-form col-6-cus">
 
-                        <input type="text" class="required"  placeholder="Số điện thoại" name="phone">
+                        <input type="text" class="required"  placeholder="Số điện thoại" name="phone" required>
                     </div>
                     <div class="clearfix box-form" style="margin-top: 10px">
 
-                        <input type="email" placeholder="Email" class="required" name="email" value="">
+                        <input type="email" placeholder="Email" class="required" name="email" value="" required>
                     </div>
                     <div class="clearfix box-form" style="margin-top: 10px">
 
@@ -147,20 +147,20 @@
                             <div class="firstaddress ">
                                 <div class="citydis">
                                     <div class="city">
-                                        <select id="province_id" name="address[province]" class="form-control">
+                                        <select id="province_id" name="address[province]" class="form-control" required>
                                             @include('partials.province',['provinceId'=>$provinceId])
 
                                         </select>
                                     </div>
                                     <div class="dist">
-                                        <select id="district_id" name="address[district]" class="form-control">
+                                        <select id="district_id" name="address[district]" class="form-control" required>
                                             @include('partials.district',['provinceId'=>$provinceId,'districtId'=>$districtId])
                                         </select>
                                     </div>
                                 </div>
                                 <div class="box-form" style="float: none"><input type="text"
                                         placeholder="Số nhà, tên đường, phường / xã" id="customerAddress"
-                                        name="address" class="homenumber" value=""></div>
+                                        name="address" class="homenumber" value="" required></div>
                             </div>
                         </div>
                         <div class="area_market bg_box_order">

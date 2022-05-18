@@ -56,7 +56,7 @@
                                     {{$value->name}}
                                 </a>
                             </td>
-                            <td>{{number_format($value->price)}}</td>
+                            <td>{{(!empty($value->price) ? number_format($value->price) : 'Liên hệ')}}</td>
                             <td>{{isset($value->productLine['name']) ? $value->productLine['name'] : ''}}</td>
                             <td>
                                 <div class="rating-star">

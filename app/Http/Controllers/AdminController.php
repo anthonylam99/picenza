@@ -133,12 +133,19 @@ class AdminController extends Controller
         $options = new Options;
 
         $price = str_replace(",", '', $request->get('price'));
+        $salePrice = str_replace(",", '', $request->get('sale_price'));
+        $salePercent = str_replace(",", '', $request->get('sale_percent'));
+
+        if($salePrice == 0 || $salePercent == 0){
+            $salePrice = $price;
+            $salePercent = 0;
+        }
 
         $priceData = ProductPrice::all();
         $priceType = [];
 
         foreach ($priceData as $value) {
-            if ($price >= $value['min_price'] && $price <= $value['max_price'] ) {
+            if ($salePrice >= $value['min_price'] && $salePrice <= $value['max_price'] ) {
                 array_push($priceType, $value['id']);
             }
         }
@@ -165,8 +172,8 @@ class AdminController extends Controller
             'name' => $request->get('product_name'),
 
             'price' => $price,
-            'sale_price' => str_replace(",", '', $request->get('sale_price')),
-            'sale_percent' => str_replace(",", '', $request->get('sale_percent')),
+            'sale_price' => $salePrice,
+            'sale_percent' => $salePercent,
             'company' => $request->get('company'),
             'product_type' => $request->get('product_type'),
             'product_line' => $request->get('product_line'),

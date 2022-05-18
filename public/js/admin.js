@@ -134,7 +134,12 @@ $('#productPrice').on('input', function () {
 
     $("#salePrice").val(0)
     $("#pricePercent").val(0)
-    $(this).val(format)
+    if(isNaN(format)){
+        $(this).val(0)
+    }else{
+        $(this).val(format)
+    }
+
 })
 $('#salePrice').on('input', function () {
     const price = $("#productPrice").val().replace(/[,]+/g, "")
@@ -151,6 +156,8 @@ $('#salePrice').on('input', function () {
         const pricePercent = 100 - Math.round(salePrice / price * 100)
         console.log(pricePercent)
         $("#pricePercent").val(pricePercent)
+    }else{
+        $(this).val(0)
     }
 })
 $('#pricePercent').on('input', function () {
