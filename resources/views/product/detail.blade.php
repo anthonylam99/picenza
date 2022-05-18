@@ -68,10 +68,10 @@
                     @foreach($detailProduct->productImage as $image)
                         <?php $i++; ?>
                         @if($i == 1)
-                            <img class="image-product" style="height: 350px !important; display: block"
+                            <img class="image-product" style="display: block"
                                  src="{{ asset($image->image_path) }}" alt="tag">
                         @else
-                            <img class="image-product" style="height: 350px !important; display: none"
+                            <img class="image-product" style="display: none"
                                  src="{{ asset($image->image_path) }}" alt="tag">
                         @endif
                     @endforeach
