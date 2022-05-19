@@ -310,7 +310,8 @@ class AdminController extends Controller
         $productLine = ProductLine::where('status', 1)->get();
         $productReliability = ProductReliability::all();
         $featureData = ProductLine::with(['feature', 'feature.sub'])->where('id', $product->product_line)->first();
-        $feature = $featureData->feature;
+
+        $feature = !empty($featureData->feature) ? $featureData->feature : '';
 
         $product = collect($product)->toArray();
 

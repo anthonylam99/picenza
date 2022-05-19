@@ -108,10 +108,12 @@
 
                                 <option value="">-- Vui lòng chọn --</option>
                                 @foreach($productLine as $value)
-                                    @if($product['product_line']['id'] === $value->id)
-                                        <option value="{{$value->id}}" selected>{{$value->name}}</option>
-                                    @else
-                                        <option value="{{$value->id}}">{{$value->name}}</option>
+                                    @if(isset($product['product_line']))
+                                        @if($product['product_line']['id'] === $value->id)
+                                            <option value="{{$value->id}}" selected>{{$value->name}}</option>
+                                        @else
+                                            <option value="{{$value->id}}">{{$value->name}}</option>
+                                        @endif
                                     @endif
 
                                 @endforeach
@@ -126,38 +128,40 @@
                             <label for="company">Tính năng</label>
                             <div class="form-group">
                                 <div class="accordion row" id="accordionExample">
-                                    @foreach($feature as $item)
-                                        <div class="col-4">
-                                            <div class="card">
-                                                <div class="card-header" id="headingOne{{$item->id}}">
-                                                    <h2 class="mb-0">
-                                                        <button type="button" class="btn btn-link"
-                                                                data-toggle="collapse"
-                                                                data-target="#collapseOne{{$item->id}}">
-                                                            <i class="fa fa-plus"></i>
-                                                            {{$item->name}}
-                                                        </button>
-                                                    </h2>
-                                                </div>
-                                                <div id="collapseOne{{$item->id}}" class="collapse"
-                                                     aria-labelledby="headingOne{{$item->id}}"
-                                                     data-parent="#accordionExample">
-                                                    <div class="card-body">
-                                                        @if(!empty($item['sub']))
+                                    @if(!empty($feature))
+                                        @foreach($feature as $item)
+                                            <div class="col-4">
+                                                <div class="card">
+                                                    <div class="card-header" id="headingOne{{$item->id}}">
+                                                        <h2 class="mb-0">
+                                                            <button type="button" class="btn btn-link"
+                                                                    data-toggle="collapse"
+                                                                    data-target="#collapseOne{{$item->id}}">
+                                                                <i class="fa fa-plus"></i>
+                                                                {{$item->name}}
+                                                            </button>
+                                                        </h2>
+                                                    </div>
+                                                    <div id="collapseOne{{$item->id}}" class="collapse"
+                                                         aria-labelledby="headingOne{{$item->id}}"
+                                                         data-parent="#accordionExample">
+                                                        <div class="card-body">
+                                                            @if(!empty($item['sub']))
 
-                                                            @foreach($item['sub'] as $sub)
-                                                                <div class="custom-control custom-checkbox">
-                                                                    <input name="feature[]" class="custom-control-input" type="checkbox"
-                                                                           id="customCheckbox{{$sub->id}}" value="{{$sub->id}}" {{in_array($sub->id, $featureList) ? 'checked' : '' }}>
-                                                                    <label for="customCheckbox{{$sub->id}}" class="custom-control-label">{{$sub->name}}</label>
-                                                                </div>
-                                                            @endforeach
-                                                        @endif
+                                                                @foreach($item['sub'] as $sub)
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input name="feature[]" class="custom-control-input" type="checkbox"
+                                                                               id="customCheckbox{{$sub->id}}" value="{{$sub->id}}" {{in_array($sub->id, $featureList) ? 'checked' : '' }}>
+                                                                        <label for="customCheckbox{{$sub->id}}" class="custom-control-label">{{$sub->name}}</label>
+                                                                    </div>
+                                                                @endforeach
+                                                            @endif
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    @endforeach
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
                         </div>

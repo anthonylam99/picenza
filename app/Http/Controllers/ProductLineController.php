@@ -26,7 +26,7 @@ class ProductLineController extends Controller
             $query = $request->get('s');
             $line = ProductLine::with(['company'])->where('name', 'like', '%' . $query . '%')->paginate(10);
         } else if (!empty($request->get('s')) || !$request->has('s')) {
-            $line = ProductLine::with(['company'])->paginate(10);
+            $line = ProductLine::with(['company'])->paginate(15);
         }
         return view('admin.line.list', compact('line'));
     }

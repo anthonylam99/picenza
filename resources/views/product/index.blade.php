@@ -149,33 +149,33 @@
                 </div>
             </div>
         </div>
-        <div class="main-product-content-show content-2">
-            <div class="content-1 container">
-                <div class="content-1-main">
-                    <div class="title">
-                        <h5>PHỤ KIỆN NHÀ VỆ SINH</h5>
-                    </div>
-                    <div class="feature">
-                        <div class="feature-item row owl-carousel subcate owl-theme">
-                            @foreach ($subNormalCate as $sub)
-                                <div class="feature-item-main">
-                                    <div class="image">
-                                        <img
-                                            src="{{ !empty($sub->avatar) ? $sub->avatar : asset('images/product/c.png') }}"
-                                            alt="">
-                                    </div>
-                                    <div class="title">
-                                        <h5 class="text-uppercase">{{ $sub->name }}</h5>
-                                    </div>
-                                    <div class="sub-title">
-                                        <p>{{ $sub->description }}</p>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+{{--        <div class="main-product-content-show content-2">--}}
+{{--            <div class="content-1 container">--}}
+{{--                <div class="content-1-main">--}}
+{{--                    <div class="title">--}}
+{{--                        <h5>PHỤ KIỆN NHÀ VỆ SINH</h5>--}}
+{{--                    </div>--}}
+{{--                    <div class="feature">--}}
+{{--                        <div class="feature-item row owl-carousel subcate owl-theme">--}}
+{{--                            @foreach ($subNormalCate as $sub)--}}
+{{--                                <div class="feature-item-main">--}}
+{{--                                    <div class="image">--}}
+{{--                                        <img--}}
+{{--                                            src="{{ !empty($sub->avatar) ? $sub->avatar : asset('images/product/c.png') }}"--}}
+{{--                                            alt="">--}}
+{{--                                    </div>--}}
+{{--                                    <div class="title">--}}
+{{--                                        <h5 class="text-uppercase">{{ $sub->name }}</h5>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="sub-title">--}}
+{{--                                        <p>{{ $sub->description }}</p>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            @endforeach--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
     </div>
 @endsection
