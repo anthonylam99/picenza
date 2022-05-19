@@ -11,7 +11,7 @@
                 <div class="product-relate-item">
                     <div class="image">
                         <a href="">
-                            <img src="{{ count($detailProduct->productImage) > 0 ? asset($detailProduct->productImage[0]->image_path) : 'images/product/product_demo_2.png' }}" alt="tag">
+                            <img src="{{ !empty($relatedProd->avatar_path) ? $relatedProd->avatar_path : 'images/product/product_demo_2.png' }}" alt="tag">
                         </a>
                     </div>
                     <div class="name">
@@ -21,8 +21,8 @@
                     </div>
                     <div class="price">
                         <div class="content-price">
-                            <h6 class="sale-price">@money($relatedProd->sale_price)</h6>
-                            <h6 class="unsale-price">@money($relatedProd->price)</h6>
+                            <h6 class="sale-price">{{(!empty($relatedProd->sale_price)) ? number_format($relatedProd->sale_price).'đ' : 'Liên hệ'}}</h6>
+                            <h6 class="unsale-price">{{(!empty($relatedProd->price)) ? number_format($relatedProd->price).'đ' : 'Liên hệ'}}</h6>
                         </div>
                     </div>
                 </div>

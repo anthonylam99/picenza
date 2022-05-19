@@ -50,7 +50,7 @@
                         <a href="/danh-muc/{{$category}}">Danh mục </a> /&nbsp;
                     </li>
                     <li>
-                        <a href="">Chậu rửa</a>
+                        <a href="">{{$category->name}}</a>
                     </li>
                 </ul>
             </div>
@@ -187,9 +187,11 @@
                             <input type="number" name="qty" value="1">
                         </div>
                         <div class="addcart col-9">
-                            <button type="submit" class="btn btn_add_cart btn-cart add_to_cart">
-                                THÊM VÀO GIỎ HÀNG
-                            </button>
+                            <a href="/lien-he" target="_blank">
+                                <button type="button" class="btn btn_add_cart btn-cart add_to_cart">
+                                    LIÊN HỆ
+                                </button>
+                            </a>
                         </div>
                     </div>
                     <div class="compare-product">

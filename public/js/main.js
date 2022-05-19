@@ -9,7 +9,11 @@ function changeColor(id, color_id, color, productId, pricent) {
     $('.color-options:nth-child(' + id + ')').addClass("active")
 
     var price = new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(pricent)
-    $('#bind-price').html(price);
+    if(isNaN(price) || price == 0){
+        $('#bind-price').html('Liên hệ');
+    }else{
+        $('#bind-price').html(price);
+    }
     $('#hidden-price').val(pricent);
 
     var list = $(".image-product").map(function () {

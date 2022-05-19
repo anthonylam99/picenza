@@ -21,8 +21,8 @@
                     </div>
                     <div class="price">
                         <div class="content-price">
-                            <h6 class="sale-price">@money($prod->sale_price)</h6>
-                            <h6 class="unsale-price">@money($prod->price)</h6>
+                            <h6 class="sale-price">{{(!empty($prod->sale_price)) ? number_format($prod->sale_price).'đ' : 'Liên hệ'}}</h6>
+                            <h6 class="unsale-price">{{(!empty($prod->price)) ? number_format($prod->price).'đ' : 'Liên hệ'}}</h6>
                         </div>
                     </div>
                 </div>
