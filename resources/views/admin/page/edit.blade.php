@@ -42,9 +42,57 @@
                                 if(!empty($pageContent)){
                                     $intro = $pageContent['intro'];
                                     $diff = $pageContent['diff'];
+                                    $header = $pageContent['header'];
+                                    $footer = $pageContent['footer'];
                                 }
                             }
                         ?>
+                        <div class="card card-info collapse-card">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    Nội dung đầu trang
+                                </h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"
+                                            title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <input class="form-control" type="text" name="header_content"
+                                               placeholder="Nhập nội dung.." value="{{$header['content']}}">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" type="text" name="header_content_link"
+                                               placeholder="Đường dẫn.." value="{{$header['url']}}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="card card-info collapse-card">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        Nội dung cuối trang
+                                    </h3>
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"
+                                                title="Collapse">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group row">
+                                        <div class="col-sm-6">
+                                            <input class="form-control" type="text" name="footer_content"
+                                                   placeholder="Nhập nội dung.." value="{{$footer['content']}}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         <div class="card card-info collapsed-card">
                             <div class="card-header">
                                 <h3 class="card-title">

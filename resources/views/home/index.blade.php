@@ -39,7 +39,7 @@
                         <div class="intro-content__right col-xs-9 col-lg-9 col-sm-9 col-12">
                             <div class="content">
                                 <p>
-                                    {{$intro['content']}}
+                                    <?php echo nl2br($intro['content']); ?>
                                 </p>
                             </div>
                             <div class="number-running text-center">

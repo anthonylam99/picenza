@@ -146,7 +146,12 @@
     </div>
     <div class="header-2">
         <div class="header-2__content w-100">
-            <h6 class="text-center">Free Shipping on Parcel Orders $49+ <a href="">Chi tiết</a></h6>
+            <?php
+                $page = \App\Models\Page::where('slug', 'trang-chu')->first();
+                $header = json_decode($page->sub_section, true);
+                $header = $header['header'];
+            ?>
+            <h6 class="text-center">{{$header['content']}} <a href="{{$header['url']}}">Chi tiết</a></h6>
         </div>
         <div class="bd-example container">
             <?php
@@ -254,11 +259,11 @@
                                         </button>
                                     </div>
                                 </form>
-                                <button class="cart">
-                                    <a href="{{ route('product.cart') }}" class="text-center">
-                                        <img src="{{ asset('images/cart.png') }}" alt="tag">
-                                    </a>
-                                </button>
+{{--                                <button class="cart">--}}
+{{--                                    <a href="{{ route('product.cart') }}" class="text-center">--}}
+{{--                                        <img src="{{ asset('images/cart.png') }}" alt="tag">--}}
+{{--                                    </a>--}}
+{{--                                </button>--}}
                                 </div>
                             </div>
                         </div>
@@ -308,11 +313,11 @@
                                     </button>
                                 </div>
                             </form>
-                            <button class="cart">
-                                <a href="{{ route('product.cart') }}" class="text-center">
-                                    <img src="{{ asset('images/cart.png') }}" alt="tag">
-                                </a>
-                            </button>
+{{--                            <button class="cart">--}}
+{{--                                <a href="{{ route('product.cart') }}" class="text-center">--}}
+{{--                                    <img src="{{ asset('images/cart.png') }}" alt="tag">--}}
+{{--                                </a>--}}
+{{--                            </button>--}}
                         </div>
                     </div>
                 </div>

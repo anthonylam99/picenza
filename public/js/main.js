@@ -209,7 +209,7 @@ $(document).ready(function () {
                 dots: true
             },
             1000: {
-                items: 6,
+                items: 4,
                 nav: false,
                 loop: false,
                 dots: true

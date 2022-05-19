@@ -105,7 +105,7 @@ img {
 
 #nav li a {
     display: block;
-    padding: 7px;
+    padding: 7px 12px;
     text-decoration: none;
     width: auto;
     /* this is the width of the menu items */
@@ -113,12 +113,13 @@ img {
     /* this is the hieght of the menu items */
     color: #000000;
 
-    font-weight: 700;
     font-size: 15px;
     line-height: 22px;
     color: #232323;
     text-transform: uppercase;
     text-decoration: unset !important;
+    font-family: "GoogleSans-Medium";
+    font-weight: 500;
     /* list item font color */
 }
 
@@ -160,7 +161,7 @@ img {
 #nav ul {
     position: absolute;
     padding: 0;
-    left: 0;
+    left: 10px;
     display: none;
     /* hides sublists */
     z-index: 9999;
@@ -2115,7 +2116,8 @@ main {
 }
 
 .main-product-show .main-product-content-show {
-    padding: 70px 0 30px 0;
+    padding: 60px 0 40px 0;
+    background: #EFEFEF;
 }
 
 .main-product-show > div:nth-child(5) {
@@ -2163,8 +2165,7 @@ main {
     line-height: 24px;
     text-align: left;
     color: #333;
-    font-family: "GoogleSans-Medium";
-    font-weight: 500;
+    font-family: "GoogleSans-Bold";
 }
 
 .main-product-show .main-product-content-show .content-1 .content-1-main .feature .feature-item .feature-item-main .sub-title p {
@@ -2242,6 +2243,7 @@ main {
     color: #FFFFFF;
     font-weight: 500;
     font-size: 16px;
+    font-family: "GoogleSans-Medium";
     line-height: 32px;
 }
 
@@ -3056,7 +3058,7 @@ footer .copyright h6 {
     }
 
     .options-3-item {
-        padding: 0 0px;
+        padding: 0 15px;
     }
 
     .header .breadcrumb-s .breadcrumb-s-content .breadcrumb-path ul li a {
@@ -3221,7 +3223,7 @@ footer .copyright h6 {
     background-size: cover;
     height: 14px;
     width: 16px;
-    top: 14px;
+    top: 14px !important;
     right: 5px;
     position: absolute;
 }
@@ -3234,12 +3236,14 @@ footer .copyright h6 {
 
 .main-product-show .slider-box .slider-box-main .caption-container .content-sl .content-sl-main .title h5:after {
     content: "";
-    background: url(img/Line11.png) no-repeat;
     background-size: cover;
     height: 2px;
     width: 32px;
     bottom: -18px;
-    right: 111px;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    background: #DDDDDD;
     position: absolute;
 }
 
@@ -3258,7 +3262,7 @@ footer .copyright h6 {
 }
 
 .main-content-product.container > div.content-1.row > div.product-image.col-12.col-md-7 .image img {
-    height: unset !important;
+    height: auto !important;
 }
 
 .accordion-body {
@@ -4035,7 +4039,7 @@ footer .copyright h6 {
         font-weight: 500;
     }
     .different .different-content .content .item .item-content .sub-content .title-sub h5 {
-        font-size: 18px;
+        font-size: 17px;
         font-weight: 500;
         font-family: "GoogleSans-Medium";
     }

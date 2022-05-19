@@ -61,6 +61,13 @@ class PageController extends Controller
             $arr['url'] = $url . '/trang/' . $slug;
 
             $sub_section = [
+                'header' => [
+                    'content' => $request->get('header_content', ''),
+                    'url' => $request->get('header_content_link', ''),
+                ],
+                'footer' => [
+                    'content' => $request->get('footer_content', '')
+                ],
                 'intro' => [
                     'title' => $request->get('title-intro', ''),
                     'post' => $request->get('post-intro', 0),
@@ -101,6 +108,7 @@ class PageController extends Controller
                     ]
                 ]
             ];
+
             $arr['sub_section'] = json_encode($sub_section);
 
             $res = Page::where('id', $request->get('page_id'))->update($arr);

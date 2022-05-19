@@ -63,13 +63,13 @@
                                 </a>
                             </p>
                             <div class="image">
-                                <a href="/chi-tiet-san-pham/{{$item->id}}">
+                                <a href="/chi-tiet-san-pham/{{$item->slug}}">
                                     <img style="width: 100% !important; height: 350px"
                                          src="{{(!empty($item->avatar_path) ? $item->avatar_path : asset('images/no-image.jpg'))}}">
                                 </a>
                             </div>
                             <h3 style="height: 43.2px;">
-                                <a href="/chi-tiet-san-pham/{{$item->id}}">
+                                <a href="/chi-tiet-san-pham/{{$item->slug}}">
                                     {{$item->name}}
                                 </a>
                             </h3>

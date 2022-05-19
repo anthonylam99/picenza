@@ -36,7 +36,12 @@
         </div>
     </div>
     <div class="copyright text-center">
-        <h6 style="margin: 0; color: #999999; ">© 2022 Công ty Pacenza</h6>
+        <?php
+        $page = \App\Models\Page::where('slug', 'trang-chu')->first();
+        $footer = json_decode($page->sub_section, true);
+        $footer = $footer['footer'];
+        ?>
+        <h6 style="margin: 0; color: #999999; ">{{$footer['content']}}</h6>
     </div>
 </footer>
 
