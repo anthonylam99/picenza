@@ -17,7 +17,7 @@ $(function () {
             "<label for='color-choose" + i + "'>Màu sắc:</label>" +
             "                        <input onchange='setColor(" + i + ")' type='color' id='color-picker" + i + "'>" +
             "                        <input type='hidden' id='color-choose" + i + "' name='hex" + i + "' value='#000000'>" +
-            "<input class='form-control' type='text' name='price" + i + "' value='' placeholder='Nhập giá cả....' required/>" +
+            "<input class='form-control' type='text' name='price" + i + "' value='0' placeholder='Nhập giá cả....' required/>" +
             "<input class='form-control' type='text' name='color" + i + "' value='' placeholder='Nhập tên màu....' required/>" +
             "<label for='image-input" + i + "' class='image-upload'>" +
             "<i class='fas fa-upload'></i>Chọn ảnh" +
@@ -476,10 +476,28 @@ function changeStatus(id) {
             status: status
         },
         success: function (res) {
-            console.log(res)
         },
         error: function (err) {
-            console.log(err)
+        }
+    })
+}
+
+function showHomeLine(id){
+    var status = $('#show-home' + id).is(':checked')
+    status = status ? 1 : 0
+    var statusText = status ? 'Bật' : 'Tắt'
+    $('.show-home' + id).html(statusText)
+    console.log(status)
+    $.ajax({
+        type: 'GET',
+        url: '/quan-tri/dong-san-pham/show-home',
+        data: {
+            id: id,
+            show_home: status
+        },
+        success: function (res) {
+        },
+        error: function (err) {
         }
     })
 }
@@ -497,10 +515,8 @@ function changeShowHome(id) {
             show_home: status
         },
         success: function (res) {
-            console.log(res)
         },
         error: function (err) {
-            console.log(err)
         }
     })
 }
@@ -518,10 +534,8 @@ function changeStatusTag(id) {
             status: status
         },
         success: function (res) {
-            console.log(res)
         },
         error: function (err) {
-            console.log(err)
         }
     })
 }
@@ -539,10 +553,8 @@ function changeStatusProjectTag(id) {
             status: status
         },
         success: function (res) {
-            console.log(res)
         },
         error: function (err) {
-            console.log(err)
         }
     })
 }

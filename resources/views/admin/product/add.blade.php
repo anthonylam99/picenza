@@ -27,17 +27,17 @@
                         <div class="form-group">
                             <label for="productPrice">Giá</label>
                             <input type="text" name="price" class="form-control" id="productPrice"
-                                   placeholder="Nhập giá sản phẩm...." required>
+                                   placeholder="Nhập giá sản phẩm...." value="0" required>
                         </div>
                         <div class="form-group">
                             <label for="salePrice">Giá giảm giá</label>
                             <input type="text" name="sale_price" class="form-control" id="salePrice"
-                                   placeholder="Nhập giá giảm giá....">
+                                   placeholder="Nhập giá giảm giá...." value="0" >
                         </div>
                         <div class="form-group">
                             <label for="pricePercent">Giảm giá (%)</label>
                             <input type="number" max="100" min="0" name="sale_percent" class="form-control"
-                                   id="pricePercent" placeholder="Nhập phần trăm giảm giá....">
+                                   id="pricePercent" placeholder="Nhập phần trăm giảm giá...." value="0" >
                         </div>
 
                     </div>

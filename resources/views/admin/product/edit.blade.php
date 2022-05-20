@@ -114,6 +114,8 @@
                                         @else
                                             <option value="{{$value->id}}">{{$value->name}}</option>
                                         @endif
+                                    @else
+                                        <option value="{{$value->id}}">{{$value->name}}</option>
                                     @endif
 
                                 @endforeach

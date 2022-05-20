@@ -22,7 +22,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
 
-        $category = ProductLine::where('status', 1)->get();
+        $category = ProductLine::where('status', 1)->where('show_home', 1)->get();
         $postTag = PostTag::whereNotNull('posts')->get();
         $arrPostPage = [];
         $aryPostId = [];

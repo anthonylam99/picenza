@@ -45,6 +45,7 @@
                         <th>ID</th>
                         <th>Danh mục sản phẩm</th>
                         <th>Trạng thái</th>
+                        <th>Hiển thị trang chủ</th>
                         <th>Thông tin</th>
                         <th class="text-center">Xem</th>
                         <th class="text-center">Sửa</th>
@@ -60,6 +61,12 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input" id="status{{$value->id}}" {{ $value->status == 1 ? 'checked' : '' }} name="status" onclick="changeStatus({{$value->id}})">
                                         <label name="status{{$value->id}}" class="custom-control-label status{{$value->id}}" for="status{{$value->id}}">{{ $value->status ? 'Bật' : 'Tắt' }}</label>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="show-home{{$value->id}}" {{ $value->show_home == 1 ? 'checked' : '' }} name="show-home" onclick="showHomeLine({{$value->id}})">
+                                        <label name="show-home{{$value->id}}" class="custom-control-label status{{$value->id}}" for="show-home{{$value->id}}">{{ $value->show_home ? 'Bật' : 'Tắt' }}</label>
                                     </div>
                                 </th>
                                 <td>
