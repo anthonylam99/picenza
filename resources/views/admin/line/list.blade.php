@@ -75,10 +75,17 @@
                                 </td>
                                 <td class="text-center">
                                     <button class="btn btn-info ">
-                                        <a target="_blank" style="color: #FFFFFF" href="{{'/san-pham/'.$value->seo_url }}">
-                                            <i class="far fa-eye"></i>
+                                        @if(empty($value->parent))
+                                            <a target="_blank" style="color: #FFFFFF" href="{{'/san-pham/'.$value->seo_url }}">
+                                                <i class="far fa-eye"></i>
 
-                                        </a>
+                                            </a>
+                                        @else
+                                            <a target="_blank" style="color: #FFFFFF" href="{{'/danh-muc/'.$value->seo_url }}">
+                                                <i class="far fa-eye"></i>
+
+                                            </a>
+                                        @endif
                                     </button>
                                 </td>
                                 <td class="text-center">

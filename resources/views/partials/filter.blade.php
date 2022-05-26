@@ -12,13 +12,15 @@
             <div id="price" class="accordion-collapse collapse"
                  aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
-                    @foreach($productPrice as $value)
-                        <input id="price{{$value->id}}" type="checkbox" name="price[]"
-                               value="{{$value->id}}"
-                               onChange="this.form.submit()" {{ is_array(request()->input('price')) && in_array($value->id, request()->input('price')) ? 'checked' : ''}}>
-                        <label for="price{{$value->id}}">
-                            {{$value->name}}&nbsp;</label><br>
-                    @endforeach
+                    @if(!empty($productPrice))
+                        @foreach($productPrice as $value)
+                            <input id="price{{$value->id}}" type="checkbox" name="price[]"
+                                   value="{{$value->id}}"
+                                   onChange="this.form.submit()" {{ is_array(request()->input('price')) && in_array($value->id, request()->input('price')) ? 'checked' : ''}}>
+                            <label style="cursor: pointer" for="price{{$value->id}}">
+                                {{$value->name}}&nbsp;</label><br>
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </div>
@@ -33,13 +35,38 @@
             <div id="company" class="accordion-collapse collapse"
                  aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
-                    @foreach($company as $value)
-                        <input id="company{{$value->id}}" type="checkbox" name="company[]"
-                               value="{{$value->id}}"
-                               onChange="this.form.submit()" {{ is_array(request()->input('company')) && in_array($value->id, request()->input('company')) ? 'checked' : ''}}>
-                        <label for="company{{$value->id}}">
-                            {{$value->name}}&nbsp;</label><br>
-                    @endforeach
+                    @if(!empty($company))
+                        @foreach($company as $value)
+                            <input id="company{{$value->id}}" type="checkbox" name="company[]"
+                                   value="{{$value->id}}"
+                                   onChange="this.form.submit()" {{ is_array(request()->input('company')) && in_array($value->id, request()->input('company')) ? 'checked' : ''}}>
+                            <label style="cursor: pointer" for="company{{$value->id}}">
+                                {{$value->name}}&nbsp;</label><br>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#color"
+                        aria-expanded="false" aria-controls="color">
+                    MÀU SẮC
+                </button>
+            </h2>
+            <div id="color" class="accordion-collapse collapse"
+                 aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                    @if(!empty($color))
+                        @foreach($color as $key => $value)
+                            <input id="color{{$key}}" type="checkbox" name="color[]"
+                                   value="{{$key}}"
+                                   onChange="this.form.submit()" {{ is_array(request()->input('color')) && in_array($key, request()->input('color')) ? 'checked' : ''}}>
+                            <label style="cursor: pointer" for="color{{$key}}">
+                                {{$value}}&nbsp;</label><br>
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </div>
@@ -50,7 +77,9 @@
                             data-bs-toggle="collapse"
                             data-bs-target="#customFeature{{$featureItem->id}}"
                             aria-expanded="false"
-                            aria-controls="customFeature{{$featureItem->id}}">
+                            aria-controls="customFeature{{$featureItem->id}}"
+                            style="text-transform: uppercase"
+                    >
                         {{$featureItem->name}}
                     </button>
                 </h2>
@@ -63,7 +92,7 @@
                             <input id="feature{{$value->id}}" type="checkbox"
                                    name="feature[]" value="{{$value->id}}"
                                    onChange="this.form.submit()" {{ is_array(request()->input('feature')) && in_array($value->id, request()->input('feature')) ? 'checked' : ''}}>
-                            <label for="feature{{$value->id}}">
+                            <label style="cursor: pointer" for="feature{{$value->id}}">
                                 {{$value->name}}&nbsp;</label><br>
                         @endforeach
                     </div>

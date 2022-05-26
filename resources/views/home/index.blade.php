@@ -131,7 +131,7 @@
                         @foreach($category as $value)
                             <div class="product-category-item text-center">
                                 <div class="div-center">
-                                    <a href="/san-pham/{{$value->seo_url}}">
+                                    <a href="{{$value->url}}">
                                         <div class="product-category-item-content">
                                             <img src="{{$value->avatar}}" alt="">
                                         </div>

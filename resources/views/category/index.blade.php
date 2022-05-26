@@ -105,8 +105,10 @@
                                                         <h5>{{ $value->name }}</h5>
                                                     </div>
                                                     <div class="price">
-                                                        <div class="sale">{{ number_format($value->sale_price) }}đ</div>
-                                                        <div class="unsale">{{number_format($value->price)}}đ</div>
+                                                        <div class="sale">{{ (!empty($value->sale_price)) ? number_format($value->sale_price).'đ' : 'Liên hệ' }}</div>
+                                                        @if(!empty($value->sale_price))
+                                                            <div class="unsale">{{ (!empty($value->price)) ? number_format($value->price).'đ' : 'Liên hệ'}}</div>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </a>

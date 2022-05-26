@@ -53,14 +53,15 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="company">Danh mục</label>
-                            <select name="product_line" id="productLineList" class="form-control" required>
-
-                                <option value="">-- Vui lòng chọn --</option>
-                                @foreach($productLine as $value)
-                                    <option value="{{$value->id}}">{{$value->name}}</option>
-                                @endforeach
+                        <div class="form-group select2-purple">
+                            <label for="title" class="">Danh mục</label>
+                            <select name="product_line[]" class="select2 form-control" multiple="multiple"
+                                    required>
+                                @if(!empty($productLine))
+                                    @foreach($productLine as $value)
+                                        <option value="{{$value->id}}">{{$value->name}}</option>
+                                    @endforeach
+                                @endif
                             </select>
                         </div>
                         <div class="form-group">

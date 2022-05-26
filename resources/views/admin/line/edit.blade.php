@@ -20,6 +20,16 @@
                 <div class="col-12">
                     <div class="card-body">
                         <div class="form-group row">
+                            <label  class="col-md-2 col-sm-2 col-xs-12" for="company">Danh mục cha</label>
+                            <select name="parent" id="parent" class="form-control col-sm-9">
+
+                                <option value="">-- Vui lòng chọn --</option>
+                                @foreach($productLine as $value)
+                                    <option value="{{$value->id}}" {{$line->parent == $value->id ? 'selected' : ''}}>{{$value->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group row">
                             <label for="lineName" class="col-md-2 col-sm-2 col-xs-12">Danh mục</label>
                             <input type="text" name="lineName" id="lineName" class="form-control col-sm-9"
                                    value="{{$line->name}}"

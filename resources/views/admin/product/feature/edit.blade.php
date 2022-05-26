@@ -24,7 +24,7 @@
                             <div class="form-group">
                                 <label>Danh mục sản phẩm</label>
                                 <select class="form-control" name="category_id" required>
-                                    <option>-- Vui lòng chọn ---</option>
+                                    <option value="">-- Vui lòng chọn ---</option>
                                     @foreach($category as $value)
                                         <option
                                             value="{{$value->id}}" {{$value->id === $feature->product_line ? 'selected' : ''}}>{{$value->name}}</option>

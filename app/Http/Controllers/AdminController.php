@@ -127,7 +127,6 @@ class AdminController extends Controller
     public function addProductPost(Request $request)
     {
         $data = collect($request)->toArray();
-
         $productTechnology = ProductTechnology::all();
 
         $options = new Options;
@@ -176,7 +175,7 @@ class AdminController extends Controller
             'sale_percent' => $salePercent,
             'company' => $request->get('company'),
             'product_type' => $request->get('product_type'),
-            'product_line' => $request->get('product_line'),
+            'product_line' => json_encode($request->get('product_line')),
             'price_type' => $priceType,
             'shape_type' => $request->get('shape_type'),
             'technology_type' => $request->get('technology_type'),
@@ -292,7 +291,6 @@ class AdminController extends Controller
         $product = Product::with([
             'company',
             'productType',
-            'productLine',
             'priceType',
             'shapeType',
             'technologyType',
@@ -300,6 +298,7 @@ class AdminController extends Controller
             'productImage',
             'productImage.color',
         ])->findOrFail($id);
+
 
         $featureList = explode(',', $product->feature);
 
@@ -351,7 +350,9 @@ class AdminController extends Controller
                 $labelProduct = $request->get('label_product');
                 foreach ($labelProduct as $value) {
                     $data = ProductLine::find($value);
+
                     if (!empty($data)) {
+                        $url = 'danh-muc';
                         $arr = [
                             'labelmenu' => $data->name,
                             'linkmenu' => $data->url,

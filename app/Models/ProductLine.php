@@ -22,6 +22,7 @@ class ProductLine extends Model
         'url',
         'description',
         'posts',
+        'parent'
     ];
 
     public function company()

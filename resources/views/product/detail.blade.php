@@ -245,7 +245,7 @@
                                  aria-labelledby="flush-headingOne-{{ $key }}"
                                  data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
-                                    {{ $dec['content'] }}
+                                    <?php echo nl2br($dec['content']); ?>
                                 </div>
                             </div>
                         </div>

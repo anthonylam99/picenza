@@ -18,11 +18,12 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card-body">
-                        <div class="form-group">
-                            <label for="productName">Hãng sản xuất</label>
-                            <select class="form-control" name="company_id" required>
-                                <option value="">---Vui lòng chọn---</option>
-                                @foreach($company as $value)
+                        <div class="form-group ">
+                            <label   for="company">Danh mục cha</label>
+                            <select name="parent" id="parent" class="form-control">
+
+                                <option value="">-- Vui lòng chọn --</option>
+                                @foreach($productLine as $value)
                                     <option value="{{$value->id}}">{{$value->name}}</option>
                                 @endforeach
                             </select>

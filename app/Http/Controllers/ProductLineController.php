@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Entity\Options;
+use App\Models\AdminMenus;
 use App\Models\Post;
 use App\Models\ProductCompany;
 use App\Models\ProductLine;
 use App\Models\ProductType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductLineController extends Controller
 {
@@ -44,7 +46,8 @@ class ProductLineController extends Controller
     {
         $company = ProductCompany::all();
         $post = Post::all();
-        return view('admin.line.add', compact('company', 'post'));
+        $productLine = ProductLine::all();
+        return view('admin.line.add', compact('company', 'post', 'productLine'));
     }
 
     public function addLinePost(Request $request)
@@ -64,28 +67,43 @@ class ProductLineController extends Controller
         if(!$request->has('id')){
             $slug = $options->create_slug($lineName);
             $product = ProductLine::where('slug', $slug)->get();
+            $parent = $request->get('parent', 0);
 
             if (!empty(collect($product)->toArray()) && count(collect($product)->toArray()) >= 1) {
                 $randomNumber = rand(0, 9999);
                 $slug .= '-' . $randomNumber;
             }
+
+            $url =  collect($request->server)['HTTP_ORIGIN'].'/danh-muc/'.$slug;
+
+            if(!empty($parent)){
+                $url = collect($request->server)['HTTP_ORIGIN']. '/danh-muc/'.$slug;
+            }
+
             $insert = ProductLine::create([
                 'name' => $lineName,
                 'avatar' => $avatar,
                 'status' => $status,
                 'slug' => $slug,
                 'seo_url' => $slug,
-                'url' => collect($request->server)['HTTP_ORIGIN'].'/san-pham/'.$slug,
+                'url' => $url,
                 'description' => $description,
-                'posts' => $posts
+                'posts' => $posts,
+                'parent' => $parent
             ]);
+
+
             if($insert){
                 return redirect()->route('admin.line.edit', ['id' => $insert->id]);
             }
         }else{
+            $id = $request->get('id');
             $slug = $request->get('seo-url');
 
-            $product = ProductLine::where('slug', $slug)->get();
+            $product = ProductLine::where('slug', $slug)->where('id', '!=', $id)->get();
+
+            $line = ProductLine::findOrFail($id);
+            $oldUrl = $line->url;
 
             if (!empty(collect($product)->toArray()) && count(collect($product)->toArray()) >= 1) {
                 $randomNumber = rand(0, 9999);
@@ -93,15 +111,28 @@ class ProductLineController extends Controller
             }
 
             $seo_url = $slug;
+            $parent = $request->get('parent', 0);
+
+            $url =  collect($request->server)['HTTP_ORIGIN'].'/san-pham/'.$slug;
+
+            if(!empty($parent)){
+                $url = collect($request->server)['HTTP_ORIGIN']. '/danh-muc/'.$slug;
+            }
+
+            DB::table('admin_menu_items')->where('link', $oldUrl)->update([
+                'link' => $url
+            ]);
+
             $update = ProductLine::where('id', $request->get('id'))->update([
                 'name' => $lineName,
                 'avatar' => $avatar,
                 'status' => $status,
                 'slug' => $slug,
                 'seo_url' => $seo_url,
-                'url' => collect($request->server)['HTTP_ORIGIN'].'/san-pham/'.$slug,
+                'url' => $url,
                 'description' => $description,
-                'posts' => $posts
+                'posts' => $posts,
+                'parent' => $parent
             ]);
             if($update){
                 return redirect()->route('admin.line.edit', ['id' => $request->get('id')]);
@@ -114,10 +145,12 @@ class ProductLineController extends Controller
         $line = ProductLine::findOrFail($id);
         $company = ProductCompany::all();
         $post = Post::all();
+
+        $productLine = ProductLine::all();
         $arrPostPage = explode(',',$line->posts);
 
 
-        return view('admin.line.edit', compact('line', 'company', 'post', 'arrPostPage'));
+        return view('admin.line.edit', compact('line', 'company', 'post', 'arrPostPage', 'productLine'));
     }
 
     public function delLine(Request $request, $id = null)

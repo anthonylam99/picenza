@@ -102,14 +102,13 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="company">Danh mục</label>
-                            <select name="product_line" id="productLineList" class="form-control m-r-10 input-sm" required>
-
-                                <option value="">-- Vui lòng chọn --</option>
+                        <div class="form-group select2-purple">
+                            <label for="title" class="">Danh mục</label>
+                            <select name="product_line[]" class="select2 form-control" multiple="multiple"
+                                    required>
                                 @foreach($productLine as $value)
                                     @if(isset($product['product_line']))
-                                        @if($product['product_line']['id'] === $value->id)
+                                        @if(in_array($value->id, json_decode($product['product_line'], true)))
                                             <option value="{{$value->id}}" selected>{{$value->name}}</option>
                                         @else
                                             <option value="{{$value->id}}">{{$value->name}}</option>
@@ -117,7 +116,6 @@
                                     @else
                                         <option value="{{$value->id}}">{{$value->name}}</option>
                                     @endif
-
                                 @endforeach
                             </select>
                         </div>

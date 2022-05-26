@@ -32,7 +32,7 @@
                         <div class="feature-item row">
                             @foreach($favourite as $item)
                                 <div class="feature-item-main col-6 col-sm-6 col-md-4 col-lg-4">
-                                    <a href="{{$item->url}}">
+                                    <a href="/danh-muc/{{$category->seo_url.'?feature[]='.$item->id}}">
                                         <div class="image">
                                             <img src="{{$item->avatar}}" alt="">
                                         </div>
